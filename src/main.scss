@@ -1,5 +1,7 @@
 @import './utils/modern-normalize.scss';
 @import './utils/styles-reset.scss';
-@import "./utils/_mixins.scss";
+@import './utils/_mixins.scss';
 @import './utils/_variables.scss';
-@import './components/scss-components/container.scss';
+@import './components/scss-components/_container.scss';
+@import './components/scss-components/_base.scss';
+@import './pages/main-page/_main-section.scss';
