@@ -124,16 +124,29 @@
 
   width: 100%;
 
+  cursor: pointer;
+
   @include for-size(tablet) {
     width: 299px;
+  }
+
+  @include for-size(desktop) {
+    width: 255px;
   }
 }
 
 .advertisement-card-buttons-div {
   display: flex;
   align-items: center;
-  //   justify-content: space-around;
+  justify-content: space-around;
   margin-bottom: 30px;
+
+  @include for-size(tablet) {
+    justify-content: start;
+  }
+
+  // @include for-size(desktop) {
+  // }
 }
 
 .advertisement-card-favorites-and-share {
@@ -162,18 +175,28 @@
 }
 
 .advertisement-card-favorites-svg {
-  background-color: $white-color;
-  border: none;
+  // background-color: $white-color;
+  // border: none;
   margin-right: 25px;
+  margin-left: 13px;
+  fill: #878686;
+  cursor: pointer;
+
+  @include for-size(tablet) {
+    margin-right: 40px;
+  }
 }
 
 .advertisement-card-share-svg {
-  background-color: $white-color;
-  border: none;
+  // background-color: $white-color;
+  // border: none;
+  margin-left: 13px;
+  fill: #878686;
+  cursor: pointer;
 }
 
-.advertisement-card-description-div {
-}
+// .advertisement-card-description-div {
+// }
 
 .advertisement-card-description-title {
   font-weight: 300;
@@ -200,12 +223,15 @@
   padding-bottom: 61px;
 }
 
-// .container {
-
-// }
-
-.advertisement-card-small-photo {
+.container {
+  @include for-size(desktop) {
+    display: flex;
+    justify-content: center;
+  }
 }
+
+// .advertisement-card-small-photo {
+// }
 
 .flex-container {
   @include for-size(tablet) {
