@@ -1,0 +1,233 @@
+// =================================================
+.advertisement-card-button-exit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  line-height: 40px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.advertisement-card-title {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+
+  color: $main-black;
+  margin-bottom: 5px;
+}
+
+.advertisement-card-code {
+  margin-top: 5px;
+
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+
+  color: #878686;
+}
+
+.advertisement-card-slider-big-photo {
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+  //   width: 253px;
+  //   height: 253px;
+  margin-bottom: 15px;
+}
+
+.advertisement-card-small-photo {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.advertisement-card-slider-list {
+  //   display: inline-flex;
+  //   margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  //   justify-content: space-between;
+}
+
+.advertisement-card-slider-list-item {
+  width: 5px;
+  height: 5px;
+  background-color: $orange-color;
+  border-radius: 50%;
+
+  //   display: inline-flex;
+  //   margin: 0 auto;
+
+  @include for-size(tablet) {
+    width: 52.06px;
+    height: 55.89px;
+
+    border-radius: 0;
+    background: #f5f6fb;
+  }
+}
+.advertisement-card-slider-list-item:not(:last-child) {
+  margin-right: 5px;
+}
+
+.advertisement-card-price {
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 22px;
+
+  letter-spacing: 0.02em;
+  color: $orange-color;
+
+  margin-bottom: 30px;
+
+  @include for-size(tablet) {
+    margin-bottom: 40px;
+  }
+
+  @include for-size(desktop) {
+    margin-bottom: 40px;
+  }
+}
+
+.product-card-price-button-div {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.advertisement-card-button-salesman-info {
+  background: $orange-color;
+  width: 254px;
+  height: 60px;
+  border: none;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: $white-color;
+
+  padding-left: 59px;
+  padding-right: 58px;
+  padding-top: 17px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+
+  width: 100%;
+
+  @include for-size(tablet) {
+    width: 299px;
+  }
+}
+
+.advertisement-card-buttons-div {
+  display: flex;
+  align-items: center;
+  //   justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.advertisement-card-favorites-and-share {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  color: #878686;
+  margin-right: 13px;
+  margin: 0;
+}
+
+.advertisement-card-name-container {
+  @include for-size(tablet) {
+    display: none;
+    order: 2;
+  }
+}
+
+.advertisement-card-name-container.tablet-desktop {
+  display: none;
+
+  @include for-size(tablet) {
+    display: block;
+  }
+}
+
+.advertisement-card-favorites-svg {
+  background-color: $white-color;
+  border: none;
+  margin-right: 25px;
+}
+
+.advertisement-card-share-svg {
+  background-color: $white-color;
+  border: none;
+}
+
+.advertisement-card-description-div {
+}
+
+.advertisement-card-description-title {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  color: #878686;
+  margin-bottom: 10px;
+}
+
+.advertisement-card-description {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+
+  color: $main-black;
+
+  margin: 0;
+}
+
+.advertisement-card-container {
+  padding-top: 55px;
+  padding-bottom: 61px;
+}
+
+// .container {
+
+// }
+
+.advertisement-card-small-photo {
+}
+
+.flex-container {
+  @include for-size(tablet) {
+    display: flex;
+  }
+}
+
+.advertisement-card-slider {
+  @include for-size(tablet) {
+    order: 1;
+
+    margin-right: 34px;
+  }
+
+  @include for-size(desktop) {
+    margin-right: 38px;
+  }
+}
+
+.advertisement-card-main-container {
+  @include for-size(tablet) {
+    order: 3;
+    max-width: 300px;
+  }
+}
