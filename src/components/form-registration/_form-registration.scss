@@ -1,0 +1,75 @@
+.registrationForm {
+  width: 260px;
+  margin: 0 auto;
+  @include for-size(tablet) {
+    width: 427px;
+  }
+}
+
+.registration-title {
+  margin-top: 47px;
+font-weight: 500;
+@include for-size(tablet) {
+   margin-top: 50px;
+  font-size: 14px;
+}
+}
+.reg-aut-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.registration-input {
+  padding-left: 25px;
+  width: 100%;
+  height: 50px;
+  margin-top: 26px;
+}
+.input-reg {
+  text-align: center;
+}
+
+.reg-aut-btn button {
+  margin-top: 30px;
+  width: 120px;
+  height: 50px;
+  border: 1px solid #BBBBBB;
+  font-weight: 700;
+  transition: 0.3s;
+  @include for-size(tablet) {
+    width: 203px;
+    height: 60px;
+  }
+}
+.registration-input::placeholder {
+  padding-left: 25px;
+  color: $tertirary-gray-color;
+}
+.reg-aut-btn button:hover {
+  background-color: $orange-color;
+  color: #FAFAFA;
+  border: none;
+}
+
+.registration-google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAFAFA;;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 26px;
+   transition: 0.3s;
+}
+.registration-google:hover {
+  background-color: $orange-color;
+
+}
+.registration-google-svg {
+    margin-right: 10px
+}
+
