@@ -8,4 +8,5 @@ import "./components/hero-section/hero-section.js";
 import "./components/item-card/item-card.js";
 import "./pages/main-page/main-section.js";
 import "./pages/favourites-page/favourites-page.js";
+import "./utils/fetch-querries.js"
 
