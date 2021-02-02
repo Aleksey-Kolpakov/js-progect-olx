@@ -4,11 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Project JS</title>
+    <title></title>
   </head>
 
   <body>
     <include src="./pages/main-page/main-page.html"></include>
+    <div class="container">
+      <div class="registrationForm">
+        <p class="registration-title">Для авторизации можете использовать Google Account:</p>
+        <button class="registration-google" type="button"><svg class="registration-google-svg" width='17' height='17'>
+          <use href='./images/sprite/sprite.svg#icon-google'></use>
+        </svg>Google</button>
+        <p class='registration-title'>Или войдите в приложение используя e-mail и пароль:</p>
+        <div class="input-reg">
+              <input data-email="email" class="registration-input" type="email" name="email" placeholder="E-mail">
+              <input data-pass="pass" class="registration-input" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="reg-aut-btn">
+          <button class="enterAccount" type="submit">ВОЙТИ</button>
+          <button class="registerAccount" data-reg="registration" type="submit">РЕГИСТРАЦИЯ</button>
+        </div>
+      </div>
+    </div>
     <footer class="footer-section">
       <div class="footer-wrap">
         <p>
