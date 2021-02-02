@@ -1,4 +1,3 @@
-import './_hero-section-styles.scss';
 import adsCardHandleBar from './hero.hbs';
 import { callAdsAPI } from './fetchAPI';
 
