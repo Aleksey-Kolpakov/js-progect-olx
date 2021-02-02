@@ -9,5 +9,18 @@
 
   <body>
     <include src="./pages/main-page/main-page.html"></include>
+    <div class="registrationForm">
+      <p>Для авторизации можете использовать Google Account:</p>
+      <!-- <form name="regForm" class="js-register-from"> -->
+        <button class="registration-google" type="button">Google</button>
+        <input data-email="email" class="registration-input" type="email" name="email" placeholder="E-mail">
+        <input data-pass="pass" class="registration-input" type="password" name="password" placeholder="Password">
+        <div class="reg-aut-btn">
+          <button class="enterAccount" type="submit">Войти</button>
+          <button class="registerAccount" data-reg="registration" type="submit">Регистрация</button>
+        </div>
+
+      <!-- </form> -->
+    </div>
   </body>
 </html>
