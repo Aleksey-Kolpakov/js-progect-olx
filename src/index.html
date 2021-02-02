@@ -8,20 +8,30 @@
   </head>
 
   <body>
-    <include src="./pages/main-page/main-page.html"></include>
-    <footer class="footer-section">
-      <div class="footer-wrap">
-        <p>
-          &copy 2020
-          <span class="footer-allrights">All Rights Reserved</span> Developed
-          with
-          <svg class="icon-footer-heart" width="15" height="15">
-            <use href="./images/sprite/sprite.svg#icon-favorite-heart"></use>
-          </svg>
-          by
-          <a href="">GoIT Students</a>
+    <section class="section-category">
+      <div class="container">
+        <h2 class="section-title">Распродажа</h2>
+        <a href="" class="section-link">Смотреть все</a>
+        <p class="section-text">
+          Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
+          многое другое.
         </p>
+        <ul class="section-gallery">
+          <li class="section-gallery-item">
+            <img
+              class="section-gallery-item-image"
+              src="./images/test-item.png"
+              alt=""
+            />
+            <h3 class="section-gallery-item-title">Victrola Vintage</h3>
+            <div class="price-container">
+              <p class="section-gallery-item-oldprice">2,000 €</p>
+              <p class="section-gallery-item-newprice">1,200 €</p>
+            </div>
+          </li>
+        </ul>
       </div>
-    </footer>
+      <button class="loadmore-btn" type="button">Загрузить еще</button>
+    </section>
   </body>
 </html>
