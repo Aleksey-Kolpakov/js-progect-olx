@@ -1,5 +1,5 @@
 .registrationForm {
-  width: 260  px;
+  width: 260px;
   margin: 0 auto;
 }
 
@@ -24,7 +24,7 @@ font-weight: 500;
 
 .reg-aut-btn button {
   margin-top: 30px;
-  width: 130px;
+  width: 120px;
   height: 50px;
   border: 1px solid #BBBBBB;
   font-weight: 700;
@@ -56,7 +56,11 @@ font-weight: 500;
 }
 .registration-google:hover {
   background-color: $orange-color;
+@include for-size(tablet) {
+  
+}
 }
 .registration-google-svg {
     margin-right: 10px
 }
+
