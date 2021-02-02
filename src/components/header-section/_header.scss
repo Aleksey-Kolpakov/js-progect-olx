@@ -1,0 +1,502 @@
+ul {
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+}
+
+header {
+  background-color: $Header-backgound;
+
+  font-size: 12px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 15px 18px;
+
+  // width: 320px;
+
+  @include for-size(tablet) {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    padding: 35px 38px;
+    // width: 768px;
+  }
+
+  @include for-size(desktop) {
+    // width: 1280px;
+  }
+}
+
+.burger-menu-button {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: inherit;
+  border: none;
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.mobile-search-button {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: inherit;
+  border: none;
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.burger-menu-icon,
+.loupe-icon-mobile {
+  fill: $main-gray-color;
+}
+
+.burger-menu-button:hover .burger-menu-icon,
+.burger-menu-button:focus .burger-menu-icon,
+.mobile-search-button:hover .loupe-icon-mobile,
+.mobile-search-button:focus .loupe-icon-mobile,
+.mobile-close-button:hover {
+  fill: $orange-color;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.header-logo-link {
+  @include for-size(tablet) {
+    order: 1;
+  }
+
+  @include for-size(desktop) {
+    margin-right: 31px;
+  }
+}
+
+.header-logo {
+  width: 64px;
+  height: 40px;
+
+  @include for-size(desktop) {
+    width: 71px;
+    height: 44px;
+  }
+}
+
+.input-container {
+  @include for-size(mobile-only) {
+    position: absolute;
+    top: 85px;
+
+    display: block;
+
+    width: 285px;
+    height: 44px;
+
+    &.is-hidden {
+      transform: translate(0, -200px);
+    }
+  }
+
+  @include for-size(tablet) {
+    position: relative;
+    display: block;
+    order: 4;
+    width: 410px;
+    height: 44px;
+    margin-top: 20px;
+  }
+
+  @include for-size(desktop) {
+    order: 2;
+    margin-top: 0;
+  }
+}
+
+.header-input {
+  width: 410px;
+  height: 44px;
+  padding: 10px 54px 10px 15px;
+  border: none;
+  outline: none;
+
+  @include for-size(mobile-only) {
+    display: inline-block;
+
+    border: 1px solid $main-gray-color;
+
+    width: 285px;
+    height: 44px;
+  }
+}
+
+.loupe-icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: text;
+}
+
+.authentication-block {
+  @include for-size(mobile-only) {
+    position: absolute;
+    top: 70px;
+    left: 70px;
+
+    display: flex;
+
+    z-index: 2;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  @include for-size(tablet) {
+    display: flex;
+    order: 2;
+    margin-left: auto;
+    margin-right: 12px;
+  }
+
+  @include for-size(desktop) {
+    order: 3;
+  }
+}
+
+.authentication-block button {
+  border: none;
+  padding: 3px 12px;
+  background-color: inherit;
+}
+
+.authentication-block .registration-button {
+  color: $main-gray-color;
+  border-right: 1px solid $main-gray-color;
+}
+
+.authentication-block .login-button {
+  color: $orange-color;
+}
+
+.authentication-block .registration-button:hover,
+.authentication-block .registration-button:focus,
+.authentication-block .login-button:hover,
+.authentication-block .login-button:focus {
+  color: $orange-color;
+  text-decoration: underline;
+}
+
+.my-cabinet-block {
+  &.is-hidden {
+    display: none;
+  }
+
+  @include for-size(mobile-only) {
+    position: absolute;
+    // top: 100px;
+    top: 70px;
+    left: 54px;
+
+    display: flex;
+
+    z-index: 2;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  @include for-size(tablet) {
+    display: flex;
+    order: 2;
+    margin-left: auto;
+    margin-right: 12px;
+  }
+
+  @include for-size(desktop) {
+    order: 3;
+  }
+}
+
+.my-cabinet-block button {
+  display: flex;
+  align-items: center;
+
+  border: none;
+  padding: 0 12px;
+  background-color: inherit;
+
+  color: $main-gray-color;
+  & svg {
+    fill: $main-gray-color;
+  }
+
+  &:hover svg {
+    fill: $orange-color;
+  }
+}
+
+.my-cabinet-block .my-cabinet-button {
+  border-right: 1px solid $main-gray-color;
+
+  & svg {
+    margin-right: 10px;
+  }
+}
+
+.my-cabinet-block .logout-button {
+  color: $orange-color;
+}
+
+.my-cabinet-block .my-cabinet-button:hover,
+.my-cabinet-block .my-cabinet-button:focus {
+  color: $orange-color;
+}
+
+.create-ad-button {
+  display: none;
+
+  @include for-size(tablet) {
+    display: inline-block;
+    order: 3;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    background-color: $orange-color;
+    padding: 0;
+    min-height: 44px;
+    min-width: 216px;
+  }
+
+  @include for-size(desktop) {
+    order: 4;
+    min-width: 238px;
+  }
+}
+
+.header-filter-container {
+  @include for-size(mobile-only) {
+    position: absolute;
+    top: 180px;
+    left: 10px;
+    width: 280px;
+
+    z-index: 2;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  @include for-size(tablet) {
+    display: block;
+    order: 6;
+    position: absolute;
+    top: 178px;
+    left: 0;
+    right: 0;
+    background-color: $Header-dropout-menu;
+
+    // transition: 200ms transform linear;
+    &.is-hidden {
+      transform: translate(-100%, 0%);
+    }
+  }
+
+  @include for-size(desktop) {
+    order: 5;
+    position: static;
+    margin-top: 24px;
+    background-color: $Header-backgound;
+
+    &.is-hidden {
+      transform: translate(0%, 0%);
+    }
+  }
+}
+
+.header-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 280px;
+
+  @include for-size(tablet) {
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 35px;
+  }
+
+  @include for-size(desktop) {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.header-filter-list li {
+  margin: 10px 5px;
+
+  @include for-size(desktop) {
+    margin: 0 10px 0 0;
+  }
+}
+
+.header-filter-list li button {
+  padding: 8px 21px;
+  color: $main-gray-color;
+  background-color: inherit;
+  border: 1px solid $main-gray-color;
+  border-radius: 17px;
+}
+
+.header-filter-list button:hover,
+.header-filter-list button:focus {
+  color: $orange-color;
+  border: 1px solid $orange-color;
+}
+
+.filter-clear-block {
+  @include for-size(mobile-only) {
+    position: absolute;
+    top: 125px;
+    left: 40px;
+
+    display: flex;
+
+    z-index: 2;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  @include for-size(tablet) {
+    position: static;
+    display: flex;
+    order: 5;
+    margin-top: 20px;
+    margin-left: auto;
+  }
+
+  @include for-size(desktop) {
+    order: 6;
+  }
+}
+
+.filter-clear-block button {
+  display: flex;
+  align-items: center;
+
+  padding: 0;
+  color: $main-gray-color;
+  background-color: inherit;
+  border: none;
+
+  &:hover,
+  &:focus {
+    color: $orange-color;
+
+    & svg {
+      fill: $orange-color;
+    }
+  }
+}
+
+.filter-clear-block li:not(:last-child) {
+  margin-right: 40px;
+
+  @include for-size(desktop) {
+    margin-right: 20px;
+  }
+}
+
+.button-icon {
+  margin-right: 15px;
+  fill: $main-gray-color;
+}
+
+.filter-clear-block .header-filter-button {
+  @include for-size(desktop) {
+    display: none;
+  }
+}
+
+.mobile-menu {
+  display: block;
+  position: absolute;
+
+  z-index: 1;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 300px;
+
+  background-color: $Header-dropout-menu;
+
+  // transition: 200ms transform linear;
+
+  &.is-hidden {
+    transform: translate(-100%, 0%);
+  }
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.mobile-close-button {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: inherit;
+  border: none;
+
+  position: absolute;
+
+  top: 20px;
+  left: 256px;
+
+  & svg {
+    fill: $main-gray-color;
+
+    &:hover,
+    &:focus {
+      fill: $orange-color;
+    }
+  }
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
