@@ -27,19 +27,16 @@ callAdsAPI().then(data => data.filter((item, index) => {
 
 
 
-
-
-
-
-
-
-
 // import { callAPI, callFindAPI, callCategoriesAPI, callRussianCategoriesAPI, callSpecificCategoryAPI, callAdsAPI } from './fetchAPI';
 // const tryFetch = () => {
 //     callAPI(1);
+//     callAPI(2);
+//     callAPI(3);
 //     callFindAPI('car');
 //     callCategoriesAPI();
 //     callRussianCategoriesAPI();
 //     callSpecificCategoryAPI();
 //     callAdsAPI();
 // };
+
+// tryFetch();
