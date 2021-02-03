@@ -55,15 +55,6 @@ svg {
   }
 }
 
-// .burger-menu-icon {
-//   fill: $main-gray-color;
-
-//   .burger-menu-button:hover &,
-//   .burger-menu-button:focus & {
-//     fill: $orange-color;
-//   }
-// }
-
 .header-logo-link {
   @include for-size(tablet) {
     order: 1;
@@ -170,19 +161,18 @@ svg {
   display: flex;
 
   @include for-size(mobile-only) {
-    display: none;
+    // display: none;
     position: absolute;
     top: 70px;
-    left: 70px;
+    left: -230px; //
 
     z-index: 2;
 
-    // transform: translate(-300px, 0);
-    // transition: 200ms transform linear;
+    transition: $transform-transition; //
 
     &.is-open {
-      // transform: translate(0, 0);
-      display: flex;
+      transform: translate(300px, 0); //
+      // display: flex;
     }
   }
 
@@ -222,19 +212,18 @@ svg {
   display: flex;
 
   @include for-size(mobile-only) {
-    display: none;
+    // display: none;
     position: absolute;
     top: 70px;
-    left: 54px;
+    left: -246px; //
 
     z-index: 2;
 
-    // transform: translate(-300px, 0);
-    // transition: 200ms transform linear;
+    transition: $transform-transition; //
 
     &.is-open {
-      // transform: translate(0, 0);
-      display: flex;
+      transform: translate(300px, 0); //
+      // display: flex;
     }
   }
 
@@ -302,25 +291,9 @@ svg {
 .header-filter-container {
   display: block;
 
-  @include for-size(mobile-only) {
+  @include for-size(tablet-only) {
+    // display: block; //
     display: none;
-    position: absolute;
-    top: 180px;
-    left: 10px;
-    width: 280px;
-
-    z-index: 2;
-
-    // transform: translate(-300px, 0);
-    // transition: 200ms transform linear;
-
-    &.is-open {
-      // transform: translate(0, 0);
-      display: block;
-    }
-  }
-
-  @include for-size(tablet) {
     order: 6;
     position: absolute;
     top: 178px;
@@ -328,22 +301,45 @@ svg {
     right: 0;
     background-color: $Header-dropout-menu;
 
+    // opacity: 0;
+    // pointer-events: none;
+
     z-index: 2;
 
-    &.tablet-is-hidden {
-      transform: translate(-100%, 0);
+    // transition: 200ms opacity linear, $transform-transition;
+
+    &.tablet-is-open {
+      // transform: translate(0, 20px); //
+      // opacity: 1;
+      // pointer-events: auto;
+      display: block;
+    }
+  }
+
+  @include for-size(mobile-only) {
+    display: block;
+    // display: none;
+    position: absolute;
+    top: 180px;
+    left: -290px;
+    width: 280px;
+
+    // opacity: 1;
+    // pointer-events: auto;
+
+    z-index: 2;
+
+    transition: $transform-transition;
+
+    &.is-open {
+      transform: translate(300px, 0);
+      // display: block;
     }
   }
 
   @include for-size(desktop) {
     order: 5;
-    position: static;
     margin-top: 24px;
-    background-color: $Header-backgound;
-
-    &.tablet-is-hidden {
-      transform: translate(0, 0);
-    }
   }
 }
 
@@ -390,20 +386,19 @@ svg {
 
 .filter-clear-block {
   @include for-size(mobile-only) {
-    display: none;
-    // display: flex;
+    // display: none;
+    display: flex;
     position: absolute;
     top: 125px;
-    left: 40px;
+    left: -260px; //
 
     z-index: 2;
 
-    // transform: translate(-300px, 0);
-    // transition: 200ms transform linear;
+    transition: $transform-transition; //
 
     &.is-open {
-      // transform: translate(0, 0);
-      display: flex;
+      transform: translate(300px, 0); //
+      // display: flex;
     }
   }
 
@@ -455,26 +450,25 @@ svg {
 
 .mobile-menu {
   @include for-size(mobile-only) {
-    display: none;
-    // display: block;
+    // display: none;
+    display: block;
     position: absolute;
 
     z-index: 1;
 
     top: 0;
-    left: 0;
+    left: -300px; //
     bottom: 0;
 
     width: 300px;
 
     background-color: $Header-dropout-menu;
 
-    // transform: translate(-300px, 0);
-    // transition: 200ms transform linear;
+    transition: $transform-transition; //
 
     &.is-open {
-      // transform: translate(0, 0);
-      display: block;
+      transform: translate(300px, 0); //
+      // display: block;
     }
   }
 
