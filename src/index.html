@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <include src="./pages/main-page/main-page.html"></include>
+   
     <div class="container">
       <div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
@@ -32,6 +32,97 @@
           <button class="registerAccount" data-reg="registration" type="submit">РЕГИСТРАЦИЯ</button>
         </div>
       </div>
+    </div>
+    <section class="section section__form">
+      <div class="container__form">
+          <button class="button-close" type="button" data-action="close">
+          <svg class="button-close__icon" width="24" height="24" aria-label="Закрытие модального окна">
+            <use href="./images/sprite/sprite.svg#icon-close"></use>
+          </svg>
+          </button>
+        <form class="form" autocomplete="off">
+              <h3 class="form__title">Редактировать объявление</h3>
+              <ul class="list form__list">
+                <li class="item form__item">
+                  <label class="form__label" for="input-text">Название товара</label>
+                    <input class="form__input" type="text" id="input-text">
+                </li>
+                <li class="item form__item">
+                  <label class="form__label" for="input-file">Фото</label>
+                    <input type="file" id="input-file">
+                </li>
+                <li class="item form__item">
+                  <label class="form__label" for="input-textarea">Описание товара</label>
+                    <textarea class="form__input" rows="5" id="input-textarea"></textarea>
+                </li>
+                <li class="item form__item">
+                  <label class="form__label" for="input-select">Категория товара</label>
+                    <select class="form__input" id="input-select"></select>
+                </li>
+                <li class="item form__item">
+                  <label class="form__label" for="input-number">Цена</label>
+                    <input class="form__input" type="number" placeholder="0.00 €" id="input-number">
+                </li>
+                <li class="item form__item">
+                  <label class="form__label" for="input-tel">Телефон</label>
+                    <input class="form__input" type="tel" placeholder="+38 (0--) --- -- --" for="input-tel">
+                </li>
+                <li class="item form__item-delete">
+                  <button class="button-delete" type="click" data-action="delete">
+                    <span class="button-delete__span">
+                          <svg class="button-delete__icon" width="13" height="14" aria-label="Удалить объявление">
+                            <use href="./images/sprite/sprite.svg#icon-file"></use>
+                          </svg>
+                       </span>
+                    Удалить объявление</button>
+                </li>
+                <li class="item form__item-submit">
+                  <button class="button-submit" type="submit" data-action="submit">Добавить</button>
+                  </li>
+                </ul>
+      </div>
+</section>
+
+    <section class="hero">
+      <div class="container">
+      <ul class="hero-list">
+        <li id="item1" class="hero-item">
+          <ul class="hero-list-slider"></ul>
+        </li>
+      </ul>
+      </div>
+    </section>
+
+     <section class="section-category">
+      <div class="container">
+        <h2 class="section-title">Распродажа</h2>
+        <a href="" class="section-link">Смотреть все</a>
+        <p class="section-text">
+          Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
+          многое другое.
+        </p>
+        <ul class="section-gallery"></ul>
+      </div>
+    </section>
+    <div class="section-gallery-upload"></div>
+    <button class="loadmore-btn" type="button">Загрузить еще</button>
+
+    <footer class="footer-section">
+      <div class="footer-wrap">
+        <p>
+          &copy 2020
+          <span class="footer-allrights">All Rights Reserved</span> Developed
+          with
+          <svg class="icon-footer-heart" width="15" height="15">
+            <use href="./images/sprite/sprite.svg#icon-favorite-heart"></use>
+          </svg>
+          by
+          <a href="">GoIT Students</a>
+        </p>
+      </div>
+    </footer>
+    <div class="modal-wrapper">
+      <div class="modal"></div>
     </div>
   </body>
 </html>

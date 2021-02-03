@@ -1,0 +1,11 @@
+{{#each this}}
+<li {{#if id}} id="item{{id}}" {{/if}} class="hero-item" {{!-- {{#unless id}} class="hero-item-slider" {{/unless}} --}}>
+    <div class="hero-wrap">
+        <h2 class="hero-title">{{title}}</h2>
+        <p class="hero-price">{{price}}</p>
+    </div>
+    <div class="hero-wrap">
+        <img src="{{imageUrl}}" alt="{{title}}" width="100%" class="hero-image" />
+    </div>
+</li>
+{{/each}}
