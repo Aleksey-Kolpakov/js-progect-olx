@@ -17,12 +17,18 @@ const exit = `
 const exitRef = document.querySelector('.exit');
 exitRef.addEventListener('click', formExit);
 
-// console.log(exitRef);
 function formExit() {
   modalBackDrop(exit);
 
-  const cancelRef = modalRef.querySelector('.cancel');
-  cancelRef.addEventListener('click', () => {
-    console.log('da');
-  });
+  const closeModal = () => {
+    modalRef.classList.remove('is-open');
+  };
+
+  const modalRef = document.querySelector('.modal');
+
+  const exitBtnRef = document.querySelector('.exit-btn-escape');
+  exitBtnRef.addEventListener('click', closeModal);
+
+  const cancelBtnRef = document.querySelector('.cancel');
+  cancelBtnRef.addEventListener('click', closeModal);
 }

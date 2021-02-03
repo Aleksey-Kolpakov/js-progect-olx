@@ -7,6 +7,11 @@
   left: 50%;
 
   transform: translate(-50%, -50%);
+
+  @mixin tablet-only {
+    width: 290px;
+    height: 205px;
+  }
 }
 
 .exit-text {
@@ -22,15 +27,25 @@
   width: 210px;
   height: 60px;
 
-  margin-top: 30px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.21;
+
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  background-color: inherit;
+  border: 1px solid #bbbbbb;
 }
 .confirm {
   margin-right: 20px;
+  background: #ff6b09;
 }
 
 .exit-btn-group {
   display: flex;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .exit-btn-escape {
