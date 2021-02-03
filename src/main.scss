@@ -1,8 +1,15 @@
 @import './utils/modern-normalize.scss';
-@import './utils/styles-reset.scss';
+@import './utils/_styles-reset.scss';
 @import './utils/_mixins.scss';
 @import './utils/_variables.scss';
 @import './components/scss-components/_container.scss';
 @import './components/scss-components/_base.scss';
 @import './pages/main-page/_main-section.scss';
+@import './components/form-registration/form-registration.scss';
+@import './components/hero-section/_hero-section-styles.scss';
+@import './components//form-registration/_form-registration.scss';
 @import './components/footer-section/_footer-section.scss';
+@import './components/form-create-item/form-item.scss';
+
+@import './components/item-card/item-card.scss';
+
