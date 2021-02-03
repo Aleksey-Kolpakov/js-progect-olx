@@ -1,5 +1,5 @@
 {{#each this}}
-<li id="item{{id}}" class="hero-item">
+<li {{#if id}} id="item{{id}}" {{/if}} class="hero-item" {{!-- {{#unless id}} class="hero-item-slider" {{/unless}} --}}>
     <div class="hero-wrap">
         <h2 class="hero-title">{{title}}</h2>
         <p class="hero-price">{{price}}</p>

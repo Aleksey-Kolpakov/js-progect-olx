@@ -43,7 +43,6 @@
       'item2 item3';
     grid-template-rows: 2fr 1fr;
     grid-template-columns: 1fr 1fr;
-    /* grid-auto-rows: 0px; */
   }
 }
 @media screen and (min-width: 1280px) {
@@ -101,6 +100,8 @@
 
 #item1 {
   grid-area: item1;
+  position: relative;
+  overflow: hidden;
   background: $hero-slider;
 
   .hero-title {
@@ -120,6 +121,7 @@
 }
 #item3 {
   grid-area: item3;
+  background: $fourth-gray-color;
 
   .hero-price {
     color: $orange-color;
@@ -131,6 +133,7 @@
 }
 #item5 {
   grid-area: item5;
+  background: $fourth-gray-color;
 
   .hero-price {
     color: $orange-color;
@@ -143,4 +146,11 @@
   .hero-price {
     color: $white-color;
   }
+}
+.hero-list-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
