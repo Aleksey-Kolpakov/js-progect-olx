@@ -2,8 +2,9 @@ const imgRef = document.querySelectorAll('.download__img');
 const images = Object.values(imgRef);
 const fileInput = document.querySelector('.download__input');
 
-const imageItems = document.querySelectorAll('.download__item');
+const donwloadtems = document.querySelectorAll('.download__item');
 
+const downloadLabels = document.querySelectorAll('.download__label');
 // console.log(imageItems);
 
 fileInput.addEventListener('change', insertImages);
@@ -25,13 +26,27 @@ function insertImages(e) {
 
       reader.onloadend = () => {
         imgRef[currentPosition].src = reader.result;
-        imageItems[currentPosition].insertAdjacentElement(
-          'beforeend',
+        donwloadtems[currentPosition].insertAdjacentHTML(
+          'afterbegin',
           '<button type="button" class="close-image-button">X</button>',
         );
-        // console.log(imageItems[currentPosition]);
+
+        const closeImgRef = document.querySelectorAll('.close-image-button');
+        console.log(currentPosition);
+        closeImgRef[currentPosition].setAttribute(
+          'data-position',
+          currentPosition,
+        );
+        closeImgRef[currentPosition].addEventListener('click', clearImgSrc);
         currentPosition += 1;
       };
+
+      function clearImgSrc(event) {
+        // console.log(event.target);
+        let position = event.target.getAttribute('data-position');
+        imgRef[position].src = '';
+        event.target.remove();
+      }
 
       reader.readAsDataURL(file);
     });
