@@ -95,7 +95,7 @@ svg {
   }
 }
 
-.header-input-container {
+.header-form {
   display: block;
 
   @include for-size(mobile-only) {
@@ -141,13 +141,29 @@ svg {
   }
 }
 
-.header-input-search-icon {
+.header-input-submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   top: 50%;
-  right: 15px;
-  cursor: text;
-
+  right: 1px;
   transform: translate(0, -50%);
+
+  width: 52px;
+  height: 42px;
+  padding: 0;
+  margin: 0;
+
+  border: none;
+
+  background-color: inherit;
+
+  &:hover,
+  &:focus {
+    background-color: rgb(245, 245, 245);
+  }
 }
 
 .authentication-block {
