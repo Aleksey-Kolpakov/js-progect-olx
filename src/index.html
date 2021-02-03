@@ -10,7 +10,7 @@
   <body>
     <!-- HEADER (Kozubskyi) -->
     <header>
-      <div class="container">
+      <div class="container header-container">
         <button class="burger-menu-button">
           <svg class="burger-menu-icon" width="20" height="20">
             <use href="./images/sprite/sprite.svg#icon-menu"></use>
@@ -18,45 +18,18 @@
         </button>
         <a href="./index.html" class="header-logo-link">
           <img class="header-logo" src="./images/logo.svg" alt="Company logo" />
-          <!-- <svg class="header-logo">
-            <use href="./images/sprite/sprite.svg#icon-logo"></use>
-          </svg> -->
         </a>
-        <div class="input-container is-hidden">
-          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
-          <svg class="loupe-icon" width="24" height="24">
-            <use href="./images/sprite/sprite.svg#icon-search"></use>
-          </svg>
-    <section class="hero">
-      <ul class="hero-list">
-        <li id="item1" class="hero-item">
-          <ul class="hero-list-slider"></ul>
-        </li>
-      </ul>
-    </section>
-
-    <include src="./pages/main-page/main-page.html"></include>
-
-
-
-
-
-    <div class="container">
-      <div class="registrationForm">
-        <p class="registration-title">Для авторизации можете использовать Google Account:</p>
-        <button class="registration-google" type="button"><svg class="registration-google-svg" width='17' height='17'>
-          <use href='./images/sprite/sprite.svg#icon-google'></use>
-        </svg>Google</button>
-        <p class='registration-title'>Или войдите в приложение используя e-mail и пароль:</p>
-        <div class="input-reg">
-              <input data-email="email" class="registration-input" type="email" name="email" placeholder="E-mail">
-              <input data-pass="pass" class="registration-input" type="password" name="password" placeholder="Password">
-        </div>
         <button class="mobile-search-button">
-          <svg class="loupe-icon-mobile" width="24" height="24">
+          <svg class="mobile-search-icon" width="24" height="24">
             <use href="./images/sprite/sprite.svg#icon-search"></use>
           </svg>
         </button>
+        <div class="header-input-container is-hidden">
+          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
+          <svg class="header-input-search-icon" width="24" height="24">
+            <use href="./images/sprite/sprite.svg#icon-search"></use>
+          </svg>
+        </div>
         <ul class="authentication-block is-hidden">
           <li><button class="registration-button">Регистрация</button></li>
           <li><button class="login-button">Войти</button></li>

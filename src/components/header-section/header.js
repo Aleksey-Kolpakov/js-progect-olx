@@ -8,17 +8,18 @@ const refs = {
   filterButton: document.querySelector('.header-filter-button'),
   mobileSearchButton: document.querySelector('.mobile-search-button'),
   mobileCloseButton: document.querySelector('.mobile-close-button'),
-
-  inputContainer: document.querySelector('.input-container'),
-  input: document.querySelector('.header-input'),
-  loupeIcon: document.querySelector('.loupe-icon'),
+  headerInputContainer: document.querySelector('.header-input-container'),
+  headerInput: document.querySelector('.header-input'),
+  headerInputSearchIcon: document.querySelector('.header-input-search-icon'),
 };
 
 refs.burgerMenuButton.addEventListener('click', openMobileMenu);
 refs.mobileSearchButton.addEventListener('click', toggleSearchInput);
 refs.mobileCloseButton.addEventListener('click', closeMobileMenu);
 refs.filterButton.addEventListener('click', toggleFiltersContainer);
-refs.loupeIcon.addEventListener('click', () => refs.input.focus());
+refs.headerInputSearchIcon.addEventListener('click', () =>
+  refs.headerInput.focus(),
+);
 
 function openMobileMenu() {
   refs.mobileMenu.classList.remove('is-hidden');
@@ -36,7 +37,8 @@ function closeMobileMenu() {
 }
 
 function toggleSearchInput() {
-  refs.inputContainer.classList.toggle('is-hidden');
+  refs.headerInputContainer.classList.toggle('is-hidden');
+  refs.headerInput.focus();
 }
 
 function toggleFiltersContainer() {

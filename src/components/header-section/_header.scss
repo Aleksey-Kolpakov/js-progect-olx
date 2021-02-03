@@ -1,15 +1,12 @@
-ul {
-  list-style: none;
-
-  margin: 0;
-  padding: 0;
-}
-
 button {
   margin: 0;
   padding: 0;
   background-color: inherit;
-  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
 }
 
 img,
@@ -19,32 +16,20 @@ svg {
 
 header {
   background-color: $Header-backgound;
-
-  font-size: 12px;
 }
 
-.container {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  margin-left: auto;
-  margin-right: auto;
-
   padding: 15px 18px;
-
-  // width: 320px;
 
   @include for-size(tablet) {
     flex-wrap: wrap;
     justify-content: flex-start;
 
     padding: 35px 38px;
-    // width: 768px;
-  }
-
-  @include for-size(desktop) {
-    // width: 1280px;
   }
 }
 
@@ -60,6 +45,15 @@ header {
   }
 }
 
+.burger-menu-icon {
+  fill: $main-gray-color;
+
+  .burger-menu-button:hover &,
+  .burger-menu-button:focus & {
+    fill: $orange-color;
+  }
+}
+
 .mobile-search-button {
   display: block;
   width: 24px;
@@ -72,15 +66,15 @@ header {
   }
 }
 
-.burger-menu-icon,
-.loupe-icon-mobile {
+.mobile-search-icon {
   fill: $main-gray-color;
+
+  .mobile-search-button:hover &,
+  .mobile-search-button:focus & {
+    fill: $orange-color;
+  }
 }
 
-.burger-menu-button:hover .burger-menu-icon,
-.burger-menu-button:focus .burger-menu-icon,
-.mobile-search-button:hover .loupe-icon-mobile,
-.mobile-search-button:focus .loupe-icon-mobile,
 .mobile-close-button:hover {
   fill: $orange-color;
 }
@@ -109,24 +103,24 @@ header {
   }
 }
 
-.input-container {
+.header-input-container {
   @include for-size(mobile-only) {
+    display: block;
+
     position: absolute;
     top: 85px;
-
-    display: block;
 
     width: 285px;
     height: 44px;
 
     &.is-hidden {
-      transform: translate(0, -200px);
+      display: none;
     }
   }
 
   @include for-size(tablet) {
-    position: relative;
     display: block;
+    position: relative;
     order: 4;
     width: 410px;
     height: 44px;
@@ -156,7 +150,7 @@ header {
   }
 }
 
-.loupe-icon {
+.header-input-search-icon {
   position: absolute;
   top: 10px;
   right: 15px;
