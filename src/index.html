@@ -18,28 +18,46 @@
 
     <include src="./pages/main-page/main-page.html"></include>
 
-
-
-
-
     <div class="container">
       <div class="registrationForm">
-        <p class="registration-title">Для авторизации можете использовать Google Account:</p>
-        <button class="registration-google" type="button"><svg class="registration-google-svg" width='17' height='17'>
-          <use href='./images/sprite/sprite.svg#icon-google'></use>
-        </svg>Google</button>
-        <p class='registration-title'>Или войдите в приложение используя e-mail и пароль:</p>
+        <p class="registration-title">
+          Для авторизации можете использовать Google Account:
+        </p>
+        <button class="registration-google" type="button">
+          <svg class="registration-google-svg" width="17" height="17">
+            <use href="./images/sprite/sprite.svg#icon-google"></use></svg
+          >Google
+        </button>
+        <p class="registration-title">
+          Или войдите в приложение используя e-mail и пароль:
+        </p>
         <div class="input-reg">
-              <input data-email="email" class="registration-input" type="email" name="email" placeholder="E-mail">
-              <input data-pass="pass" class="registration-input" type="password" name="password" placeholder="Password">
+          <input
+            data-email="email"
+            class="registration-input"
+            type="email"
+            name="email"
+            placeholder="E-mail"
+          />
+          <input
+            data-pass="pass"
+            class="registration-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
         </div>
         <div class="reg-aut-btn">
           <button class="enterAccount" type="submit">ВОЙТИ</button>
-          <button class="registerAccount" data-reg="registration" type="submit">РЕГИСТРАЦИЯ</button>
+          <button class="registerAccount" data-reg="registration" type="submit">
+            РЕГИСТРАЦИЯ
+          </button>
         </div>
       </div>
     </div>
-    <section class="section section__form">
+
+
+      <section class="section section__form">
       <div class="container__form">
           <button class="button-close" type="button" data-action="close">
           <svg class="button-close__icon" width="24" height="24" aria-label="Закрытие модального окна">
@@ -54,8 +72,34 @@
                     <input class="form__input" type="text" id="input-text">
                 </li>
                 <li class="item form__item">
-                  <label class="form__label" for="input-file">Фото</label>
-                    <input type="file" id="input-file">
+                  <p class="form__label">Фото</p>
+                  <ul class="form__input-download">
+                    <li class="item download__item">        
+                      <label class="download__label">
+                        <img class="download__img" width="78" height="50">
+                      <input class="download__input" type="file" style="display: none" multiple/></label>
+                    </li>
+                    <li class="item download__item">
+                      <label class="download__label">
+                      <img class="download__img" width="78" height="50">
+                      <input class="download__input" type="file" style="display: none" multiple/></label>
+                    </li>
+                    <li class="item download__item">
+                      <label class="download__label">
+                      <img class="download__img" width="78" height="50">
+                      <input class="download__input" type="file" style="display: none" multiple/></label>
+                    </li>
+                    <li class="item download__item">
+                      <label class="download__label">
+                      <img class="download__img" width="78" height="50">
+                      <input class="download__input" type="file" style="display: none" multiple/></label>
+                    </li>
+                    <li class="item download__item">
+                      <label class="download__label">
+                      <img class="download__img" width="78" height="50">
+                      <input class="download__input" type="file" style="display: none" multiple/></label>
+                    </li>
+                  </ul>
                 </li>
                 <li class="item form__item">
                   <label class="form__label" for="input-textarea">Описание товара</label>
@@ -88,7 +132,6 @@
                 </ul>
       </div>
 </section>
-
     <footer class="footer-section">
       <div class="footer-wrap">
         <p>
