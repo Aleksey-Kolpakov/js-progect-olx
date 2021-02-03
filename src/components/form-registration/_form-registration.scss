@@ -1,0 +1,114 @@
+.registrationForm {
+  width: 260px;
+  margin: 0 auto;
+  @include for-size(tablet) {
+    width: 427px;
+  }
+}
+
+.registration-title {
+  margin-top: 47px;
+font-weight: 500;
+@include for-size(tablet) {
+   margin-top: 50px;
+  font-size: 14px;
+}
+}
+.reg-aut-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.registration-input {
+  background-color: $white-color;
+  padding-left: 25px;
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  margin-top: 26px;
+  border: 1px solid $tertirary-gray-color;
+}
+.input-reg {
+  text-align: center;
+}
+
+.reg-aut-btn button {
+  margin-top: 30px;
+  width: 120px;
+  height: 50px;
+  border: 1px solid #BBBBBB;
+  font-weight: 700;
+  transition: 0.3s;
+  margin-bottom: 47px;
+  @include for-size(tablet) {
+    width: 203px;
+    height: 60px;
+    margin-bottom: 50px;
+  }
+}
+.registration-input::placeholder {
+  padding-left: 10px;
+  color: $tertirary-gray-color;
+  border: $tertirary-gray-color;
+}
+.reg-aut-btn button:hover {
+  background-color: $orange-color;
+  color: #FAFAFA;
+  border: none;
+}
+
+.registration-google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAFAFA;;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 26px;
+  transition: 0.3s;
+    @include for-size(tablet) {
+       margin-top: 30px;
+       display: inline-flex;
+  }
+}
+.registration-google:hover {
+  background-color: $orange-color;
+  color: #FAFAFA;
+
+}
+.registration-google-svg {
+    margin-right: 10px
+}
+
+.form__error {
+  color: red;
+  text-align: left;
+  font-size: 10px;
+  display: block;
+  margin-top: 3px;
+  display: none;
+}
+
+input:valid:not(:placeholder-shown) {
+  border-color: green;
+}
+
+input:invalid:not(:placeholder-shown) {
+  border-color: red;
+}
+
+input:invalid:not(:placeholder-shown)+.form__error {
+  display: block;
+}
+
+.show-password {
+display: flex;
+margin-top: 10px;
+}
+#show_password {
+  margin-right: 3px;
+}
