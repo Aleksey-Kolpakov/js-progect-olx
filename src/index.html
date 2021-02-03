@@ -69,7 +69,7 @@
             <li><button class="header-filter-item">Отдам бесплатно</button></li>
             <li><button class="header-filter-item">Обмен</button></li>
           </ul>
-        </div>
+
         <ul class="filter-clear-block">
           <li>
             <button class="header-filter-button header-button">
@@ -151,6 +151,30 @@
       </div>
 </section>
 
+    <section class="hero">
+      <div class="container">
+      <ul class="hero-list">
+        <li id="item1" class="hero-item">
+          <ul class="hero-list-slider"></ul>
+        </li>
+      </ul>
+      </div>
+    </section>
+
+     <section class="section-category">
+      <div class="container">
+        <h2 class="section-title">Распродажа</h2>
+        <a href="" class="section-link">Смотреть все</a>
+        <p class="section-text">
+          Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
+          многое другое.
+        </p>
+        <ul class="section-gallery"></ul>
+      </div>
+    </section>
+    <div class="section-gallery-upload"></div>
+    <button class="loadmore-btn" type="button">Загрузить еще</button>
+
     <footer class="footer-section">
       <div class="footer-wrap">
         <p>
@@ -165,5 +189,27 @@
         </p>
       </div>
     </footer>
+    <div class="modal-wrapper">
+      <div class="modal"></div>
+    </div>
+      
+          <div class="container">
+      <div class="registrationForm">
+        <p class="registration-title">Для авторизации можете использовать Google Account:</p>
+        <button class="registration-google" type="button"><svg class="registration-google-svg" width='17' height='17'>
+          <use href='./images/sprite/sprite.svg#icon-google'></use>
+        </svg>Google</button>
+        <p class='registration-title'>Или войдите в приложение используя e-mail и пароль:</p>
+        <div class="input-reg">
+              <input data-email="email" class="registration-input" type="email" name="email" placeholder="E-mail" required>
+              <span class="form__error">Это поле должно содержать E-Mail в формате example@site.com</span>
+        </div>
+        <div class="input-reg password">
+                <input data-pass="pass" id="password"  class="registration-input" type="password" name="password" placeholder="Password" minlength="6" maxlength="18" required>
+                <label class="show-password" for="show_password">
+                  <input type="checkbox" name="show_password" id="show_password">
+                 Показать пароль
+                </label>
+           </div>
   </body>
 </html>
