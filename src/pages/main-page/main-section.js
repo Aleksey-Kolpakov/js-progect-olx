@@ -135,7 +135,7 @@ function createMarkup(categoriesList, otherEl) {
 </section>`;
     })
     .join('');
-  sectionGalleryRef.insertAdjacentHTML('beforeend', createMarkup);
+  sectionGalleryRef.insertAdjacentHTML('beforebegin', createMarkup);
 }
 
 function markupSales() {
