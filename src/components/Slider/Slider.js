@@ -7,7 +7,9 @@ export default class Slider {
 
     getRefs(listSelectorCSS, buttons) {
         const refs = {};
-        refs.sliderList = document.querySelector(listSelectorCSS);
+        // refs.sliderList = document.querySelector(listSelectorCSS);//цю закоментуй
+        refs.sliderList = typeof listSelectorCSS==='object' ? listSelectorCSS ://ось цю додаєш
+            document.querySelector(listSelectorCSS);//і цю додаєш
         refs.sliderList.classList.add('slider-wrap');
 
         refs.sliderBlock = document.createElement('div');
@@ -17,11 +19,15 @@ export default class Slider {
 
         const itemCollection = refs.sliderList.children;
         itemCollection.forEach(item => item.classList.add('slider-item'));
-        const itemAmount = itemCollection.length;
 
-        function createDots(amountOfItems, parentNode){
+        const parentWidth = refs.sliderList.offsetWidth;
+        const itemWidth = itemCollection[0].offsetWidth;
+        const itemAmount = itemCollection.length;
+        const slidesAmount = Math.ceil(itemAmount * itemWidth / parentWidth);
+
+        function createDots(amountOfSlides, parentNode){
         const dotsArray = [];
-        for (let i = 0; i < amountOfItems; i += 1){
+        for (let i = 0; i < amountOfSlides; i += 1){
             const newDot = document.createElement('div');
             newDot.classList.add('slider-dot');
             if (i == 0) {
@@ -61,12 +67,15 @@ export default class Slider {
         console.log('screenWidth', screenWidth);
         if (buttons && screenWidth>=480) {
             createButtons();
-            refs.nextButton.addEventListener('click', this.slideRight.bind(this));
-            refs.prevButton.addEventListener('click', this.slideLeft.bind(this));
+            // refs.nextButton.addEventListener('click', this.slideRight.bind(this));
+            // refs.prevButton.addEventListener('click', this.slideLeft.bind(this));
+            refs.nextButton.addEventListener('click', ()=>(this.slideRight(slidesAmount)));
+            refs.prevButton.addEventListener('click', ()=>(this.slideLeft(slidesAmount)));
         }
         if (buttons && screenWidth<480 || !buttons) {
-            createDots(itemAmount, refs.sliderBlock);
-            refs.sliderBlock.addEventListener('click', this.slideRight.bind(this));
+            createDots(slidesAmount, refs.sliderBlock);
+            // refs.sliderBlock.addEventListener('click', this.slideRight.bind(this));
+            refs.sliderBlock.addEventListener('click', ()=>(this.slideRight(slidesAmount)));
         }
 
         return refs;
@@ -74,9 +83,11 @@ export default class Slider {
 
     position=0;
 
-    slideRight() {
+    slideRight(maxPos) {
         this.position += 1;
-        const maxPosition = this.refs.sliderList.children.length - 1;
+        console.log(maxPos);
+        // const maxPosition = this.refs.sliderList.children.length - 1;
+        const maxPosition = maxPos - 1;
         if (this.position > maxPosition) {
             this.position = 0;
         };
@@ -84,9 +95,11 @@ export default class Slider {
         this.changeActiveDot(this.refs.blockDots, this.position);
     }
 
-    slideLeft() {
+    slideLeft(maxPos) {
         this.position -= 1;
-        const maxPosition = this.refs.sliderList.children.length - 1;
+        console.log(maxPos);
+        // const maxPosition = this.refs.sliderList.children.length - 1;
+        const maxPosition = maxPos - 1;
         if (this.position < 0) {
             this.position = maxPosition;
         };
