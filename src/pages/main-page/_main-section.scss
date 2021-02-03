@@ -1,5 +1,5 @@
 .section-category {
-  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 .section-title {
@@ -101,6 +101,10 @@
 .price-container {
   display: flex;
   justify-content: center;
+}
+
+.loadmore-btn.is-hidden {
+  display: none;
 }
 
 .loadmore-btn {
