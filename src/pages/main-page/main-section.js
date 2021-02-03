@@ -1,3 +1,4 @@
+import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './tamplates/category-items-markup.hbs';
 
 let pageNumber = 1;
@@ -117,12 +118,14 @@ function createMarkup(categoriesList, otherEl) {
         imageUrls: item.imageUrls[0],
       }))
       .map(item => {
-        return `<li class="section-gallery-item">
+        return `<li class="section-gallery-item slider-item">
+        <div class="image-container">
         <img
           class="section-gallery-item-image"
           src="${item.imageUrls}"
           alt="${item.title}"
         />
+        </div>
         <h3 class="section-gallery-item-title">${item.title}</h3>
         <div class="price-container">
           <p class="section-gallery-item-newprice">${item.price} €</p>
@@ -136,6 +139,10 @@ function createMarkup(categoriesList, otherEl) {
     })
     .join('');
   sectionGalleryRef.insertAdjacentHTML('beforebegin', createMarkup);
+  const ArraySectionGallery = document.querySelectorAll('.section-gallery');
+  ArraySectionGallery.forEach(section => {
+    new Slider({ listUlSelector: section, buttons: true });
+  });
 }
 
 function markupSales() {
@@ -152,3 +159,24 @@ function markupSales() {
 }
 
 markupSales();
+
+// .then(
+//   items => console.log(items),
+//   // items.reduce(
+//   //   (accObj, item, index) => {
+//   //     if (index > 0 && index <= 5) {
+//   //       item.id = index + 1;
+//   //       accObj.notslider.push(item);
+//   //       return accObj;
+//   //     }
+//   //     accObj.slider.push(item);
+//   //     return accObj;
+//   //   },
+//   //   { slider: [], notslider: [] },
+//   // ),
+// )
+// .then(ObjWithArrays => {
+//   const markUpSlider = itemsMarkup(ObjWithArrays.slider);
+//   galleryRef.insertAdjacentHTML('beforeend', markUpSlider);
+//   new Slider({ listUlSelector: '.section-gallery', buttons: false });
+// });
