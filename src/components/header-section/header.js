@@ -22,25 +22,30 @@ refs.headerInputSearchIcon.addEventListener('click', () =>
 );
 
 function openMobileMenu() {
-  refs.mobileMenu.classList.remove('is-hidden');
-  refs.authenticationBlock.classList.remove('is-hidden'); // одна из двух остается в зависимости от того авторизирован ли пользователь
-  // refs.myCabinetBlock.classList.remove('is-hidden'); // одна из двух остается в зависимости от того авторизирован ли пользователь
-  refs.filterClearBlock.classList.remove('is-hidden');
+  refs.mobileMenu.classList.add('is-open');
+  refs.authenticationBlock.classList.add('is-open'); // одна из двух остается в зависимости от того авторизирован ли пользователь
+  refs.myCabinetBlock.classList.add('is-open'); // одна из двух остается в зависимости от того авторизирован ли пользователь
+  refs.filterClearBlock.classList.add('is-open');
 }
 
 function closeMobileMenu() {
-  refs.mobileMenu.classList.add('is-hidden');
-  refs.authenticationBlock.classList.add('is-hidden'); // одна из двух остается в зависимости от того авторизирован ли пользователь
-  // refs.myCabinetBlock.classList.add('is-hidden'); // одна из двух остается в зависимости от того авторизирован ли пользователь
-  refs.filtersContainer.classList.add('is-hidden');
-  refs.filterClearBlock.classList.add('is-hidden');
+  refs.mobileMenu.classList.remove('is-open');
+  refs.authenticationBlock.classList.remove('is-open'); // одна из двух остается в зависимости от того авторизирован ли пользователь
+  refs.myCabinetBlock.classList.remove('is-open'); // одна из двух остается в зависимости от того авторизирован ли пользователь
+  refs.filterClearBlock.classList.remove('is-open');
+  refs.filtersContainer.classList.remove('is-open');
 }
 
 function toggleSearchInput() {
-  refs.headerInputContainer.classList.toggle('is-hidden');
+  refs.headerInputContainer.classList.toggle('is-open');
   refs.headerInput.focus();
 }
 
 function toggleFiltersContainer() {
-  refs.filtersContainer.classList.toggle('is-hidden');
+  if (window.innerWidth < 768) {
+    refs.filtersContainer.classList.toggle('is-open');
+  }
+  if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+    refs.filtersContainer.classList.toggle('tablet-is-hidden');
+  }
 }

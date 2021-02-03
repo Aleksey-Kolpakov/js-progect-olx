@@ -1,21 +1,32 @@
-button {
+header {
+  background-color: $Header-backgound;
+}
+
+.header-button {
   margin: 0;
   padding: 0;
   background-color: inherit;
 
+  color: $main-gray-color;
+  border: none;
+
   &:hover,
   &:focus {
-    cursor: pointer;
+    color: $orange-color;
+  }
+
+  & svg {
+    fill: $main-gray-color;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: $orange-color;
   }
 }
 
-img,
 svg {
   display: block;
-}
-
-header {
-  background-color: $Header-backgound;
 }
 
 .header-container {
@@ -37,7 +48,6 @@ header {
   display: block;
   width: 20px;
   height: 20px;
-  background-color: inherit;
   border: none;
 
   @include for-size(tablet) {
@@ -45,43 +55,14 @@ header {
   }
 }
 
-.burger-menu-icon {
-  fill: $main-gray-color;
+// .burger-menu-icon {
+//   fill: $main-gray-color;
 
-  .burger-menu-button:hover &,
-  .burger-menu-button:focus & {
-    fill: $orange-color;
-  }
-}
-
-.mobile-search-button {
-  display: block;
-  width: 24px;
-  height: 24px;
-  background-color: inherit;
-  border: none;
-
-  @include for-size(tablet) {
-    display: none;
-  }
-}
-
-.mobile-search-icon {
-  fill: $main-gray-color;
-
-  .mobile-search-button:hover &,
-  .mobile-search-button:focus & {
-    fill: $orange-color;
-  }
-}
-
-.mobile-close-button:hover {
-  fill: $orange-color;
-}
-
-.mobile-menu {
-  display: none;
-}
+//   .burger-menu-button:hover &,
+//   .burger-menu-button:focus & {
+//     fill: $orange-color;
+//   }
+// }
 
 .header-logo-link {
   @include for-size(tablet) {
@@ -103,23 +84,36 @@ header {
   }
 }
 
-.header-input-container {
-  @include for-size(mobile-only) {
-    display: block;
+.mobile-search-button {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: none;
 
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.header-input-container {
+  display: block;
+
+  @include for-size(mobile-only) {
+    display: none;
     position: absolute;
     top: 85px;
 
     width: 285px;
     height: 44px;
 
-    &.is-hidden {
-      display: none;
+    z-index: 1;
+
+    &.is-open {
+      display: block;
     }
   }
 
   @include for-size(tablet) {
-    display: block;
     position: relative;
     order: 4;
     width: 410px;
@@ -134,15 +128,12 @@ header {
 }
 
 .header-input {
-  width: 410px;
-  height: 44px;
+  width: 100%;
+  height: 100%;
   padding: 10px 54px 10px 15px;
   border: none;
-  outline: none;
 
   @include for-size(mobile-only) {
-    display: inline-block;
-
     border: 1px solid $main-gray-color;
 
     width: 285px;
@@ -152,28 +143,34 @@ header {
 
 .header-input-search-icon {
   position: absolute;
-  top: 10px;
+  top: 50%;
   right: 15px;
   cursor: text;
+
+  transform: translate(0, -50%);
 }
 
 .authentication-block {
+  display: flex;
+
   @include for-size(mobile-only) {
+    display: none;
     position: absolute;
     top: 70px;
     left: 70px;
 
-    display: flex;
-
     z-index: 2;
 
-    &.is-hidden {
-      display: none;
+    // transform: translate(-300px, 0);
+    // transition: 200ms transform linear;
+
+    &.is-open {
+      // transform: translate(0, 0);
+      display: flex;
     }
   }
 
   @include for-size(tablet) {
-    display: flex;
     order: 2;
     margin-left: auto;
     margin-right: 12px;
@@ -182,16 +179,22 @@ header {
   @include for-size(desktop) {
     order: 3;
   }
+
+  &.is-hidden {
+    display: none;
+  }
 }
 
 .authentication-block button {
-  border: none;
   padding: 3px 12px;
-  background-color: inherit;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .authentication-block .registration-button {
-  color: $main-gray-color;
   border-right: 1px solid $main-gray-color;
 }
 
@@ -199,36 +202,27 @@ header {
   color: $orange-color;
 }
 
-.authentication-block .registration-button:hover,
-.authentication-block .registration-button:focus,
-.authentication-block .login-button:hover,
-.authentication-block .login-button:focus {
-  color: $orange-color;
-  text-decoration: underline;
-}
-
 .my-cabinet-block {
-  &.is-hidden {
-    display: none;
-  }
+  display: flex;
 
   @include for-size(mobile-only) {
+    display: none;
     position: absolute;
-    // top: 100px;
     top: 70px;
     left: 54px;
 
-    display: flex;
-
     z-index: 2;
 
-    &.is-hidden {
-      display: none;
+    // transform: translate(-300px, 0);
+    // transition: 200ms transform linear;
+
+    &.is-open {
+      // transform: translate(0, 0);
+      display: flex;
     }
   }
 
   @include for-size(tablet) {
-    display: flex;
     order: 2;
     margin-left: auto;
     margin-right: 12px;
@@ -237,24 +231,26 @@ header {
   @include for-size(desktop) {
     order: 3;
   }
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.authentication-block button {
+  padding: 3px 12px;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .my-cabinet-block button {
   display: flex;
   align-items: center;
 
-  border: none;
   padding: 0 12px;
-  background-color: inherit;
-
-  color: $main-gray-color;
-  & svg {
-    fill: $main-gray-color;
-  }
-
-  &:hover svg {
-    fill: $orange-color;
-  }
 }
 
 .my-cabinet-block .my-cabinet-button {
@@ -263,15 +259,6 @@ header {
   & svg {
     margin-right: 10px;
   }
-}
-
-.my-cabinet-block .logout-button {
-  color: $orange-color;
-}
-
-.my-cabinet-block .my-cabinet-button:hover,
-.my-cabinet-block .my-cabinet-button:focus {
-  color: $orange-color;
 }
 
 .create-ad-button {
@@ -297,7 +284,10 @@ header {
 }
 
 .header-filter-container {
+  display: block;
+
   @include for-size(mobile-only) {
+    display: none;
     position: absolute;
     top: 180px;
     left: 10px;
@@ -305,13 +295,16 @@ header {
 
     z-index: 2;
 
-    &.is-hidden {
-      display: none;
+    // transform: translate(-300px, 0);
+    // transition: 200ms transform linear;
+
+    &.is-open {
+      // transform: translate(0, 0);
+      display: block;
     }
   }
 
   @include for-size(tablet) {
-    display: block;
     order: 6;
     position: absolute;
     top: 178px;
@@ -319,9 +312,10 @@ header {
     right: 0;
     background-color: $Header-dropout-menu;
 
-    // transition: 200ms transform linear;
-    &.is-hidden {
-      transform: translate(-100%, 0%);
+    z-index: 2;
+
+    &.tablet-is-hidden {
+      transform: translate(-100%, 0);
     }
   }
 
@@ -331,8 +325,8 @@ header {
     margin-top: 24px;
     background-color: $Header-backgound;
 
-    &.is-hidden {
-      transform: translate(0%, 0%);
+    &.tablet-is-hidden {
+      transform: translate(0, 0);
     }
   }
 }
@@ -380,16 +374,20 @@ header {
 
 .filter-clear-block {
   @include for-size(mobile-only) {
+    display: none;
+    // display: flex;
     position: absolute;
     top: 125px;
     left: 40px;
 
-    display: flex;
-
     z-index: 2;
 
-    &.is-hidden {
-      display: none;
+    // transform: translate(-300px, 0);
+    // transition: 200ms transform linear;
+
+    &.is-open {
+      // transform: translate(0, 0);
+      display: flex;
     }
   }
 
@@ -415,13 +413,8 @@ header {
   background-color: inherit;
   border: none;
 
-  &:hover,
-  &:focus {
-    color: $orange-color;
-
-    & svg {
-      fill: $orange-color;
-    }
+  & svg {
+    margin-right: 15px;
   }
 }
 
@@ -433,10 +426,10 @@ header {
   }
 }
 
-.button-icon {
-  margin-right: 15px;
-  fill: $main-gray-color;
-}
+// .button-icon {
+//   margin-right: 15px;
+//   fill: $main-gray-color;
+// }
 
 .filter-clear-block .header-filter-button {
   @include for-size(desktop) {
@@ -445,23 +438,28 @@ header {
 }
 
 .mobile-menu {
-  display: block;
-  position: absolute;
+  @include for-size(mobile-only) {
+    display: none;
+    // display: block;
+    position: absolute;
 
-  z-index: 1;
+    z-index: 1;
 
-  top: 0;
-  left: 0;
-  bottom: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
 
-  width: 300px;
+    width: 300px;
 
-  background-color: $Header-dropout-menu;
+    background-color: $Header-dropout-menu;
 
-  // transition: 200ms transform linear;
+    // transform: translate(-300px, 0);
+    // transition: 200ms transform linear;
 
-  &.is-hidden {
-    transform: translate(-100%, 0%);
+    &.is-open {
+      // transform: translate(0, 0);
+      display: block;
+    }
   }
 
   @include for-size(tablet) {
@@ -480,15 +478,6 @@ header {
 
   top: 20px;
   left: 256px;
-
-  & svg {
-    fill: $main-gray-color;
-
-    &:hover,
-    &:focus {
-      fill: $orange-color;
-    }
-  }
 
   @include for-size(tablet) {
     display: none;

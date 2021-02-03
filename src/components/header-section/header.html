@@ -12,52 +12,53 @@
   </head>
   <body> -->
     <header>
-      <div class="container">
-        <button class="burger-menu-button">
+      <div class="container header-container">
+        <button class="burger-menu-button header-button">
           <svg class="burger-menu-icon" width="20" height="20">
             <use href="./images/sprite/sprite.svg#icon-menu"></use>
           </svg>
         </button>
         <a href="./index.html" class="header-logo-link">
           <img class="header-logo" src="./images/logo.svg" alt="Company logo" />
-          <!-- <svg class="header-logo">
-            <use href="./images/sprite/sprite.svg#icon-logo"></use>
-          </svg> -->
         </a>
-        <div class="input-container is-hidden">
-          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
-          <svg class="loupe-icon" width="24" height="24">
-            <use href="./images/sprite/sprite.svg#icon-search"></use>
-          </svg>
-        </div>
-        <button class="mobile-search-button">
-          <svg class="loupe-icon-mobile" width="24" height="24">
+        <button class="mobile-search-button header-button">
+          <svg class="mobile-search-icon" width="24" height="24">
             <use href="./images/sprite/sprite.svg#icon-search"></use>
           </svg>
         </button>
-        <ul class="authentication-block is-hidden">
-          <li><button class="registration-button">Регистрация</button></li>
-          <li><button class="login-button">Войти</button></li>
+        <div class="header-input-container">
+          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
+          <svg class="header-input-search-icon" width="24" height="24">
+            <use href="./images/sprite/sprite.svg#icon-search"></use>
+          </svg>
+        </div>
+        <ul class="authentication-block">
+          <li>
+            <button class="registration-button header-button">
+              Регистрация
+            </button>
+          </li>
+          <li><button class="login-button header-button">Войти</button></li>
         </ul>
         <ul class="my-cabinet-block is-hidden">
           <li>
-            <button class="my-cabinet-button">
-              <svg class="user-icon" width="20" height="20">
+            <button class="my-cabinet-button header-button">
+              <svg width="20" height="20">
                 <use href="./images/sprite/sprite.svg#icon-user-profile"></use>
               </svg>
               МОЙ КАБИНЕТ
             </button>
           </li>
           <li>
-            <button class="logout-button">
-              <svg class="logout-icon" width="20" height="20">
+            <button class="logout-button header-button">
+              <svg width="20" height="20">
                 <use href="./images/sprite/sprite.svg#icon-logout"></use>
               </svg>
             </button>
           </li>
         </ul>
         <button class="create-ad-button">Создать обьявление</button>
-        <div class="header-filter-container is-hidden">
+        <div class="header-filter-container tablet-is-hidden">
           <ul class="header-filter-list">
             <li><button class="header-filter-item">Недвижимость</button></li>
             <li><button class="header-filter-item">Транспорт</button></li>
@@ -69,9 +70,9 @@
             <li><button class="header-filter-item">Обмен</button></li>
           </ul>
         </div>
-        <ul class="filter-clear-block is-hidden">
+        <ul class="filter-clear-block">
           <li>
-            <button class="header-filter-button">
+            <button class="header-filter-button header-button">
               <svg class="filter-icon button-icon" width="24" height="24">
                 <use href="./images/sprite/sprite.svg#icon-tune"></use>
               </svg>
@@ -79,7 +80,7 @@
             </button>
           </li>
           <li>
-            <button class="header-clear-button">
+            <button class="header-clear-button header-button">
               <svg class="clear-icon button-icon" width="24" height="24">
                 <use href="./images/sprite/sprite.svg#icon-replay"></use>
               </svg>
@@ -87,8 +88,8 @@
             </button>
           </li>
         </ul>
-        <div class="mobile-menu is-hidden">
-          <button class="mobile-close-button">
+        <div class="mobile-menu">
+          <button class="mobile-close-button header-button">
             <svg class="close-icon button-icon" width="24" height="24">
               <use href="./images/sprite/sprite.svg#icon-close"></use>
             </svg>
