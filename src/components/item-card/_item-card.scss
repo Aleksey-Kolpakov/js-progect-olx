@@ -223,16 +223,6 @@
   padding-bottom: 61px;
 }
 
-.container {
-  @include for-size(desktop) {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-// .advertisement-card-small-photo {
-// }
-
 .flex-container {
   @include for-size(tablet) {
     display: flex;
