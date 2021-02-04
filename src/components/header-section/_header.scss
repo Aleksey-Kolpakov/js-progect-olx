@@ -425,14 +425,20 @@ header {
   }
 }
 
-// .button-icon {
-//   margin-right: 15px;
-//   fill: $main-gray-color;
-// }
-
 .filter-clear-block .header-filter-button {
   @include for-size(desktop) {
     display: none;
+  }
+}
+
+.header-clear-link {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+
+  & svg {
+    margin-right: 15px;
   }
 }
 
