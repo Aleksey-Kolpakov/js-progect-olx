@@ -1,11 +1,11 @@
 import './_slider.scss';
 
 export default class Slider {
-  constructor({ listUlSelector, buttons = false }) {
-    this.refs = this.getRefs(listUlSelector, buttons);
+  constructor({ listUlSelector, buttons = false, autoScroll = false, timeautoScroll = 3000 }) {
+    this.refs = this.getRefs(listUlSelector, buttons, autoScroll, timeautoScroll);
   }
 
-    getRefs(listSelectorCSS, buttons) {
+    getRefs(listSelectorCSS, buttons, autoScroll, autoScrollTime) {
       const refs = {};
       refs.sliderList = typeof listSelectorCSS === 'object'
         ? listSelectorCSS
@@ -23,6 +23,7 @@ export default class Slider {
         console.error('Error: Едік підключи правильно Слайдер в асинхронний код категорії sales');
         return;
       }
+
       itemCollection.forEach(item => item.classList.add('slider-item'));
 
       // const resizeWindow = () => {
@@ -50,7 +51,9 @@ export default class Slider {
         if (buttons && screenWidth < 768 || !buttons) {
           refs.blockDots = this.createDots(slidesAmount,lengthToScroll,refs.sliderList);
           refs.sliderBlock.append(refs.blockDots);
-          // refs.sliderBlock.addEventListener('click', slideRightCallback);
+        }
+        if (autoScroll) {
+          setInterval(slideRightCallback, autoScrollTime);
         }
       // }
       // resizeWindow();
@@ -133,7 +136,7 @@ export default class Slider {
     if (event.target === event.currentTarget) {
       return;
     }
-      this.position = event.target.dataset.id;
+      this.position = Number(event.target.dataset.id);
       const activeScrollLength = this.position * scrollLength;
     sliderBlock.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
     this.changeActiveDot(this.refs.blockDots, this.position);
@@ -143,7 +146,6 @@ export default class Slider {
     if (blockDots) {
       const allDots = blockDots.children;
       allDots.forEach(dot => dot.classList.remove('dot-active'));
-      console.log(currentPosition);
       const activeDot = allDots[currentPosition];
       activeDot.classList.add('dot-active');
     }

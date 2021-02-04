@@ -20,7 +20,7 @@ callAdsAPI()
     const markUpSlider = adsCardHandleBar(ObjWithArrays.slider);
         heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
         heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
-        new Slider({ listUlSelector: ".hero-list-slider", buttons: false });
+        new Slider({ listUlSelector: ".hero-list-slider", buttons: false, autoScroll: true });
 });
 
 
