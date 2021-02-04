@@ -1,7 +1,12 @@
 .section-category {
   margin-top: 40px;
   & .slider-dot {
-    background-color: $orange-color;
+    background-image: radial-gradient(
+      circle at center,
+      $orange-color 0,
+      #fff 50%,
+      transparent 50%
+    );
   }
 }
 

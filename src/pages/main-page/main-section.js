@@ -143,6 +143,7 @@ function createMarkup(categoriesList, otherEl) {
           class="section-gallery-item-image"
           src="${item.imageUrls}"
           alt="${item.title}"
+          loading="lazy"
         />
         </div>
         <h3 class="section-gallery-item-title">${item.title}</h3>
@@ -160,7 +161,10 @@ function createMarkup(categoriesList, otherEl) {
     .join('');
   sectionGalleryRef.insertAdjacentHTML('beforebegin', createMarkup);
   const ArraySectionGallery = document.querySelectorAll('.section-gallery');
-  ArraySectionGallery.forEach(section => {
+  ArraySectionGallery.forEach((section, indx) => {
+    if (indx === 0) {
+      return;
+    }
     new Slider({ listUlSelector: section, buttons: true });
   });
 
