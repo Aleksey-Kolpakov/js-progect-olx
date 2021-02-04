@@ -14,13 +14,6 @@ $orange-color: #ff6b09;
   position: relative;
 }
 
-// .slider-dots-wrapper {
-//   position: absolute;
-//   left: 50%;
-//   bottom: 10px;
-//   transform: translate(-50%, -50%);
-// }
-
 .slider-dots-block {
   position: absolute;
   display: flex;
@@ -30,12 +23,21 @@ $orange-color: #ff6b09;
 }
 
 .slider-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #fff;
-  margin-right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  // border-radius: 50%;
+  // background-color: #fff;
+  margin-right: 2px;
   opacity: 0.5;
+  background-image: radial-gradient(
+    circle at center,
+    #fff 0,
+    #fff 50%,
+    transparent 50%
+  );
 
   &:last-child {
     margin-right: 0;
