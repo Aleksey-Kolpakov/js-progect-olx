@@ -18,6 +18,11 @@ export default class Slider {
       refs.sliderBlock.append(refs.sliderList);
 
       const itemCollection = refs.sliderList.children;
+
+      if (!itemCollection[0]) {
+        console.error('Error: Едік підключи правильно Слайдер в асинхронний код категорії sales');
+        return;
+      }
       itemCollection.forEach(item => item.classList.add('slider-item'));
 
       // const resizeWindow = () => {
