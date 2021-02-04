@@ -1,9 +1,12 @@
 const refs = {
   burgerMenuButton: document.querySelector('.burger-menu-button'),
   mobileMenu: document.querySelector('.mobile-menu'),
-  authenticationBlock: document.querySelector('.authentication-block'),
+  authorizationBlock: document.querySelector('.authorization-block'),
+  registrationButton: document.querySelector('.registration-button'),
+  loginButton: document.querySelector('.login-button'),
   myCabinetBlock: document.querySelector('.my-cabinet-block'),
   filtersContainer: document.querySelector('.header-filter-container'),
+  filterList: document.querySelector('.header-filter-list'),
   filterClearBlock: document.querySelector('.filter-clear-block'),
   filterButton: document.querySelector('.header-filter-button'),
   mobileSearchButton: document.querySelector('.mobile-search-button'),
