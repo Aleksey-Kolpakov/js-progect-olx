@@ -1,0 +1,278 @@
+@mixin for-form($range) {
+  $mobile: 290px;
+  $tablet: 724px;
+  $desktop: 950px;
+
+  @if $range == mobile-only {
+    @media (max-width: #{$tablet - 1}) {
+      @content;
+    }
+  } @else if $range == mobile {
+    @media (min-width: $mobile) {
+      @content;
+    }
+  } @else if $range == tablet-only {
+    @media (max-width: #{$desktop - 1}) {
+      @content;
+    }
+  } @else if $range == tablet {
+    @media (min-width: $tablet) {
+      @content;
+    }
+  } @else if $range == desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+}
+
+.container__form {
+  background: rgba(126, 141, 206, 0.25);
+
+  position: relative;
+  @include for-form(mobile) {
+    width: 290px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 54px;
+    padding-bottom: 40px;
+  }
+
+  @include for-form(tablet) {
+    width: 724px;
+    padding-left: 54px;
+    padding-right: 54px;
+    padding-top: 54px;
+    padding-bottom: 60px;
+  }
+
+  @include for-form(desktop) {
+    width: 950px;
+    padding-left: 57px;
+    padding-right: 57px;
+    padding-top: 54px;
+    padding-bottom: 60px;
+  }
+}
+
+.button-close {
+  width: 24px;
+  height: 24px;
+  margin: 0px;
+  padding: 0px;
+  border-width: 0px;
+
+  position: absolute;
+
+  @include for-form(mobile) {
+    top: 15px;
+    right: 15px;
+  }
+
+  @include for-form(tablet) {
+    top: 25px;
+    right: 25px;
+  }
+
+  @include for-form(desktop) {
+    top: 25px;
+    right: 20px;
+  }
+}
+
+.form__title {
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+
+  @include for-form(mobile) {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  @include for-form(tablet) {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+}
+
+.form__list {
+  padding: 0px;
+  margin: 0px;
+}
+
+.form__item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__label {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  @include for-form(mobile) {
+    position: absolute;
+    margin-top: 20px;
+  }
+
+  @include for-form(tablet) {
+    position: static;
+    margin-top: 35px;
+  }
+}
+
+.form__input {
+  border: 1px solid #bbbbbb;
+
+  padding-left: 23px;
+
+  @include for-form(mobile) {
+    width: 250px;
+    height: 52px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+  }
+
+  @include for-form(tablet) {
+    width: 458px;
+    height: 58px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  @include for-form(desktop) {
+    width: 610px;
+    height: 58px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+textarea {
+  resize: vertical;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form__item-delete {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form__item-submit {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-delete__span {
+  padding: 0px;
+  margin-right: 8px;
+}
+
+.button-delete__icon {
+  object-fit: cover;
+  vertical-align: text-bottom;
+}
+
+.button-delete {
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+
+  border-width: 0px;
+  color: #000000;
+
+  @include for-form(tablet) {
+    margin-left: 158px;
+  }
+
+  @include for-form(desktop) {
+    margin-left: 227px;
+  }
+}
+
+.button-submit {
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+
+  padding: 0px;
+  margin-top: 30px;
+
+  border-width: 0px;
+  background: #ff6b09;
+  color: #ffffff;
+
+  @include for-form(mobile) {
+    font-size: 12px;
+    line-height: 14px;
+    width: 250px;
+    height: 50px;
+  }
+
+  @include for-form(tablet) {
+    font-size: 14px;
+    line-height: 17px;
+    width: 266px;
+    height: 60px;
+    margin-right: 194px;
+  }
+
+  @include for-form(desktop) {
+    width: 286px;
+    height: 60px;
+    margin-right: 324px;
+  }
+}
+.form__input-download {
+  //  position: relative;
+  // width: 100px;
+  //@at-root height: 100px;
+  display: flex;
+  padding-right: 179px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.download__item {
+  width: 78px;
+  height: 50px;
+  background-color: #f5f6fb;
+  margin-left: 10px;
+  position: relative;
+}
+​ .download__label {
+  //position: absolute;
+  //padding-top: 18px;
+  //padding-bottom: 18px;
+  //padding-left: 35px;
+  //padding-right: 35px;
+  width: 78px;
+  height: 50px;
+}
+.download__img {
+  position: relative;
+  background-image: url(./images/+.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  width: 78px;
+  height: 50px;
+  text-indent: -10000px;
+}
+
+.close-image-button {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border-radius: 50%;
+}
