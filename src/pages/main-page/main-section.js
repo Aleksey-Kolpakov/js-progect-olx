@@ -117,8 +117,9 @@ function createMarkup(categoriesList, otherEl) {
         ...item,
         imageUrls: item.imageUrls[0],
       }))
-      .map(item => {
-        return `<li class="section-gallery-item slider-item">
+      .map((item, indx) => {
+        if (indx <= 15) {
+          return `<li class="section-gallery-item slider-item">
         <div class="image-container">
         <img
           class="section-gallery-item-image"
@@ -131,6 +132,7 @@ function createMarkup(categoriesList, otherEl) {
           <p class="section-gallery-item-newprice">${item.price} €</p>
         </div>
       </li>`;
+        }
       })
       .join('')}
     </ul>
