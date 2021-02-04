@@ -16,6 +16,7 @@ header {
   }
 
   & svg {
+    display: block;
     fill: $main-gray-color;
   }
 
@@ -23,10 +24,6 @@ header {
   &:focus svg {
     fill: $orange-color;
   }
-}
-
-svg {
-  display: block;
 }
 
 .header-container {
@@ -157,7 +154,7 @@ svg {
   }
 }
 
-.authentication-block {
+.authorization-block {
   display: flex;
 
   @include for-size(mobile-only) {
@@ -191,7 +188,7 @@ svg {
   }
 }
 
-.authentication-block button {
+.authorization-block button {
   padding: 3px 12px;
 
   &:hover,
@@ -200,11 +197,11 @@ svg {
   }
 }
 
-.authentication-block .registration-button {
+.authorization-block .registration-button {
   border-right: 1px solid $main-gray-color;
 }
 
-.authentication-block .login-button {
+.authorization-block .login-button {
   color: $orange-color;
 }
 
@@ -239,15 +236,6 @@ svg {
 
   &.is-hidden {
     display: none;
-  }
-}
-
-.authentication-block button {
-  padding: 3px 12px;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
   }
 }
 
