@@ -1,16 +1,8 @@
 .modal {
-  width: 650px;
-  height: 230px;
-  // background-color: $white-color;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-
-  // transform: translate(-50%, -50%);
-
-  @mixin tablet-only {
-    width: 290px;
-    height: 205px;
+  max-width: 650px;
+  width: 100%;
+  @include for-size(mobile-only) {
+    max-width: 290px;
   }
 }
 
@@ -21,6 +13,10 @@
   letter-spacing: 0.02em;
 
   margin-top: 62px;
+
+  @include for-size(tablet-only) {
+    margin-top: 47px;
+  }
 }
 
 .exit-btn {
@@ -36,16 +32,28 @@
 
   background-color: inherit;
   border: 1px solid #bbbbbb;
+
+  @include for-size(tablet-only) {
+    width: 118px;
+    height: 50px;
+  }
 }
 .confirm {
   margin-right: 20px;
   background: #ff6b09;
+  @include for-size(tablet-only) {
+    margin-right: 15px;
+  }
 }
 
 .exit-btn-group {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  margin-bottom: 61px;
+  @include for-size(tablet-only) {
+    margin-bottom: 44px;
+  }
 }
 
 // .exit-btn-escape {
