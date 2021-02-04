@@ -1,5 +1,7 @@
 import './_modal-scss.scss';
 
+let isActive = false;
+
 export function modalBackDrop(template) {
   const backDropRef = document.querySelector('.back-drop');
   const modalRef = document.querySelector('.modal');
@@ -11,7 +13,12 @@ export function modalBackDrop(template) {
   exitBtnRef.addEventListener('click', onBtnClose);
 
   backDropRef.classList.add('is-open');
-  modalRef.innerHTML = createModalMarkup();
+
+  if (isActive) {
+    return;
+  }
+  modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
+  isActive = true;
 
   function createModalMarkup() {
     return `${template}`;
