@@ -1,8 +1,6 @@
 // const imgRef = document.querySelectorAll('.download__img');
 // const images = Object.values(imgRef);
 
-// const donwloadtems = document.querySelectorAll('.download__item');
-
 // const downloadLabels = document.querySelectorAll('.download__label');
 // console.log(imageItems);
 
@@ -26,6 +24,7 @@ function insertImages(e) {
 
   if (allImg.length < 6) {
     allImg.forEach(file => {
+      const donwloadtems = document.querySelectorAll('.download__item');
       const reader = new FileReader();
 
       reader.onloadend = () => {
