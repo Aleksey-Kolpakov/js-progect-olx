@@ -10,6 +10,10 @@ export default class Slider {
       refs.sliderList = typeof listSelectorCSS === 'object'
         ? listSelectorCSS
         : document.querySelector(listSelectorCSS);
+
+      if (refs.sliderList.classList.contains('slider-wrap')) {
+        return;
+      }
       refs.sliderList.classList.add('slider-wrap');
 
       refs.sliderBlock = document.createElement('div');
