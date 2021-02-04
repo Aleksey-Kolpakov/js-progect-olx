@@ -17,10 +17,10 @@ function formExit() {
   modalBackDrop(exit);
 
   const closeModal = () => {
-    modalRef.classList.remove('is-open');
+    backDropRef.classList.remove('is-open');
   };
 
-  const modalRef = document.querySelector('.modal');
+  const backDropRef = document.querySelector('.back-drop');
 
   // const exitBtnRef = document.querySelector('.exit-btn-escape');
   // exitBtnRef.addEventListener('click', closeModal);
