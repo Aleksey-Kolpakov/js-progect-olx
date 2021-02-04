@@ -7,6 +7,6 @@ function toggleFiltersContainer() {
     refs.filtersContainer.classList.toggle('is-open');
   }
   if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-    refs.filtersContainer.classList.toggle('tablet-is-hidden');
+    refs.filtersContainer.classList.toggle('tablet-is-open');
   }
 }
