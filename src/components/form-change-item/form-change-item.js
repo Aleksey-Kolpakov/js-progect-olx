@@ -1,53 +1,45 @@
-// const imgRef = document.querySelectorAll('.download__img');
-// const images = Object.values(imgRef);
+export default function () {
+  const formImgList = document.querySelector('.form__input-download');
+  console.log(formImgList);
 
-// const downloadLabels = document.querySelectorAll('.download__label');
-// console.log(imageItems);
+  formImgList.insertAdjacentHTML(
+    'afterbegin',
+    '<li class="item download__item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
+  );
 
-const formImgList = document.querySelector('.form__input-download');
-console.log(formImgList);
+  const fileInput = document.querySelector('.download__input');
 
-formImgList.insertAdjacentHTML(
-  'afterbegin',
-  '<li class="item download__item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
-);
+  fileInput.addEventListener('change', insertImages);
 
-const fileInput = document.querySelector('.download__input');
+  function insertImages(e) {
+    const allImg = Object.values(e.target.files);
 
-fileInput.addEventListener('change', insertImages);
+    if (allImg.length < 6) {
+      allImg.forEach((file, i) => {
+        const donwloadtems = document.querySelectorAll('.download__item');
 
-function insertImages(e) {
-  console.log(images);
-  const allImg = Object.values(e.target.files);
+        const reader = new FileReader();
 
-  let currentPosition = position;
+        reader.onloadend = () => {
+          formImgList.insertAdjacentHTML(
+            'afterbegin',
+            `<li class="item download__item"> <img src="${reader.result}" data-index="${i}"  class="download__img" width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button">X</button></li > `,
+          );
 
-  if (allImg.length < 6) {
-    allImg.forEach(file => {
-      const donwloadtems = document.querySelectorAll('.download__item');
-      const reader = new FileReader();
+          const closeImgRef = document.querySelector('.close-image-button');
 
-      reader.onloadend = () => {
-        // imgRef[currentPosition].;
+          closeImgRef.addEventListener('click', clearImgSrc);
+        };
 
-        const closeImgRef = document.querySelectorAll('.close-image-button');
-        closeImgRef[currentPosition].setAttribute(
-          'data-position',
-          currentPosition,
-        );
+        function clearImgSrc(event) {
+          let position = event.target.dataset.index;
+          let currentimg = document.querySelectorAll('[data-index]');
+          console.log(currentimg);
+        }
 
-        closeImgRef[currentPosition].addEventListener('click', clearImgSrc);
-      };
-
-      function clearImgSrc(event) {
-        // console.log(event.target);
-        let position = event.target.getAttribute('data-position');
-        imgRef[position].src = 'a';
-        event.target.remove();
-      }
-
-      reader.readAsDataURL(file);
-    });
+        reader.readAsDataURL(file);
+      });
+    }
   }
 }
 
