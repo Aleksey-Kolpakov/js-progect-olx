@@ -64,7 +64,7 @@
     }
 
     @include for-size(desktop) {
-      max-width: calc((100% - 20px * 2) / 4);
+      max-width: calc((100% - 20px * 3) / 4);
     }
   }
 

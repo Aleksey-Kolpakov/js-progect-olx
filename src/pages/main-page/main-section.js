@@ -1,5 +1,5 @@
 import Slider from '../../components/Slider/Slider';
-import itemsMarkup from './tamplates/category-items-markup.hbs';
+import itemsMarkup from './templates/category-items-markup.hbs';
 
 let pageNumber = 1;
 
