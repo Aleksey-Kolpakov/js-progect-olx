@@ -7,7 +7,10 @@ export function modalBackDrop(template) {
   backDropRef.addEventListener('click', onBackdrop);
   document.addEventListener('keydown', onBtnPress);
 
-  modalRef.classList.add('is-open');
+  const exitBtnRef = document.querySelector('.exit-btn-escape');
+  exitBtnRef.addEventListener('click', onBtnClose);
+
+  backDropRef.classList.add('is-open');
   modalRef.innerHTML = createModalMarkup();
 
   function createModalMarkup() {
@@ -22,6 +25,10 @@ export function modalBackDrop(template) {
     if (event.currentTarget === event.target) {
       closeModal();
     }
+  }
+
+  function onBtnClose() {
+    closeModal();
   }
 
   function onBtnPress(event) {
