@@ -161,6 +161,19 @@
   }
 }
 
+// ----------------------------------------------Select category
+
+.form__input.select {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.select__option {
+  width: 100px;
+}
+
 textarea {
   resize: vertical;
   padding-top: 20px;

@@ -222,6 +222,8 @@
       </div>
     </div>
   </div>
+
+
     <div class="container__form">
       <button class="button-close" type="button" data-action="close">
         <svg class="button-close__icon" width="24" height="24" aria-label="Закрытие модального окна">
@@ -233,7 +235,7 @@
         <ul class="list form__list">
           <li class="item form__item">
             <label class="form__label" for="input-text">Название товара</label>
-            <input class="form__input" type="text" id="input-text">
+            <input class="form__input" type="text" id="input-text" name="title"> 
           </li>
           <li class="item form__item">
             <p class="form__label-text">Фото</p>
@@ -241,50 +243,52 @@
               <li class="item download__item">
                 <label class="download__label">
                   <img class="download__img" width="78" height="46">
-                  <input class="download__input" type="file" style="display: none" multiple />
+                  <input class="download__input" type="file" style="display: none" multiple name="file"/>
                 </label>
               </li>
               <li class="item download__item">
                 <label class="download__label">
                   <img class="download__img" width="78" height="46">
-                  <input class="download__input" type="file" style="display: none" multiple />
+                  <input class="download__input" type="file" style="display: none" multiple name="file"/>
                 </label>
               </li>
               <li class="item download__item">
                 <label class="download__label">
                   <img class="download__img" width="78" height="50">
-                  <input class="download__input" type="file" style="display: none" multiple />
+                  <input class="download__input" type="file" style="display: none" multiple name="file"/>
                 </label>
               </li>
               <li class="item download__item">
                 <label class="download__label">
                   <img class="download__img" width="78" height="50">
-                  <input class="download__input" type="file" style="display: none" multiple />
+                  <input class="download__input" type="file" style="display: none" multiple name="file"/>
                 </label>
               </li>
               <li class="item download__item">
                 <label class="download__label">
                   <img class="download__img" width="78" height="50">
-                  <input class="download__input" type="file" style="display: none" multiple />
+                  <input class="download__input" type="file" style="display: none" multiple name="file"/>
                 </label>
               </li>
             </ul>
           </li>
           <li class="item form__item">
             <label class="form__label" for="input-textarea">Описание товара</label>
-            <textarea class="form__input" rows="5" id="input-textarea"></textarea>
+            <textarea class="form__input" rows="5" id="input-textarea" name="description"></textarea>
           </li>
           <li class="item form__item">
             <label class="form__label" for="input-select">Категория товара</label>
-            <select class="form__input" id="input-select"></select>
+            <select id="form-category" class="form__input select" id="input-select" size="1" name="category">
+              <option class="select__option"></option>
+            </select>
           </li>
           <li class="item form__item">
             <label class="form__label" for="input-number">Цена</label>
-            <input class="form__input" type="number" placeholder="0.00 €" id="input-number">
+            <input class="form__input" type="number" placeholder="0.00 €" id="input-number" name="price">
           </li>
           <li class="item form__item">
             <label class="form__label" for="input-tel">Телефон</label>
-            <input class="form__input" type="tel" placeholder="+38 (0--) --- -- --" for="input-tel">
+            <input class="form__input" type="tel" placeholder="+38 (0--) --- -- --" for="input-tel" name="phone">
           </li>
           <li class="item form__item-delete">
             <button class="button-delete" type="click" data-action="delete">
@@ -301,7 +305,6 @@
         </ul>
       </form>
     </div>
-    </section>
 </body>
 
 </html>
