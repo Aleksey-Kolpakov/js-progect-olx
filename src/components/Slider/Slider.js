@@ -1,72 +1,84 @@
 import './_slider.scss';
 
 export default class Slider {
-  constructor({ listUlSelector, buttons = false, autoScroll = false, timeautoScroll = 3000 }) {
-    this.refs = this.getRefs(listUlSelector, buttons, autoScroll, timeautoScroll);
+  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0' }) {
+    this.position = 0;
+    this.itemsSelector = listUlSelector;
+    this.buttons = buttons;
+    this.autoScrolling = autoScroll;
+    this.autoScrollTime = timeAutoScroll;
+    this.parentBlockPadding = parentPadding;
+    this.refs = this.getRefs();
   }
 
-    getRefs(listSelectorCSS, buttons, autoScroll, autoScrollTime) {
-      const refs = {};
-      refs.sliderList = typeof listSelectorCSS === 'object'
-        ? listSelectorCSS
-        : document.querySelector(listSelectorCSS);
+  getRefs() {
+    const refs = {};
+    /* перевіряємо наш селектор це клас/id чи дом обєкт */
+    refs.sliderList = typeof this.itemsSelector === 'object'
+      ? this.itemsSelector
+      : document.querySelector(this.itemsSelector);
+    /* якщо селектор має такий клас, слайдер не додаємо повторно */
+    if (refs.sliderList.classList.contains('slider-wrap')) {
+      return;
+    }
+    /* додаємо селектору клас та падінги */
+    refs.sliderList.classList.add('slider-wrap');
+    refs.sliderList.style['padding'] = this.parentBlockPadding;
+    /* створюємо обгортку для селектора */
+    refs.sliderBlock = document.createElement('div');
+    refs.sliderBlock.classList.add('slider');
+    refs.sliderList.parentNode.insertBefore(refs.sliderBlock, refs.sliderList);
+    refs.sliderBlock.append(refs.sliderList);
 
-      if (refs.sliderList.classList.contains('slider-wrap')) {
-        return;
+    // const resizeWindow = () => {
+    /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
+    const itemCollection = refs.sliderList.children;
+    if (!itemCollection[0]) {
+      console.error('Error: array of items did not come from server yet. Connect Slider inside async function');
+      return;
+    }
+    itemCollection.forEach(item => item.classList.add('slider-item'));
+
+    /* вираховую довжину, на яку треба прокрутити слайд, і к-сть прокруток слайду */
+    const parentStyles = getComputedStyle(refs.sliderList);
+    const { paddingLeft, paddingRight, width } = parentStyles;
+    const parentContentWidth = parseInt(width) - parseInt(paddingLeft) - parseInt(paddingRight);
+    const itemWidth = itemCollection[0]?.offsetWidth;
+    const itemStyles = getComputedStyle(itemCollection[0]);
+    const { marginLeft, marginRight } = itemStyles;
+    const itemMarginSum = parseInt(marginLeft) + parseInt(marginRight);
+    const lengthToScroll = parentContentWidth + itemMarginSum;//довжина, на яку треба прокрутити слайд
+    const itemOnScreen = lengthToScroll / (itemWidth + itemMarginSum);
+    const itemAllAmount = itemCollection.length;
+    const slidesAmount = Math.ceil(itemAllAmount / itemOnScreen);//к-сть прокруток слайду.
+
+    /* -------- */
+    const screenWidth = window.innerWidth;
+    const slideRightCallback = () => (this.slideRight(slidesAmount, lengthToScroll));
+    const slideLeftCallback = () => (this.slideLeft(slidesAmount, lengthToScroll));
+    /* умова створення кнопок вправо-вліво */
+      if (this.buttons && screenWidth >= 768) {
+        const { prevButton, nextButton } = this.createButtons(refs.sliderBlock);
+        nextButton.addEventListener('click', slideRightCallback);
+        prevButton.addEventListener('click', slideLeftCallback);
       }
-      refs.sliderList.classList.add('slider-wrap');
-
-      refs.sliderBlock = document.createElement('div');
-      refs.sliderBlock.classList.add('slider');
-      refs.sliderList.parentNode.insertBefore(refs.sliderBlock, refs.sliderList);
-      refs.sliderBlock.append(refs.sliderList);
-
-      const itemCollection = refs.sliderList.children;
-
-      if (!itemCollection[0]) {
-        console.error('Error: Едік підключи правильно Слайдер в асинхронний код категорії sales');
-        return;
+    /* умова створення кнопок-точок під слайдером */
+      if (this.buttons && screenWidth < 768 || !this.buttons) {
+        refs.blockDots = this.createDots(slidesAmount,lengthToScroll,refs.sliderList);
+        refs.sliderBlock.append(refs.blockDots);
       }
-
-      itemCollection.forEach(item => item.classList.add('slider-item'));
-
-      // const resizeWindow = () => {
-      /* -------- */
-      const parentWidth = refs.sliderList.offsetWidth;
-      const itemWidth = itemCollection[0]?.offsetWidth;
-      const itemStyles = window.getComputedStyle(itemCollection[0]);
-      const itemMarginLeft = Number.parseInt(itemStyles.marginLeft);
-      const itemMarginRight = Number.parseInt(itemStyles.marginRight);
-      const itemMarginSum = itemMarginRight + itemMarginLeft;
-      const lengthToScroll = parentWidth + itemMarginSum;//довжина, на яку треба прокрутити слайд
-      const itemOnScreen = lengthToScroll / (itemWidth + itemMarginSum);
-      const itemAllAmount = itemCollection.length;
-      const slidesAmount = Math.ceil(itemAllAmount / itemOnScreen);//к-сть прокруток слайду.
-      /* -------- */
-
-        const screenWidth = window.innerWidth;
-        const slideRightCallback = () => (this.slideRight(slidesAmount, lengthToScroll));
-        const slideLeftCallback = () => (this.slideLeft(slidesAmount, lengthToScroll));
-        if (buttons && screenWidth >= 768) {
-          const { prevButton, nextButton } = this.createButtons(refs.sliderBlock);
-          nextButton.addEventListener('click', slideRightCallback);
-          prevButton.addEventListener('click', slideLeftCallback);
-        }
-        if (buttons && screenWidth < 768 || !buttons) {
-          refs.blockDots = this.createDots(slidesAmount,lengthToScroll,refs.sliderList);
-          refs.sliderBlock.append(refs.blockDots);
-        }
-        if (autoScroll) {
-          setInterval(slideRightCallback, autoScrollTime);
-        }
-      // }
-      // resizeWindow();
-      // window.addEventListener('resize', resizeWindow);
-
-        return refs;
+    /* умова увімкнення автоскролу */
+      if (this.autoScrolling) {
+        setInterval(slideRightCallback, this.autoScrollTime);
+      }
+    // }
+    // resizeWindow();
+    // window.addEventListener('resize', resizeWindow);
+      return refs;
   }
 /* -------------------------------------------------- */
-  position = 0;
+
+/* -------------------------------------------------- */
 
   slideRight(maxPos, scrollLength) {
     this.position += 1;
