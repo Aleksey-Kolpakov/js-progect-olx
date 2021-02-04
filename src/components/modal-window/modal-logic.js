@@ -1,26 +1,34 @@
 import './_modal-scss.scss';
 
 export function modalBackDrop(template) {
+  const backDropRef = document.querySelector('.back-drop');
   const modalRef = document.querySelector('.modal');
 
-  modalRef.addEventListener('click', onBackdrop);
+  backDropRef.addEventListener('click', onBackdrop);
   document.addEventListener('keydown', onBtnPress);
 
+  const exitBtnRef = document.querySelector('.exit-btn-escape');
+  exitBtnRef.addEventListener('click', onBtnClose);
+
+  backDropRef.classList.add('is-open');
   modalRef.innerHTML = createModalMarkup();
-  modalRef.classList.add('is-open');
 
   function createModalMarkup() {
     return `${template}`;
   }
 
   function closeModal() {
-    modalRef.classList.remove('is-open');
+    backDropRef.classList.remove('is-open');
   }
 
   function onBackdrop(event) {
     if (event.currentTarget === event.target) {
       closeModal();
     }
+  }
+
+  function onBtnClose() {
+    closeModal();
   }
 
   function onBtnPress(event) {

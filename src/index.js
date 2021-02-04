@@ -10,3 +10,4 @@ import './pages/favourites-page/favourites-page.js';
 import './pages/user-items-pages/user-items-page.js';
 import './utils/backend-services.js';
 import './components/modal-window/modal-logic.js';
+import './components/form-exit/form-exit.js';
