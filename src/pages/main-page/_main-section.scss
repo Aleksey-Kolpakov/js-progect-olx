@@ -148,3 +148,35 @@
   width: 100%;
   height: 120px;
 }
+
+.section-goods {
+  text-align: center;
+
+  & .section-gallery-goods {
+    margin-bottom: 20px;
+
+    @include for-size(tablet) {
+      max-width: calc((100% - 20px) / 2);
+      width: 322px;
+
+      &:nth-child(odd) {
+        margin-right: 20px;
+      }
+    }
+
+    @include for-size(desktop) {
+      max-width: calc((100% - 20px * 3) / 4);
+      width: 286px;
+
+      &:not(:nth-child(4n)) {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  @include for-size(tablet) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

@@ -1,13 +1,16 @@
-{{#each this}}
 <section class="section-category">
     <div class="container">
-        <h2 class="section-title">{{this}}</h2>
-        <a href="#" class="section-link">Смотреть все</a>
-        <p class="section-text">
-            Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
-            многое другое.
-        </p>
-        <ul class="section-gallery"></ul>
+        <ul class="section-goods">
+            {{#each this}}
+            <li class="section-gallery-goods">
+                <div class="image-container">
+                    <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" />
+                </div>
+                <h3 class="section-gallery-item-title">{{title}}</h3>
+                <div class="price-container">
+                    <p class="section-gallery-item-newprice">{{price}} €</p>
+            </li>
+            {{/each}}
+        </ul>
     </div>
 </section>
-{{/each}}
