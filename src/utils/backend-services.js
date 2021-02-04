@@ -4,7 +4,7 @@ export let jsDataBase = [];
 let pageNumber = 1;
 let id = "6018c8769dfece51e3667546";
 const getHeroAds = function () {
-   return axios.get('https://callboard-backend.goit.global/call/ads')
+    return axios.get('https://callboard-backend.goit.global/call/ads')
         .then(({ data }) => data)
         .catch((error) => error)
 };
