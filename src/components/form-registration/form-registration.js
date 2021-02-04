@@ -13,14 +13,14 @@ const registrerFetch = function (submittedData) {
 }
 
 const loginFetch = function (submittedData) {
-    return fetch(`https://callboard-backend.goit.global/auth/login`, {
-        method: 'POST',
-        body: JSON.stringify(submittedData),
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-        }
-    })
-        .then(response => response.json())
+  return fetch(`https://callboard-backend.goit.global/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify(submittedData),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    }
+  })
+    .then(response => response.json())
         .catch(error => console.log(error));
 }
 
@@ -58,7 +58,7 @@ export function openForm() {
     registerAccountBtn: document.querySelector('.registerAccount'),
     inputEmail: document.querySelector('[data-email="email"]'),
     inputPass: document.querySelector('[data-pass="pass" ]'),
-    showPass : document.querySelector('.show-password')
+    showPass : document.querySelector('.show-password'),
     };
 
   const submittedData = {
@@ -67,15 +67,15 @@ export function openForm() {
   }
 
 authRefs.registerAccountBtn.addEventListener('click', () => {
-  submittedData.email = authRefs.inputEmail.value
-   submittedData.password = authRefs.inputPass.value
-  registrerFetch(submittedData)
+  submittedData.email = authRefs.inputEmail.value;
+  submittedData.password = authRefs.inputPass.value;
+  registrerFetch(submittedData);
 })
 
 authRefs.enterAccountBtn.addEventListener('click', () => {
-   submittedData.email = authRefs.inputEmail.value
-  submittedData.password = authRefs.inputPass.value
-  loginFetch(submittedData)
+  submittedData.email = authRefs.inputEmail.value;
+  submittedData.password = authRefs.inputPass.value;
+  loginFetch(submittedData);
 })
 
 authRefs.showPass.addEventListener('click', function (event) {
