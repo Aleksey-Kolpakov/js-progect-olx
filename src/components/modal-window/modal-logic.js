@@ -1,20 +1,21 @@
 import './_modal-scss.scss';
 
 export function modalBackDrop(template) {
+  const backDropRef = document.querySelector('.back-drop');
   const modalRef = document.querySelector('.modal');
 
-  modalRef.addEventListener('click', onBackdrop);
+  backDropRef.addEventListener('click', onBackdrop);
   document.addEventListener('keydown', onBtnPress);
 
-  modalRef.innerHTML = createModalMarkup();
   modalRef.classList.add('is-open');
+  modalRef.innerHTML = createModalMarkup();
 
   function createModalMarkup() {
     return `${template}`;
   }
 
   function closeModal() {
-    modalRef.classList.remove('is-open');
+    backDropRef.classList.remove('is-open');
   }
 
   function onBackdrop(event) {

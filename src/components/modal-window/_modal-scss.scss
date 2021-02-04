@@ -1,8 +1,8 @@
-.modal-wrapper {
-  position: relative;
-}
+// .modal-wrapper {
+//   position: relative;
+// }
 
-.modal {
+.back-drop {
   position: fixed;
   top: 0;
   left: 0;
@@ -17,8 +17,28 @@
   overflow-x: hidden;
 }
 
+.modal {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
 .is-open {
   pointer-events: initial;
   opacity: 1;
   visibility: visible;
+}
+
+.exit-btn-escape {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 30px;
+  margin-right: 29px;
+
+  border: none;
+  background-color: inherit;
 }

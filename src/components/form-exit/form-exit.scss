@@ -1,12 +1,12 @@
-.exit-modal {
+.modal {
   width: 650px;
   height: 230px;
-  background-color: $white-color;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  // background-color: $white-color;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
 
-  transform: translate(-50%, -50%);
+  // transform: translate(-50%, -50%);
 
   @mixin tablet-only {
     width: 290px;
@@ -48,16 +48,16 @@
   margin-top: 30px;
 }
 
-.exit-btn-escape {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 30px;
-  margin-right: 29px;
+// .exit-btn-escape {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   margin-top: 30px;
+//   margin-right: 29px;
 
-  border: none;
-  background-color: inherit;
-}
+//   border: none;
+//   background-color: inherit;
+// }
 
 .exit-svg {
   width: 14px;
