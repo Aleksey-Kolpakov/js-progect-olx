@@ -109,8 +109,8 @@
             <use href="./images/sprite/sprite.svg#icon-search"></use>
           </svg>
         </button>
-        <form class="header-form">
-          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
+        <form class="header-form js-search">
+          <input class="header-input js-input-search" type="text" />
           <button class="header-input-submit-button" type="submit">
             <svg class="header-input-search-icon" width="24" height="24">
               <use href="./images/sprite/sprite.svg#icon-search"></use>
@@ -183,27 +183,31 @@
       </div>
     </header>
 
-    <section class="hero">
-      <ul class="hero-list">
-        <li id="item1" class="hero-item">
-          <ul class="hero-list-slider"></ul>
-        </li>
-      </ul>
-    </section>
+    <div class="container search-is-hidden js-search-container"></div>
 
-    <section class="section-category">
-      <div class="container">
-        <h2 class="section-title">Распродажа</h2>
-        <a href="" class="section-link">Смотреть все</a>
-        <p class="section-text">
-          Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
-          многое другое.
-        </p>
-        <ul class="section-gallery"></ul>
-      </div>
-    </section>
-    <div class="section-gallery-upload"></div>
-    <button class="loadmore-btn" type="button">Загрузить еще</button>
+    <main class="js-main">
+      <section class="hero">
+        <ul class="hero-list">
+          <li id="item1" class="hero-item">
+            <ul class="hero-list-slider"></ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section-category">
+        <div class="container">
+          <h2 class="section-title">Распродажа</h2>
+          <a href="" class="section-link">Смотреть все</a>
+          <p class="section-text">
+            Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары
+            и многое другое.
+          </p>
+          <ul class="section-gallery"></ul>
+        </div>
+      </section>
+      <div class="section-gallery-upload"></div>
+      <button class="loadmore-btn" type="button">Загрузить еще</button>
+    </main>
 
     <footer class="footer-section">
       <div class="footer-wrap">
