@@ -4,7 +4,7 @@
 @import './utils/_variables.scss';
 @import './components/scss-components/_container.scss';
 @import './components/scss-components/_base.scss';
-
+@import './components/modal-window/_modal-scss.scss';
 @import './components/header-section/_header.scss'; // kozubskyi
 
 @import './pages/main-page/_main-section.scss';
@@ -15,3 +15,4 @@
 @import './components/form-create-item/form-item.scss';
 
 @import './components/item-card/item-card.scss';
+@import './components/form-exit/form-exit.scss';
