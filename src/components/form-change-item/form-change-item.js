@@ -1,6 +1,5 @@
 export default function () {
   const formImgList = document.querySelector('.form__input-download');
-  console.log(formImgList);
 
   formImgList.insertAdjacentHTML(
     'afterbegin',
