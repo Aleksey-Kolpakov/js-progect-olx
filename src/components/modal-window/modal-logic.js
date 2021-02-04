@@ -1,5 +1,3 @@
-import './_modal-scss.scss';
-
 let isActive = false;
 
 export function modalBackDrop(template) {
@@ -26,6 +24,8 @@ export function modalBackDrop(template) {
 
   function closeModal() {
     backDropRef.classList.remove('is-open');
+    document.removeEventListener('keydown', onBtnPress);
+    backDropRef.removeEventListener('click', onBackdrop);
   }
 
   function onBackdrop(event) {
