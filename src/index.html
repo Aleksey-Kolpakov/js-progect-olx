@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title></title>
+    <title>Project JS</title>
   </head>
 
   <body>
@@ -19,6 +19,8 @@
     <include src="./pages/main-page/main-page.html"></include>
 
     <div class="container">
+    <button class="exit">exit</button>
+    <!-- <div class="container">
       <div class="registrationForm">
         <p class="registration-title">
           Для авторизации можете использовать Google Account:
@@ -57,6 +59,11 @@
     </div>
 
     <section class="section section__form">
+            РЕГИСТРАЦИЯ -->
+
+    <!-- <section class="section section__form">
+
+      
       <div class="container__form">
           <button class="button-close" type="button" data-action="close">
           <svg class="button-close__icon" width="24" height="24" aria-label="Закрытие модального окна">
@@ -107,7 +114,157 @@
                   </li>
                 </ul>
       </div>
-</section>
+</section> -->
+    <header>
+      <div class="container header-container">
+        <button type="button" class="burger-menu-button header-button">
+          <svg class="burger-menu-icon" width="20" height="20">
+            <use href="./images/sprite/sprite.svg#icon-menu"></use>
+          </svg>
+        </button>
+        <a href="./index.html" class="header-logo-link">
+          <img class="header-logo" src="./images/logo.svg" alt="Company logo" />
+        </a>
+        <button type="button" class="mobile-search-button header-button">
+          <svg class="mobile-search-icon" width="24" height="24">
+            <use href="./images/sprite/sprite.svg#icon-search"></use>
+          </svg>
+        </button>
+        <form class="header-form">
+          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
+          <button type="submit" class="header-input-submit-button">
+            <svg class="header-input-search-icon" width="24" height="24">
+              <use href="./images/sprite/sprite.svg#icon-search"></use>
+            </svg>
+          </button>
+        </form>
+        <ul class="authorization-block">
+          <li>
+            <button type="button" class="registration-button header-button">
+              Регистрация
+            </button>
+          </li>
+          <li>
+            <button type="button" class="login-button header-button">
+              Войти
+            </button>
+          </li>
+        </ul>
+        <ul class="my-cabinet-block is-hidden">
+          <li>
+            <button type="button" class="my-cabinet-button header-button">
+              <svg width="20" height="20">
+                <use href="./images/sprite/sprite.svg#icon-user-profile"></use>
+              </svg>
+              МОЙ КАБИНЕТ
+            </button>
+          </li>
+          <li>
+            <button type="button" class="logout-button header-button">
+              <svg width="20" height="20">
+                <use href="./images/sprite/sprite.svg#icon-logout"></use>
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <button type="button" class="create-ad-button">
+          Создать обьявление
+        </button>
+        <div class="header-filter-container">
+          <ul class="header-filter-list">
+            <li>
+              <button type="button" class="header-filter-item">
+                Недвижимость
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Транспорт
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">Работа</button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Электроника
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Бизнес и услуги
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Отдых и спорт
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Отдам бесплатно
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">Обмен</button>
+            </li>
+          </ul>
+        </div>
+        <ul class="filter-clear-block">
+          <li>
+            <button class="header-filter-button header-button">
+              <svg class="filter-icon button-icon" width="24" height="24">
+                <use href="./images/sprite/sprite.svg#icon-tune"></use>
+              </svg>
+              Фильтры
+            </button>
+          </li>
+          <li>
+            <!-- <button class="header-clear-button header-button">
+              <svg class="clear-icon button-icon" width="24" height="24">
+                <use href="./images/sprite/sprite.svg#icon-replay"></use>
+              </svg>
+              Очистить
+            </button> -->
+            <a href="./index.html" class="header-clear-link header-button">
+              <svg class="clear-icon button-icon" width="24" height="24">
+                <use href="./images/sprite/sprite.svg#icon-replay"></use>
+              </svg>
+              Очистить
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-menu">
+          <button class="mobile-close-button header-button">
+            <svg class="close-icon button-icon" width="24" height="24">
+              <use href="./images/sprite/sprite.svg#icon-close"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <ul class="hero-list">
+        <li id="item1" class="hero-item">
+          <ul class="hero-list-slider"></ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section-category">
+      <div class="container">
+        <h2 class="section-title">Распродажа</h2>
+        <a href="" class="section-link">Смотреть все</a>
+        <p class="section-text">
+          Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
+          многое другое.
+        </p>
+        <ul class="section-gallery"></ul>
+      </div>
+    </section>
+    <div class="section-gallery-upload"></div>
+    <button class="loadmore-btn" type="button">Загрузить еще</button>
 
     <!-- <button type="button" class="close-image-button">X</button> -->
     <footer class="footer-section">
@@ -124,5 +281,63 @@
         </p>
       </div>
     </footer>
+    <!-- <div class="modal-wrapper">
+      <div class="modal"></div>
+    </div> -->
+    <div class="modal-wrapper">
+      <div class="back-drop">
+        <div class="modal">
+          <button class="exit-btn-escape">
+            <svg class="exit-svg">
+              <use href="./images/sprite/sprite.svg#icon-close"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="registrationForm">
+        <p class="registration-title">
+          Для авторизации можете использовать Google Account:
+        </p>
+        <button class="registration-google" type="button">
+          <svg class="registration-google-svg" width="17" height="17">
+            <use href="./images/sprite/sprite.svg#icon-google"></use></svg>Google
+        </button>
+        <p class="registration-title">
+          Или войдите в приложение используя e-mail и пароль:
+        </p>
+        <div class="input-reg">
+          <input
+            data-email="email"
+            class="registration-input"
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            required
+          />
+          <span class="form__error"
+            >Это поле должно содержать E-Mail в формате example@site.com</span
+          >
+        </div>
+        <div class="input-reg password">
+          <input
+            data-pass="pass"
+            id="password"
+            class="registration-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            minlength="6"
+            maxlength="18"
+            required
+          />
+          <label class="show-password" for="show_password">
+            <input type="checkbox" name="show_password" id="show_password" />
+            Показать пароль
+          </label>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

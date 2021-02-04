@@ -1,2 +1,1 @@
-import itemCardMarkup from '../../pages/main-page/tamplates/item-card-markup.hbs'
-
+import itemCardMarkup from '../../pages/main-page/templates/item-card-markup.hbs';

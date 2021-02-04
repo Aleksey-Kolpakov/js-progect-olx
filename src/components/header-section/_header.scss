@@ -1,0 +1,489 @@
+header {
+  background-color: $Header-backgound;
+}
+
+.header-button {
+  margin: 0;
+  padding: 0;
+  background-color: inherit;
+
+  color: $main-gray-color;
+  border: none;
+
+  &:hover,
+  &:focus {
+    color: $orange-color;
+  }
+
+  & svg {
+    display: block;
+    fill: $main-gray-color;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: $orange-color;
+  }
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 18px;
+
+  @include for-size(tablet) {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    padding: 35px 38px;
+  }
+}
+
+.burger-menu-button {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: none;
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.header-logo-link {
+  @include for-size(tablet) {
+    order: 1;
+  }
+
+  @include for-size(desktop) {
+    margin-right: 31px;
+  }
+}
+
+.header-logo {
+  width: 64px;
+  height: 40px;
+
+  @include for-size(desktop) {
+    width: 71px;
+    height: 44px;
+  }
+}
+
+.mobile-search-button {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: none;
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.header-form {
+  display: block;
+
+  @include for-size(mobile-only) {
+    display: none;
+    position: absolute;
+    top: 85px;
+
+    width: 285px;
+    height: 44px;
+
+    z-index: 1;
+
+    &.is-open {
+      display: block;
+    }
+  }
+
+  @include for-size(tablet) {
+    position: relative;
+    order: 4;
+    width: 410px;
+    height: 44px;
+    margin-top: 20px;
+  }
+
+  @include for-size(desktop) {
+    order: 2;
+    margin-top: 0;
+  }
+}
+
+.header-input {
+  width: 100%;
+  height: 100%;
+  padding: 10px 54px 10px 15px;
+  border: none;
+
+  @include for-size(mobile-only) {
+    border: 1px solid $main-gray-color;
+
+    width: 285px;
+    height: 44px;
+  }
+}
+
+.header-input-submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translate(0, -50%);
+
+  width: 52px;
+  height: 42px;
+  padding: 0;
+  margin: 0;
+
+  border: none;
+
+  background-color: inherit;
+
+  &:hover,
+  &:focus {
+    background-color: rgb(245, 245, 245);
+  }
+}
+
+.authorization-block {
+  display: flex;
+
+  @include for-size(mobile-only) {
+    // display: none;
+    position: absolute;
+    top: 70px;
+    left: -230px; //
+
+    z-index: 2;
+
+    transition: $transform-transition; //
+
+    &.is-open {
+      transform: translate(300px, 0); //
+      // display: flex;
+    }
+  }
+
+  @include for-size(tablet) {
+    order: 2;
+    margin-left: auto;
+    margin-right: 12px;
+  }
+
+  @include for-size(desktop) {
+    order: 3;
+  }
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.authorization-block button {
+  padding: 3px 12px;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.authorization-block .registration-button {
+  border-right: 1px solid $main-gray-color;
+}
+
+.authorization-block .login-button {
+  color: $orange-color;
+}
+
+.my-cabinet-block {
+  display: flex;
+
+  @include for-size(mobile-only) {
+    // display: none;
+    position: absolute;
+    top: 70px;
+    left: -246px; //
+
+    z-index: 2;
+
+    transition: $transform-transition; //
+
+    &.is-open {
+      transform: translate(300px, 0); //
+      // display: flex;
+    }
+  }
+
+  @include for-size(tablet) {
+    order: 2;
+    margin-left: auto;
+    margin-right: 12px;
+  }
+
+  @include for-size(desktop) {
+    order: 3;
+  }
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.my-cabinet-block button {
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+}
+
+.my-cabinet-block .my-cabinet-button {
+  border-right: 1px solid $main-gray-color;
+
+  & svg {
+    margin-right: 10px;
+  }
+}
+
+.create-ad-button {
+  display: none;
+
+  @include for-size(tablet) {
+    display: inline-block;
+    order: 3;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    background-color: $orange-color;
+    padding: 0;
+    min-height: 44px;
+    min-width: 216px;
+  }
+
+  @include for-size(desktop) {
+    order: 4;
+    min-width: 238px;
+  }
+}
+
+.header-filter-container {
+  display: block;
+
+  @include for-size(tablet-only) {
+    // display: block; //
+    display: none;
+    order: 6;
+    position: absolute;
+    top: 178px;
+    left: 0;
+    right: 0;
+    background-color: $Header-dropout-menu;
+
+    // opacity: 0;
+    // pointer-events: none;
+
+    z-index: 2;
+
+    // transition: 200ms opacity linear, $transform-transition;
+
+    &.tablet-is-open {
+      // transform: translate(0, 20px); //
+      // opacity: 1;
+      // pointer-events: auto;
+      display: block;
+    }
+  }
+
+  @include for-size(mobile-only) {
+    display: block;
+    // display: none;
+    position: absolute;
+    top: 180px;
+    left: -290px;
+    width: 280px;
+
+    // opacity: 1;
+    // pointer-events: auto;
+
+    z-index: 2;
+
+    transition: $transform-transition;
+
+    &.is-open {
+      transform: translate(300px, 0);
+      // display: block;
+    }
+  }
+
+  @include for-size(desktop) {
+    order: 5;
+    margin-top: 24px;
+  }
+}
+
+.header-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 280px;
+
+  @include for-size(tablet) {
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 35px;
+  }
+
+  @include for-size(desktop) {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.header-filter-list li {
+  margin: 10px 5px;
+
+  @include for-size(desktop) {
+    margin: 0 10px 0 0;
+  }
+}
+
+.header-filter-list li button {
+  padding: 8px 21px;
+  color: $main-gray-color;
+  background-color: inherit;
+  border: 1px solid $main-gray-color;
+  border-radius: 17px;
+}
+
+.header-filter-list button:hover,
+.header-filter-list button:focus {
+  color: $orange-color;
+  border: 1px solid $orange-color;
+}
+
+.filter-clear-block {
+  @include for-size(mobile-only) {
+    // display: none;
+    display: flex;
+    position: absolute;
+    top: 125px;
+    left: -260px; //
+
+    z-index: 2;
+
+    transition: $transform-transition; //
+
+    &.is-open {
+      transform: translate(300px, 0); //
+      // display: flex;
+    }
+  }
+
+  @include for-size(tablet) {
+    position: static;
+    display: flex;
+    order: 5;
+    margin-top: 20px;
+    margin-left: auto;
+  }
+
+  @include for-size(desktop) {
+    order: 6;
+  }
+}
+
+.filter-clear-block button {
+  display: flex;
+  align-items: center;
+
+  padding: 0;
+  color: $main-gray-color;
+  background-color: inherit;
+  border: none;
+
+  & svg {
+    margin-right: 15px;
+  }
+}
+
+.filter-clear-block li:not(:last-child) {
+  margin-right: 40px;
+
+  @include for-size(desktop) {
+    margin-right: 20px;
+  }
+}
+
+.filter-clear-block .header-filter-button {
+  @include for-size(desktop) {
+    display: none;
+  }
+}
+
+.header-clear-link {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+
+  & svg {
+    margin-right: 15px;
+  }
+}
+
+.mobile-menu {
+  @include for-size(mobile-only) {
+    // display: none;
+    display: block;
+    position: absolute;
+
+    z-index: 1;
+
+    top: 0;
+    left: -300px; //
+    bottom: 0;
+
+    width: 300px;
+
+    background-color: $Header-dropout-menu;
+
+    transition: $transform-transition; //
+
+    &.is-open {
+      transform: translate(300px, 0); //
+      // display: block;
+    }
+  }
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.mobile-close-button {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: inherit;
+  border: none;
+
+  position: absolute;
+
+  top: 20px;
+  left: 256px;
+
+  @include for-size(tablet) {
+    display: none;
+  }
+}
