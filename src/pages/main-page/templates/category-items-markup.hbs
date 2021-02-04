@@ -1,0 +1,13 @@
+{{#each this}}
+<li class="section-gallery-item slider-item">
+    <div class="image-container">
+        <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" />
+    </div>
+    <h3 class="section-gallery-item-title">{{title}}</h3>
+    <div class="price-container">
+        {{#if isOnSale}}
+        <p class="section-gallery-item-oldprice">{{oldPrice}} €</p>
+        {{/if}}
+        <p class="section-gallery-item-newprice">{{price}} €</p>
+</li>
+{{/each}}

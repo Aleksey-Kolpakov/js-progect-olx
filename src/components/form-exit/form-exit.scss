@@ -1,0 +1,65 @@
+.modal {
+  width: 650px;
+  height: 230px;
+  // background-color: $white-color;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+
+  // transform: translate(-50%, -50%);
+
+  @mixin tablet-only {
+    width: 290px;
+    height: 205px;
+  }
+}
+
+.exit-text {
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  letter-spacing: 0.02em;
+
+  margin-top: 62px;
+}
+
+.exit-btn {
+  width: 210px;
+  height: 60px;
+
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.21;
+
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  background-color: inherit;
+  border: 1px solid #bbbbbb;
+}
+.confirm {
+  margin-right: 20px;
+  background: #ff6b09;
+}
+
+.exit-btn-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+// .exit-btn-escape {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   margin-top: 30px;
+//   margin-right: 29px;
+
+//   border: none;
+//   background-color: inherit;
+// }
+
+.exit-svg {
+  width: 14px;
+  height: 14px;
+}
