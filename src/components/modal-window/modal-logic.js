@@ -2,13 +2,22 @@ export function modalBackDrop(template) {
   const backDropRef = document.querySelector('.back-drop');
   const modalRef = document.querySelector('.modal');
 
-  backDropRef.addEventListener('click', onBackdrop);
-  document.addEventListener('keydown', onBtnPress);
+  backDropRef.classList.add('is-open');
+
+  modalRef.innerHTML = '';
+  const addBtn = `<button class="exit-btn-escape">
+            <svg class="exit-svg">
+              <use href="./images/sprite/sprite.svg#icon-close"></use>
+            </svg>
+          </button>`;
+
+  modalRef.insertAdjacentHTML('beforeend', addBtn);
 
   const exitBtnRef = document.querySelector('.exit-btn-escape');
-  exitBtnRef.addEventListener('click', onBtnClose);
 
-  backDropRef.classList.add('is-open');
+  exitBtnRef.addEventListener('click', onBtnClose);
+  backDropRef.addEventListener('click', onBackdrop);
+  document.addEventListener('keydown', onBtnPress);
 
   modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
 
@@ -20,13 +29,7 @@ export function modalBackDrop(template) {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
-    const addBtn = `<button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>`;
-    modalRef.innerHTML = '';
-    modalRef.insertAdjacentHTML('beforeend', addBtn);
+    exitBtnRef.removeEventListener('click', onBtnClose);
   }
 
   function onBackdrop(event) {
@@ -44,6 +47,4 @@ export function modalBackDrop(template) {
       closeModal();
     }
   }
-
-  return closeModal;
 }
