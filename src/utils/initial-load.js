@@ -10,7 +10,7 @@ export const EnglishCategoriesPromise = getEnglishCategories();
 import {
   showAuthorizationBlock,
   showMyCabinetBlock,
-} from '../components/header-section/js/authorization-my-cabinet-blocks';
+} from '../components/header-section/js/service';
 
 export function isUserAutorized() {
   const accesToken = localStoradge.load('accessTokenOlx');
