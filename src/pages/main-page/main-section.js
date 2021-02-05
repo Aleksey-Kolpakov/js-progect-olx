@@ -1,6 +1,7 @@
 import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './templates/category-items-markup.hbs';
 import categoryMarkup from './templates/categories-markup.hbs';
+import throttle from 'lodash.throttle';
 
 let pageNumber = 1;
 
@@ -9,8 +10,11 @@ const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
 const sectionLinkRef = document.querySelector('.section-link');
 const mainSectionRef = document.querySelector('.main-section');
+const arrowUpRef = document.querySelector('.arrow-up');
 
 loadmoreBtn.addEventListener('click', loadmoreMarkup);
+window.addEventListener('scroll', throttle(listArrowBtn, 200));
+arrowUpRef.addEventListener('click', scrollToHeader);
 
 const getAllCategoriesWithItemsByPages = function (pageNumber) {
   return fetch(
@@ -138,6 +142,7 @@ function createMarkup(categoriesList, otherEl) {
       .map((item, indx) => {
         if (indx <= 15) {
           return `<li class="section-gallery-item slider-item">
+          <a href="" class=" section-gallery-goods-link" data-id="${item._id}">
         <div class="image-container">
         <img
           class="section-gallery-item-image"
@@ -150,6 +155,13 @@ function createMarkup(categoriesList, otherEl) {
         <div class="price-container">
           <p class="section-gallery-item-newprice">${item.price} €</p>
         </div>
+        <svg class="icon-fullscreen" width="20" height="24">
+            <use href="./images/sprite/sprite.svg#icon-fullscreen"></use>
+        </svg>
+        <svg class="icon-add-favorite" width="17" height="20">
+            <use href="./images/sprite/sprite.svg#icon-heart-add-favorite"></use>
+        </svg>
+        </a>
       </li>`;
         }
       })
@@ -165,7 +177,11 @@ function createMarkup(categoriesList, otherEl) {
     if (indx === 0) {
       return;
     }
-    new Slider({ listUlSelector: section, buttons: true });
+    new Slider({
+      listUlSelector: section,
+      buttons: true,
+      parentPadding: '5px 2px',
+    });
   });
 
   const sectionLinksRef = document
@@ -184,7 +200,11 @@ function markupSales() {
     }));
     const markupSales = itemsMarkup(mapSales);
     galleryRef.insertAdjacentHTML('beforeend', markupSales);
-    new Slider({ listUlSelector: '.section-gallery', buttons: true });
+    new Slider({
+      listUlSelector: '.section-gallery',
+      buttons: true,
+      parentPadding: '5px 2px',
+    });
   });
   markupSections();
 }
@@ -206,6 +226,21 @@ function onClick(event) {
         behavior: 'smooth',
       });
     });
+  }
+}
+
+function scrollToHeader() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
+function listArrowBtn() {
+  if (pageYOffset > 400) {
+    arrowUpRef.classList.add('is-active');
+  } else {
+    arrowUpRef.classList.remove('is-active');
   }
 }
 
