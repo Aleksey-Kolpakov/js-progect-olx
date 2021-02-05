@@ -10,4 +10,19 @@ function showMyCabinetBlock() {
   refs.myCabinetBlock.classList.remove('is-hidden');
 }
 
-export { showAuthorizationBlock, showMyCabinetBlock };
+function openMobileMenu() {
+  refs.mobileMenu.classList.add('is-open');
+  refs.authorizationBlock.classList.add('is-open');
+  refs.myCabinetBlock.classList.add('is-open');
+  refs.filterClearBlock.classList.add('is-open');
+}
+
+function closeMobileMenu() {
+  refs.mobileMenu.classList.remove('is-open');
+  refs.authorizationBlock.classList.remove('is-open');
+  refs.myCabinetBlock.classList.remove('is-open');
+  refs.filterClearBlock.classList.remove('is-open');
+  refs.filtersContainer.classList.remove('is-open');
+}
+
+export { openMobileMenu, closeMobileMenu, showAuthorizationBlock, showMyCabinetBlock };
