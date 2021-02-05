@@ -11,3 +11,6 @@ import './pages/user-items-pages/user-items-page.js';
 import './utils/backend-services.js';
 import './components/modal-window/modal-logic.js';
 import './components/form-exit/form-exit.js';
+
+import func from './components/form-change-item/form-item-image-markup';
+func();
