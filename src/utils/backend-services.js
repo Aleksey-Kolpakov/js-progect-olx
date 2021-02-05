@@ -229,10 +229,6 @@ export function getItembyTitle(searchQuerry) {
         }
     })
         .then(response => response.json())
-        .then(({ favourites }) => {
-            jsDataBase = favourites.length ? [...jsDataBase, ...favourites] : jsDataBase;
-            return favourites;
-        })
         .catch(error => console.log(error));
 };
 // getItembyTitle("mack").then(data => console.dir(data));
