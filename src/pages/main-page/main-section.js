@@ -133,7 +133,7 @@ function createMarkup(categoriesList, otherEl) {
       Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
       многое другое.
     </p>
-    <ul class="section-gallery">
+    <ul class="section-gallery js-item-container">
     ${values[indx]
       .map(item => ({
         ...item,
