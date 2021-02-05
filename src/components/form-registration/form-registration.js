@@ -1,6 +1,9 @@
 import { modalBackDrop } from '../modal-window/modal-logic';
-import {registerUserApi, loginFetch} from '../../utils/backend-services.js'
-const  createMarkupReg =
+import { registerUserApi, loginFetch } from '../../utils/backend-services.js'
+import { showMyCabinetBlock } from '../header-section/js/service'
+
+const createMarkupReg =
+
   `<div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
         <a class="registration-google" href="https://callboard-backend.goit.global/auth/google"><svg class="registration-google-svg" width='17' height='17'>
@@ -22,7 +25,9 @@ const  createMarkupReg =
           <button class="enterAccount" type="submit">ВОЙТИ</button>
           <button class="registerAccount" data-reg="registration" type="submit">РЕГИСТРАЦИЯ</button>
         </div>
-      </div>`
+      </div>`;
+
+
 export function openForm() {
   function listenerReg() {
     const authRefs = {
@@ -30,18 +35,34 @@ export function openForm() {
     registerAccountBtn: document.querySelector('.registerAccount'),
     inputEmail: document.querySelector('[data-email="email"]'),
     inputPass: document.querySelector('[data-pass="pass"]'),
-    showPass : document.querySelector('.show-password'),
+    showPass: document.querySelector('.show-password'),
+    backDropRef: document.querySelector('.back-drop'),
+    modalRef: document.querySelector('.modal'),
     };
 
-  const submittedData = {
-  email: '',
-  password: '',
-  }
+    const submittedData = {
+    email: '',
+    password: '',
+    }
 
+function closeModal() {
+    authRefs.backDropRef.classList.remove('is-open');
+    const addBtn = `<button class="exit-btn-escape">
+            <svg class="exit-svg">
+              <use href="./images/sprite/sprite.svg#icon-close"></use>
+            </svg>
+          </button>`;
+    authRefs.modalRef.innerHTML = '';
+    authRefs.modalRef.insertAdjacentHTML('beforeend', addBtn);
+  }
     const loginUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
-      loginFetch(submittedData);
+      loginFetch(submittedData).then(data => {
+        showMyCabinetBlock()
+      })
+      closeModal()
+      alert('Hello PES you authorization')
     };
 
     const registerUser = function () {
@@ -50,22 +71,26 @@ export function openForm() {
       registerUserApi(submittedData);
     };
 
-  authRefs.registerAccountBtn.addEventListener('click', registerUser)
-  authRefs.enterAccountBtn.addEventListener('click', loginUser)
-  authRefs.showPass.addEventListener('click', function (event) {
-	if (event.target.id !== 'show_password') return;
-	let password = document.querySelector('#password');
-	if (!password) return;
-	if (event.target.checked) {
-		password.type = 'text';
-	} else {
-		password.type = 'password';
-	}
-}, false);
+    authRefs.registerAccountBtn.addEventListener('click', registerUser);
+    authRefs.enterAccountBtn.addEventListener('click', loginUser);
+    authRefs.showPass.addEventListener('click', function (event) {
+    if (event.target.id !== 'show_password') return;
+    let password = document.querySelector('#password');
+    if (!password) return;
+    if (event.target.checked) {
+      password.type = 'text';
+    } else {
+      password.type = 'password';
+    }
+  }, false);
   }
+
   modalBackDrop(createMarkupReg);
   listenerReg()
 }
 
 export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
 console.log(userTokenGoogle);
+
+
+
