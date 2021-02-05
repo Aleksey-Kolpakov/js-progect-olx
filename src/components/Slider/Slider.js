@@ -1,6 +1,11 @@
 import throttle from 'lodash.throttle';
 import './_slider.scss';
 
+const { MOBILE, TABLETDESKTOP } = {
+    MOBILE: 'mobile',
+    TABLETDESKTOP: 'tabletdesktop',
+}
+
 export default class Slider {
   constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0' }) {
     this.position = 0;
@@ -12,6 +17,7 @@ export default class Slider {
     this.lengthToScroll = null;
     this.slidesAmount = null;
     this.intervalId = null;
+    this.prevScreenType = this.setTypeOfScreen();
     this.refs = this.getRefs();
     this.renderSliderComponents();
     window.addEventListener('resize', throttle(this.resizeWindowRerender, 2500));
@@ -44,7 +50,7 @@ export default class Slider {
   renderSliderComponents = () => {
   /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
     if (!this.refs) {
-      this.renderSliderComponents();
+      // this.renderSliderComponents();
       return;
     }
     const itemCollection = this.refs.sliderList.children;
@@ -189,11 +195,37 @@ export default class Slider {
       activeDot?.classList.add('dot-active');
   }
 
+  setTypeOfScreen = () => {
+    const currentScreenWidth = window.innerWidth;
+    let screenType = null;
+    if (currentScreenWidth < 768) {
+      return screenType = MOBILE;
+    }
+    if (currentScreenWidth >= 768) {
+      return screenType = TABLETDESKTOP;
+    }
+  }
+
+  checkScreenWidth = () => {
+    if (this.autoScrolling) {
+      return true;
+    }
+    const currentScreenType = this.setTypeOfScreen();
+    if (currentScreenType === this.prevScreenType) {
+      return false;
+    }
+    this.prevScreenType = currentScreenType;
+    return true;
+  }
+
   resizeWindowRerender = () => {
-      console.log('reRender');
+    const mustRerender = this.checkScreenWidth();
+    if (!mustRerender) {
+      return;
+    }
       this.refresh();
       this.renderSliderComponents();
       this.position = this.slidesAmount;
-      this.slideRight();
+    this.slideRight();
     }
 }
