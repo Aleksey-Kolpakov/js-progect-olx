@@ -6,13 +6,26 @@ export default function () {
   let firstItem = document.querySelector('.start-list-item');
 
   if (typeof obj != 'undefined') {
-    const img = obj.imageUrls;
-    const title = obj.title;
-    const price = obj.price;
-    const phone = obj.phone;
-    const category = obj.category;
-    const description = obj.description;
-    // console.log(obj.imageUrls);
+    const values = [
+      obj.title,
+      obj.description,
+      obj.category,
+      obj.price,
+
+      obj.phone,
+    ];
+    // console.log(values);
+    const formInputs = document.querySelectorAll('.form__input');
+
+    const categoryInput = document.querySelector('#input-select');
+    console.dir(categoryInput);
+    categoryInput.value = 'dir';
+    const formRef = document.querySelector('.form');
+
+    formInputs.forEach((form, i) => {
+      form.value = values[i];
+    });
+
     obj.imageUrls.forEach((img, i) => {
       formImgList.insertAdjacentHTML(
         'afterbegin',
