@@ -1,11 +1,6 @@
 import { modalBackDrop } from '../modal-window/modal-logic.js';
 
 const formCreate = `<div class="container__form">
-<button class="button-close" type="button" data-action="close">
-  <svg class="button-close__icon" width="24" height="24" aria-label="Закрытие модального окна">
-    <use href="./images/sprite/sprite.svg#icon-close"></use>
-  </svg>
-</button>
 <form class="form" autocomplete="off">
   <h3 class="form__title">Редактировать объявление</h3>
   <ul class="list form__list">
@@ -15,38 +10,6 @@ const formCreate = `<div class="container__form">
     </li>
     <li class="item form__item">
       <p class="form__label-text">Фото</p>
-      <ul class="form__input-download">
-        <li class="item download__item">
-          <label class="download__label">
-            <img class="download__img" width="78" height="46">
-            <input class="download__input" type="file" style="display: none" multiple name="file"/>
-          </label>
-        </li>
-        <li class="item download__item">
-          <label class="download__label">
-            <img class="download__img" width="78" height="46">
-            <input class="download__input" type="file" style="display: none" multiple name="file"/>
-          </label>
-        </li>
-        <li class="item download__item">
-          <label class="download__label">
-            <img class="download__img" width="78" height="50">
-            <input class="download__input" type="file" style="display: none" multiple name="file"/>
-          </label>
-        </li>
-        <li class="item download__item">
-          <label class="download__label">
-            <img class="download__img" width="78" height="50">
-            <input class="download__input" type="file" style="display: none" multiple name="file"/>
-          </label>
-        </li>
-        <li class="item download__item">
-          <label class="download__label">
-            <img class="download__img" width="78" height="50">
-            <input class="download__input" type="file" style="display: none" multiple name="file"/>
-          </label>
-        </li>
-      </ul>
     </li>
     <li class="item form__item">
       <label class="form__label" for="input-textarea">Описание товара</label>
