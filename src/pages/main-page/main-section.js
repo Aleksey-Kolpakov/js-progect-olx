@@ -165,7 +165,11 @@ function createMarkup(categoriesList, otherEl) {
     if (indx === 0) {
       return;
     }
-    new Slider({ listUlSelector: section, buttons: true });
+    new Slider({
+      listUlSelector: section,
+      buttons: true,
+      parentPadding: '5px 0',
+    });
   });
 
   const sectionLinksRef = document
@@ -184,7 +188,11 @@ function markupSales() {
     }));
     const markupSales = itemsMarkup(mapSales);
     galleryRef.insertAdjacentHTML('beforeend', markupSales);
-    new Slider({ listUlSelector: '.section-gallery', buttons: true });
+    new Slider({
+      listUlSelector: '.section-gallery',
+      buttons: true,
+      parentPadding: '5px 0',
+    });
   });
   markupSections();
 }
