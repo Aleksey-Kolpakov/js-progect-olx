@@ -26,6 +26,7 @@ export function modalBackDrop(template) {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
+    exitBtnRef.removeEventListener('click', onBtnClose);
   }
 
   function onBackdrop(event) {
