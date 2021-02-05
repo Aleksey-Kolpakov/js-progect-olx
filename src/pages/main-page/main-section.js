@@ -1,11 +1,14 @@
 import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './templates/category-items-markup.hbs';
+import categoryMarkup from './templates/categories-markup.hbs';
 
 let pageNumber = 1;
 
 const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
+const sectionLinkRef = document.querySelector('.section-link');
+const mainSectionRef = document.querySelector('.main-section');
 
 loadmoreBtn.addEventListener('click', loadmoreMarkup);
 
@@ -22,11 +25,26 @@ const getAllCategoriesWithItemsByPages = function (pageNumber) {
     .then(response => response.json())
     .catch(error => console.log(error));
 };
+function getItemsInCategory(category) {
+  return fetch(
+    `https://callboard-backend.goit.global/call/specific/${category}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    },
+  )
+    .then(response => response.json())
+    .catch(error => console.log(error));
+}
 
-function loadmoreMarkup() {
+function loadmoreMarkup(event) {
+  event.preventDefault();
   pageNumber += 1;
   if (pageNumber < 3) {
     markupSections();
+
     return;
   }
   markupSections();
@@ -104,7 +122,7 @@ function createMarkup(categoriesList, otherEl) {
       return `<section class="section-category">
   <div class="container">
     <h2 class="section-title">${title}</h2>
-    <a href="" class="section-link">
+    <a href="" class="section-link" data-title="${title.trim()}">
       Смотреть все
     </a>
     <p class="section-text">
@@ -125,6 +143,7 @@ function createMarkup(categoriesList, otherEl) {
           class="section-gallery-item-image"
           src="${item.imageUrls}"
           alt="${item.title}"
+          loading="lazy"
         />
         </div>
         <h3 class="section-gallery-item-title">${item.title}</h3>
@@ -142,9 +161,18 @@ function createMarkup(categoriesList, otherEl) {
     .join('');
   sectionGalleryRef.insertAdjacentHTML('beforebegin', createMarkup);
   const ArraySectionGallery = document.querySelectorAll('.section-gallery');
-  ArraySectionGallery.forEach(section => {
+  ArraySectionGallery.forEach((section, indx) => {
+    if (indx === 0) {
+      return;
+    }
     new Slider({ listUlSelector: section, buttons: true });
   });
+
+  const sectionLinksRef = document
+    .querySelectorAll('.section-link')
+    .forEach(link => {
+      link.addEventListener('click', onClick);
+    });
 }
 
 function markupSales() {
@@ -156,8 +184,29 @@ function markupSales() {
     }));
     const markupSales = itemsMarkup(mapSales);
     galleryRef.insertAdjacentHTML('beforeend', markupSales);
+    new Slider({ listUlSelector: '.section-gallery', buttons: true });
   });
   markupSections();
+}
+
+function onClick(event) {
+  event.preventDefault();
+  if (event.target === event.currentTarget) {
+    const currentSection = event.target.dataset.title;
+    getItemsInCategory(currentSection).then(resp => {
+      const mapImg = resp.map(item => ({
+        ...item,
+        imageUrls: item.imageUrls[0],
+      }));
+      const markup = categoryMarkup(mapImg);
+      mainSectionRef.innerHTML = '';
+      mainSectionRef.insertAdjacentHTML('beforeend', markup);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
+  }
 }
 
 markupSales();

@@ -32,10 +32,29 @@ font-weight: 500;
   text-align: center;
 }
 
-.reg-aut-btn button {
+.reg-aut-btn .enterAccount {
   margin-top: 30px;
   width: 120px;
   height: 50px;
+  background-color:$orange-color;
+  border: none;
+  color: #FAFAFA;
+  font-weight: 700;
+  transition: 0.3s;
+  margin-bottom: 47px;
+  @include for-size(tablet) {
+    width: 203px;
+    height: 60px;
+    margin-bottom: 50px;
+  }
+}
+
+.reg-aut-btn .registerAccount {
+  margin-top: 30px;
+  background-color: #ffffff;;
+  width: 120px;
+  height: 50px;
+  border: none;
   border: 1px solid #BBBBBB;
   font-weight: 700;
   transition: 0.3s;
@@ -46,6 +65,7 @@ font-weight: 500;
     margin-bottom: 50px;
   }
 }
+
 .registration-input::placeholder {
   padding-left: 10px;
   color: $tertirary-gray-color;
@@ -61,6 +81,7 @@ font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
   background-color: #FAFAFA;;
   width: 150px;
   height: 50px;
@@ -70,6 +91,7 @@ font-weight: 500;
   font-size: 14px;
   margin-top: 26px;
   transition: 0.3s;
+  text-decoration: none;
     @include for-size(tablet) {
        margin-top: 30px;
        display: inline-flex;
@@ -93,15 +115,15 @@ font-weight: 500;
   display: none;
 }
 
-input:valid:not(:placeholder-shown) {
+.valid:valid:not(:placeholder-shown) {
   border-color: green;
 }
 
-input:invalid:not(:placeholder-shown) {
+.valid:invalid:not(:placeholder-shown) {
   border-color: red;
 }
 
-input:invalid:not(:placeholder-shown)+.form__error {
+.valid:invalid:not(:placeholder-shown)+.form__error {
   display: block;
 }
 

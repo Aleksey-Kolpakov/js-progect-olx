@@ -63,10 +63,10 @@ export function callAdsAPI () {
     return fetch(url)
         .then(response => response.ok ? response.json() :
                 Promise.reject(new Error(`Error. Failed callAdsAPI`)))
-        .then(data => {
-            console.log(url + ':');
-            console.dir(data);
-            return data;
-        })
+        // .then(data => {
+        //     console.log(url + ':');
+        //     console.dir(data);
+        //     return data;
+        // })
         .catch(console.error)
 }
