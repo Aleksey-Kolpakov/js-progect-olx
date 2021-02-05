@@ -43,60 +43,9 @@
           <button class="registerAccount" data-reg="registration" type="submit">
             РЕГИСТРАЦИЯ -->
 
-    <!-- <section class="section section__form">
-
-      
-      <div class="container__form">
-          <button class="button-close" type="button" data-action="close">
-          <svg class="button-close__icon" width="24" height="24" aria-label="Закрытие модального окна">
-            <use href="./images/sprite/sprite.svg#icon-close"></use>
-          </svg>
-          </button>
-        <form class="form" autocomplete="off">
-              <h3 class="form__title">Редактировать объявление</h3>
-              <ul class="list form__list">
-                <li class="item form__item">
-                  <label class="form__label" for="input-text">Название товара</label>
-                    <input class="form__input" type="text" id="input-text">
-                </li>
-                <li class="item form__item">
-                  <label class="form__label" for="input-file">Фото</label>
-                    <input type="file" id="input-file">
-                </li>
-                <li class="item form__item">
-                  <label class="form__label" for="input-textarea">Описание товара</label>
-                    <textarea class="form__input" rows="5" id="input-textarea"></textarea>
-                </li>
-                <li class="item form__item">
-                  <label class="form__label" for="input-select">Категория товара</label>
-                    <select class="form__input" id="input-select"></select>
-                </li>
-                <li class="item form__item">
-                  <label class="form__label" for="input-number">Цена</label>
-                    <input class="form__input" type="number" placeholder="0.00 €" id="input-number">
-                </li>
-                <li class="item form__item">
-                  <label class="form__label" for="input-tel">Телефон</label>
-                    <input class="form__input" type="tel" placeholder="+38 (0--) --- -- --" for="input-tel">
-                </li>
-                <li class="item form__item-delete">
-                  <button class="button-delete" type="click" data-action="delete">
-                    <span class="button-delete__span">
-                          <svg class="button-delete__icon" width="13" height="14" aria-label="Удалить объявление">
-                            <use href="./images/sprite/sprite.svg#icon-file"></use>
-                          </svg>
-                       </span>
-                    Удалить объявление</button>
-                </li>
-                <li class="item form__item-submit">
-                  <button class="button-submit" type="submit" data-action="submit">Добавить</button>
-                  </li>
-                </ul>
-      </div>
-</section> -->
     <header>
       <div class="container header-container">
-        <button class="burger-menu-button header-button">
+        <button type="button" class="burger-menu-button header-button">
           <svg class="burger-menu-icon" width="20" height="20">
             <use href="./images/sprite/sprite.svg#icon-menu"></use>
           </svg>
@@ -104,7 +53,7 @@
         <a href="./index.html" class="header-logo-link">
           <img class="header-logo" src="./images/logo.svg" alt="Company logo" />
         </a>
-        <button class="mobile-search-button header-button">
+        <button type="button" class="mobile-search-button header-button">
           <svg class="mobile-search-icon" width="24" height="24">
             <use href="./images/sprite/sprite.svg#icon-search"></use>
           </svg>
@@ -117,17 +66,21 @@
             </svg>
           </button>
         </form>
-        <ul class="authentication-block">
+        <ul class="authorization-block">
           <li>
-            <button class="registration-button header-button">
+            <button type="button" class="registration-button header-button">
               Регистрация
             </button>
           </li>
-          <li><button class="login-button header-button">Войти</button></li>
+          <li>
+            <button type="button" class="login-button header-button">
+              Войти
+            </button>
+          </li>
         </ul>
         <ul class="my-cabinet-block is-hidden">
           <li>
-            <button class="my-cabinet-button header-button">
+            <button type="button" class="my-cabinet-button header-button">
               <svg width="20" height="20">
                 <use href="./images/sprite/sprite.svg#icon-user-profile"></use>
               </svg>
@@ -135,24 +88,54 @@
             </button>
           </li>
           <li>
-            <button class="logout-button header-button">
+            <button type="button" class="logout-button header-button">
               <svg width="20" height="20">
                 <use href="./images/sprite/sprite.svg#icon-logout"></use>
               </svg>
             </button>
           </li>
         </ul>
-        <button class="create-ad-button">Создать обьявление</button>
+        <button type="button" class="create-ad-button">
+          Создать обьявление
+        </button>
         <div class="header-filter-container">
           <ul class="header-filter-list">
-            <li><button class="header-filter-item">Недвижимость</button></li>
-            <li><button class="header-filter-item">Транспорт</button></li>
-            <li><button class="header-filter-item">Работа</button></li>
-            <li><button class="header-filter-item">Электроника</button></li>
-            <li><button class="header-filter-item">Бизнес и услуги</button></li>
-            <li><button class="header-filter-item">Отдых и спорт</button></li>
-            <li><button class="header-filter-item">Отдам бесплатно</button></li>
-            <li><button class="header-filter-item">Обмен</button></li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Недвижимость
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Транспорт
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">Работа</button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Электроника
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Бизнес и услуги
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Отдых и спорт
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">
+                Отдам бесплатно
+              </button>
+            </li>
+            <li>
+              <button type="button" class="header-filter-item">Обмен</button>
+            </li>
           </ul>
         </div>
         <ul class="filter-clear-block">
@@ -165,12 +148,18 @@
             </button>
           </li>
           <li>
-            <button class="header-clear-button header-button">
+            <!-- <button class="header-clear-button header-button">
               <svg class="clear-icon button-icon" width="24" height="24">
                 <use href="./images/sprite/sprite.svg#icon-replay"></use>
               </svg>
               Очистить
-            </button>
+            </button> -->
+            <a href="./index.html" class="header-clear-link header-button">
+              <svg class="clear-icon button-icon" width="24" height="24">
+                <use href="./images/sprite/sprite.svg#icon-replay"></use>
+              </svg>
+              Очистить
+            </a>
           </li>
         </ul>
         <div class="mobile-menu">
@@ -182,50 +171,60 @@
         </div>
       </div>
     </header>
+ <div class="container search-is-hidden js-search-container"></div>
+  <main class="main-section js-main">
 
-    <div class="container search-is-hidden js-search-container"></div>
+  <section class="hero">
+    <ul class="hero-list">
+      <li id="item1" class="hero-item">
+        <ul class="hero-list-slider"></ul>
+      </li>
+    </ul>
+  </section>
 
-    <main class="js-main">
-      <section class="hero">
-        <ul class="hero-list">
-          <li id="item1" class="hero-item">
-            <ul class="hero-list-slider"></ul>
-          </li>
-        </ul>
-      </section>
+  <section class="section-category">
+    <div class="container">
+      <h2 class="section-title">Распродажа</h2>
+      <p class="section-text">
+        Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и многое другое.
+      </p>
+      <ul class="section-gallery"></ul>
+    </div>
+  </section>
+  <div class="section-gallery-upload"></div>
+  <button class="loadmore-btn" type="button">Загрузить еще</button>
+ </main>
+  <footer class="footer-section">
+    <div class="footer-wrap">
+      <p>
+        &copy 2020
+        <span class="footer-allrights">All Rights Reserved</span> Developed with
+        <svg class="icon-footer-heart" width="15" height="15">
+          <use href="./images/sprite/sprite.svg#icon-favorite-heart"></use>
+        </svg>
+        by
+        <a href="">GoIT Students</a>
+      </p>
+    </div>
+  </footer>
+  <!-- <div class="modal-wrapper">
+      <div class="modal"></div>
+    </div> -->
+  <div class="modal-wrapper">
+    <div class="back-drop">
+      <div class="modal">
+        <button class="exit-btn-escape">
+          <svg class="exit-svg">
+            <use href="./images/sprite/sprite.svg#icon-close"></use>
+>>>>>>> dev
 
-      <section class="section-category">
-        <div class="container">
-          <h2 class="section-title">Распродажа</h2>
-          <a href="" class="section-link">Смотреть все</a>
-          <p class="section-text">
-            Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары
-            и многое другое.
-          </p>
-          <ul class="section-gallery"></ul>
-        </div>
-      </section>
-      <div class="section-gallery-upload"></div>
-      <button class="loadmore-btn" type="button">Загрузить еще</button>
-    </main>
-
-    <footer class="footer-section">
-      <div class="footer-wrap">
-        <p>
-          &copy 2020
-          <span class="footer-allrights">All Rights Reserved</span> Developed
-          with
-          <svg class="icon-footer-heart" width="15" height="15">
-            <use href="./images/sprite/sprite.svg#icon-favorite-heart"></use>
           </svg>
           by
           <a href="">GoIT Students</a>
         </p>
       </div>
     </footer>
-    <!-- <div class="modal-wrapper">
-      <div class="modal"></div>
-    </div> -->
+
     <div class="modal-wrapper">
       <div class="back-drop">
         <div class="modal">
@@ -237,50 +236,86 @@
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="registrationForm">
-        <p class="registration-title">
-          Для авторизации можете использовать Google Account:
-        </p>
-        <button class="registration-google" type="button">
-          <svg class="registration-google-svg" width="17" height="17">
-            <use href="./images/sprite/sprite.svg#icon-google"></use></svg
-          >Google
-        </button>
-        <p class="registration-title">
-          Или войдите в приложение используя e-mail и пароль:
-        </p>
-        <div class="input-reg">
-          <input
-            data-email="email"
-            class="registration-input"
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            required
-          />
-          <span class="form__error"
-            >Это поле должно содержать E-Mail в формате example@site.com</span
-          >
-        </div>
-        <div class="input-reg password">
-          <input
-            data-pass="pass"
-            id="password"
-            class="registration-input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            minlength="6"
-            maxlength="18"
-            required
-          />
-          <label class="show-password" for="show_password">
-            <input type="checkbox" name="show_password" id="show_password" />
-            Показать пароль
-          </label>
-        </div>
-      </div>
+
+    <div class="container__form">
+      <button class="button-close" type="button" data-action="close">
+        <svg
+          class="button-close__icon"
+          width="24"
+          height="24"
+          aria-label="Закрытие модального окна"
+        >
+          <use href="./images/sprite/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+
+      <form class="form" autocomplete="off">
+        <h3 class="form__title">Редактировать объявление</h3>
+        <ul class="list form__list">
+          <li class="item form__item">
+            <label class="form__label" for="input-text">Название товара</label>
+            <input class="form__input" type="text" id="input-text" />
+          </li>
+          <li class="item form__item">
+            <p class="form__label-text">Фото</p>
+            <ul class="form__input-download"></ul>
+          </li>
+          <li class="item form__item">
+            <label class="form__label" for="input-textarea"
+              >Описание товара</label
+            >
+            <textarea
+              class="form__input"
+              rows="5"
+              id="input-textarea"
+            ></textarea>
+          </li>
+          <li class="item form__item">
+            <label class="form__label" for="input-select"
+              >Категория товара</label
+            >
+            <select class="form__input" id="input-select"></select>
+          </li>
+          <li class="item form__item">
+            <label class="form__label" for="input-number">Цена</label>
+            <input
+              class="form__input"
+              type="number"
+              placeholder="0.00 €"
+              id="input-number"
+            />
+          </li>
+          <li class="item form__item">
+            <label class="form__label" for="input-tel">Телефон</label>
+            <input
+              class="form__input"
+              type="tel"
+              placeholder="+38 (0--) --- -- --"
+              for="input-tel"
+            />
+          </li>
+          <li class="item form__item-delete">
+            <button class="button-delete" type="click" data-action="delete">
+              <span class="button-delete__span">
+                <svg
+                  class="button-delete__icon"
+                  width="13"
+                  height="14"
+                  aria-label="Удалить объявление"
+                >
+                  <use href="./images/sprite/sprite.svg#icon-file"></use>
+                </svg>
+              </span>
+              Удалить объявление
+            </button>
+          </li>
+          <li class="item form__item-submit">
+            <button class="button-submit" type="submit" data-action="submit">
+              Добавить
+            </button>
+          </li>
+        </ul>
+      </form>
     </div>
   </body>
 </html>
