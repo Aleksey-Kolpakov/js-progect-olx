@@ -72,17 +72,17 @@ const formChangeItem = `<div class="container__form">
 </div>
 `;
 
-import func from './form-item-image-markup';
-func();
+// import func from './form-item-image-markup';
+// func();
 
-import obj from './objectForTest';
-console.log(obj.imageUrls);
-const formImgList = document.querySelector('.form__input-download');
+// import obj from './objectForTest';
 // console.log(obj.imageUrls);
-obj.imageUrls.forEach((img, i) => {
-  console.log(img);
-  formImgList.insertAdjacentHTML(
-    'afterbegin',
-    `<li  class=item download__item img${i}> <img src=${img} data-position=${i}  class=download__img width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button">X</button></li > `,
-  );
-});
+// const formImgList = document.querySelector('.form__input-download');
+// // console.log(obj.imageUrls);
+// obj.imageUrls.forEach((img, i) => {
+//   console.log(img);
+//   formImgList.insertAdjacentHTML(
+//     'afterbegin',
+//     `<li  class=item download__item img${i}> <img src=${img} data-position=${i}  class=download__img width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button">X</button></li > `,
+//   );
+// });
