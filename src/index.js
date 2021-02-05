@@ -14,3 +14,6 @@ import './utils/backend-services.js';
 import './components/modal-window/modal-logic.js';
 import './components/form-exit/form-exit.js';
 import './utils/initial-load.js';
+
+import func from './components/form-change-item/form-item-image-markup';
+func();
