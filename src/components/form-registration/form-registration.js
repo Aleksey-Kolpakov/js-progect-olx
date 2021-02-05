@@ -67,5 +67,5 @@ export function openForm() {
   listenerReg()
 }
 
-const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
+export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
 console.log(userTokenGoogle);
