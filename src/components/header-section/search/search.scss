@@ -1,83 +1,289 @@
 @import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
 
-.search-is-hidden {
+.js-search-container {
+  min-height: 600px;
+}
+
+.search-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.section-category {
+  margin-top: 40px;
+  & .slider-dot {
+    background-image: radial-gradient(
+      circle at center,
+      $orange-color 0,
+      #fff 50%,
+      transparent 50%
+    );
+  }
+}
+
+.section-title {
+  display: inline;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.section-link {
+  line-height: 1.22;
+
+  margin-left: 12px;
+
+  color: $orange-color;
+}
+
+.section-text {
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+
+  margin-top: 16px;
+  margin-bottom: 24px;
+
+  color: $secondary-gray-color;
+}
+
+.section-gallery {
+  padding-left: 0;
+  text-align: center;
+  margin-top: 0;
+
+  margin-bottom: 0;
+
+  @include for-size(tablet) {
+    display: flex;
+  }
+  @include for-size(desktop) {
+    justify-content: space-between;
+  }
+
+  &-item {
+    background-color: $white-color;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+
+    @include for-size(mobile) {
+      max-width: 290px;
+    }
+
+    @include for-size(tablet) {
+      max-width: calc((100% - 20px) / 2);
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+
+    @include for-size(desktop) {
+      max-width: calc((100% - 20px * 3) / 4);
+    }
+  }
+
+  &-item-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 0;
+    margin-bottom: 3px;
+
+    color: $main-black;
+  }
+  &-item-oldprice {
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    text-decoration: line-through;
+
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 25px;
+
+    color: $tertirary-gray-color;
+  }
+
+  &-item-newprice {
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+
+    margin-top: 0;
+    margin-bottom: 0;
+
+    color: $orange-color;
+  }
+  &-item-image {
+    height: 120px;
+    object-fit: contain;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.price-container {
+  display: flex;
+  justify-content: center;
+}
+
+.loadmore-btn.is-hidden {
   display: none;
 }
 
-.search-is-shown {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 100px;
-  padding-bottom: 100px;
+.loadmore-btn {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  border: none;
+
+  width: 100%;
+  margin-top: 80px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  color: $white-color;
+  background-color: $loadmore-btn;
 
   @include for-size(tablet) {
-    padding-left: 50px;
-    padding-right: 50px;
+    margin-top: 88px;
+    padding-top: 37px;
+    padding-bottom: 37px;
   }
+
   @include for-size(desktop) {
-    min-height: 650px;
+    margin-top: 76px;
+    padding-top: 41px;
+    padding-bottom: 41px;
+  }
+
+  &:hover {
+    background-color: $orange-color;
   }
 }
 
-.search-goods-item {
-  margin-right: 30px;
-  margin-bottom: 30px;
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-height: 300px;
+  height: 120px;
+  margin-bottom: 20px;
+}
 
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.section-goods {
+  text-align: center;
+
+  @include for-size(tablet) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.section-gallery-goods {
+  margin-bottom: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
-  @media screen and(min-width: 768px) and(max-width: 1280px) {
-    width: calc((100% - 2 * 30px) / 3);
+  @include for-size(tablet) {
+    width: calc((100% - 20px) / 2);
 
-    &:nth-child(3n) {
-      margin-right: 0px;
+    &:nth-child(odd) {
+      margin-right: 20px;
     }
   }
 
   @include for-size(desktop) {
-    width: calc((100% - 3 * 30px) / 4);
+    width: calc((100% - 20px * 3) / 4);
 
-    &:nth-child(4n) {
-      margin-right: 0px;
+    &:not(:nth-child(4n)) {
+      margin-right: 20px;
     }
   }
 }
 
-.search-item-image {
-  width: 100%;
-  min-height: 240px;
-  max-height: 250px;
+.section-gallery-goods-link {
+  padding: 32px 32px;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+  &:hover .section-gallery-item-image,
+  &:focus .section-gallery-item-image {
+    transform: scale(1.03);
+  }
+
+  &:hover .icon-fullscreen,
+  &:focus .icon-fullscreen,
+  &:hover .icon-add-favorite,
+  &:focus .icon-add-favorite {
+    opacity: 1;
+  }
 }
 
-.search-item-title {
-  margin-top: 5px;
+.icon-fullscreen {
+  position: absolute;
+  fill: $white-color;
+  z-index: 1;
+  right: 4%;
+  bottom: 4%;
+  opacity: 0;
 
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
-
-  text-align: center;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-
-  color: #000000;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.search-item-price {
-  padding-bottom: 30px;
+.icon-add-favorite {
+  position: absolute;
+  fill: $white-color;
+  z-index: 1;
+  right: 4%;
+  top: 4%;
+  opacity: 0;
 
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 15px;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  text-align: center;
-  letter-spacing: 0.04em;
+.arrow-up {
+  position: fixed;
+  opacity: 0;
+  right: 2%;
+  bottom: 5%;
 
-  color: #ff6b09;
+  fill: $orange-color;
+  transform: translateY(50%);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-active {
+    opacity: 1;
+    transform: translateY(0);
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+  }
+
+  @include for-size(mobile) {
+    width: 40px;
+    height: 40px;
+  }
+
+  @include for-size(tablet) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @include for-size(desktop) {
+    width: 70px;
+    height: 70px;
+  }
 }
