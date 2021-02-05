@@ -1,5 +1,3 @@
-let isActive = false;
-
 export function modalBackDrop(template) {
   const backDropRef = document.querySelector('.back-drop');
   const modalRef = document.querySelector('.modal');
@@ -12,11 +10,7 @@ export function modalBackDrop(template) {
 
   backDropRef.classList.add('is-open');
 
-  if (isActive) {
-    return;
-  }
   modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
-  isActive = true;
 
   function createModalMarkup() {
     return `${template}`;
@@ -26,6 +20,13 @@ export function modalBackDrop(template) {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
+    const addBtn = `<button class="exit-btn-escape">
+            <svg class="exit-svg">
+              <use href="./images/sprite/sprite.svg#icon-close"></use>
+            </svg>
+          </button>`;
+    modalRef.innerHTML = '';
+    modalRef.insertAdjacentHTML('beforeend', addBtn);
   }
 
   function onBackdrop(event) {

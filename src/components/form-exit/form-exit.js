@@ -16,15 +16,15 @@ exitRef.addEventListener('click', formExit);
 function formExit() {
   modalBackDrop(exit);
 
-  const closeModal = () => {
-    backDropRef.classList.remove('is-open');
-  };
+  // const closeModal = () => {
+  //   backDropRef.classList.remove('is-open');
+  // };
 
-  const backDropRef = document.querySelector('.back-drop');
+  // const backDropRef = document.querySelector('.back-drop');
 
-  // const exitBtnRef = document.querySelector('.exit-btn-escape');
-  // exitBtnRef.addEventListener('click', closeModal);
+  // // const exitBtnRef = document.querySelector('.exit-btn-escape');
+  // // exitBtnRef.addEventListener('click', closeModal);
 
-  const cancelBtnRef = document.querySelector('.cancel');
-  cancelBtnRef.addEventListener('click', closeModal);
+  // const cancelBtnRef = document.querySelector('.cancel');
+  // cancelBtnRef.addEventListener('click', closeModal);
 }

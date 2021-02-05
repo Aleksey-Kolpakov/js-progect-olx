@@ -389,3 +389,25 @@ textarea {
     margin-right: 324px;
   }
 }
+
+// Стили для создающихся элементов
+.download__img {
+  position: relative;
+  background-image: url(./images/+.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  width: 78px;
+  height: 50px;
+  text-indent: -10000px;
+}
+
+.close-image-button {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border-radius: 50%;
+}
