@@ -30,6 +30,7 @@ export default function () {
               'afterbegin',
               `<li  class="item download__item img${i}"> <img src="${reader.result}" data-position="${i}"  class="download__img" width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button">X</button></li > `,
             );
+            console.log(reader.result);
             const allListItems = document.querySelectorAll('.download__item');
           };
 
