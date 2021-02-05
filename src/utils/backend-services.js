@@ -4,7 +4,7 @@ export let jsDataBase = [];
 let pageNumber = 1;
 let id = "6018c8769dfece51e3667546";
 const getHeroAds = function () {
-   return axios.get('https://callboard-backend.goit.global/call/ads')
+    return axios.get('https://callboard-backend.goit.global/call/ads')
         .then(({ data }) => data)
         .catch((error) => error)
 };
@@ -229,10 +229,6 @@ export function getItembyTitle(searchQuerry) {
         }
     })
         .then(response => response.json())
-        .then(({ favourites }) => {
-            jsDataBase = favourites.length ? [...jsDataBase, ...favourites] : jsDataBase;
-            return favourites;
-        })
         .catch(error => console.log(error));
 };
 // getItembyTitle("mack").then(data => console.dir(data));
