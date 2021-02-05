@@ -12,39 +12,9 @@ export function modalBackDrop(template) {
           </button>`;
 
   modalRef.insertAdjacentHTML('beforeend', addBtn);
-
-  const exitBtnRef = document.querySelector('.exit-btn-escape');
-
-  exitBtnRef.addEventListener('click', onBtnClose);
-  backDropRef.addEventListener('click', onBackdrop);
-  document.addEventListener('keydown', onBtnPress);
-
   modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
 
   function createModalMarkup() {
     return `${template}`;
-  }
-
-  function closeModal() {
-    backDropRef.classList.remove('is-open');
-    document.removeEventListener('keydown', onBtnPress);
-    backDropRef.removeEventListener('click', onBackdrop);
-    exitBtnRef.removeEventListener('click', onBtnClose);
-  }
-
-  function onBackdrop(event) {
-    if (event.currentTarget === event.target) {
-      closeModal();
-    }
-  }
-
-  function onBtnClose() {
-    closeModal();
-  }
-
-  function onBtnPress(event) {
-    if (event.code === 'Escape') {
-      closeModal();
-    }
   }
 }

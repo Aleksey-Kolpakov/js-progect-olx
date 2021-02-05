@@ -1,5 +1,6 @@
 import { modalBackDrop } from '../modal-window/modal-logic.js';
 import { logoutFetch } from '../../utils/backend-services.js';
+import { closeModalTest } from '../modal-window/close-func.js';
 
 const exit = `
     <div class="exit-modal">
@@ -17,23 +18,7 @@ exitRef.addEventListener('click', formExit);
 
 function formExit() {
   modalBackDrop(exit);
-
-  function closeModal() {
-    backDropRef.classList.remove('is-open');
-    document.removeEventListener('keydown', onBtnPress);
-    backDropRef.removeEventListener('click', onBackdrop);
-    exitBtnRef.removeEventListener('click', onBtnClose);
-  }
-
-  const backDropRef = document.querySelector('.back-drop');
-  const modalRef = document.querySelector('.modal');
-
-  const cancelBtnRef = document.querySelector('.cancel');
-  cancelBtnRef.addEventListener('click', cancelBtn);
-
-  function cancelBtn() {
-    closeModal();
-  }
+  closeModalTest();
 
   const confirmRef = document.querySelector('.confirm');
   confirmRef.addEventListener('click', exitConfirm);
@@ -44,7 +29,7 @@ function formExit() {
 
     authorizationBlock.classList.remove('is-hidden');
     myCabinetBlock.classList.add('is-hidden');
-    closeModal();
+
     logoutFetch();
   }
 }
