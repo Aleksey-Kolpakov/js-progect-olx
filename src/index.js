@@ -1,4 +1,5 @@
 import './main.scss';
+import './components/header-section/search/search.js';
 import './components/form-change-item/form-change-item.js';
 import './components/form-item/form-create-item.js';
 import './components/form-registration/form-registration.js';
