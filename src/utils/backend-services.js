@@ -1,11 +1,15 @@
 import axios from 'axios';
-import localStoradge from './local-storadge.js'
+import localStoradge from './local-storadge.js';
+export let jsDataBase = [];
 let pageNumber = 1;
 let id = "6018c8769dfece51e3667546";
 const getHeroAds = function () {
-    axios.get('https://callboard-backend.goit.global/call/ads').
-        then(({ data }) => console.log(data));
+    return axios.get('https://callboard-backend.goit.global/call/ads')
+        .then(({ data }) => data)
+        .catch((error) => error)
 };
+
+
 const registerData = {
     email: "testwwerdfcwq@test.com",
     password: "qwerty123",
@@ -86,6 +90,13 @@ export const getAllCategoriesWithItemsByPages = function (pageNumber) {
         }
     })
         .then(response => response.json())
+        .then(data => {
+            const dataArr = Object.values(data);
+            dataArr.forEach(element => {
+                jsDataBase = [...jsDataBase, ...element];
+            });
+            return data;
+        })
         .catch(error => console.log(error));
 }
 
@@ -99,10 +110,13 @@ export const getUsersFavouritesByToken = function () {
         }
     })
         .then(response => response.json())
-        .then(({ favourites }) => favourites)
+        .then(({ favourites }) => {
+            jsDataBase = favourites.length ? [...jsDataBase, ...favourites] : jsDataBase;
+            return favourites;
+        })
         .catch(error => console.log(error));
 }
-// не тестил, нужны имуджи
+/// нужно тестить
 export function createItemFetch(item) {
     const accessToken = localStoradge.load('accessTokenOlx');
     return fetch(`https://callboard-backend.goit.global/call`, {
@@ -115,6 +129,10 @@ export function createItemFetch(item) {
         }
     })
         .then(response => response.json())
+        .then(data => {
+            jsDataBase.push(data);
+            return data;
+        })
         .catch(error => console.log(error));
 }
 
@@ -158,6 +176,16 @@ export function changeItemFetch(id, newItem) {
         }
     })
         .then(response => response.json())
+        .then(data => {
+            let changedItemIndex =
+                jsDataBase.map(item => {
+                    if (item._id === id) {
+                        return data;
+                    }
+                    return item;
+                })
+            return data;
+        })
         .catch(error => console.log(error));
 }
 
@@ -185,9 +213,12 @@ export function getUsersOwnItems() {
         }
     })
         .then(response => response.json())
+        .then(({ favourites }) => {
+            jsDataBase = favourites.length ? [...jsDataBase, ...favourites] : jsDataBase;
+            return favourites;
+        })
         .catch(error => console.log(error));
 };
-
 
 export function getItembyTitle(searchQuerry) {
     return fetch(`https://callboard-backend.goit.global/call/find?search=${searchQuerry}`, {
@@ -200,7 +231,7 @@ export function getItembyTitle(searchQuerry) {
         .then(response => response.json())
         .catch(error => console.log(error));
 };
-
+// getItembyTitle("mack").then(data => console.dir(data));
 
 export function getEnglishCategories() {
     return fetch(`https://callboard-backend.goit.global/call/categories`, {
@@ -213,7 +244,7 @@ export function getEnglishCategories() {
         .then(response => response.json())
         .catch(error => console.log(error));
 };
-getEnglishCategories().then(data => console.log(data));
+
 
 export function getRussianCategories() {
     return fetch(`https://callboard-backend.goit.global/call/russian-categories`, {
@@ -237,5 +268,9 @@ export function getItemsInCategory(category) {
         }
     })
         .then(response => response.json())
+        .then(data => {
+            jsDataBase = [...data];
+            return data;
+        })
         .catch(error => console.log(error));
 };

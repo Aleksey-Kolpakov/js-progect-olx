@@ -31,7 +31,7 @@
   grid-template-rows: 1fr;
   grid-template-columns: 1fr;
   grid-auto-columns: 0px;
-  height: 100vh;
+  height: 50vh;
   margin: 0;
   padding: 0;
 }
@@ -43,6 +43,7 @@
       'item2 item3';
     grid-template-rows: 2fr 1fr;
     grid-template-columns: 1fr 1fr;
+    height: 100vh;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -109,6 +110,10 @@
     font-weight: 700;
     font-size: 40px;
     line-height: 1.23;
+
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+    }
   }
 
   .hero-price {
