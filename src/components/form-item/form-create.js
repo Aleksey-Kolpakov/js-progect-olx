@@ -1,26 +1,16 @@
 console.log('hello');
 
-
-import { getEnglishCategories, getRussianCategories } from '../../utils/backend-services.js';
-
+import { getEnglishCategories, getRussianCategories,  createItemFetch} from '../../utils/backend-services.js';
 import templateCategory from './category.hbs';
-
-getEnglishCategories().then(function (data) {
-  return console.log(data);
-});
-
-
-// const fnCategory = function () {
-//     getRussianCategories().then(function (data) {
-//   return;
-// });
-// }
-
 
 const categoryRef = document.querySelector('#form-category');
 const form = document.querySelector('.form');
 
-console.dir(form);
+//------------------------------------------- ф-я загрузки категорий в input
+
+/*getEnglishCategories().then(function (data) {
+  return console.log(data);
+});*/
 
 getRussianCategories().then(function (data) {
     const template = templateCategory(data);
@@ -28,32 +18,9 @@ getRussianCategories().then(function (data) {
     return console.log(data);
 });
 
-// console.dir(form.elements);
-// console.log(form.elements.text.value);
-// console.log(form.elements.photo.value);
-// console.log(form.elements.description.value);
-// form.elements.category.value = 1
-    
-getRussianCategories().then(function (data) {
-  return console.log(data);
-});
-// console.log(form.elements.text.value);
-// console.log(form.elements.text.value);
-// console.log(form.elements.text.value);
+//------------------------------------------- ф-я сбора всех полей
 
-// let a = inputCatRef.selectedOptions
-
-// a = [1, 2];
-// // inputCatRef.selectedOptions = [1, 2]
-// inputCatRef.value = 'mashina';
-// console.dir(inputCatRef);
-// // const a = [1,2]
-// // inputCatRef.labels = [1,2]
-
-
-// // console.dir(inputCatRef.selectedOptions);
-// // console.dir(inputCatRef.value);
-
+//let submitData = {};
 
 function formDataCollect(event) {
     console.dir(event.target);
@@ -62,7 +29,35 @@ function formDataCollect(event) {
     const submitData = {};
     formData.forEach((value, key) => { submitData[key] = value;});
     console.log(submitData);
+    console.log(translator(submitData.category, listOfCategory));
+    submitData.category = translator(submitData.category, listOfCategory);
+    console.log(submitData);
+    //createItemFetch(submitData);
     return submitData;
 }
 
+
 form.addEventListener("submit", formDataCollect);
+
+//-------------------------------------Переводчик категорий
+const listOfCategory = {
+  "Недвижимость": "property",
+  "Транспорт": "transport",
+  "Работа": "work",
+  "Электроника": "electronics",
+  "Бизнес и услуги": "business and services",
+  "Отдых и спорт": "recreation and sport",
+  "Отдам бесплатно": "free",
+  "Обмен": "trade",
+}
+
+function translator(rus, list) {
+  if (listOfCategory[rus] === undefined) {
+  console.warn('Отсутствует перевод. Отредактируйте список категорий - listOfCategory')
+  }
+
+  return listOfCategory[rus];
+}
+
+//console.log(translator('Транспорт', listOfCategory));
+

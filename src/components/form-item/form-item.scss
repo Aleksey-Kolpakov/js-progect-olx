@@ -42,6 +42,8 @@
     padding-right: 20px;
     padding-top: 54px;
     padding-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @include for-form(tablet) {
@@ -50,6 +52,8 @@
     padding-right: 54px;
     padding-top: 54px;
     padding-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @include for-form(desktop) {
@@ -58,7 +62,8 @@
     padding-right: 57px;
     padding-top: 54px;
     padding-bottom: 60px;
-    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -344,6 +349,7 @@ textarea {
 
   border-width: 0px;
   color: #000000;
+  background-color: #ffffff;
 
   @include for-form(tablet) {
     margin-left: 158px;

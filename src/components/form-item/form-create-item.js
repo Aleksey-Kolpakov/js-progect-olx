@@ -81,6 +81,14 @@ const formCreate = `<div class="container__form">
     </div>`
 
 
-const formCreateRef = document.querySelector(".create-ad-button");
+/*const formCreateRef = document.querySelector(".create-ad-button");
 formCreateRef.addEventListener('click', funModalBackDrop);
-function funModalBackDrop() { modalBackDrop(formCreate) };
+function funModalBackDrop() { modalBackDrop(formCreate) };*/
+
+const formCreateRef = document.querySelector(".create-ad-button");
+formCreateRef.addEventListener('click', openModalAddItem);
+
+
+function openModalAddItem() {
+  const tempale = modalBackDrop(formCreate)
+}

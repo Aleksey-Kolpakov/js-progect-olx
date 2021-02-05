@@ -1,7 +1,7 @@
 import './main.scss';
 import './components/form-change-item/form-change-item.js';
 import './components/form-item/form-create-item.js'; //oleg
-import './components/form-item/form-create.js'; //oleg
+//import './components/form-item/form-create.js'; //oleg
 import './components/form-registration/form-registration.js';
 import './components/header-section/header.js';
 import './components/hero-section/hero-section.js';
