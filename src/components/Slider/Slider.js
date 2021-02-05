@@ -14,7 +14,7 @@ export default class Slider {
     this.intervalId = null;
     this.refs = this.getRefs();
     this.renderSliderComponents();
-    window.addEventListener('resize', throttle(this.resizeWindowRerender, 1000));
+    window.addEventListener('resize', throttle(this.resizeWindowRerender, 1500));
   }
 
   getRefs() {
@@ -41,7 +41,11 @@ export default class Slider {
   }
 /* -------------------------------------------------- */
   renderSliderComponents = () => {
-    /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
+  /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
+    if (!this.refs) {
+      setInterval(this.renderSliderComponents, 300);
+      return;
+    }
     const itemCollection = this.refs.sliderList.children;
     if (!itemCollection[0]) {
       console.error('Error: array of items did not come from server yet. Connect Slider inside async function');
@@ -88,7 +92,9 @@ export default class Slider {
         this.position = 0;
     };
     const activeScrollLength = this.position * this.lengthToScroll;
-    this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
+    if (this.refs) {
+      this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
+    }
     this.changeActiveDot();
   }
 
@@ -132,8 +138,8 @@ export default class Slider {
 
   refresh = () => {
     clearInterval(this.intervalId);
-    this.refs.blockDots.remove();
-    if (this.refs.buttonsBlock.parentNode) {
+    this.refs?.blockDots?.remove();
+    if (this.refs?.buttonsBlock.parentNode) {
       this.refs.buttonsBlock.parentNode.insertBefore(this.refs.sliderBlock, this.refs.buttonsBlock);
       this.refs.sliderBlock.append(this.refs.buttonsBlock);
       this.refs.buttonsBlock.remove();
@@ -173,7 +179,10 @@ export default class Slider {
   }
 
   changeActiveDot() {
-      const allDots = this.refs.blockDots?.children;
+    if (!this.refs) {
+      return
+    };
+      const allDots = this.refs?.blockDots?.children;
       allDots?.forEach(dot => dot.classList.remove('dot-active'));
       const activeDot = allDots[this.position];
       activeDot?.classList.add('dot-active');
