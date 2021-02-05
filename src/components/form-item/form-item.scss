@@ -407,7 +407,16 @@ textarea {
   z-index: 10;
   right: 0;
   top: 0;
-  width: 5px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #fff;
+}
+
+.close-image-button :hover,
+.close-image-button :hover {
+  fill: #2196f3;
+  cursor: pointer;
 }
