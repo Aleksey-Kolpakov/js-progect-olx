@@ -31,9 +31,10 @@ export default function () {
       const allImg = Object.values(e.target.files);
       let allListItems = document.querySelectorAll('.download__item');
       firstItem = document.querySelector('.start-list-item');
-      console.log(allListItems);
+      console.log(allImg.length + allListItems.length);
 
       if (allImg.length < 6 && allImg.length + allListItems.length <= 6) {
+        firstItem.remove();
         if (allImg.length === 5) {
           firstItem.remove();
         }
@@ -52,7 +53,7 @@ export default function () {
         });
         allListItems = document.querySelectorAll('.download__item');
         firstItem = document.querySelector('.start-list-item');
-        console.log(allListItems);
+
         if (allListItems.length >= 5) {
           firstItem.remove();
         }
