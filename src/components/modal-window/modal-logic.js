@@ -44,6 +44,4 @@ export function modalBackDrop(template) {
       closeModal();
     }
   }
-
-  return closeModal;
 }

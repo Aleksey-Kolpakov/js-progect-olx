@@ -22,6 +22,7 @@ function formExit() {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
+    exitBtnRef.removeEventListener('click', onBtnClose);
   }
 
   const backDropRef = document.querySelector('.back-drop');
@@ -32,17 +33,6 @@ function formExit() {
 
   function cancelBtn() {
     closeModal();
-  }
-  function onBackdrop(event) {
-    if (event.currentTarget === event.target) {
-      closeModal();
-    }
-  }
-
-  function onBtnPress(event) {
-    if (event.code === 'Escape') {
-      closeModal();
-    }
   }
 
   const confirmRef = document.querySelector('.confirm');
