@@ -4,10 +4,10 @@ export let jsDataBase = [];
 let pageNumber = 1;
 let id = '6018c8769dfece51e3667546';
 const getHeroAds = function () {
-  return axios
-    .get('https://callboard-backend.goit.global/call/ads')
-    .then(({ data }) => data)
-    .catch(error => error);
+    return axios.get('https://callboard-backend.goit.global/call/ads')
+        .then(({ data }) => data)
+        .catch((error) => error)
+
 };
 
 const registerData = {
@@ -227,18 +227,18 @@ export function getUsersOwnItems() {
 }
 
 export function getItembyTitle(searchQuerry) {
-  return fetch(
-    `https://callboard-backend.goit.global/call/find?search=${searchQuerry}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    },
-  )
-    .then(response => response.json())
-    .catch(error => console.log(error));
-}
+
+    return fetch(`https://callboard-backend.goit.global/call/find?search=${searchQuerry}`, {
+        method: 'GET',
+        headers: {
+
+            'Content-Type': 'application/json; charset=UTF-8',
+        }
+    })
+        .then(response => response.json())
+        .catch(error => console.log(error));
+};
+
 // getItembyTitle("mack").then(data => console.dir(data));
 
 export function getEnglishCategories() {
