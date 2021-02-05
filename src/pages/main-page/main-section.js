@@ -151,7 +151,7 @@ function createMarkup(categoriesList, otherEl) {
           loading="lazy"
         />
         </div>
-        <h3 class="section-gallery-item-title">${item.title}</h3>
+        <h3 class="section-gallery-item-title" title="${item.title}">${item.title}</h3>
         <div class="price-container">
           <p class="section-gallery-item-newprice">${item.price} €</p>
         </div>
