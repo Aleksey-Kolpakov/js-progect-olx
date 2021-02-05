@@ -1,7 +1,7 @@
 import { modalBackDrop } from '../modal-window/modal-logic.js';
+import fnDownloadPhoto from '../form-change-item/form-item-image-markup';
 
-const formCreate = `<div class="container__form">
-<form class="form" autocomplete="off">
+const formCreate = `<form class="form" autocomplete="off">
   <h3 class="form__title">Редактировать объявление</h3>
   <ul class="list form__list">
     <li class="item form__item">
@@ -10,6 +10,8 @@ const formCreate = `<div class="container__form">
     </li>
     <li class="item form__item">
       <p class="form__label-text">Фото</p>
+      <ul class="form__input-download">
+      </ul>
     </li>
     <li class="item form__item">
       <label class="form__label" for="input-textarea">Описание товара</label>
@@ -42,8 +44,7 @@ const formCreate = `<div class="container__form">
       <button class="button-submit" type="submit" data-action="submit">Добавить</button>
     </li>
   </ul>
-</form>
-</div>`
+</form>`
 
 
 /*const formCreateRef = document.querySelector(".create-ad-button");
@@ -56,4 +57,5 @@ formCreateRef.addEventListener('click', openModalAddItem);
 
 function openModalAddItem() {
   const tempale = modalBackDrop(formCreate)
+  fnDownloadPhoto();
 }
