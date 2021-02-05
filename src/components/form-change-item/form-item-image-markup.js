@@ -13,11 +13,9 @@ export default function () {
       obj.price,
       obj.phone,
     ];
-    // console.log(values);
     const formInputs = document.querySelectorAll('.form__input');
 
     const categoryInput = document.querySelector('#input-select');
-    console.dir(categoryInput);
     categoryInput.value = 'dir';
     const formRef = document.querySelector('.form');
 
@@ -28,7 +26,15 @@ export default function () {
     obj.imageUrls.forEach((img, i) => {
       formImgList.insertAdjacentHTML(
         'afterbegin',
-        `<li  class="item download__item img${i}"> <img src="${img}" data-position="${i}"  class="download__img" width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button"></button></li > `,
+        `<li  class="item download__item img${i}"> 
+        <img src="${img}" data-position="${i}"  class="download__img" width="78" height="50" >
+        <button data-index="${i}" type="button" class="close-image-button">
+        <svg class='item-close-button' >
+        <use href="./images/sprite/sprite.svg#icon-close">
+        </use>
+        </svg>
+        </button>
+        </li >`,
       );
     });
   }
@@ -64,7 +70,15 @@ export default function () {
           reader.onloadend = () => {
             formImgList.insertAdjacentHTML(
               'afterbegin',
-              `<li  class="item download__item img${i}"> <img src="${reader.result}" data-position="${i}"  class="download__img" width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button"></button></li > `,
+              `<li  class="item download__item img${i}"> 
+        <img src="${reader.result}" data-position="${i}"  class="download__img" width="78" height="50" >
+        <button data-index="${i}" type="button" class="close-image-button">
+        <svg class='item-close-button' >
+        <use href="./images/sprite/sprite.svg#icon-close">
+        </use>
+        </svg>
+        </button>
+        </li >`,
             );
             allListItems = document.querySelectorAll('.download__item');
           };
