@@ -1,3 +1,4 @@
+import throttle from 'lodash.throttle';
 import './_slider.scss';
 
 export default class Slider {
@@ -8,7 +9,12 @@ export default class Slider {
     this.autoScrolling = autoScroll;
     this.autoScrollTime = timeAutoScroll;
     this.parentBlockPadding = parentPadding;
+    this.lengthToScroll = null;
+    this.slidesAmount = null;
+    this.intervalId = null;
     this.refs = this.getRefs();
+    this.renderSliderComponents();
+    window.addEventListener('resize', throttle(this.resizeWindowRerender, 1000));
   }
 
   getRefs() {
@@ -29,10 +35,14 @@ export default class Slider {
     refs.sliderBlock.classList.add('slider');
     refs.sliderList.parentNode.insertBefore(refs.sliderBlock, refs.sliderList);
     refs.sliderBlock.append(refs.sliderList);
-
-    // const resizeWindow = () => {
+    refs.blockDots = document.createElement('div');
+    refs.buttonsBlock = document.createElement('div');
+    return refs;
+  }
+/* -------------------------------------------------- */
+  renderSliderComponents = () => {
     /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
-    const itemCollection = refs.sliderList.children;
+    const itemCollection = this.refs.sliderList.children;
     if (!itemCollection[0]) {
       console.error('Error: array of items did not come from server yet. Connect Slider inside async function');
       return;
@@ -40,69 +50,60 @@ export default class Slider {
     itemCollection.forEach(item => item.classList.add('slider-item'));
 
     /* вираховую довжину, на яку треба прокрутити слайд, і к-сть прокруток слайду */
-    const parentStyles = getComputedStyle(refs.sliderList);
+    const parentStyles = getComputedStyle(this.refs.sliderList);
     const { paddingLeft, paddingRight, width } = parentStyles;
     const parentContentWidth = parseInt(width) - parseInt(paddingLeft) - parseInt(paddingRight);
     const itemWidth = itemCollection[0]?.offsetWidth;
     const itemStyles = getComputedStyle(itemCollection[0]);
     const { marginLeft, marginRight } = itemStyles;
     const itemMarginSum = parseInt(marginLeft) + parseInt(marginRight);
-    const lengthToScroll = parentContentWidth + itemMarginSum;//довжина, на яку треба прокрутити слайд
-    const itemOnScreen = lengthToScroll / (itemWidth + itemMarginSum);
+    this.lengthToScroll = parentContentWidth + itemMarginSum;//довжина, на яку треба прокрутити слайд
+    const itemOnScreen = this.lengthToScroll / (itemWidth + itemMarginSum);
     const itemAllAmount = itemCollection.length;
-    const slidesAmount = Math.ceil(itemAllAmount / itemOnScreen);//к-сть прокруток слайду.
-
+    this.slidesAmount = Math.ceil(itemAllAmount / itemOnScreen);//к-сть прокруток слайду.
     /* -------- */
-    const screenWidth = window.innerWidth;
-    const slideRightCallback = () => (this.slideRight(slidesAmount, lengthToScroll));
-    const slideLeftCallback = () => (this.slideLeft(slidesAmount, lengthToScroll));
+
     /* умова створення кнопок вправо-вліво */
-      if (this.buttons && screenWidth >= 768) {
-        const { prevButton, nextButton } = this.createButtons(refs.sliderBlock);
-        nextButton.addEventListener('click', slideRightCallback);
-        prevButton.addEventListener('click', slideLeftCallback);
+      if (this.buttons && innerWidth >= 768) {
+        const { prevButton, nextButton } = this.createButtons();
+        nextButton.addEventListener('click', this.slideRight);
+        prevButton.addEventListener('click', this.slideLeft);
       }
     /* умова створення кнопок-точок під слайдером */
-      if (this.buttons && screenWidth < 768 || !this.buttons) {
-        refs.blockDots = this.createDots(slidesAmount,lengthToScroll,refs.sliderList);
-        refs.sliderBlock.append(refs.blockDots);
+      if (this.buttons && innerWidth < 768 || !this.buttons) {
+        this.refs.blockDots = this.createDots();
+        this.refs.sliderBlock.append(this.refs.blockDots);
       }
     /* умова увімкнення автоскролу */
       if (this.autoScrolling) {
-        setInterval(slideRightCallback, this.autoScrollTime);
+        this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
       }
-    // }
-    // resizeWindow();
-    // window.addEventListener('resize', resizeWindow);
-      return refs;
-  }
+    }
 /* -------------------------------------------------- */
 
-/* -------------------------------------------------- */
-
-  slideRight(maxPos, scrollLength) {
+  slideRight=()=> {
     this.position += 1;
-    const maxPosition = maxPos - 1;
+    const maxPosition = this.slidesAmount - 1;
     if (this.position > maxPosition) {
         this.position = 0;
     };
-    const activeScrollLength = this.position * scrollLength;
+    const activeScrollLength = this.position * this.lengthToScroll;
     this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
-    this.changeActiveDot(this.refs.blockDots, this.position);
+    this.changeActiveDot();
   }
 
-  slideLeft(maxPos, scrollLength) {
+  slideLeft=()=> {
     this.position -= 1;
-    const maxPosition = maxPos - 1;
+    const maxPosition = this.slidesAmount - 1;
     if (this.position < 0) {
         this.position = maxPosition;
     };
-    const activeScrollLength = this.position * scrollLength;
+    const activeScrollLength = this.position * this.lengthToScroll;
     this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
-    this.changeActiveDot(this.refs.blockDots, this.position);
+    this.changeActiveDot();
   }
 
-  createButtons(sliderBlock) {
+  createButtons() {
     const prevButton = document.createElement('div');
     const nextButton = document.createElement('div');
 
@@ -118,21 +119,30 @@ export default class Slider {
                   <use href="../images/sprite/sprite.svg#icon-chevron_right" />
                 </svg>`,
     );
-
-    const buttonsBlock = document.createElement('div');
-    buttonsBlock.classList.add('slider-buttons-block');
-    sliderBlock.parentNode.insertBefore( buttonsBlock, sliderBlock );
-    buttonsBlock.append(sliderBlock);
+    this.refs.buttonsBlock = document.createElement('div');
+    this.refs.buttonsBlock.classList.add('slider-buttons-block');
+    this.refs.sliderBlock.parentNode.insertBefore( this.refs.buttonsBlock, this.refs.sliderBlock );
+    this.refs.buttonsBlock.append(this.refs.sliderBlock);
 
     prevButton.classList.add('button-prev');
     nextButton.classList.add('button-next');
-    buttonsBlock.append(...[prevButton, nextButton]);
+    this.refs.buttonsBlock.append(prevButton, nextButton);
     return {prevButton, nextButton};
   }
 
-  createDots(amountOfSlides, scrollLength, sliderBlock){
+  refresh = () => {
+    clearInterval(this.intervalId);
+    this.refs.blockDots.remove();
+    if (this.refs.buttonsBlock.parentNode) {
+      this.refs.buttonsBlock.parentNode.insertBefore(this.refs.sliderBlock, this.refs.buttonsBlock);
+      this.refs.sliderBlock.append(this.refs.buttonsBlock);
+      this.refs.buttonsBlock.remove();
+    }
+  }
+
+  createDots(){
     const dotsArray = [];
-    for (let i = 0; i < amountOfSlides; i += 1){
+    for (let i = 0; i < this.slidesAmount; i += 1){
       const newDot = document.createElement('li');
       newDot.setAttribute('data-id', i);
       newDot.classList.add('slider-dot');
@@ -142,79 +152,37 @@ export default class Slider {
       dotsArray.push(newDot);
     }
     const blockDots = document.createElement('ul');
-    blockDots.addEventListener('click', this.toTargetSlide(scrollLength,sliderBlock));
+    blockDots.addEventListener('click', this.toTargetSlide);
     blockDots.classList.add('slider-dots-block');
     blockDots.append(...dotsArray);
     return blockDots;
   }
 
-  toTargetSlide=(scrollLength, sliderBlock)=>(event)=> {
+  toTargetSlide=(event)=> {
     if (event.target === event.currentTarget) {
       return;
     }
       this.position = Number(event.target.dataset.id);
-      const activeScrollLength = this.position * scrollLength;
-    sliderBlock.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
-    this.changeActiveDot(this.refs.blockDots, this.position);
-  }
-
-  changeActiveDot(blockDots, currentPosition) {
-    if (blockDots) {
-      const allDots = blockDots.children;
-      allDots.forEach(dot => dot.classList.remove('dot-active'));
-      const activeDot = allDots[currentPosition];
-      activeDot.classList.add('dot-active');
+      const activeScrollLength = this.position * this.lengthToScroll;
+    this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
+    this.changeActiveDot();
+    if (this.autoScrolling) {
+        clearInterval(this.intervalId);
+        this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
     }
   }
+
+  changeActiveDot() {
+      const allDots = this.refs.blockDots?.children;
+      allDots?.forEach(dot => dot.classList.remove('dot-active'));
+      const activeDot = allDots[this.position];
+      activeDot?.classList.add('dot-active');
+  }
+
+  resizeWindowRerender = () => {
+      this.refresh();
+      this.renderSliderComponents();
+      this.position = this.slidesAmount;
+      this.slideRight();
+    }
 }
-
-
-
-
-
-
-
-
-
-   // function createDots(amountOfSlides, parentNode){
-        // const dotsArray = [];
-        // for (let i = 0; i < amountOfSlides; i += 1){
-        //     const newDot = document.createElement('li');
-        //     newDot.classList.add('slider-dot');
-        //     if (i == 0) {
-        //         newDot.classList.add('dot-active');
-        //     };
-        //     dotsArray.push(newDot);
-        // }
-        // refs.blockDots = document.createElement('ul');
-        // refs.blockDots.classList.add('slider-dots-block');
-        // refs.blockDots.append(...dotsArray);
-        // parentNode.append(refs.blockDots);
-        // }
-
-    // function createButtons() {
-    //     refs.prevButton = document.createElement('div');
-    //     refs.nextButton = document.createElement('div');
-
-    //     refs.prevButton.insertAdjacentHTML(
-    //       'beforeend',
-    //       `<svg class="arrow-icon">
-    //                   <use href="../images/sprite/sprite.svg#icon-chevron_left" />
-    //                 </svg>`,
-    //     );
-    //     refs.nextButton.insertAdjacentHTML(
-    //       'beforeend',
-    //       `<svg class="arrow-icon">
-    //                   <use href="../images/sprite/sprite.svg#icon-chevron_right" />
-    //                 </svg>`,
-    //     );
-
-    //     refs.buttonsBlock = document.createElement('div');
-    //     refs.buttonsBlock.classList.add('slider-buttons-block');
-    //     refs.sliderBlock.parentNode.insertBefore( refs.buttonsBlock, refs.sliderBlock );
-    //     refs.buttonsBlock.append(refs.sliderBlock);
-
-    //     refs.prevButton.classList.add('button-prev');
-    //     refs.nextButton.classList.add('button-next');
-    //     refs.buttonsBlock.append(...[refs.prevButton, refs.nextButton]);
-    // }
