@@ -1,12 +1,20 @@
+import throttle from 'lodash.throttle';
 import adsCardHandleBar from './hero.hbs';
 import { callAdsAPI } from './fetchAPI';
 import Slider from '../Slider';
 
 const heroListRef = document.querySelector('.hero-list');
 const heroListSliderRef = document.querySelector('.hero-list-slider');
-callAdsAPI()
-    .then(items => items.reduce((accObj, item, index) => {
-        if (index > 0 && index <= 5) {
+const fetchResult = callAdsAPI();
+
+const renderHero = () => {
+    fetchResult.then(items => items.reduce((accObj, item, index) => {
+        if (innerWidth >= 1280 && index > 0 && index <= 5) {
+            item.id = index + 1;
+            accObj.notslider.push(item);
+            return accObj;
+        }
+        if (innerWidth >= 768 && index > 0 && index <= 2) {
             item.id = index + 1;
             accObj.notslider.push(item);
             return accObj;
@@ -15,14 +23,67 @@ callAdsAPI()
         return accObj;
     }, { slider: [], notslider: [] })
     )
-    .then(ObjWithArrays => {
-    const markUpNotSlider = adsCardHandleBar(ObjWithArrays.notslider);
-    const markUpSlider = adsCardHandleBar(ObjWithArrays.slider);
-        heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
-        heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
-        new Slider({ listUlSelector: ".hero-list-slider", buttons: false, autoScroll: true });
-});
+        .then(ObjWithArrays => {
+            const markUpNotSlider = adsCardHandleBar(ObjWithArrays.notslider);
+            const markUpSlider = adsCardHandleBar(ObjWithArrays.slider);
+            heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
+            heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
+        }).then(() => new Slider({ listUlSelector: ".hero-list-slider", autoScroll: true }));
+};
 
+
+const refreshHero = () => {
+    heroListSliderRef.textContent = '';
+    const adsCardCollection = heroListRef.children;
+    adsCardCollection.forEach(card => {
+        if (card.id !== 'item1') {
+            card.remove();
+        }
+    })
+}
+
+const { MOBILE, TABLET, DESKTOP } = {
+    MOBILE: 'mobile',
+    TABLET: 'tablet',
+    DESKTOP: 'desktop'
+}
+
+const setTypeOfScreen = () => {
+    const currentScreenWidth = window.innerWidth;
+    let screenType = null;
+    if (currentScreenWidth < 768) {
+      return screenType = MOBILE;
+    }
+    if (currentScreenWidth >= 768 && currentScreenWidth <1280) {
+        return screenType  = TABLET;
+    }
+    if (currentScreenWidth >= 1280) {
+        return screenType  = DESKTOP;
+    }
+  }
+
+let prevScreenType = setTypeOfScreen();
+
+const checkScreenWidth = () => {
+    const currentScreenType = setTypeOfScreen();
+    if (currentScreenType === prevScreenType) {
+      return false;
+    }
+    prevScreenType = currentScreenType;
+    return true;
+  }
+
+const resizeWindowRerender = () => {
+    const mustRerender = checkScreenWidth();
+    if (!mustRerender) {
+      return;
+    }
+    refreshHero();
+    renderHero();
+}
+
+renderHero();
+window.addEventListener('resize', throttle(resizeWindowRerender,1000))
 
 
 

@@ -8,7 +8,6 @@
   </head>
 
   <body>
-    <button class="exit">exit</button>
     <!-- <div class="container">
       <div class="registrationForm">
         <p class="registration-title">
@@ -58,9 +57,9 @@
             <use href="./images/sprite/sprite.svg#icon-search"></use>
           </svg>
         </button>
-        <form class="header-form">
-          <input class="header-input" type="text" pattern="[A-Za-zА-Яа-яЁё]" />
-          <button type="submit" class="header-input-submit-button">
+        <form class="header-form js-search">
+          <input class="header-input js-input-search" type="text" />
+          <button class="header-input-submit-button" type="submit">
             <svg class="header-input-search-icon" width="24" height="24">
               <use href="./images/sprite/sprite.svg#icon-search"></use>
             </svg>
@@ -172,7 +171,8 @@
       </div>
     </header>
 
-    <main class="main-section">
+    <div class="container search-is-hidden js-search-container"></div>
+    <main class="main-section js-main">
       <section class="hero">
         <ul class="hero-list">
           <li id="item1" class="hero-item">
@@ -208,6 +208,10 @@
         </p>
       </div>
     </footer>
+    <svg class="arrow-up">
+      <use href="./images/sprite/sprite.svg#icon-arrow-up"></use>
+    </svg>
+
     <!-- <div class="modal-wrapper">
       <div class="modal"></div>
     </div> -->
