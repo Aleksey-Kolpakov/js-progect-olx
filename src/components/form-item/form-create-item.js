@@ -80,17 +80,17 @@ const formCreate = `<div class="container__form">
     </li>
   </ul>
 </form>
-</div>`
-
+</div>`;
 
 /*const formCreateRef = document.querySelector(".create-ad-button");
 formCreateRef.addEventListener('click', funModalBackDrop);
 function funModalBackDrop() { modalBackDrop(formCreate) };*/
 
-const formCreateRef = document.querySelector(".create-ad-button");
-formCreateRef.addEventListener('click', openModalAddItem);
-
+// const formCreateRef = document.querySelector('.create-ad-button');
+// formCreateRef.addEventListener('click', openModalAddItem);
 
 function openModalAddItem() {
-  const tempale = modalBackDrop(formCreate)
+  const tempale = modalBackDrop(formCreate);
 }
+
+export { openModalAddItem };
