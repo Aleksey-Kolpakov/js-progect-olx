@@ -9,7 +9,13 @@ export function modalBackDrop(template) {
   exitBtnRef.addEventListener('click', onBtnClose);
 
   backDropRef.classList.add('is-open');
-
+  const addBtn = `<button class="exit-btn-escape">
+            <svg class="exit-svg">
+              <use href="./images/sprite/sprite.svg#icon-close"></use>
+            </svg>
+          </button>`;
+  modalRef.innerHTML = '';
+  modalRef.insertAdjacentHTML('beforeend', addBtn);
   modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
 
   function createModalMarkup() {
@@ -20,13 +26,6 @@ export function modalBackDrop(template) {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
-    const addBtn = `<button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>`;
-    modalRef.innerHTML = '';
-    modalRef.insertAdjacentHTML('beforeend', addBtn);
   }
 
   function onBackdrop(event) {

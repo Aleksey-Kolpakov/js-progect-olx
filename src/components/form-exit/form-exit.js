@@ -12,6 +12,7 @@ const exit = `
 </div>`;
 
 const exitRef = document.querySelector('.logout-button');
+
 exitRef.addEventListener('click', formExit);
 
 function formExit() {
@@ -21,13 +22,6 @@ function formExit() {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
-    const addBtn = `<button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>`;
-    modalRef.innerHTML = '';
-    modalRef.insertAdjacentHTML('beforeend', addBtn);
   }
 
   const backDropRef = document.querySelector('.back-drop');
