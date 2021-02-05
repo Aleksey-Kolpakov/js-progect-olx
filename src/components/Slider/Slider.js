@@ -40,10 +40,11 @@ export default class Slider {
     return refs;
   }
 /* -------------------------------------------------- */
+
   renderSliderComponents = () => {
   /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
     if (!this.refs) {
-      setInterval(this.renderSliderComponents, 300);
+      this.renderSliderComponents();
       return;
     }
     const itemCollection = this.refs.sliderList.children;
