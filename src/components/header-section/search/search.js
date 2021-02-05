@@ -18,10 +18,11 @@ function findGoods(event) {
 function onSearchMarkup(data) {
   const markup = template(data);
 
-  if (!data.length) {
+  /* if (!data.length) {
     alert('No matches found');
     return;
-  }
+  } */
+
   wrapRef.classList.remove('search-is-hidden');
   wrapRef.classList.add('search-is-shown');
   wrapRef.innerHTML = '';
