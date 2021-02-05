@@ -28,8 +28,7 @@ const renderHero = () => {
             const markUpSlider = adsCardHandleBar(ObjWithArrays.slider);
             heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
             heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
-            new Slider({ listUlSelector: ".hero-list-slider", autoScroll: true });
-        });
+        }).then(() => new Slider({ listUlSelector: ".hero-list-slider", autoScroll: true }));
 };
 
 
@@ -43,7 +42,42 @@ const refreshHero = () => {
     })
 }
 
+const { MOBILE, TABLET, DESKTOP } = {
+    MOBILE: 'mobile',
+    TABLET: 'tablet',
+    DESKTOP: 'desktop'
+}
+
+const setTypeOfScreen = () => {
+    const currentScreenWidth = window.innerWidth;
+    let screenType = null;
+    if (currentScreenWidth < 768) {
+      return screenType = MOBILE;
+    }
+    if (currentScreenWidth >= 768 && currentScreenWidth <1280) {
+        return screenType  = TABLET;
+    }
+    if (currentScreenWidth >= 1280) {
+        return screenType  = DESKTOP;
+    }
+  }
+
+let prevScreenType = setTypeOfScreen();
+
+const checkScreenWidth = () => {
+    const currentScreenType = setTypeOfScreen();
+    if (currentScreenType === prevScreenType) {
+      return false;
+    }
+    prevScreenType = currentScreenType;
+    return true;
+  }
+
 const resizeWindowRerender = () => {
+    const mustRerender = checkScreenWidth();
+    if (!mustRerender) {
+      return;
+    }
     refreshHero();
     renderHero();
 }
