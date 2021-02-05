@@ -14,12 +14,16 @@
     padding-left: 50px;
     padding-right: 50px;
   }
+  @include for-size(desktop) {
+    min-height: 650px;
+  }
 }
 
 .search-goods-item {
   margin-right: 30px;
   margin-bottom: 30px;
   width: 100%;
+  max-height: 300px;
 
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
