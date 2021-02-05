@@ -14,7 +14,7 @@ export default class Slider {
     this.intervalId = null;
     this.refs = this.getRefs();
     this.renderSliderComponents();
-    window.addEventListener('resize', throttle(this.resizeWindowRerender, 1500));
+    window.addEventListener('resize', throttle(this.resizeWindowRerender, 2500));
   }
 
   getRefs() {
@@ -190,6 +190,7 @@ export default class Slider {
   }
 
   resizeWindowRerender = () => {
+      console.log('reRender');
       this.refresh();
       this.renderSliderComponents();
       this.position = this.slidesAmount;
