@@ -1,9 +1,4 @@
 .modal {
-  max-width: 650px;
-  width: 100%;
-  @include for-size(mobile-only) {
-    max-width: 290px;
-  }
 }
 
 .exit-text {

@@ -1,5 +1,9 @@
 header {
   background-color: $Header-backgound;
+
+  @include for-size(desktop) {
+    border-bottom: 1px solid white;
+  }
 }
 
 .header-button {

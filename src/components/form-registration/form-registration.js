@@ -23,7 +23,6 @@ const  createMarkupReg =
           <button class="registerAccount" data-reg="registration" type="submit">РЕГИСТРАЦИЯ</button>
         </div>
       </div>`
-
 export function openForm() {
   function listenerReg() {
     const authRefs = {
@@ -68,3 +67,5 @@ export function openForm() {
   listenerReg()
 }
 
+export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
+console.log(userTokenGoogle);
