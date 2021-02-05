@@ -54,12 +54,15 @@ $orange-color: #ff6b09;
   will-change: transform;
   position: relative;
   height: 100%;
+  padding: 0px;
+  // border: 1px solid rgb(255, 51, 0);
 }
 
 .slider-item {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 100%;
+  // border: 1px solid rgb(0, 255, 128);
 }
 
 .button-prev,
