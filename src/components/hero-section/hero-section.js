@@ -28,7 +28,7 @@ const renderHero = () => {
             const markUpSlider = adsCardHandleBar(ObjWithArrays.slider);
             heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
             heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
-        }).then(() => new Slider({ listUlSelector: ".hero-list-slider", autoScroll: true }));
+        }).then(() => new Slider({ listUlSelector: ".hero-list-slider", autoScroll: true, timeAutoScroll: 3000 }));
 };
 
 
