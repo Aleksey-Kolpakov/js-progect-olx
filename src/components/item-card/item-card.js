@@ -52,24 +52,24 @@ function renderMarkup() {
 
             // sectionContainer.innerHTML = '';
             const markup = itemCardMarkup(dataMarkup);
-            
-            
+
+
             // new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false });
             // console.dir(window.innerWidth);
             // const screenWidth = Number(window.innerWidth)
             // if (screenWidth < 768) {
-            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
+            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
             // }
             modalBackDrop(markup);
             addAndRemoveFavorites();
             changeSmallToBigImg();
             getSalesmanInfo();
-            
+
         })
         .then((data) => {
         const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
-             new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
+             new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
             }
     })
 };
@@ -114,7 +114,7 @@ function addAndRemoveFavorites() {
  //==============INFO ABOUT SALESMAN===========
 function getSalesmanInfo() {
    const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
-    
+
     salesmanInfoBtn.addEventListener('click', event => {
         event.preventDefault();
         getUsersInfoByID("5fd26f640031930017e916a2")

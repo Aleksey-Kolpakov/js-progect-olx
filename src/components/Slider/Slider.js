@@ -1,19 +1,14 @@
 import throttle from 'lodash.throttle';
 import './_slider.scss';
 
-const { MOBILE, TABLETDESKTOP } = {
-  MOBILE: 'mobile',
-  TABLETDESKTOP: 'tabletdesktop',
-};
+const { MOBILE, TABLET, DESKTOP } = {
+    MOBILE: 'mobile',
+    TABLET: 'tablet',
+    DESKTOP: 'desktop'
+}
 
 export default class Slider {
-  constructor({
-    listUlSelector,
-    buttons = false,
-    autoScroll = false,
-    timeAutoScroll = 3000,
-    parentPadding = '0',
-  }) {
+  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', }) {
     this.position = 0;
     this.itemsSelector = listUlSelector;
     this.buttons = buttons;
@@ -26,10 +21,7 @@ export default class Slider {
     this.prevScreenType = this.setTypeOfScreen();
     this.refs = this.getRefs();
     this.renderSliderComponents();
-    window.addEventListener(
-      'resize',
-      throttle(this.resizeWindowRerender, 2500),
-    );
+    window.addEventListener( 'resize', throttle(this.resizeWindowRerender, 2500), );
   }
 
   getRefs() {
@@ -39,20 +31,30 @@ export default class Slider {
       typeof this.itemsSelector === 'object'
         ? this.itemsSelector
         : document.querySelector(this.itemsSelector);
-    /* якщо селектор має такий клас, слайдер не додаємо повторно */
+  /* якщо селектор має такий клас, слайдер не додаємо повторно */
     if (refs.sliderList.classList.contains('slider-wrap')) {
       return;
     }
     /* додаємо селектору клас та падінги */
-    refs.sliderList.classList.add('slider-wrap');
+    // refs.sliderList.classList.add('slider-wrap');
+    refs.sliderList.className = 'slider-wrap';//стирає усі попередні класи і залишає тільки новий
     refs.sliderList.style['padding'] = this.parentBlockPadding;
-    /* створюємо обгортку для селектора */
+
+    /* створюємо обгортку overflow-hidden для селектора */
     refs.sliderBlock = document.createElement('div');
     refs.sliderBlock.classList.add('slider');
-    refs.sliderList.parentNode.insertBefore(refs.sliderBlock, refs.sliderList);
-    refs.sliderBlock.append(refs.sliderList);
-    refs.blockDots = document.createElement('div');
+    // /* створюємо блок для розміщення кнопок поверх overflow-hidden */
     refs.buttonsBlock = document.createElement('div');
+    refs.buttonsBlock.classList.add('slider-buttons-block');
+    refs.buttonsBlock.append(refs.sliderBlock);
+    /* обгортаємо селктор цими блоками */
+    refs.sliderList.parentNode.insertBefore(refs.buttonsBlock, refs.sliderList);
+    refs.sliderBlock.append(refs.sliderList);
+
+    refs.blockDots = document.createElement('div');
+    refs.prevButton = document.createElement('div');
+    refs.nextButton = document.createElement('div');
+
     return refs;
   }
   /* -------------------------------------------------- */
@@ -92,17 +94,26 @@ export default class Slider {
     const itemAllAmount = itemCollection.length;
     this.slidesAmount = Math.ceil(itemAllAmount / itemOnScreen); //к-сть прокруток слайду.
     /* -------- */
+    /* створення кнопок вліво-вправо та кнопок-точок*/
+    const { prevButton, nextButton } = this.createButtons();
+    this.refs.prevButton = prevButton;
+    this.refs.nextButton = nextButton;
+    this.refs.blockDots = this.createDots();
+    this.refs.buttonsBlock.append(this.refs.blockDots, this.refs.prevButton, this.refs.nextButton);
 
-    /* умова створення кнопок вправо-вліво */
+    /* умова показу кнопок вправо-вліво */
     if (this.buttons && innerWidth >= 768) {
-      const { prevButton, nextButton } = this.createButtons();
-      nextButton.addEventListener('click', this.slideRight);
-      prevButton.addEventListener('click', this.slideLeft);
+      const { blockDots, prevButton, nextButton } = this.refs;
+      blockDots.style['display'] = 'none';
+      prevButton.style['display'] = 'block';
+      nextButton.style['display'] = 'block';
     }
-    /* умова створення кнопок-точок під слайдером */
+    /* умова показу кнопок-точок під слайдером */
     if ((this.buttons && innerWidth < 768) || !this.buttons) {
-      this.refs.blockDots = this.createDots();
-      this.refs.sliderBlock.append(this.refs.blockDots);
+      const { blockDots, prevButton, nextButton } = this.refs;
+      blockDots.style['display'] = 'flex';
+      prevButton.style['display'] = 'none';
+      nextButton.style['display'] = 'none';
     }
     /* умова увімкнення автоскролу */
     if (this.autoScrolling) {
@@ -117,13 +128,12 @@ export default class Slider {
     if (this.position > maxPosition) {
       this.position = 0;
     }
-    const activeScrollLength = this.position * this.lengthToScroll;
     if (this.refs) {
-      this.refs.sliderList.style[
-        'transform'
-      ] = `translateX(calc(-${activeScrollLength}px))`;
+      this.scrollOnNewPosition();
     }
-    this.changeActiveDot();
+    if (this.autoScrolling) {
+      this.changeActiveDot();
+    }
   };
 
   slideLeft = () => {
@@ -132,13 +142,10 @@ export default class Slider {
     if (this.position < 0) {
       this.position = maxPosition;
     }
-    const activeScrollLength = this.position * this.lengthToScroll;
-    this.refs.sliderList.style[
-      'transform'
-    ] = `translateX(calc(-${activeScrollLength}px))`;
-    this.changeActiveDot();
+    this.scrollOnNewPosition();
   };
 
+  /* ----створення кнопок вліво-вправо та кнопок-точок---- */
   createButtons() {
     const prevButton = document.createElement('div');
     const nextButton = document.createElement('div');
@@ -155,32 +162,13 @@ export default class Slider {
                   <use href="../images/sprite/sprite.svg#icon-chevron_right" />
                 </svg>`,
     );
-    this.refs.buttonsBlock = document.createElement('div');
-    this.refs.buttonsBlock.classList.add('slider-buttons-block');
-    this.refs.sliderBlock.parentNode.insertBefore(
-      this.refs.buttonsBlock,
-      this.refs.sliderBlock,
-    );
-    this.refs.buttonsBlock.append(this.refs.sliderBlock);
 
     prevButton.classList.add('button-prev');
     nextButton.classList.add('button-next');
-    this.refs.buttonsBlock.append(prevButton, nextButton);
+    nextButton.addEventListener('click', this.slideRight);
+    prevButton.addEventListener('click', this.slideLeft);
     return { prevButton, nextButton };
   }
-
-  refresh = () => {
-    clearInterval(this.intervalId);
-    this.refs?.blockDots?.remove();
-    if (this.refs?.buttonsBlock.parentNode) {
-      this.refs.buttonsBlock.parentNode.insertBefore(
-        this.refs.sliderBlock,
-        this.refs.buttonsBlock,
-      );
-      this.refs.sliderBlock.append(this.refs.buttonsBlock);
-      this.refs.buttonsBlock.remove();
-    }
-  };
 
   createDots() {
     const dotsArray = [];
@@ -199,16 +187,14 @@ export default class Slider {
     blockDots.append(...dotsArray);
     return blockDots;
   }
-
+/* ------------------------------------- */
+/* перемотка на певний елемент при кліку на кнопку-точку */
   toTargetSlide = event => {
     if (event.target === event.currentTarget) {
       return;
     }
     this.position = Number(event.target.dataset.id);
-    const activeScrollLength = this.position * this.lengthToScroll;
-    this.refs.sliderList.style[
-      'transform'
-    ] = `translateX(calc(-${activeScrollLength}px))`;
+    this.scrollOnNewPosition();
     this.changeActiveDot();
     if (this.autoScrolling) {
       clearInterval(this.intervalId);
@@ -225,15 +211,23 @@ export default class Slider {
     const activeDot = allDots[this.position];
     activeDot?.classList.add('dot-active');
   }
-
+/* ------------------------------------- */
+  scrollOnNewPosition() {
+    const activeScrollLength = this.position * this.lengthToScroll;
+    this.refs.sliderList.style[ 'transform' ] = `translateX(calc(-${activeScrollLength}px))`;
+  }
+/* ререндер при зміні ширини екрану*/
   setTypeOfScreen = () => {
     const currentScreenWidth = window.innerWidth;
     let screenType = null;
     if (currentScreenWidth < 768) {
       return (screenType = MOBILE);
     }
-    if (currentScreenWidth >= 768) {
-      return (screenType = TABLETDESKTOP);
+    if (currentScreenWidth >= 768 && currentScreenWidth <1280) {
+        return screenType  = TABLET;
+    }
+    if (currentScreenWidth >= 1280) {
+        return screenType  = DESKTOP;
     }
   };
 
@@ -249,6 +243,16 @@ export default class Slider {
     return true;
   };
 
+  refresh = () => {
+    if (!this.refs) {
+      return;
+    }
+    clearInterval(this.intervalId);
+    this.refs.blockDots.style['display'] = `none`;
+    this.refs.prevButton.style['display'] = `none`;
+    this.refs.nextButton.style['display'] = `none`;
+  };
+
   resizeWindowRerender = () => {
     const mustRerender = this.checkScreenWidth();
     if (!mustRerender) {
@@ -259,4 +263,5 @@ export default class Slider {
     this.position = this.slidesAmount;
     this.slideRight();
   };
+/* ------------------------------------- */
 }
