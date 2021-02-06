@@ -8,10 +8,11 @@ const { MOBILE, TABLET, DESKTOP } = {
 }
 
 export default class Slider {
-  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', }) {
+  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', dotsVerticalPosition = '10' }) {
     this.position = 0;
     this.itemsSelector = listUlSelector;
     this.buttons = buttons;
+    this.dotsPosition = dotsVerticalPosition;
     this.autoScrolling = autoScroll;
     this.autoScrollTime = timeAutoScroll;
     this.parentBlockPadding = parentPadding;
@@ -184,6 +185,7 @@ export default class Slider {
     const blockDots = document.createElement('ul');
     blockDots.addEventListener('click', this.toTargetSlide);
     blockDots.classList.add('slider-dots-block');
+    blockDots.style['bottom'] = `${this.dotsPosition}px`;
     blockDots.append(...dotsArray);
     return blockDots;
   }

@@ -29,11 +29,10 @@ const renderHero = () => {
             heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
             heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
     }).then(() => {
-            const heroListForSlideRef = document.querySelector('.hero-list-slider');
-            if (!heroListForSlideRef) {
+            if (!heroListSliderRef) {
                 return;
             }
-            new Slider({ listUlSelector: heroListForSlideRef, autoScroll: true, timeAutoScroll: 3000 })
+            new Slider({ listUlSelector: heroListSliderRef, autoScroll: true, timeAutoScroll: 3000 })
         });
 };
 
