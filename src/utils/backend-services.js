@@ -3,7 +3,7 @@ import localStoradge from './local-storadge.js';
 export let jsDataBase = [];
 let pageNumber = 1;
 let id = '6018c8769dfece51e3667546';
-const getHeroAds = function () {
+export const getHeroAds = function () {
   return axios
     .get('https://callboard-backend.goit.global/call/ads')
     .then(({ data }) => data)
