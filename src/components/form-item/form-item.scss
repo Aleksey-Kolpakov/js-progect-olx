@@ -419,9 +419,9 @@ textarea {
   background-color: #fff;
 }
 
-.item-close-button :focus .close-image-button,
-.item-close-button :hover .close-image-button {
-  fill: $orange-color;
+.close-image-button :focus,
+.close-image-button :hover {
+  fill: orange;
   cursor: pointer;
 }
 .item-close-button {
