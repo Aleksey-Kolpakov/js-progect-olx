@@ -60,7 +60,7 @@ export default class Slider {
   renderSliderComponents = () => {
     /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
     if (!this.refs) {
-      setTimeout(this.renderSliderComponents, 300);
+      // setTimeout(this.renderSliderComponents, 300);
       return;
     }
     const itemCollection = this.refs.sliderList.children;
