@@ -60,7 +60,7 @@ export default class Slider {
   renderSliderComponents = () => {
     /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
     if (!this.refs) {
-      // this.renderSliderComponents();
+      setTimeout(this.renderSliderComponents, 300);
       return;
     }
     const itemCollection = this.refs.sliderList.children;
@@ -74,13 +74,7 @@ export default class Slider {
 
     /* вираховую довжину, на яку треба прокрутити слайд, і к-сть прокруток слайду */
     const parentStyles = getComputedStyle(this.refs.sliderList);
-    const {
-      paddingLeft,
-      paddingRight,
-      width,
-      marginLeft: pMarginLeft,
-      marginRight: pMarginRight,
-    } = parentStyles;
+    const { paddingLeft, paddingRight, width, marginLeft: pMarginLeft, marginRight: pMarginRight, } = parentStyles;
     let pMargins = 0;
     if (parseInt(pMarginLeft) < 0) {
       pMargins += parseInt(pMarginLeft);
@@ -88,11 +82,7 @@ export default class Slider {
     if (parseInt(pMarginRight) < 0) {
       pMargins += parseInt(pMarginRight);
     }
-    const parentContentWidth =
-      parseInt(width) -
-      parseInt(paddingLeft) -
-      parseInt(paddingRight) +
-      pMargins;
+    const parentContentWidth = parseInt(width) - parseInt(paddingLeft) - parseInt(paddingRight) + pMargins;
     const itemWidth = itemCollection[0]?.offsetWidth;
     const itemStyles = getComputedStyle(itemCollection[0]);
     const { marginLeft, marginRight } = itemStyles;
