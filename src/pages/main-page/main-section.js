@@ -191,7 +191,7 @@ function createMarkup(categoriesList, otherEl) {
     });
 }
 
-function markupSales() {
+export function markupSales() {
   getAllCategoriesWithItemsByPages(pageNumber).then(resp => {
     const sales = resp.sales;
     const mapSales = sales.map(element => ({
