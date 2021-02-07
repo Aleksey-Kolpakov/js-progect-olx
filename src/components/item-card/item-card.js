@@ -42,16 +42,14 @@ import {modalBackDrop} from '../../components/modal-window/modal-logic.js'
 
 
 // ================RENDER MARKUP=================
-function renderMarkup() {
-    getItembyTitle('macbook')
-        .then((data) => {
-            const dataMarkup = { ...data[0] };
-            console.log(dataMarkup);
-            dataMarkup.imageUrl = dataMarkup.imageUrls[0];
+function renderMarkup(item) {
+    item.imageUrl = item.imageUrls[0];
+    
+
             // dataMarkup.imageUrls.shift();
 
             // sectionContainer.innerHTML = '';
-            const markup = itemCardMarkup(dataMarkup);
+            const markup = itemCardMarkup(item);
             
             
             // new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false });
@@ -65,14 +63,14 @@ function renderMarkup() {
             changeSmallToBigImg();
             getSalesmanInfo();
             
-        })
-        .then((data) => {
+
         const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
              new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
             }
-    })
+
 };
+export default renderMarkup;
 // renderMarkup();
 // =======================
 

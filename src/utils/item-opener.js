@@ -1,7 +1,11 @@
-import { state } from './backend-services.js'
-import {markupSales} from '../pages/main-page/main-section.js'
-const itemOpener = function () {
-    const containersArr = document.querySelectorAll('.js-item-container');
+import { jsDataBase } from './backend-services.js'
+import { markupSales } from '../pages/main-page/main-section.js'
+import createItemModal from '../components/item-card/item-card.js'
+
+export const itemOpener = function () {
+    const containers = document.querySelectorAll('.js-item-container');
+    const containersArr=Array.from(containers)
+    console.dir(containersArr);
     containersArr.map(ul => {
         ul.addEventListener('click', openItemModal);
     })
@@ -10,9 +14,8 @@ const itemOpener = function () {
 function openItemModal(event) {
     event.preventDefault();
     const itemRef = event.target.closest("[data-id]");
-    const clickedItemId = item.dataset.id;
-    const itemData = state.find(item => {
-        item._id === clickedItemId
-    });
-    /// здесь нужно вызы
+    const clickedItemId = itemRef.dataset.id;
+    const itemData = jsDataBase.find(item => item._id === clickedItemId);
+ 
+    createItemModal(itemData)
 }
