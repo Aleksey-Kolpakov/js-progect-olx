@@ -133,7 +133,7 @@ function createMarkup(categoriesList, otherEl) {
       Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
       многое другое.
     </p>
-    <ul class="section-gallery">
+    <ul class="section-gallery js-item-container">
     ${values[indx]
       .map(item => ({
         ...item,
@@ -151,7 +151,7 @@ function createMarkup(categoriesList, otherEl) {
           loading="lazy"
         />
         </div>
-        <h3 class="section-gallery-item-title">${item.title}</h3>
+        <h3 class="section-gallery-item-title" title="${item.title}">${item.title}</h3>
         <div class="price-container">
           <p class="section-gallery-item-newprice">${item.price} €</p>
         </div>
@@ -213,6 +213,7 @@ function onClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     const currentSection = event.target.dataset.title;
+    history.pushState(null, null, currentSection.trim());
     getItemsInCategory(currentSection).then(resp => {
       const mapImg = resp.map(item => ({
         ...item,

@@ -1,0 +1,83 @@
+.section-item-good {
+  margin-bottom: 50px;
+  & .slider-dot {
+    background-color: $orange-color;
+  }
+}
+
+.section-title {
+  display: inline;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.section-link {
+  line-height: 1.22;
+
+  margin-left: 12px;
+
+  color: $orange-color;
+}
+
+.card-list {
+  padding-left: 0;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 0;
+  margin-left: -20px;
+
+  @include for-size(tablet) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.favourite-list-item {
+  background-color: $white-color;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+  // margin-right: 20px;
+  margin-bottom: 20px;
+
+  @include for-size(tablet) {
+    flex-basis: auto !important;
+    width: calc((100% - 2 * 20px) / 2);
+    // width: calc((100% - 1 * 20px) / 2);
+  }
+
+  @include for-size(desktop) {
+    width: calc((100% - 4 * 20px) / 4);
+    // width: calc((100% - 3 * 20px) / 4);
+  }
+}
+
+.favourite-list-item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 120px;
+}
+
+.favourite-list-item-title {
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 3px;
+
+  color: $main-black;
+}
+
+.favourite-list-item-price {
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  color: $orange-color;
+}

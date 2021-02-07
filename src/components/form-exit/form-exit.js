@@ -12,6 +12,7 @@ const exit = `
 </div>`;
 
 const exitRef = document.querySelector('.logout-button');
+
 exitRef.addEventListener('click', formExit);
 
 function formExit() {
@@ -21,13 +22,7 @@ function formExit() {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
-    const addBtn = `<button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>`;
-    modalRef.innerHTML = '';
-    modalRef.insertAdjacentHTML('beforeend', addBtn);
+    exitBtnRef.removeEventListener('click', onBtnClose);
   }
 
   const backDropRef = document.querySelector('.back-drop');
@@ -38,17 +33,6 @@ function formExit() {
 
   function cancelBtn() {
     closeModal();
-  }
-  function onBackdrop(event) {
-    if (event.currentTarget === event.target) {
-      closeModal();
-    }
-  }
-
-  function onBtnPress(event) {
-    if (event.code === 'Escape') {
-      closeModal();
-    }
   }
 
   const confirmRef = document.querySelector('.confirm');
