@@ -2,17 +2,18 @@
     <div class="container">
         <h2 class="section-title">Избранное</h2>
         <a href="" class="section-link favourites">Смотреть все</a>
-        <ul class=" card-list js-item-container">
+        <ul class="card-list js-item-container">
             {{#each this}}
             <li class="favourite-list-item">
-                <a href="" class=" section-gallery-goods-link" data-id="{{_id}}"></a>
-                <div class="image-container">
-                    <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" />
-                </div>
-                <h3 class="favourite-list-item-title">
-                    {{description}}
-                </h3>
-                <p class="favourite-list-item-price">{{price}} €</p>
+                <a href="" class=" section-gallery-goods-link" data-id="{{_id}}">
+                    <div class="image-container">
+                        <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" />
+                    </div>
+                    <h3 class="favourite-list-item-title">
+                        {{description}}
+                    </h3>
+                    <p class="favourite-list-item-price">{{price}} €</p>
+                </a>
             </li>
             {{/each}}
         </ul>

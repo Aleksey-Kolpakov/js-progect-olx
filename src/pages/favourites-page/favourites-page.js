@@ -1,5 +1,5 @@
 import { loginFetch } from '../../utils/backend-services';
-import EdikMarkUp from '../../pages/main-page/templates/categories-markup.hbs';
+import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
 import favouritesHbs from '../favourites-page/templates/favourites.hbs';
 import ownItemsHbs from '../favourites-page/templates/ownItems.hbs';
 import {
@@ -7,28 +7,25 @@ import {
   getUsersOwnItems,
 } from '../../utils/backend-services';
 import Slider from '../../components/Slider';
+// ===============================================================================//
+// refs
+const mainRef = document.querySelector('main');
+const myAccountBtnRef = document.querySelector(
+  '.my-cabinet-button.header-button',
+);
 
-// Дані тестового юзера:
-const registerData = {
-  email: 'Ruslantester@test.com',
-  password: 'qwerty123',
-};
+// listeners
+myAccountBtnRef.addEventListener('click', onClickBtnMyAccount);
+//===============================================================================//
 
 // functions
-const startTestinLogin = async function () {
-  const loginData = await loginFetch({
-    email: 'Ruslantester@test.com',
-    password: 'qwerty123',
-  });
-};
-
 function updateMarkupFavouritesAll(elementsArray) {
   const checkedElementsArray = elementsArray.map(element => ({
     ...element,
     imageUrls: element.imageUrls[0],
   }));
 
-  const markup = EdikMarkUp(checkedElementsArray);
+  const markup = EdikMarkUpHbs(checkedElementsArray);
   mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
@@ -46,7 +43,7 @@ function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
   mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
-function onMyAccountClick() {
+function onClickBtnMyAccount() {
   // const fetchPromiseOwnItems = getUsersOwnItems();
   const fetchPromiseFavourites = getUsersFavouritesByToken();
   mainRef.innerHTML = '';
@@ -59,7 +56,7 @@ function onMyAccountClick() {
     const seeAllBtnRef = document.querySelector('.favourites');
     seeAllBtnRef.addEventListener(
       'click',
-      onSeeAllClickY(fetchPromiseFavourites),
+      onClickBtnSeeAll(fetchPromiseFavourites),
     );
   });
 
@@ -71,7 +68,7 @@ function onMyAccountClick() {
     const seeAllBtnRef = document.querySelector('.ownItems');
     seeAllBtnRef.addEventListener(
       'click',
-      onSeeAllClickY(fetchPromiseFavourites),
+      onClickBtnSeeAll(fetchPromiseFavourites),
     );
   });
 
@@ -83,7 +80,7 @@ function onMyAccountClick() {
   });
 }
 
-const onSeeAllClickY = promise => e => {
+const onClickBtnSeeAll = promise => e => {
   e.preventDefault();
   promise.then(data => {
     mainRef.innerHTML = '';
@@ -91,13 +88,17 @@ const onSeeAllClickY = promise => e => {
   });
 };
 
-// refs
-const mainRef = document.querySelector('main');
-const myAccountBtnRef = document.querySelector(
-  '.my-cabinet-button.header-button',
-);
+// Дані тестового юзера:
+const registerData = {
+  email: 'Ruslantester@test.com',
+  password: 'qwerty123',
+};
 
-// listeners
-myAccountBtnRef.addEventListener('click', onMyAccountClick);
+const startTestinLogin = async function () {
+  const loginData = await loginFetch({
+    email: 'Ruslantester@test.com',
+    password: 'qwerty123',
+  });
+};
 
-// startTestinLogin();
+startTestinLogin();
