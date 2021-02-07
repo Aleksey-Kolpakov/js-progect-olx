@@ -6,7 +6,7 @@ import {
 import { getItemsInCategory } from '../../../utils/backend-services';
 import { closeMobileMenu } from './service';
 import template from '../../../pages/main-page/templates/categories-markup.hbs';
-
+import {itemOpener} from '../../../utils/item-opener'
 refs.filterList.addEventListener('click', onFilterButtonClick);
 
 function onFilterButtonClick(event) {
@@ -33,7 +33,7 @@ function onFilterButtonClick(event) {
 
           refs.mainSection.innerHTML = '';
           refs.mainSection.insertAdjacentHTML('beforeend', markup);
-
+          itemOpener();
           if (window.innerWidth >= 768 && window.innerWidth < 1280) {
             refs.filtersContainer.classList.remove('tablet-is-open');
           }
