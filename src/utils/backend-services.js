@@ -3,10 +3,11 @@ import localStoradge from './local-storadge.js';
 export let jsDataBase = [];
 let pageNumber = 1;
 let id = '6018c8769dfece51e3667546';
-const getHeroAds = function () {
-    return axios.get('https://callboard-backend.goit.global/call/ads')
-        .then(({ data }) => data)
-        .catch((error) => error)
+export const getHeroAds = function () {
+  return axios
+    .get('https://callboard-backend.goit.global/call/ads')
+    .then(({ data }) => data)
+    .catch(error => error);
 };
 const registerData = {
     email: 'testwwerdfcwq@test.com',
@@ -16,10 +17,7 @@ export const registerUserApi = function (registerData) {
     return axios
         .post('https://callboard-backend.goit.global/auth/register', registerData)
         .then(({ data }) => data)
-        .catch(error => {
-            console.log(error)
-            return error;
-        });
+        .catch(error => console.log(error));
 };
 
 export const loginFetch = function (loginData) {
@@ -35,14 +33,11 @@ export const loginFetch = function (loginData) {
             localStoradge.save('accessTokenOlx', data.accessToken);
             return data;
         })
-        .catch(error => {
-            console.log(error);
-            return error;
-        });
+        .catch(error => console.log(error));
 };
 // loginFetch(registerData).then(data => {
-//     console.log(data);
-//     console.log(data.accessToken)
+//   console.log(data);
+//   console.log(data.accessToken);
 // });
 
 export const logoutFetch = function () {
@@ -231,19 +226,20 @@ export function getUsersOwnItems() {
 }
 
 export function getItembyTitle(searchQuerry) {
-
-    return fetch(`https://callboard-backend.goit.global/call/find?search=${searchQuerry}`, {
-        method: 'GET',
-        headers: {
-
-            'Content-Type': 'application/json; charset=UTF-8',
-        }
-    })
+    return fetch(
+        `https://callboard-backend.goit.global/call/find?search=${searchQuerry}`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+        },
+    )
         .then(response => response.json())
         .catch(error => console.log(error));
-};
+}
 
-// getItembyTitle("mack").then(data => console.dir(data));
+getItembyTitle("mack").then(data => console.dir(data));
 
 export function getEnglishCategories() {
     return fetch(`https://callboard-backend.goit.global/call/categories`, {

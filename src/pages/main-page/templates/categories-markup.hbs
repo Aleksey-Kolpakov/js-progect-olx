@@ -1,14 +1,23 @@
 <section class="section-category">
     <div class="container">
-        <ul class="section-goods">
+        <ul class="section-goods js-item-container">
             {{#each this}}
             <li class="section-gallery-goods">
-                <div class="image-container">
-                    <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" loading="lazy" />
-                </div>
-                <h3 class="section-gallery-item-title">{{title}}</h3>
-                <div class="price-container">
-                    <p class="section-gallery-item-newprice">{{price}} €</p>
+                <a href="" class="section-gallery-goods-link" data-id="{{_id}}">
+                    <div class="image-container">
+                        <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" loading="lazy" />
+                    </div>
+                    <h3 class="section-gallery-item-title" title="{{title}}">{{title}}</h3>
+                    <div class="price-container">
+                        <p class="section-gallery-item-newprice">{{price}} €</p>
+                    </div>
+                    <svg class="icon-fullscreen" width="20" height="24">
+                        <use href="./images/sprite/sprite.svg#icon-fullscreen"></use>
+                    </svg>
+                    <svg class="icon-add-favorite" width="17" height="20">
+                        <use href="./images/sprite/sprite.svg#icon-heart-add-favorite"></use>
+                    </svg>
+                </a>
             </li>
             {{/each}}
         </ul>

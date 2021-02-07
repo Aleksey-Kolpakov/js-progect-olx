@@ -1,4 +1,5 @@
 import { modalBackDrop } from '../modal-window/modal-logic.js';
+import { logoutFetch } from '../../utils/backend-services.js';
 
 const exit = `
     <div class="exit-modal">
@@ -10,21 +11,40 @@ const exit = `
     </div>
 </div>`;
 
-const exitRef = document.querySelector('.exit');
+const exitRef = document.querySelector('.logout-button');
+
 exitRef.addEventListener('click', formExit);
 
 function formExit() {
   modalBackDrop(exit);
 
-  // const closeModal = () => {
-  //   backDropRef.classList.remove('is-open');
-  // };
+  function closeModal() {
+    backDropRef.classList.remove('is-open');
+    document.removeEventListener('keydown', onBtnPress);
+    backDropRef.removeEventListener('click', onBackdrop);
+    exitBtnRef.removeEventListener('click', onBtnClose);
+  }
 
-  // const backDropRef = document.querySelector('.back-drop');
+  const backDropRef = document.querySelector('.back-drop');
+  const modalRef = document.querySelector('.modal');
 
-  // // const exitBtnRef = document.querySelector('.exit-btn-escape');
-  // // exitBtnRef.addEventListener('click', closeModal);
+  const cancelBtnRef = document.querySelector('.cancel');
+  cancelBtnRef.addEventListener('click', cancelBtn);
 
-  // const cancelBtnRef = document.querySelector('.cancel');
-  // cancelBtnRef.addEventListener('click', closeModal);
+  function cancelBtn() {
+    closeModal();
+  }
+
+  const confirmRef = document.querySelector('.confirm');
+  confirmRef.addEventListener('click', exitConfirm);
+
+  function exitConfirm() {
+    const authorizationBlock = document.querySelector('.authorization-block');
+    const myCabinetBlock = document.querySelector('.my-cabinet-block');
+
+    authorizationBlock.classList.remove('is-hidden');
+    myCabinetBlock.classList.add('is-hidden');
+    closeModal();
+    logoutFetch();
+  }
 }

@@ -9,26 +9,30 @@ const fetchResult = callAdsAPI();
 
 const renderHero = () => {
     fetchResult.then(items => items.reduce((accObj, item, index) => {
+        const newItem = { ...item };
         if (innerWidth >= 1280 && index > 0 && index <= 5) {
-            item.id = index + 1;
-            accObj.notslider.push(item);
+            newItem.id = index + 1;
+            accObj.notslider.push(newItem);
             return accObj;
         }
         if (innerWidth >= 768 && index > 0 && index <= 2) {
-            item.id = index + 1;
-            accObj.notslider.push(item);
+            newItem.id = index + 1;
+            accObj.notslider.push(newItem);
             return accObj;
         }
-        accObj.slider.push(item);
+        accObj.slider.push(newItem);
         return accObj;
     }, { slider: [], notslider: [] })
-    )
-        .then(ObjWithArrays => {
+    ).then(ObjWithArrays => {
             const markUpNotSlider = adsCardHandleBar(ObjWithArrays.notslider);
             const markUpSlider = adsCardHandleBar(ObjWithArrays.slider);
             heroListRef.insertAdjacentHTML('beforeend', markUpNotSlider);
             heroListSliderRef.insertAdjacentHTML('beforeend', markUpSlider);
-            new Slider({ listUlSelector: ".hero-list-slider", autoScroll: true });
+    }).then(() => {
+            if (!heroListSliderRef) {
+                return;
+            }
+            new Slider({ listUlSelector: heroListSliderRef, autoScroll: true, timeAutoScroll: 3000 })
         });
 };
 
@@ -43,7 +47,42 @@ const refreshHero = () => {
     })
 }
 
+const { MOBILE, TABLET, DESKTOP } = {
+    MOBILE: 'mobile',
+    TABLET: 'tablet',
+    DESKTOP: 'desktop'
+}
+
+const setTypeOfScreen = () => {
+    const currentScreenWidth = window.innerWidth;
+    let screenType = null;
+    if (currentScreenWidth < 768) {
+      return screenType = MOBILE;
+    }
+    if (currentScreenWidth >= 768 && currentScreenWidth <1280) {
+        return screenType  = TABLET;
+    }
+    if (currentScreenWidth >= 1280) {
+        return screenType  = DESKTOP;
+    }
+  }
+
+let prevScreenType = setTypeOfScreen();
+
+const checkScreenWidth = () => {
+    const currentScreenType = setTypeOfScreen();
+    if (currentScreenType === prevScreenType) {
+      return false;
+    }
+    prevScreenType = currentScreenType;
+    return true;
+  }
+
 const resizeWindowRerender = () => {
+    const mustRerender = checkScreenWidth();
+    if (!mustRerender) {
+      return;
+    }
     refreshHero();
     renderHero();
 }

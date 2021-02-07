@@ -1,30 +1,34 @@
 import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './templates/category-items-markup.hbs';
 import categoryMarkup from './templates/categories-markup.hbs';
-
+import throttle from 'lodash.throttle';
+import {getAllCategoriesWithItemsByPages} from '../../utils/backend-services.js'
 let pageNumber = 1;
-
+import {itemOpener} from '../../utils/item-opener.js'
 const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
 const sectionLinkRef = document.querySelector('.section-link');
 const mainSectionRef = document.querySelector('.main-section');
+const arrowUpRef = document.querySelector('.arrow-up');
 
 loadmoreBtn.addEventListener('click', loadmoreMarkup);
+window.addEventListener('scroll', throttle(listArrowBtn, 200));
+arrowUpRef.addEventListener('click', scrollToHeader);
 
-const getAllCategoriesWithItemsByPages = function (pageNumber) {
-  return fetch(
-    `https://callboard-backend.goit.global/call?page=${pageNumber}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    },
-  )
-    .then(response => response.json())
-    .catch(error => console.log(error));
-};
+// const getAllCategoriesWithItemsByPages = function (pageNumber) {
+//   return fetch(
+//     `https://callboard-backend.goit.global/call?page=${pageNumber}`,
+//     {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json; charset=UTF-8',
+//       },
+//     },
+//   )
+//     .then(response => response.json())
+//     .catch(error => console.log(error));
+// };
 function getItemsInCategory(category) {
   return fetch(
     `https://callboard-backend.goit.global/call/specific/${category}`,
@@ -75,12 +79,15 @@ function markupSections() {
           return;
         }
       });
+      itemOpener()
       return;
     }
     const values = Object.values(data);
 
     const categoryName = values.map(item => item[0].category);
     createMarkup(categoryName, data);
+    itemOpener()
+
     const sectionTittleRef = document.querySelectorAll('.section-title');
     sectionTittleRef.forEach(item => {
       if (item.textContent === 'property') {
@@ -129,7 +136,7 @@ function createMarkup(categoriesList, otherEl) {
       Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
       многое другое.
     </p>
-    <ul class="section-gallery">
+    <ul class="section-gallery js-item-container">
     ${values[indx]
       .map(item => ({
         ...item,
@@ -138,6 +145,7 @@ function createMarkup(categoriesList, otherEl) {
       .map((item, indx) => {
         if (indx <= 15) {
           return `<li class="section-gallery-item slider-item">
+          <a href="" class=" section-gallery-goods-link" data-id="${item._id}">
         <div class="image-container">
         <img
           class="section-gallery-item-image"
@@ -146,10 +154,17 @@ function createMarkup(categoriesList, otherEl) {
           loading="lazy"
         />
         </div>
-        <h3 class="section-gallery-item-title">${item.title}</h3>
+        <h3 class="section-gallery-item-title" title="${item.title}">${item.title}</h3>
         <div class="price-container">
           <p class="section-gallery-item-newprice">${item.price} €</p>
         </div>
+        <svg class="icon-fullscreen" width="20" height="24">
+            <use href="./images/sprite/sprite.svg#icon-fullscreen"></use>
+        </svg>
+        <svg class="icon-add-favorite" width="17" height="20">
+            <use href="./images/sprite/sprite.svg#icon-heart-add-favorite"></use>
+        </svg>
+        </a>
       </li>`;
         }
       })
@@ -165,7 +180,11 @@ function createMarkup(categoriesList, otherEl) {
     if (indx === 0) {
       return;
     }
-    new Slider({ listUlSelector: section, buttons: true });
+    new Slider({
+      listUlSelector: section,
+      buttons: true,
+      parentPadding: '5px 2px',
+    });
   });
 
   const sectionLinksRef = document
@@ -175,7 +194,7 @@ function createMarkup(categoriesList, otherEl) {
     });
 }
 
-function markupSales() {
+export function markupSales() {
   getAllCategoriesWithItemsByPages(pageNumber).then(resp => {
     const sales = resp.sales;
     const mapSales = sales.map(element => ({
@@ -184,7 +203,11 @@ function markupSales() {
     }));
     const markupSales = itemsMarkup(mapSales);
     galleryRef.insertAdjacentHTML('beforeend', markupSales);
-    new Slider({ listUlSelector: '.section-gallery', buttons: true });
+    new Slider({
+      listUlSelector: '.section-gallery',
+      buttons: true,
+      parentPadding: '5px 2px',
+    });
   });
   markupSections();
 }
@@ -193,6 +216,7 @@ function onClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     const currentSection = event.target.dataset.title;
+    history.pushState(null, null, currentSection.trim());
     getItemsInCategory(currentSection).then(resp => {
       const mapImg = resp.map(item => ({
         ...item,
@@ -206,6 +230,21 @@ function onClick(event) {
         behavior: 'smooth',
       });
     });
+  }
+}
+
+function scrollToHeader() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
+function listArrowBtn() {
+  if (pageYOffset > 400) {
+    arrowUpRef.classList.add('is-active');
+  } else {
+    arrowUpRef.classList.remove('is-active');
   }
 }
 

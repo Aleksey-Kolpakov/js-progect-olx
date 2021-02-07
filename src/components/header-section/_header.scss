@@ -1,5 +1,9 @@
 header {
   background-color: $Header-backgound;
+
+  @include for-size(desktop) {
+    border-bottom: 1px solid white;
+  }
 }
 
 .header-button {
@@ -94,7 +98,7 @@ header {
     width: 285px;
     height: 44px;
 
-    z-index: 1;
+    z-index: 97;
 
     &.is-open {
       display: block;
@@ -163,7 +167,7 @@ header {
     top: 70px;
     left: -230px; //
 
-    z-index: 2;
+    z-index: 100;
 
     transition: $transform-transition; //
 
@@ -214,7 +218,7 @@ header {
     top: 70px;
     left: -246px; //
 
-    z-index: 2;
+    z-index: 100;
 
     transition: $transform-transition; //
 
@@ -292,7 +296,7 @@ header {
     // opacity: 0;
     // pointer-events: none;
 
-    z-index: 2;
+    z-index: 100;
 
     // transition: 200ms opacity linear, $transform-transition;
 
@@ -315,7 +319,7 @@ header {
     // opacity: 1;
     // pointer-events: auto;
 
-    z-index: 2;
+    z-index: 100;
 
     transition: $transform-transition;
 
@@ -364,6 +368,11 @@ header {
   background-color: inherit;
   border: 1px solid $main-gray-color;
   border-radius: 17px;
+
+  &.is-active {
+    color: $orange-color;
+    border: 1px solid $orange-color;
+  }
 }
 
 .header-filter-list button:hover,
@@ -380,7 +389,7 @@ header {
     top: 125px;
     left: -260px; //
 
-    z-index: 2;
+    z-index: 100;
 
     transition: $transform-transition; //
 
@@ -442,13 +451,41 @@ header {
   }
 }
 
+.mobile-header-backdrop {
+  @include for-size(mobile-only) {
+    display: block;
+    // display: none;
+
+    z-index: 99;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 200ms opacity linear;
+
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(2px);
+
+    &.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      // display: block;
+    }
+  }
+}
+
 .mobile-menu {
   @include for-size(mobile-only) {
     // display: none;
     display: block;
     position: absolute;
 
-    z-index: 1;
+    z-index: 99;
 
     top: 0;
     left: -300px; //

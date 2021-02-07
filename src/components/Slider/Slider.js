@@ -1,118 +1,153 @@
 import throttle from 'lodash.throttle';
 import './_slider.scss';
 
+const { MOBILE, TABLET, DESKTOP } = {
+    MOBILE: 'mobile',
+    TABLET: 'tablet',
+    DESKTOP: 'desktop'
+}
+
 export default class Slider {
-  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0' }) {
-    this.position = 0;
+  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', dotsVerticalPosition = '10', dotButtonColor = '#5E6671', dotButtonActiveColor = '#fff' }) {
     this.itemsSelector = listUlSelector;
     this.buttons = buttons;
     this.autoScrolling = autoScroll;
     this.autoScrollTime = timeAutoScroll;
     this.parentBlockPadding = parentPadding;
+    this.dotsPosition = dotsVerticalPosition;
+    this.dotBtnColor = dotButtonColor;
+    this.dotBtnActiveColor = dotButtonActiveColor;
+    this.position = 0;
     this.lengthToScroll = null;
     this.slidesAmount = null;
     this.intervalId = null;
+    this.prevScreenType = this.setTypeOfScreen();
     this.refs = this.getRefs();
     this.renderSliderComponents();
-    window.addEventListener('resize', throttle(this.resizeWindowRerender, 1500));
+    window.addEventListener( 'resize', throttle(this.resizeWindowRerender, 2500), );
   }
 
   getRefs() {
     const refs = {};
     /* перевіряємо наш селектор це клас/id чи дом обєкт */
-    refs.sliderList = typeof this.itemsSelector === 'object'
-      ? this.itemsSelector
-      : document.querySelector(this.itemsSelector);
-    /* якщо селектор має такий клас, слайдер не додаємо повторно */
+    refs.sliderList =
+      typeof this.itemsSelector === 'object'
+        ? this.itemsSelector
+        : document.querySelector(this.itemsSelector);
+  /* якщо селектор має такий клас, слайдер не додаємо повторно */
     if (refs.sliderList.classList.contains('slider-wrap')) {
       return;
     }
     /* додаємо селектору клас та падінги */
-    refs.sliderList.classList.add('slider-wrap');
+    // refs.sliderList.classList.add('slider-wrap');
+    refs.sliderList.className = 'slider-wrap js-item-container';//стирає усі попередні класи і залишає тільки нові. js-item-container' треба дял Льоши Колпакова
     refs.sliderList.style['padding'] = this.parentBlockPadding;
-    /* створюємо обгортку для селектора */
+
+    /* створюємо обгортку overflow-hidden для селектора */
     refs.sliderBlock = document.createElement('div');
     refs.sliderBlock.classList.add('slider');
-    refs.sliderList.parentNode.insertBefore(refs.sliderBlock, refs.sliderList);
-    refs.sliderBlock.append(refs.sliderList);
-    refs.blockDots = document.createElement('div');
+    // /* створюємо блок для розміщення кнопок поверх overflow-hidden */
     refs.buttonsBlock = document.createElement('div');
+    refs.buttonsBlock.classList.add('slider-buttons-block');
+    refs.buttonsBlock.append(refs.sliderBlock);
+    /* обгортаємо селктор цими блоками */
+    refs.sliderList.parentNode.insertBefore(refs.buttonsBlock, refs.sliderList);
+    refs.sliderBlock.append(refs.sliderList);
+
     return refs;
   }
-/* -------------------------------------------------- */
+  /* -------------------------------------------------- */
 
   renderSliderComponents = () => {
-  /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
+    /* збираємо дітей селектора в псевдомасив-колекцію і вішаємо кожному клас, якщо діти існують */
     if (!this.refs) {
-      this.renderSliderComponents();
+      // setTimeout(this.renderSliderComponents, 300);
       return;
     }
     const itemCollection = this.refs.sliderList.children;
     if (!itemCollection[0]) {
-      console.error('Error: array of items did not come from server yet. Connect Slider inside async function');
+      console.error(
+        'Error: array of items did not come from server yet. Connect Slider inside async function',
+      );
       return;
     }
     itemCollection.forEach(item => item.classList.add('slider-item'));
 
     /* вираховую довжину, на яку треба прокрутити слайд, і к-сть прокруток слайду */
     const parentStyles = getComputedStyle(this.refs.sliderList);
-    const { paddingLeft, paddingRight, width } = parentStyles;
-    const parentContentWidth = parseInt(width) - parseInt(paddingLeft) - parseInt(paddingRight);
+    const { paddingLeft, paddingRight, width, marginLeft: pMarginLeft, marginRight: pMarginRight, } = parentStyles;
+    let pMargins = 0;
+    if (parseInt(pMarginLeft) < 0) {
+      pMargins += parseInt(pMarginLeft);
+    }
+    if (parseInt(pMarginRight) < 0) {
+      pMargins += parseInt(pMarginRight);
+    }
+    const parentContentWidth = parseInt(width) - parseInt(paddingLeft) - parseInt(paddingRight) + pMargins;
     const itemWidth = itemCollection[0]?.offsetWidth;
     const itemStyles = getComputedStyle(itemCollection[0]);
     const { marginLeft, marginRight } = itemStyles;
     const itemMarginSum = parseInt(marginLeft) + parseInt(marginRight);
-    this.lengthToScroll = parentContentWidth + itemMarginSum;//довжина, на яку треба прокрутити слайд
+    this.lengthToScroll = parentContentWidth + itemMarginSum; //довжина, на яку треба прокрутити слайд
     const itemOnScreen = this.lengthToScroll / (itemWidth + itemMarginSum);
     const itemAllAmount = itemCollection.length;
-    this.slidesAmount = Math.ceil(itemAllAmount / itemOnScreen);//к-сть прокруток слайду.
+    this.slidesAmount = Math.ceil(itemAllAmount / itemOnScreen); //к-сть прокруток слайду.
     /* -------- */
+    /* створення кнопок вліво-вправо та кнопок-точок*/
+    const { prevButton, nextButton } = this.createButtons();
+    this.refs.prevButton = prevButton;
+    this.refs.nextButton = nextButton;
+    this.refs.blockDots = this.createDots();
+    this.refs.buttonsBlock.append(this.refs.blockDots, this.refs.prevButton, this.refs.nextButton);
 
-    /* умова створення кнопок вправо-вліво */
-      if (this.buttons && innerWidth >= 768) {
-        const { prevButton, nextButton } = this.createButtons();
-        nextButton.addEventListener('click', this.slideRight);
-        prevButton.addEventListener('click', this.slideLeft);
-      }
-    /* умова створення кнопок-точок під слайдером */
-      if (this.buttons && innerWidth < 768 || !this.buttons) {
-        this.refs.blockDots = this.createDots();
-        this.refs.sliderBlock.append(this.refs.blockDots);
-      }
-    /* умова увімкнення автоскролу */
-      if (this.autoScrolling) {
-        this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
-      }
+    /* умова показу кнопок вправо-вліво */
+    if (this.buttons && innerWidth >= 768) {
+      const { blockDots, prevButton, nextButton } = this.refs;
+      blockDots.style['display'] = 'none';
+      prevButton.style['display'] = 'block';
+      nextButton.style['display'] = 'block';
     }
-/* -------------------------------------------------- */
+    /* умова показу кнопок-точок під слайдером */
+    if ((this.buttons && innerWidth < 768) || !this.buttons) {
+      const { blockDots, prevButton, nextButton } = this.refs;
+      blockDots.style['display'] = 'flex';
+      prevButton.style['display'] = 'none';
+      nextButton.style['display'] = 'none';
+    }
+    /* умова увімкнення автоскролу */
+    if (this.autoScrolling) {
+      this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
+    }
+  };
+  /* -------------------------------------------------- */
 
-  slideRight=()=> {
+  slideRight = () => {
     this.position += 1;
     const maxPosition = this.slidesAmount - 1;
     if (this.position > maxPosition) {
-        this.position = 0;
-    };
-    const activeScrollLength = this.position * this.lengthToScroll;
-    if (this.refs) {
-      this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
+      this.position = 0;
     }
-    this.changeActiveDot();
-  }
+    if (this.refs) {
+      this.scrollOnNewPosition();
+    }
+    if (this.autoScrolling) {
+      this.changeActiveDot();
+    }
+  };
 
-  slideLeft=()=> {
+  slideLeft = () => {
     this.position -= 1;
     const maxPosition = this.slidesAmount - 1;
     if (this.position < 0) {
-        this.position = maxPosition;
-    };
-    const activeScrollLength = this.position * this.lengthToScroll;
-    this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
-    this.changeActiveDot();
-  }
+      this.position = maxPosition;
+    }
+    this.scrollOnNewPosition();
+  };
 
+  /* ----створення кнопок вліво-вправо та кнопок-точок---- */
   createButtons() {
-    const prevButton = document.createElement('div');
-    const nextButton = document.createElement('div');
+    const prevButton = document.createElement('button');
+    const nextButton = document.createElement('button');
 
     prevButton.insertAdjacentHTML(
       'beforeend',
@@ -126,73 +161,135 @@ export default class Slider {
                   <use href="../images/sprite/sprite.svg#icon-chevron_right" />
                 </svg>`,
     );
-    this.refs.buttonsBlock = document.createElement('div');
-    this.refs.buttonsBlock.classList.add('slider-buttons-block');
-    this.refs.sliderBlock.parentNode.insertBefore( this.refs.buttonsBlock, this.refs.sliderBlock );
-    this.refs.buttonsBlock.append(this.refs.sliderBlock);
 
     prevButton.classList.add('button-prev');
     nextButton.classList.add('button-next');
-    this.refs.buttonsBlock.append(prevButton, nextButton);
-    return {prevButton, nextButton};
+    nextButton.addEventListener('click', this.slideRight);
+    prevButton.addEventListener('click', this.slideLeft);
+    return { prevButton, nextButton };
   }
 
-  refresh = () => {
-    clearInterval(this.intervalId);
-    this.refs?.blockDots?.remove();
-    if (this.refs?.buttonsBlock.parentNode) {
-      this.refs.buttonsBlock.parentNode.insertBefore(this.refs.sliderBlock, this.refs.buttonsBlock);
-      this.refs.sliderBlock.append(this.refs.buttonsBlock);
-      this.refs.buttonsBlock.remove();
-    }
-  }
-
-  createDots(){
+  createDots() {
     const dotsArray = [];
-    for (let i = 0; i < this.slidesAmount; i += 1){
-      const newDot = document.createElement('li');
-      newDot.setAttribute('data-id', i);
-      newDot.classList.add('slider-dot');
+    for (let i = 0; i < this.slidesAmount; i += 1) {
+      /* створюємо кнопку-точку і додаємо їй клас та атрибути */
+      const newDotBtn = document.createElement('button');
+      newDotBtn.classList.add('slider-dotBtn');
+      newDotBtn.style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnColor} 0,
+          ${this.dotBtnColor} 50%,
+          transparent 50%
+        )`;
+      newDotBtn.setAttribute('data-id', i);
+      newDotBtn.setAttribute('aria-label', `slide to card number ${i}`);
+      /* створюємо елемент списку і додаємо йому клас та вкладаємо до нього кнопку-точку */
+      const newDotItem = document.createElement('li');
+      newDotItem.classList.add('slider-dotItem');
+      newDotItem.append(newDotBtn);
+      /* якщо це перша кнопка, робимо її активною. Додаємо елемент списку з кнопкою в масив */
       if (i == 0) {
-          newDot.classList.add('dot-active');
-      };
-      dotsArray.push(newDot);
+        newDotBtn.style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnActiveColor} 0,
+          ${this.dotBtnActiveColor} 50%,
+          transparent 50%
+        )`;
+      }
+      dotsArray.push(newDotItem);
     }
     const blockDots = document.createElement('ul');
     blockDots.addEventListener('click', this.toTargetSlide);
     blockDots.classList.add('slider-dots-block');
+    blockDots.style['bottom'] = `${this.dotsPosition}px`;
     blockDots.append(...dotsArray);
     return blockDots;
   }
-
-  toTargetSlide=(event)=> {
+/* ------------------------------------- */
+/* перемотка на певний елемент при кліку на кнопку-точку */
+  toTargetSlide = event => {
     if (event.target === event.currentTarget) {
       return;
     }
-      this.position = Number(event.target.dataset.id);
-      const activeScrollLength = this.position * this.lengthToScroll;
-    this.refs.sliderList.style["transform"] = `translateX(calc(-${activeScrollLength}px))`;
+    this.position = Number(event.target.dataset.id);
+    this.scrollOnNewPosition();
     this.changeActiveDot();
     if (this.autoScrolling) {
-        clearInterval(this.intervalId);
-        this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
     }
-  }
+  };
 
   changeActiveDot() {
     if (!this.refs) {
-      return
-    };
-      const allDots = this.refs?.blockDots?.children;
-      allDots?.forEach(dot => dot.classList.remove('dot-active'));
-      const activeDot = allDots[this.position];
-      activeDot?.classList.add('dot-active');
+      return;
+    }
+    const allDots = this.refs?.blockDots?.children;
+    allDots.forEach(dotItem => dotItem.children[0].style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnColor} 0,
+          ${this.dotBtnColor} 50%,
+          transparent 50%
+        )`);
+    const activeDot = allDots[this.position];
+    activeDot.children[0].style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnActiveColor} 0,
+          ${this.dotBtnActiveColor} 50%,
+          transparent 50%
+        )`;
   }
+/* ------------------------------------- */
+  scrollOnNewPosition() {
+    const activeScrollLength = this.position * this.lengthToScroll;
+    this.refs.sliderList.style[ 'transform' ] = `translateX(calc(-${activeScrollLength}px))`;
+  }
+/* ререндер при зміні ширини екрану*/
+  setTypeOfScreen = () => {
+    const currentScreenWidth = window.innerWidth;
+    let screenType = null;
+    if (currentScreenWidth < 768) {
+      return (screenType = MOBILE);
+    }
+    if (currentScreenWidth >= 768 && currentScreenWidth <1280) {
+        return screenType  = TABLET;
+    }
+    if (currentScreenWidth >= 1280) {
+        return screenType  = DESKTOP;
+    }
+  };
+
+  checkScreenWidth = () => {
+    if (this.autoScrolling) {
+      return true;
+    }
+    const currentScreenType = this.setTypeOfScreen();
+    if (currentScreenType === this.prevScreenType) {
+      return false;
+    }
+    this.prevScreenType = currentScreenType;
+    return true;
+  };
+
+  refresh = () => {
+    if (!this.refs) {
+      return;
+    }
+    clearInterval(this.intervalId);
+    this.refs.blockDots.style['display'] = `none`;
+    this.refs.prevButton.style['display'] = `none`;
+    this.refs.nextButton.style['display'] = `none`;
+  };
 
   resizeWindowRerender = () => {
-      this.refresh();
-      this.renderSliderComponents();
-      this.position = this.slidesAmount;
-      this.slideRight();
+    const mustRerender = this.checkScreenWidth();
+    if (!mustRerender) {
+      return;
     }
+    this.refresh();
+    this.renderSliderComponents();
+    this.position = this.slidesAmount;
+    this.slideRight();
+  };
+/* ------------------------------------- */
 }
