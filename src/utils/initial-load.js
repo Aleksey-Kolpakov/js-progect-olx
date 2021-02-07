@@ -22,10 +22,8 @@ export function isUserAutorized() {
 
 isUserAutorized()
   .then(data => {
-    console.log('Рендер Юзера ');
     showMyCabinetBlock();
   })
   .catch(data => {
-    console.log('Рендер логин/Рега');
     showAuthorizationBlock();
   });
