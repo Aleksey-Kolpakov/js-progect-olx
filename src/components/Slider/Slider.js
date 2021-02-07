@@ -9,15 +9,15 @@ const { MOBILE, TABLET, DESKTOP } = {
 
 export default class Slider {
   constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', dotsVerticalPosition = '10', dotButtonColor = '#5E6671', dotButtonActiveColor = '#fff' }) {
-    this.position = 0;
     this.itemsSelector = listUlSelector;
     this.buttons = buttons;
-    this.dotsPosition = dotsVerticalPosition;
-    this.dotBtnColor = dotButtonColor;
-    this.dotBtnActiveColor = dotButtonActiveColor;
     this.autoScrolling = autoScroll;
     this.autoScrollTime = timeAutoScroll;
     this.parentBlockPadding = parentPadding;
+    this.dotsPosition = dotsVerticalPosition;
+    this.dotBtnColor = dotButtonColor;
+    this.dotBtnActiveColor = dotButtonActiveColor;
+    this.position = 0;
     this.lengthToScroll = null;
     this.slidesAmount = null;
     this.intervalId = null;
