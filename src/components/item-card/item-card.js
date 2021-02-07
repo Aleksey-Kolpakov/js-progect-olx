@@ -42,37 +42,33 @@ import {modalBackDrop} from '../../components/modal-window/modal-logic.js'
 
 
 // ================RENDER MARKUP=================
-function renderMarkup() {
-    getItembyTitle('macbook')
-        .then((data) => {
-            const dataMarkup = { ...data[0] };
-            console.log(dataMarkup);
-            dataMarkup.imageUrl = dataMarkup.imageUrls[0];
+function renderMarkup(item) {
+    item.imageUrl = item.imageUrls[0];
+    
+
             // dataMarkup.imageUrls.shift();
 
             // sectionContainer.innerHTML = '';
-            const markup = itemCardMarkup(dataMarkup);
-            
-            
+
+            const markup = itemCardMarkup(item);
+
             // new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false });
             // console.dir(window.innerWidth);
             // const screenWidth = Number(window.innerWidth)
             // if (screenWidth < 768) {
-            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
+            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
             // }
             modalBackDrop(markup);
             addAndRemoveFavorites();
             changeSmallToBigImg();
             getSalesmanInfo();
-            
-        })
-        .then((data) => {
         const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
-             new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
+             new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
             }
-    })
+
 };
+export default renderMarkup;
 // renderMarkup();
 // =======================
 
@@ -114,7 +110,7 @@ function addAndRemoveFavorites() {
  //==============INFO ABOUT SALESMAN===========
 function getSalesmanInfo() {
    const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
-    
+
     salesmanInfoBtn.addEventListener('click', event => {
         event.preventDefault();
         getUsersInfoByID("5fd26f640031930017e916a2")
