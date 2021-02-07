@@ -2,7 +2,7 @@ import { getItembyTitle } from '../../../utils/backend-services.js';
 import template from './search.hbs';
 import './search.scss';
 import '../../../main.scss';
-
+import {itemOpener} from '../../../utils/item-opener.js'
 const mainRef = document.querySelector('.js-main');
 const wrapRef = document.querySelector('.search-is-hidden');
 const searchRef = document.querySelector('.js-search');
@@ -33,4 +33,5 @@ function onSearchMarkup(data) {
   wrapRef.classList.remove('search-is-hidden');
   mainRef.innerHTML = markup;
   input.value = '';
+  itemOpener();
 }

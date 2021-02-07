@@ -236,6 +236,10 @@ export function getItembyTitle(searchQuerry) {
         },
     )
         .then(response => response.json())
+        .then(data => {
+            jsDataBase = [...jsDataBase, ...data];
+            return data;
+        })
         .catch(error => console.log(error));
 }
 

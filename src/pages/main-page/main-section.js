@@ -225,6 +225,7 @@ function onClick(event) {
       const markup = categoryMarkup(mapImg);
       mainSectionRef.innerHTML = '';
       mainSectionRef.insertAdjacentHTML('beforeend', markup);
+      itemOpener();
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
