@@ -21,28 +21,23 @@ $orange-color: #ff6b09;
   transform: translate(-50%, -50%);
 }
 
-.slider-dot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 12px;
-  height: 12px;
+.slider-dotItem {
   margin-right: 2px;
-  opacity: 0.5;
-  background-image: radial-gradient(
-    circle at center,
-    #fff 0,
-    #fff 50%,
-    transparent 50%
-  );
-
   &:last-child {
     margin-right: 0;
   }
 }
 
-.dot-active {
-  opacity: 1;
+.slider-dotBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: inherit;
 }
 
 .slider-wrap {
@@ -68,6 +63,9 @@ $orange-color: #ff6b09;
   left: -10px;
   width: 30px;
   height: 60px;
+  margin: 0;
+  padding: 0;
+  border: 0;
   background: $fourth-gray-color;
   transform: translateY(-50%);
   cursor: pointer;

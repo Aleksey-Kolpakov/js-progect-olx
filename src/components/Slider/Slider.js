@@ -8,11 +8,13 @@ const { MOBILE, TABLET, DESKTOP } = {
 }
 
 export default class Slider {
-  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', dotsVerticalPosition = '10' }) {
+  constructor({ listUlSelector, buttons = false, autoScroll = false, timeAutoScroll = 3000, parentPadding = '0', dotsVerticalPosition = '10', dotButtonColor = '#5E6671', dotButtonActiveColor = '#fff' }) {
     this.position = 0;
     this.itemsSelector = listUlSelector;
     this.buttons = buttons;
     this.dotsPosition = dotsVerticalPosition;
+    this.dotBtnColor = dotButtonColor;
+    this.dotBtnActiveColor = dotButtonActiveColor;
     this.autoScrolling = autoScroll;
     this.autoScrollTime = timeAutoScroll;
     this.parentBlockPadding = parentPadding;
@@ -51,10 +53,6 @@ export default class Slider {
     /* обгортаємо селктор цими блоками */
     refs.sliderList.parentNode.insertBefore(refs.buttonsBlock, refs.sliderList);
     refs.sliderBlock.append(refs.sliderList);
-
-    refs.blockDots = document.createElement('div');
-    refs.prevButton = document.createElement('div');
-    refs.nextButton = document.createElement('div');
 
     return refs;
   }
@@ -148,8 +146,8 @@ export default class Slider {
 
   /* ----створення кнопок вліво-вправо та кнопок-точок---- */
   createButtons() {
-    const prevButton = document.createElement('div');
-    const nextButton = document.createElement('div');
+    const prevButton = document.createElement('button');
+    const nextButton = document.createElement('button');
 
     prevButton.insertAdjacentHTML(
       'beforeend',
@@ -174,13 +172,31 @@ export default class Slider {
   createDots() {
     const dotsArray = [];
     for (let i = 0; i < this.slidesAmount; i += 1) {
-      const newDot = document.createElement('li');
-      newDot.setAttribute('data-id', i);
-      newDot.classList.add('slider-dot');
+      /* створюємо кнопку-точку і додаємо їй клас та атрибути */
+      const newDotBtn = document.createElement('button');
+      newDotBtn.classList.add('slider-dotBtn');
+      newDotBtn.style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnColor} 0,
+          ${this.dotBtnColor} 50%,
+          transparent 50%
+        )`;
+      newDotBtn.setAttribute('data-id', i);
+      newDotBtn.setAttribute('aria-label', `slide to card number ${i}`);
+      /* створюємо елемент списку і додаємо йому клас та вкладаємо до нього кнопку-точку */
+      const newDotItem = document.createElement('li');
+      newDotItem.classList.add('slider-dotItem');
+      newDotItem.append(newDotBtn);
+      /* якщо це перша кнопка, робимо її активною. Додаємо елемент списку з кнопкою в масив */
       if (i == 0) {
-        newDot.classList.add('dot-active');
+        newDotBtn.style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnActiveColor} 0,
+          ${this.dotBtnActiveColor} 50%,
+          transparent 50%
+        )`;
       }
-      dotsArray.push(newDot);
+      dotsArray.push(newDotItem);
     }
     const blockDots = document.createElement('ul');
     blockDots.addEventListener('click', this.toTargetSlide);
@@ -209,9 +225,19 @@ export default class Slider {
       return;
     }
     const allDots = this.refs?.blockDots?.children;
-    allDots?.forEach(dot => dot.classList.remove('dot-active'));
+    allDots.forEach(dotItem => dotItem.children[0].style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnColor} 0,
+          ${this.dotBtnColor} 50%,
+          transparent 50%
+        )`);
     const activeDot = allDots[this.position];
-    activeDot?.classList.add('dot-active');
+    activeDot.children[0].style['background-image'] = `radial-gradient(
+          circle at center,
+          ${this.dotBtnActiveColor} 0,
+          ${this.dotBtnActiveColor} 50%,
+          transparent 50%
+        )`;
   }
 /* ------------------------------------- */
   scrollOnNewPosition() {
