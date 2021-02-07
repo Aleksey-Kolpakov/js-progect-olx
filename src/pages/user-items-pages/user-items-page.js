@@ -1,7 +1,9 @@
 import { loginFetch } from '../../utils/backend-services';
 import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
-import favouritesHbs from '../favourites-page/templates/favourites.hbs';
-import ownItemsHbs from '../favourites-page/templates/ownItems.hbs';
+import favouritesHbs from '../user-items-pages/templates/favourites.hbs';
+import ownItemsHbs from '../user-items-pages/templates/ownItems.hbs';
+import emptyFavHbs from '../user-items-pages/templates/emptyFav.hbs';
+import emptyOwnHbs from '../user-items-pages/templates/emptyOwn.hbs';
 import {
   getUsersFavouritesByToken,
   getUsersOwnItems,
@@ -19,6 +21,11 @@ myAccountBtnRef.addEventListener('click', onClickBtnMyAccount);
 //===============================================================================//
 
 // functions
+function noContentMarkup(markUpHbs) {
+  const markup = markUpHbs();
+  mainRef.insertAdjacentHTML('beforeend', markup);
+}
+
 function updateMarkupFavouritesAll(elementsArray) {
   const checkedElementsArray = elementsArray.map(element => ({
     ...element,
@@ -50,6 +57,7 @@ function onClickBtnMyAccount() {
 
   const favProm = fetchPromiseFavourites.then(data => {
     if (data.length === 0) {
+      noContentMarkup(emptyFavHbs);
       return;
     }
     updateMarkupFavouritesWithSlider(data, favouritesHbs);
@@ -62,6 +70,7 @@ function onClickBtnMyAccount() {
 
   const ownProm = fetchPromiseFavourites.then(data => {
     if (data.length === 0) {
+      noContentMarkup(emptyOwnHbs);
       return;
     }
     updateMarkupFavouritesWithSlider(data, ownItemsHbs);
@@ -95,18 +104,3 @@ const onClickBtnSeeAll = promise => e => {
     updateMarkupFavouritesAll(data);
   });
 };
-
-// Дані тестового юзера:
-const registerData = {
-  email: 'Ruslantester@test.com',
-  password: 'qwerty123',
-};
-
-const startTestinLogin = async function () {
-  const loginData = await loginFetch({
-    email: 'Ruslantester@test.com',
-    password: 'qwerty123',
-  });
-};
-
-// startTestinLogin();
