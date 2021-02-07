@@ -2,9 +2,9 @@ import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './templates/category-items-markup.hbs';
 import categoryMarkup from './templates/categories-markup.hbs';
 import throttle from 'lodash.throttle';
-
+import {getAllCategoriesWithItemsByPages} from '../../utils/backend-services.js'
 let pageNumber = 1;
-
+import {itemOpener} from '../../utils/item-opener.js'
 const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
@@ -16,19 +16,19 @@ loadmoreBtn.addEventListener('click', loadmoreMarkup);
 window.addEventListener('scroll', throttle(listArrowBtn, 200));
 arrowUpRef.addEventListener('click', scrollToHeader);
 
-const getAllCategoriesWithItemsByPages = function (pageNumber) {
-  return fetch(
-    `https://callboard-backend.goit.global/call?page=${pageNumber}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    },
-  )
-    .then(response => response.json())
-    .catch(error => console.log(error));
-};
+// const getAllCategoriesWithItemsByPages = function (pageNumber) {
+//   return fetch(
+//     `https://callboard-backend.goit.global/call?page=${pageNumber}`,
+//     {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json; charset=UTF-8',
+//       },
+//     },
+//   )
+//     .then(response => response.json())
+//     .catch(error => console.log(error));
+// };
 function getItemsInCategory(category) {
   return fetch(
     `https://callboard-backend.goit.global/call/specific/${category}`,
@@ -79,12 +79,15 @@ function markupSections() {
           return;
         }
       });
+      itemOpener()
       return;
     }
     const values = Object.values(data);
 
     const categoryName = values.map(item => item[0].category);
     createMarkup(categoryName, data);
+    itemOpener()
+
     const sectionTittleRef = document.querySelectorAll('.section-title');
     sectionTittleRef.forEach(item => {
       if (item.textContent === 'property') {
@@ -191,7 +194,7 @@ function createMarkup(categoriesList, otherEl) {
     });
 }
 
-function markupSales() {
+export function markupSales() {
   getAllCategoriesWithItemsByPages(pageNumber).then(resp => {
     const sales = resp.sales;
     const mapSales = sales.map(element => ({
