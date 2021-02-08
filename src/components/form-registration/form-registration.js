@@ -88,9 +88,11 @@ function closeModal() {
   modalBackDrop(createMarkupReg);
   listenerReg()
 }
+export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
 
-export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
-console.log(userTokenGoogle);
+window.onload = function () {
+  userTokenGoogle &&  showMyCabinetBlock()
+}
 
 
 
