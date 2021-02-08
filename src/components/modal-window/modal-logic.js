@@ -25,11 +25,15 @@ export function modalBackDrop(template) {
     return `${template}`;
   }
 
+  const hiddenModal = document.querySelector('body');
+  hiddenModal.classList.add('hiddenModalStyle');
+
   function closeModal() {
     backDropRef.classList.remove('is-open');
     document.removeEventListener('keydown', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
     exitBtnRef.removeEventListener('click', onBtnClose);
+    hiddenModal.classList.remove('hiddenModalStyle');
   }
 
   function onBackdrop(event) {
