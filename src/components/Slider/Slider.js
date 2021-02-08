@@ -305,6 +305,9 @@ export default class Slider {
   };
 /* ------------------------------------- */
   onTouchMoveSlider = () => {
+    if (!this.refs) {
+      return;
+    }
     if ('ontouchmove' in this.refs.sliderList) {
       this.refs.sliderList.addEventListener("touchstart", (event) => this.touchStartEvent = event);
       this.refs.sliderList.addEventListener("touchend", (event) => {
