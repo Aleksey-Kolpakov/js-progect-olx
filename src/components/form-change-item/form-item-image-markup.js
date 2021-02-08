@@ -1,21 +1,58 @@
 import obj from './objectForTest';
+import { modalBackDrop } from '../modal-window/modal-logic.js';
+import formChangeItem from './form-change-item';
 
-export default function () {
-  console.log(obj.imageUrls);
+export function MarkUpFormChange() {
+  modalBackDrop(formChangeItem);
+}
+
+export function DynamicMarkUp(obj) {
   const formImgList = document.querySelector('.form__input-download');
   let allListItems = document.querySelectorAll('.download__item');
   let firstItem = document.querySelector('.start-list-item');
-  const img = obj.imageUrls;
-  // console.log(obj.imageUrls);
-  obj.imageUrls.forEach((img, i) => {
-    formImgList.insertAdjacentHTML(
-      'afterbegin',
-      `<li  class="item download__item img${i}"> <img src="${img}" data-position="${i}"  class="download__img" width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button">X</button></li > `,
-    );
-  });
+
+  // const category = document.querySelector('.category-select');
+  // console.dir(category);
+  // category.selectedIndex = 1;
+
+  if (typeof obj != 'undefined') {
+    const values = [
+      obj.title,
+      obj.description,
+      obj.category,
+      obj.price,
+      obj.phone,
+    ];
+    const formInputs = document.querySelectorAll('.form__input');
+
+    // const optionRef = document.querySelector('.meh');
+    // optionRef.select;
+    // console.dir(optionRef);
+
+    const formRef = document.querySelector('.form');
+
+    formInputs.forEach((form, i) => {
+      form.value = values[i];
+    });
+
+    obj.imageUrls.forEach((img, i) => {
+      formImgList.insertAdjacentHTML(
+        'afterbegin',
+        `<li  class="item download__item img${i}"> 
+        <img src="${img}" data-position="${i}"  class="download__img" width="78" height="50" >
+        <button data-index="${i}" type="button" class="close-image-button">
+        <svg class='item-close-button' >
+        <use href="./images/sprite/sprite.svg#icon-close">
+        </use>
+        </svg>
+        </button>
+        </li >`,
+      );
+    });
+  }
 
   formImgList.insertAdjacentHTML(
-    'beforeend',
+    'beforeend', ///--->>
     '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
   );
   // if (allListItems.length >= 5) {
@@ -32,9 +69,10 @@ export default function () {
       let allListItems = document.querySelectorAll('.download__item');
       firstItem = document.querySelector('.start-list-item');
       console.log(allImg.length + allListItems.length);
-
       if (allImg.length < 6 && allImg.length + allListItems.length <= 6) {
-        firstItem.remove();
+        if (allImg.length + allListItems.length >= 6) {
+          firstItem.remove();
+        }
         if (allImg.length === 5) {
           firstItem.remove();
         }
@@ -43,8 +81,16 @@ export default function () {
 
           reader.onloadend = () => {
             formImgList.insertAdjacentHTML(
-              'afterbegin',
-              `<li  class="item download__item img${i}"> <img src="${reader.result}" data-position="${i}"  class="download__img" width="78" height="50" ><button data-index="${i}" type="button" class="close-image-button">X</button></li > `,
+              'afterbegin', ///----->>>
+              `<li  class="item download__item img${i}"> 
+        <img src="${reader.result}" data-position="${i}"  class="download__img" width="78" height="50" >
+        <button data-index="${i}" type="button" class="close-image-button">
+        <svg class='item-close-button' >
+        <use href="./images/sprite/sprite.svg#icon-close">
+        </use>
+        </svg>
+        </button>
+        </li >`,
             );
             allListItems = document.querySelectorAll('.download__item');
           };
@@ -74,7 +120,7 @@ export default function () {
 
       if (allListItems.length < 5 && !startListItem) {
         formImgList.insertAdjacentHTML(
-          'beforeend',
+          'beforeend',////------>
           '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
         );
       }

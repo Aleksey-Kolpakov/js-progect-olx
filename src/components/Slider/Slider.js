@@ -21,10 +21,12 @@ export default class Slider {
     this.lengthToScroll = null;
     this.slidesAmount = null;
     this.intervalId = null;
+    this.touchStartEvent = null;
     this.prevScreenType = this.setTypeOfScreen();
     this.refs = this.getRefs();
     this.renderSliderComponents();
-    window.addEventListener( 'resize', throttle(this.resizeWindowRerender, 2500), );
+    this.onTouchMoveSlider();
+    window.addEventListener('resize', throttle(this.resizeWindowRerender, 2500),);
   }
 
   getRefs() {
@@ -130,8 +132,10 @@ export default class Slider {
     if (this.refs) {
       this.scrollOnNewPosition();
     }
+    this.changeActiveDot();
     if (this.autoScrolling) {
-      this.changeActiveDot();
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
     }
   };
 
@@ -141,7 +145,15 @@ export default class Slider {
     if (this.position < 0) {
       this.position = maxPosition;
     }
-    this.scrollOnNewPosition();
+    // this.scrollOnNewPosition();
+    if (this.refs) {
+      this.scrollOnNewPosition();
+    }
+    this.changeActiveDot();
+    if (this.autoScrolling) {
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
+    }
   };
 
   /* ----створення кнопок вліво-вправо та кнопок-точок---- */
@@ -291,5 +303,24 @@ export default class Slider {
     this.position = this.slidesAmount;
     this.slideRight();
   };
+/* ------------------------------------- */
+  onTouchMoveSlider = () => {
+    if (!this.refs) {
+      return;
+    }
+    if ('ontouchmove' in this.refs.sliderList) {
+      this.refs.sliderList.addEventListener("touchstart", (event) => this.touchStartEvent = event);
+      this.refs.sliderList.addEventListener("touchend", (event) => {
+        const touchMoveDelta = event.changedTouches[0].pageX - this.touchStartEvent.changedTouches[0].pageX;
+        if (touchMoveDelta > 5) {
+          this.slideLeft();
+        }
+        if (touchMoveDelta < -5) {
+          this.slideRight();
+        }
+        this.touchStartEvent = null;
+      });
+    }
+  }
 /* ------------------------------------- */
 }
