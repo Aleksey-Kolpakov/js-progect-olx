@@ -30,8 +30,8 @@
   line-height: 1.5;
   letter-spacing: 0.04em;
 
-  margin-bottom: 16px;
-  margin-bottom: 26px;
+  margin-top: 16px;
+  margin-bottom: 24px;
 
   color: $secondary-gray-color;
 }
@@ -72,6 +72,9 @@
   }
 
   &-item-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-weight: 700;
     line-height: 1.25;
     margin-top: 0;
@@ -165,7 +168,6 @@
   @include for-size(tablet) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
   }
 }
 
@@ -174,8 +176,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
   @include for-size(tablet) {
-    max-width: calc((100% - 20px) / 2);
-    width: 322px;
+    width: calc((100% - 20px) / 2);
 
     &:nth-child(odd) {
       margin-right: 20px;
@@ -183,8 +184,7 @@
   }
 
   @include for-size(desktop) {
-    max-width: calc((100% - 20px * 3) / 4);
-    width: 286px;
+    width: calc((100% - 20px * 3) / 4);
 
     &:not(:nth-child(4n)) {
       margin-right: 20px;
