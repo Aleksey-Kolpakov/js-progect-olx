@@ -20,16 +20,9 @@ export const registerUserApi = function (registerData) {
         .catch(error => console.log(error));
 };
 
-export const loginFetch = function (loginData) {
-    return fetch(`https://callboard-backend.goit.global/auth/login`, {
-        method: 'POST',
-        body: JSON.stringify(loginData),
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
+export const loginFetch = function (registerData) {
+    return axios.post('https://callboard-backend.goit.global/auth/login', registerData)
+        .then(({ data }) => {
             localStoradge.save('accessTokenOlx', data.accessToken);
             return data;
         })

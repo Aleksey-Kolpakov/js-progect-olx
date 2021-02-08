@@ -110,7 +110,7 @@ const onClickBtnSeeAll = promise => e => {
   });
 };
 
-const onClickBtnSeeAllFavourites = promise => e => {
+const onClickBtnSeeAllFavourites = promise => e => {ls
   e.preventDefault();
   promise.then(data => {
     mainRef.innerHTML = '';
