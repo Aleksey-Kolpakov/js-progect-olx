@@ -4,24 +4,24 @@ const registerData = {
 };
 
 const testUser = async function () {
-    // const regData = await registerUserApi(registerData);
-    // const loginData = await loginFetch(registerData);
+    const regData = await registerUserApi(registerData);
+    const loginData = await loginFetch(registerData);
     //addItemToFavourite(itemId)
     // getUsersFavouritesByToken
     // const data = await getAllCategoriesWithItemsByPages();
-    // const additem1 = await addItemToFavourite("5fd367626da6ab0017dbf38b");
-    // const additem2 = await addItemToFavourite("5fd38f116da6ab0017dbf588");
-    // const additem3 = await addItemToFavourite("5fda618af548230017d87c35");
+    const additem1 = await addItemToFavourite("5fd367626da6ab0017dbf38b");
+    const additem2 = await addItemToFavourite("5fd38f116da6ab0017dbf588");
+    const additem3 = await addItemToFavourite("5fda618af548230017d87c35");
     // console.log(additem3);
     // const userFavourites = await getUsersFavouritesByToken();
     // console.log(userFavourites);
-    // const deleteitem3 = await deleteItemFromFavourite('5fda618af548230017d87c35');
+    const deleteitem3 = await deleteItemFromFavourite('5fda618af548230017d87c35');
     // console.log(deleteitem3);
     // const newuserFavourites = await getUsersFavouritesByToken();
     // console.log(newuserFavourites);
 }
 
-testUser();
+// testUser();
 
 
 // BACK
@@ -36,35 +36,28 @@ import salesmaInfoMarkup from '../item-card/salesman-info-btn.hbs'
 import Slider from '../Slider/Slider.js'
 import {modalBackDrop} from '../../components/modal-window/modal-logic.js'
 
-// const sectionContainer = document.querySelector('.advertisement-card-container');
-// const exitBtn = document.querySelector('.advertisement-card-button-exit');
-
-
 
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
     item.imageUrl = item.imageUrls[0];
-    
-
             // dataMarkup.imageUrls.shift();
-
             // sectionContainer.innerHTML = '';
-
             const markup = itemCardMarkup(item);
 
-            // new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false });
-            // console.dir(window.innerWidth);
-            // const screenWidth = Number(window.innerWidth)
-            // if (screenWidth < 768) {
-            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
-            // }
             modalBackDrop(markup);
             addAndRemoveFavorites();
             changeSmallToBigImg();
             getSalesmanInfo();
-        const screenWidth = Number(window.innerWidth)
+            
+            const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
-             new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
+                new Slider({
+                    listUlSelector: ".advertisement-card-slider-list",
+                    dotsVerticalPosition: -30, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
+                    dotButtonColor: "#CDCDCD",//колір неактивних кнопок
+                    dotButtonActiveColor: "#FF6B09",//колір активної
+                });
+    
             }
 
 };
@@ -118,6 +111,7 @@ function getSalesmanInfo() {
                 const salesmanMarkup = salesmaInfoMarkup(data);
                 salesmanInfoBtn.textContent = '';
                 salesmanInfoBtn.insertAdjacentHTML('beforeend', salesmanMarkup);
+                salesmanInfoBtn.setAttribute('style', 'background-color: #f5f6fb');
             });
     });
 };
