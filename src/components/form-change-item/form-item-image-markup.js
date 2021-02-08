@@ -1,6 +1,9 @@
 import obj from './objectForTest';
+import { modalBackDrop } from '../modal-window/modal-logic.js';
+import formChangeItem from './form-change-item';
 
-export default function () {
+export default function (obj) {
+  modalBackDrop(formChangeItem);
   const formImgList = document.querySelector('.form__input-download');
   let allListItems = document.querySelectorAll('.download__item');
   let firstItem = document.querySelector('.start-list-item');
