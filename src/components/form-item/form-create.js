@@ -1,24 +1,26 @@
 import { getEnglishCategories, getRussianCategories,  createItemFetch, registerUserApi, loginFetch} from '../../utils/backend-services.js';
 import templateCategory from './category.hbs';
-
-const categoryRef = document.querySelector('#form-category');
-const form = document.querySelector('.form');
+import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 
 //------------------------------------------- ф-я загрузки категорий с бэкэнда в input
+export function addRusCategory() {
+  const categoryRef = document.querySelector('#form-category');
 
-/*getEnglishCategories().then(function (data) {
-  return console.log(data);
-});*/
-
-getRussianCategories().then(function (data) {
+  RussianCategoriesPromise.then(function (data) {
     const template = templateCategory(data);
     categoryRef.insertAdjacentHTML('beforeend', template);
     return;
-});
+  })
+}
 
-//------------------------------------------- Список доступных категорий (должно совпадать с бэкэндом)
 
-const listOfCategory = {
+
+export function sendItemOnServer() {
+  const form = document.querySelector('.form');
+
+  //------------------------------------------- Список доступных категорий (должно совпадать с бэкэндом)
+  
+  const listOfCategory = {
   "Недвижимость": "property",
   "Транспорт": "transport",
   "Работа": "work",
@@ -28,20 +30,18 @@ const listOfCategory = {
   "Отдам бесплатно": "free",
   "Обмен": "trade",
 }
-
-//-------------------------------------Переводчик категорий для отправки на бэкэнд
-
-function translator(rus, list) {
-  if (listOfCategory[rus] === undefined) {
-  console.warn('Отсутствует перевод. Отредактируйте список категорий - listOfCategory')
+  //-------------------------------------Переводчик категорий для отправки на бэкэнд
+  
+  function translator(rus, list) {
+    if (listOfCategory[rus] === undefined) {
+      console.warn('Отсутствует перевод. Отредактируйте список категорий - listOfCategory (form-create)')
+    }
+    return listOfCategory[rus];
   }
-
-  return listOfCategory[rus];
-}
-
-//------------------------------------------- ф-я сбора всех полей
-
-function formDataCollect(event) {
+  
+  //------------------------------------------- ф-я сбора всех полей
+  
+  function formDataCollect(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const submitData = {};
@@ -52,13 +52,14 @@ function formDataCollect(event) {
 
     createItemFetch(submitData);
     return submitData;
+  }
+  
+  form.addEventListener("submit", formDataCollect);
 }
-
-form.addEventListener("submit", formDataCollect);
 
 
 //-------------------------------------------------------Тестирование УДАЛИТЬ
-const testUser = async function () {
+/*const testUser = async function () {
  // const regData = await registerUserApi(registerData);
   const loginData = await loginFetch(registerData);
   return loginData;
@@ -81,4 +82,4 @@ const testItem = {
   phone: "+380673332211"
 }
 
-//reateItemFetch(testItem);
+//reateItemFetch(testItem);*/
