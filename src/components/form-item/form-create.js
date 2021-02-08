@@ -4,6 +4,8 @@ import {
   createItemFetch,
   registerUserApi,
   loginFetch,
+  getUsersOwnItems,
+  getItembyTitle,
 } from '../../utils/backend-services.js';
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
@@ -52,11 +54,42 @@ export function sendItemOnServer() {
 
     formData.forEach((value, key) => { submitData[key] = value;});
     submitData.category = translator(submitData.category, listOfCategory);
+    submitData.price = Number.parseInt(submitData.price);
+
+    /*const allImages = document.querySelectorAll('.download__img');
+    const allImagesSrc = Array.from(allImages).map(img => {
+      if (img.src.length > 10) {
+        return img.src.toString(2);
+      }
+    });
+
+    submitData.file = allImagesSrc;*/
+
+
     console.log(submitData)
 
     createItemFetch(submitData);
+
+    getItembyTitle('test2').then(data=>console.log(data));
+
     return submitData;
   }
   
   form.addEventListener("submit", formDataCollect);
 }
+
+
+const item = {
+  title: "oleg",
+  description: "хорошая",
+  category: "property",
+  price: 200,
+  phone: "+380000400000",
+  imageUrls: ["https://storage.googleapis.com/kidslikev2_bucket/053663dc-ec4e-497d-97ee-d2e9eb600573.jpg"],
+}
+ 
+createItemFetch(item).then(data => console.log(data))
+
+getItembyTitle('oleg').then(data=>console.log(data));
+
+getUsersOwnItems("oleg").then(data=>console.log(data))
