@@ -5,6 +5,10 @@ export default function () {
   let allListItems = document.querySelectorAll('.download__item');
   let firstItem = document.querySelector('.start-list-item');
 
+  // const category = document.querySelector('.category-select');
+  // console.dir(category);
+  // category.selectedIndex = 1;
+
   if (typeof obj != 'undefined') {
     const values = [
       obj.title,
@@ -15,8 +19,10 @@ export default function () {
     ];
     const formInputs = document.querySelectorAll('.form__input');
 
-    const categoryInput = document.querySelector('#input-select');
-    categoryInput.value = 'dir';
+    // const optionRef = document.querySelector('.meh');
+    // optionRef.select;
+    // console.dir(optionRef);
+
     const formRef = document.querySelector('.form');
 
     formInputs.forEach((form, i) => {

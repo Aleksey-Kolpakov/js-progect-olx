@@ -1,6 +1,4 @@
-const formChangeItem = `<div class="container__form">
-    
-
+const formChangeItem = ` <div class="container__form">
       <form class="form" autocomplete="off">
         <h3 class="form__title">Редактировать объявление</h3>
         <ul class="list form__list">
@@ -26,7 +24,11 @@ const formChangeItem = `<div class="container__form">
             <label class="form__label" for="input-select"
               >Категория товара</label
             >
-            <select class="form__input" id="input-select"></select>
+            <select class="form__input category-select" id="input-select">
+              <option class="meh" value="value" selected>Value</option>
+              <option value="starter">second Value</option>
+              <option value="value">third Value</option>
+            </select>
           </li>
           <li class="item form__item">
             <label class="form__label" for="input-number">Цена</label>
@@ -74,18 +76,6 @@ const formChangeItem = `<div class="container__form">
           </li>
         </ul>
       </form>
-    </div>
-
-    <div class="modal-wrapper">
-      <div class="back-drop">
-        <div class="modal">
-          <button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>
-        </div>
-      </div>
     </div>`;
 
 {
