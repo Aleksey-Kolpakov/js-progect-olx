@@ -59,10 +59,10 @@ function closeModal() {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
       loginFetch(submittedData).then(data => {
-        showMyCabinetBlock()
+        console.log(data);
+        showMyCabinetBlock();
+        closeModal()
       })
-      closeModal()
-      alert('Hello PES you authorization')
     };
 
     const registerUser = function () {
@@ -88,9 +88,11 @@ function closeModal() {
   modalBackDrop(createMarkupReg);
   listenerReg()
 }
+export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
 
-export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
-console.log(userTokenGoogle);
+window.onload = function () {
+  userTokenGoogle &&  showMyCabinetBlock()
+}
 
 
 
