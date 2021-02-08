@@ -21,32 +21,12 @@ export default class Slider {
     this.lengthToScroll = null;
     this.slidesAmount = null;
     this.intervalId = null;
-    this.touchEvent = null;
+    this.touchStartEvent = null;
     this.prevScreenType = this.setTypeOfScreen();
     this.refs = this.getRefs();
     this.renderSliderComponents();
+    this.onTouchMoveSlider();
     window.addEventListener('resize', throttle(this.resizeWindowRerender, 2500),);
-
-    if ('ontouchmove' in window) {
-      this.refs.sliderList.addEventListener("touchstart", (event) => {
-          this.touchEvent = event;
-      });
-      this.refs.sliderList.addEventListener("touchend", (event) => {
-        if (this.touchEvent) {
-          const touchMoveDelta = event.changedTouches[0].pageX - this.touchEvent.touches[0].pageX;
-
-          if (touchMoveDelta > 5) {
-            console.log('this.touchMoveDelta=', touchMoveDelta);
-            this.slideLeft();
-          }
-          if (touchMoveDelta < -5) {
-            console.log('touchMoveDelta=', touchMoveDelta);
-            this.slideRight();
-          }
-        }
-        this.touchEvent = null;
-      });
-    }
   }
 
   getRefs() {
@@ -323,5 +303,21 @@ export default class Slider {
     this.position = this.slidesAmount;
     this.slideRight();
   };
+/* ------------------------------------- */
+  onTouchMoveSlider = () => {
+    if ('ontouchmove' in this.refs.sliderList) {
+      this.refs.sliderList.addEventListener("touchstart", (event) => this.touchStartEvent = event);
+      this.refs.sliderList.addEventListener("touchend", (event) => {
+        const touchMoveDelta = event.changedTouches[0].pageX - this.touchStartEvent.changedTouches[0].pageX;
+        if (touchMoveDelta > 5) {
+          this.slideLeft();
+        }
+        if (touchMoveDelta < -5) {
+          this.slideRight();
+        }
+        this.touchStartEvent = null;
+      });
+    }
+  }
 /* ------------------------------------- */
 }
