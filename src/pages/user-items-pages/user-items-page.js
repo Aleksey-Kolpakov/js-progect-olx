@@ -1,5 +1,6 @@
 import { loginFetch } from '../../utils/backend-services';
-import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
+// import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
+import EdikMarkUpHbs from '../user-items-pages/templates/categories-markup.hbs';
 import favouritesHbs from '../user-items-pages/templates/favourites.hbs';
 import ownItemsHbs from '../user-items-pages/templates/ownItems.hbs';
 import emptyFavHbs from '../user-items-pages/templates/emptyFav.hbs';
