@@ -85,7 +85,7 @@ function onClickBtnMyAccount() {
 
   Promise.all([favProm, ownProm]).then(([favProm, ownProm]) => {
     if (favProm === false) {
-      noContentMarkup(emptyOwnHbs);
+      noContentMarkup(emptyFavHbs);
     }
     if (ownProm === false) {
       noContentMarkup(emptyOwnHbs);
