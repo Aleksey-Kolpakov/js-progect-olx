@@ -1,7 +1,7 @@
 import { jsDataBase } from './backend-services.js';
 import { markupSales } from '../pages/main-page/main-section.js';
 import createItemModal from '../components/item-card/item-card.js';
-import ownItemChange from '../components/form-change-item/form-change-item.js';
+import { MarkUpFormChange, DynamicMarkUp } from '../components/form-change-item/form-item-image-markup.js';
 
 export const itemOpener = function (
   selector = '.js-item-container',
@@ -22,7 +22,9 @@ function openItemModal(event) {
 
 export function openChangeOwnItemModal(event) {
   const itemData = findItemData(event);
-  ownItemChange(itemData);
+  // ownItemChange(itemData);
+  MarkUpFormChange();
+  DynamicMarkUp(itemData)
 }
 
 function findItemData(event) {
