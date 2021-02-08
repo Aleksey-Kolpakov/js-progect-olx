@@ -57,8 +57,7 @@ function renderMarkup(item) {
             // if (screenWidth < 768) {
             //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
             // }
-    
-    
+
             const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
                 new Slider({
@@ -129,6 +128,7 @@ function getSalesmanInfo() {
                 const salesmanMarkup = salesmaInfoMarkup(data);
                 salesmanInfoBtn.textContent = '';
                 salesmanInfoBtn.insertAdjacentHTML('beforeend', salesmanMarkup);
+                salesmanInfoBtn.setAttribute('style', 'background-color: #f5f6fb');
             });
     });
 };
