@@ -84,7 +84,7 @@ function closeModal() {
            closeModal()
       })
     };
-    
+
     authRefs.registerAccountBtn.addEventListener('click', registerUser);
     authRefs.enterAccountBtn.addEventListener('click', loginUser);
     authRefs.showPass.addEventListener('click', function (event) {
@@ -103,7 +103,6 @@ function closeModal() {
   listenerReg()
 }
 export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
-
 window.onload = function () {
   userTokenGoogle &&  showMyCabinetBlock()
 }
