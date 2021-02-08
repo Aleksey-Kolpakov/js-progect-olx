@@ -220,7 +220,8 @@ function onClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     const currentSection = event.target.dataset.title;
-    history.pushState(null, null, currentSection.trim());
+       
+    history.pushState(null, null, currentSection.replace(/ /g,"-"));
     getItemsInCategory(currentSection).then(resp => {
       const mapImg = resp.map(item => ({
         ...item,
