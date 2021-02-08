@@ -231,10 +231,7 @@
 }
 
 .arrow-up {
-  position: fixed;
   opacity: 0;
-  right: 2%;
-  bottom: 5%;
 
   fill: $orange-color;
   transform: translateY(50%);
@@ -250,6 +247,15 @@
       transform: scale(1.2);
     }
   }
+}
+
+.arrow-up-btn {
+  position: fixed;
+  border: none;
+  padding: 0;
+  right: 2%;
+  bottom: 5%;
+  background-color: inherit;
 
   @include for-size(mobile) {
     width: 40px;
@@ -265,9 +271,4 @@
     width: 70px;
     height: 70px;
   }
-}
-
-.arrow-up-btn {
-  width: 100%;
-  background-color: inherit;
 }
