@@ -62,14 +62,31 @@ function closeModal() {
         console.log(data);
         showMyCabinetBlock();
         closeModal()
+        alert('vu uspeno avtorezirovanu')
+      }).catch(error => {
+        console.log(error);
+        alert('ne vernui parol')
+          closeModal()
       })
     };
 
     const registerUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
-      registerUserApi(submittedData);
+      registerUserApi(submittedData).then(data => {
+        console.log(data)
+        showMyCabinetBlock();
+        closeModal()
+        alert('вы успешно зарегестрированы!')
+      }).catch(error => {
+        console.log(error);
+        alert('takoi email suwestvuet')
+           closeModal()
+      })
     };
+
+
+
 
     authRefs.registerAccountBtn.addEventListener('click', registerUser);
     authRefs.enterAccountBtn.addEventListener('click', loginUser);
