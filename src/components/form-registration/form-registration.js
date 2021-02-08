@@ -59,10 +59,10 @@ function closeModal() {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
       loginFetch(submittedData).then(data => {
-        showMyCabinetBlock()
+        console.log(data);
+        showMyCabinetBlock();
+        closeModal()
       })
-      closeModal()
-      alert('Hello PES you authorization')
     };
 
     const registerUser = function () {
