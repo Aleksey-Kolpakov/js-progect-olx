@@ -21,10 +21,32 @@ export default class Slider {
     this.lengthToScroll = null;
     this.slidesAmount = null;
     this.intervalId = null;
+    this.touchEvent = null;
     this.prevScreenType = this.setTypeOfScreen();
     this.refs = this.getRefs();
     this.renderSliderComponents();
-    window.addEventListener( 'resize', throttle(this.resizeWindowRerender, 2500), );
+    window.addEventListener('resize', throttle(this.resizeWindowRerender, 2500),);
+
+    if ('ontouchmove' in window) {
+      this.refs.sliderList.addEventListener("touchstart", (event) => {
+          this.touchEvent = event;
+      });
+      this.refs.sliderList.addEventListener("touchend", (event) => {
+        if (this.touchEvent) {
+          const touchMoveDelta = event.changedTouches[0].pageX - this.touchEvent.touches[0].pageX;
+
+          if (touchMoveDelta > 5) {
+            console.log('this.touchMoveDelta=', touchMoveDelta);
+            this.slideLeft();
+          }
+          if (touchMoveDelta < -5) {
+            console.log('touchMoveDelta=', touchMoveDelta);
+            this.slideRight();
+          }
+        }
+        this.touchEvent = null;
+      });
+    }
   }
 
   getRefs() {
@@ -130,8 +152,10 @@ export default class Slider {
     if (this.refs) {
       this.scrollOnNewPosition();
     }
+    this.changeActiveDot();
     if (this.autoScrolling) {
-      this.changeActiveDot();
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
     }
   };
 
@@ -141,7 +165,15 @@ export default class Slider {
     if (this.position < 0) {
       this.position = maxPosition;
     }
-    this.scrollOnNewPosition();
+    // this.scrollOnNewPosition();
+    if (this.refs) {
+      this.scrollOnNewPosition();
+    }
+    this.changeActiveDot();
+    if (this.autoScrolling) {
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.slideRight, this.autoScrollTime);
+    }
   };
 
   /* ----створення кнопок вліво-вправо та кнопок-точок---- */
