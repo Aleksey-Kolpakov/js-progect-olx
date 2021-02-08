@@ -18,9 +18,9 @@
             </div>
 
             <div class="advertisement-card-small-photo">
-                <ul class="advertisement-card-slider-list ">
+                <ul class="advertisement-card-slider-list js-item-container">
                     {{#each imageUrls}}
-                    <li class="advertisement-card-slider-list-item">
+                    <li class="advertisement-card-slider-list-item" data-id="{{_id}}">
                         <img class="small-photos" src="{{this}}" alt="{{title}}">
                     </li>
                     {{/each}}

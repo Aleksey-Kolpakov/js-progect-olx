@@ -4,24 +4,24 @@ const registerData = {
 };
 
 const testUser = async function () {
-    // const regData = await registerUserApi(registerData);
-    // const loginData = await loginFetch(registerData);
+    const regData = await registerUserApi(registerData);
+    const loginData = await loginFetch(registerData);
     //addItemToFavourite(itemId)
     // getUsersFavouritesByToken
     // const data = await getAllCategoriesWithItemsByPages();
-    // const additem1 = await addItemToFavourite("5fd367626da6ab0017dbf38b");
-    // const additem2 = await addItemToFavourite("5fd38f116da6ab0017dbf588");
-    // const additem3 = await addItemToFavourite("5fda618af548230017d87c35");
+    const additem1 = await addItemToFavourite("5fd367626da6ab0017dbf38b");
+    const additem2 = await addItemToFavourite("5fd38f116da6ab0017dbf588");
+    const additem3 = await addItemToFavourite("5fda618af548230017d87c35");
     // console.log(additem3);
     // const userFavourites = await getUsersFavouritesByToken();
     // console.log(userFavourites);
-    // const deleteitem3 = await deleteItemFromFavourite('5fda618af548230017d87c35');
+    const deleteitem3 = await deleteItemFromFavourite('5fda618af548230017d87c35');
     // console.log(deleteitem3);
     // const newuserFavourites = await getUsersFavouritesByToken();
     // console.log(newuserFavourites);
 }
 
-testUser();
+// testUser();
 
 
 // BACK
@@ -46,7 +46,7 @@ function renderMarkup() {
     getItembyTitle('macbook')
         .then((data) => {
             const dataMarkup = { ...data[0] };
-            console.log(dataMarkup);
+            // console.log(dataMarkup);
             dataMarkup.imageUrl = dataMarkup.imageUrls[0];
             // dataMarkup.imageUrls.shift();
 
