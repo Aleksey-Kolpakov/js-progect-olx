@@ -126,7 +126,7 @@ header {
   border: none;
 
   @include for-size(mobile-only) {
-    border: 1px solid $main-gray-color;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
 
     width: 285px;
     height: 44px;
@@ -464,7 +464,7 @@ header {
     bottom: 0;
     left: 0;
 
-    opacity: 0;
+    opacity: 0; // инлайново в html прописал стили
     pointer-events: none;
     transition: 200ms opacity linear;
 
@@ -472,7 +472,7 @@ header {
     backdrop-filter: blur(2px);
 
     &.is-open {
-      opacity: 1;
+      opacity: 1; // инлайново в html прописал стили
       pointer-events: auto;
       // display: block;
     }
