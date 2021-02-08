@@ -1,13 +1,5 @@
 .section-category {
   margin-top: 40px;
-  & .slider-dot {
-    background-image: radial-gradient(
-      circle at center,
-      $orange-color 0,
-      #fff 50%,
-      transparent 50%
-    );
-  }
 }
 
 .section-title {
@@ -38,7 +30,6 @@
 
 .section-gallery {
   padding-left: 0;
-  text-align: center;
   margin-top: 0;
 
   margin-bottom: 0;
@@ -52,6 +43,7 @@
 
   &-item {
     background-color: $white-color;
+    text-align: center;
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
 
     @include for-size(mobile) {
@@ -239,10 +231,7 @@
 }
 
 .arrow-up {
-  position: fixed;
   opacity: 0;
-  right: 2%;
-  bottom: 5%;
 
   fill: $orange-color;
   transform: translateY(50%);
@@ -258,6 +247,15 @@
       transform: scale(1.2);
     }
   }
+}
+
+.arrow-up-btn {
+  position: fixed;
+  border: none;
+  padding: 0;
+  right: 2%;
+  bottom: 5%;
+  background-color: inherit;
 
   @include for-size(mobile) {
     width: 40px;

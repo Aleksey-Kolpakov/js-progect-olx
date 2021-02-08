@@ -42,37 +42,44 @@ import {modalBackDrop} from '../../components/modal-window/modal-logic.js'
 
 
 // ================RENDER MARKUP=================
-function renderMarkup() {
-    getItembyTitle('macbook')
-        .then((data) => {
-            const dataMarkup = { ...data[0] };
-            // console.log(dataMarkup);
-            dataMarkup.imageUrl = dataMarkup.imageUrls[0];
+function renderMarkup(item) {
+    item.imageUrl = item.imageUrls[0];
             // dataMarkup.imageUrls.shift();
-
             // sectionContainer.innerHTML = '';
-            const markup = itemCardMarkup(dataMarkup);
-            
-            
-            // new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false });
-            // console.dir(window.innerWidth);
-            // const screenWidth = Number(window.innerWidth)
-            // if (screenWidth < 768) {
-            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
-            // }
+            const markup = itemCardMarkup(item);
+
             modalBackDrop(markup);
             addAndRemoveFavorites();
             changeSmallToBigImg();
             getSalesmanInfo();
             
-        })
-        .then((data) => {
-        const screenWidth = Number(window.innerWidth)
+            // const screenWidth = Number(window.innerWidth)
+            // if (screenWidth < 768) {
+            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
+            // }
+    
+    
+            const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
-             new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});   
+                new Slider({
+                    listUlSelector: ".advertisement-card-slider-list",
+                    dotsVerticalPosition: -30, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
+                    dotButtonColor: "#CDCDCD",//колір неактивних кнопок
+                    dotButtonActiveColor: "#FF6B09",//колір активної
+                });
+    
             }
-    })
+    // new Slider({
+    //   listUlSelector: ".advertisement-card-slider-list",
+    //   dotsVerticalPosition: -30, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
+    //   dotButtonColor: "#CDCDCD",//колір неактивних кнопок
+    //   dotButtonActiveColor: "#FF6B09",//колір активної
+    // });
+    
+    
+
 };
+export default renderMarkup;
 // renderMarkup();
 // =======================
 
@@ -114,7 +121,7 @@ function addAndRemoveFavorites() {
  //==============INFO ABOUT SALESMAN===========
 function getSalesmanInfo() {
    const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
-    
+
     salesmanInfoBtn.addEventListener('click', event => {
         event.preventDefault();
         getUsersInfoByID("5fd26f640031930017e916a2")

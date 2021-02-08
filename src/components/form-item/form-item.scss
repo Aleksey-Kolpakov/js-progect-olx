@@ -1,8 +1,11 @@
 // ----------------------------------------------MIXIN
 @mixin for-form($range) {
-  $mobile: 290px;
-  $tablet: 724px;
-  $desktop: 950px;
+  $mobile: 320px;
+  $tablet: 768px;
+  $desktop: 1280px;
+  // $mobile: 290px;
+  // $tablet: 724px;
+  // $desktop: 950px;
 
   @if $range == mobile-only {
     @media (max-width: #{$tablet - 1}) {
@@ -28,12 +31,12 @@
 }
 
 // ----------------------------------------------Container
-.container__form {
+.form {
   background: #ffffff;
 
   position: relative;
   @include for-form(mobile) {
-    width: 290px;
+    // width: 290px;
     padding-left: 20px;
     padding-right: 20px;
     //padding-top: 54px;
@@ -155,7 +158,8 @@
   }
 
   @include for-form(desktop) {
-    width: 610px;
+    width: 500px;
+    // width: 610px;
     height: 58px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -403,11 +407,32 @@ textarea {
 }
 
 .close-image-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   z-index: 10;
   right: 0;
   top: 0;
-  width: 5px;
-  height: 10px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #fff;
+}
+
+.close-image-button :focus,
+.close-image-button :hover {
+  fill: orange;
+  cursor: pointer;
+}
+.item-close-button {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  pointer-events: none;
 }
