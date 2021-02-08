@@ -4,20 +4,19 @@ export let jsDataBase = [];
 let pageNumber = 1;
 let id = '6018c8769dfece51e3667546';
 export const getHeroAds = function () {
-  return axios
-    .get('https://callboard-backend.goit.global/call/ads')
-    .then(({ data }) => data)
-    .catch(error => error);
+    return axios
+        .get('https://callboard-backend.goit.global/call/ads')
+        .then(({ data }) => data)
+        .catch(error => error);
 };
-const registerData = {
-    email: 'testwwerdfcwq@test.com',
-    password: 'qwerty123',
-};
+// const registerData = {
+//     email: 'testwwerdfcwq@test.com',
+//     password: 'qwerty123',
+// };
 export const registerUserApi = function (registerData) {
     return axios
         .post('https://callboard-backend.goit.global/auth/register', registerData)
         .then(({ data }) => data)
-        .catch(error => console.log(error));
 };
 
 export const loginFetch = function (loginData) {
@@ -33,7 +32,6 @@ export const loginFetch = function (loginData) {
             localStoradge.save('accessTokenOlx', data.accessToken);
             return data;
         })
-        .catch(error => console.log(error));
 };
 // loginFetch(registerData).then(data => {
 //   console.log(data);
