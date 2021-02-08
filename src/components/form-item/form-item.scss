@@ -1,8 +1,11 @@
 // ----------------------------------------------MIXIN
 @mixin for-form($range) {
-  $mobile: 290px;
-  $tablet: 724px;
-  $desktop: 950px;
+  $mobile: 320px;
+  $tablet: 768px;
+  $desktop: 1280px;
+  // $mobile: 290px;
+  // $tablet: 724px;
+  // $desktop: 950px;
 
   @if $range == mobile-only {
     @media (max-width: #{$tablet - 1}) {
@@ -28,12 +31,12 @@
 }
 
 // ----------------------------------------------Container
-.container__form {
+.form {
   background: #ffffff;
 
   position: relative;
   @include for-form(mobile) {
-    width: 290px;
+    // width: 290px;
     padding-left: 20px;
     padding-right: 20px;
     //padding-top: 54px;
@@ -155,7 +158,8 @@
   }
 
   @include for-form(desktop) {
-    width: 610px;
+    width: 500px;
+    // width: 610px;
     height: 58px;
     margin-top: 10px;
     margin-bottom: 10px;
