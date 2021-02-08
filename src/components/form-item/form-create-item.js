@@ -1,5 +1,5 @@
 import { modalBackDrop } from '../modal-window/modal-logic.js';
-import fnDownloadPhoto from '../form-change-item/form-item-image-markup';
+import { DynamicMarkUp } from '../form-change-item/form-item-image-markup';
 
 const formCreate = `<form class="form" autocomplete="off">
   <h3 class="form__title">Создать объявление</h3>
@@ -46,7 +46,7 @@ function funModalBackDrop() { modalBackDrop(formCreate) };*/
 
 function openModalAddItem() {
   const tempale = modalBackDrop(formCreate);
-  fnDownloadPhoto();
+  DynamicMarkUp();
 }
 
 export { openModalAddItem };

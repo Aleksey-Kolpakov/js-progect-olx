@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.hiddenModalStyle {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 .back-drop {
   position: fixed;
   top: 0;
@@ -13,7 +17,7 @@
   opacity: 0;
   visibility: hidden;
   background-color: rgba(0, 0, 0, 0.7);
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
@@ -24,11 +28,11 @@
   left: 50%;
 
   transform: translate(-50%, -50%);
-  max-width: 650px;
-  width: 100%;
-  @include for-size(mobile-only) {
-    max-width: 290px;
-  }
+  // max-width: 650px;
+  // width: 100%;
+  // @include for-size(mobile-only) {
+  //   max-width: 290px;
+  // }
 }
 
 .is-open {
@@ -43,6 +47,7 @@
   right: 0;
   margin-top: 30px;
   margin-right: 29px;
+  z-index: 9999;
 
   border: none;
   background-color: inherit;
