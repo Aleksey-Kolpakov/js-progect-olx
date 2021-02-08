@@ -1,15 +1,4 @@
 <div class="container__form">
-  <button class="button-close" type="button" data-action="close">
-    <svg
-      class="button-close__icon"
-      width="24"
-      height="24"
-      aria-label="Закрытие модального окна"
-    >
-      <use href="./images/sprite/sprite.svg#icon-close"></use>
-    </svg>
-  </button>
-
   <form class="form" autocomplete="off">
     <h3 class="form__title">Редактировать объявление</h3>
     <ul class="list form__list">
@@ -41,11 +30,17 @@
       <li class="item form__item">
         <label class="form__label" for="input-tel">Телефон</label>
         <input
-          class="form__input"
+          pattern="\+3\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+          minlength="13"
+          maxlength="13"
+          class="form__input valid"
           type="tel"
           placeholder="+38 (0--) --- -- --"
           for="input-tel"
         />
+        <span class="form__error"
+          >Это поле должно содержать телефон в формате +38073737300</span
+        >
       </li>
       <li class="item form__item-delete">
         <button class="button-delete" type="click" data-action="delete">
@@ -69,4 +64,16 @@
       </li>
     </ul>
   </form>
+</div>
+
+<div class="modal-wrapper">
+  <div class="back-drop">
+    <div class="modal">
+      <button class="exit-btn-escape">
+        <svg class="exit-svg">
+          <use href="./images/sprite/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
 </div>

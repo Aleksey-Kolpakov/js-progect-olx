@@ -23,6 +23,8 @@ const refs = {
   headerForm: document.querySelector('.header-form'),
   headerInput: document.querySelector('.header-input'),
   headerInputSearchIcon: document.querySelector('.header-input-search-icon'),
+
+  mainSection: document.querySelector('.main-section'),
 };
 
 export default refs;
