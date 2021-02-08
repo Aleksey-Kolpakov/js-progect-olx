@@ -35,8 +35,7 @@ const formCreate = `<form class="form" autocomplete="off">
       <button class="button-submit" type="submit" data-action="submit">Добавить</button>
     </li>
   </ul>
-</form>`
-
+</form>`;
 
 /*const formCreateRef = document.querySelector(".create-ad-button");
 formCreateRef.addEventListener('click', funModalBackDrop);
@@ -46,9 +45,8 @@ function funModalBackDrop() { modalBackDrop(formCreate) };*/
 // formCreateRef.addEventListener('click', openModalAddItem);
 
 function openModalAddItem() {
-  const tempale = modalBackDrop(formCreate)
-  fnDownloadPhoto();
   const tempale = modalBackDrop(formCreate);
+  fnDownloadPhoto();
 }
 
 export { openModalAddItem };
