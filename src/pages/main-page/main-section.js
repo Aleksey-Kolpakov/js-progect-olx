@@ -184,6 +184,8 @@ function createMarkup(categoriesList, otherEl) {
       listUlSelector: section,
       buttons: true,
       parentPadding: '5px 2px',
+      dotButtonColor: '#CDCDCD',
+      dotButtonActiveColor: '#FF6B09',
     });
   });
 
@@ -207,6 +209,8 @@ export function markupSales() {
       listUlSelector: '.section-gallery',
       buttons: true,
       parentPadding: '5px 2px',
+      dotButtonColor: '#CDCDCD',
+      dotButtonActiveColor: '#FF6B09',
     });
   });
   markupSections();

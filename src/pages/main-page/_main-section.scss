@@ -1,13 +1,5 @@
 .section-category {
   margin-top: 40px;
-  & .slider-dot {
-    background-image: radial-gradient(
-      circle at center,
-      $orange-color 0,
-      #fff 50%,
-      transparent 50%
-    );
-  }
 }
 
 .section-title {
