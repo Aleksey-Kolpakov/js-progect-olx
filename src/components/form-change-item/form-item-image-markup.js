@@ -46,7 +46,7 @@ export default function () {
   }
 
   formImgList.insertAdjacentHTML(
-    'beforeend',
+    'beforeend', ///--->>
     '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
   );
   // if (allListItems.length >= 5) {
@@ -75,7 +75,7 @@ export default function () {
 
           reader.onloadend = () => {
             formImgList.insertAdjacentHTML(
-              'afterbegin',
+              'afterbegin', ///----->>>
               `<li  class="item download__item img${i}"> 
         <img src="${reader.result}" data-position="${i}"  class="download__img" width="78" height="50" >
         <button data-index="${i}" type="button" class="close-image-button">
@@ -114,7 +114,7 @@ export default function () {
 
       if (allListItems.length < 5 && !startListItem) {
         formImgList.insertAdjacentHTML(
-          'beforeend',
+          'beforeend',////------>
           '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
         );
       }
