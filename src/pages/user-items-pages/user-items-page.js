@@ -1,5 +1,6 @@
-import { loginFetch } from '../../utils/backend-services';
-import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
+// import { loginFetch } from '../../utils/backend-services';
+// import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
+import EdikMarkUpHbs from '../user-items-pages/templates/categories-markup.hbs';
 import favouritesHbs from '../user-items-pages/templates/favourites.hbs';
 import ownItemsHbs from '../user-items-pages/templates/ownItems.hbs';
 import emptyFavHbs from '../user-items-pages/templates/emptyFav.hbs';
@@ -9,6 +10,7 @@ import {
   getUsersOwnItems,
 } from '../../utils/backend-services';
 import Slider from '../../components/Slider';
+import { itemOpener, openChangeOwnItemModal } from '../../utils/item-opener';
 // ===============================================================================//
 // refs
 const mainRef = document.querySelector('main');
@@ -64,8 +66,9 @@ function onClickBtnMyAccount() {
     const seeAllBtnRef = document.querySelector('.favourites');
     seeAllBtnRef.addEventListener(
       'click',
-      onClickBtnSeeAll(fetchPromiseFavourites),
+      onClickBtnSeeAllFavourites(fetchPromiseFavourites),
     );
+    itemOpener();
   });
 
   const ownProm = fetchPromiseFavourites.then(data => {
@@ -79,6 +82,7 @@ function onClickBtnMyAccount() {
       'click',
       onClickBtnSeeAll(fetchPromiseFavourites),
     );
+    itemOpener('[data-items="own"]', openChangeOwnItemModal);
   });
 
   Promise.all([favProm, ownProm]).then(() => {
@@ -102,5 +106,17 @@ const onClickBtnSeeAll = promise => e => {
   promise.then(data => {
     mainRef.innerHTML = '';
     updateMarkupFavouritesAll(data);
+    itemOpener('[data-items="own"]', openChangeOwnItemModal);
+  });
+};
+
+const onClickBtnSeeAllFavourites = promise => e => {
+  e.preventDefault();
+  promise.then(data => {
+    mainRef.innerHTML = '';
+    updateMarkupFavouritesAll(data);
+    const ulContainerRef = document.querySelector('[data-items="own"]');
+    ulContainerRef.dataset.items = '';
+    itemOpener();
   });
 };
