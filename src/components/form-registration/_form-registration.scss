@@ -1,6 +1,7 @@
 .registrationForm {
   width: 260px;
   margin: 0 auto;
+  padding: 0px 19px 0px 19px;
   @include for-size(tablet) {
     width: 427px;
   }
@@ -34,7 +35,7 @@ font-weight: 500;
 
 .reg-aut-btn .enterAccount {
   margin-top: 30px;
-  width: 120px;
+  width: 107px;
   height: 50px;
   background-color:$orange-color;
   border: none;
@@ -43,7 +44,7 @@ font-weight: 500;
   transition: 0.3s;
   margin-bottom: 47px;
   @include for-size(tablet) {
-    width: 203px;
+    width: 180px;
     height: 60px;
     margin-bottom: 50px;
   }
@@ -52,7 +53,7 @@ font-weight: 500;
 .reg-aut-btn .registerAccount {
   margin-top: 30px;
   background-color: #ffffff;;
-  width: 120px;
+  width: 107px;
   height: 50px;
   border: none;
   border: 1px solid #BBBBBB;
@@ -60,7 +61,7 @@ font-weight: 500;
   transition: 0.3s;
   margin-bottom: 47px;
   @include for-size(tablet) {
-    width: 203px;
+    width: 180px;
     height: 60px;
     margin-bottom: 50px;
   }

@@ -1,4 +1,10 @@
-import { getEnglishCategories, getRussianCategories,  createItemFetch, registerUserApi, loginFetch} from '../../utils/backend-services.js';
+import {
+  getEnglishCategories,
+  getRussianCategories,
+  createItemFetch,
+  registerUserApi,
+  loginFetch,
+} from '../../utils/backend-services.js';
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 
@@ -12,8 +18,6 @@ export function addRusCategory() {
     return;
   })
 }
-
-
 
 export function sendItemOnServer() {
   const form = document.querySelector('.form');
@@ -56,30 +60,3 @@ export function sendItemOnServer() {
   
   form.addEventListener("submit", formDataCollect);
 }
-
-
-//-------------------------------------------------------Тестирование УДАЛИТЬ
-/*const testUser = async function () {
- // const regData = await registerUserApi(registerData);
-  const loginData = await loginFetch(registerData);
-  return loginData;
-}
-
-const registerData = {
-  email: 'testwwehnjuq@test.com',
-  password: 'qwerty123',
-};
-
-//testUser(registerData).then(data=>console.log(data));
-//createItemFetch(submitData).then(data=>console.log(data));
-
-const testItem = {
-  title: "Курточка", 
-  file: "@_pigment_file.jpg;type=image/jpeg",
-  description: "Хорошо", 
-  category: "property", 
-  price: "200",
-  phone: "+380673332211"
-}
-
-//reateItemFetch(testItem);*/

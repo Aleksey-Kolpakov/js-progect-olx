@@ -20,10 +20,10 @@ function onFilterButtonClick(event) {
       const index = array.indexOf(event.target.textContent.trim()); // trim() - убирает отступы справа и слева (текстовые узлы)
 
       EnglishCategoriesPromise.then(array => {
-        console.log(array[index]);
+        // console.log(array[index]);
 
         getItemsInCategory(array[index]).then(array => {
-          console.log(array);
+          // console.log(array);
           const mappedArray = array.map(item => ({
             ...item,
             imageUrls: item.imageUrls[0],
