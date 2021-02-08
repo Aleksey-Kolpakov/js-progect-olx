@@ -1,8 +1,8 @@
 import { modalBackDrop } from '../modal-window/modal-logic.js';
+import fnDownloadPhoto from '../form-change-item/form-item-image-markup';
 
-const formCreate = `<div class="container__form">
-<form class="form" autocomplete="off">
-  <h3 class="form__title">Редактировать объявление</h3>
+const formCreate = `<form class="form" autocomplete="off">
+  <h3 class="form__title">Создать объявление</h3>
   <ul class="list form__list">
     <li class="item form__item">
       <label class="form__label" for="input-text">Название товара</label>
@@ -10,6 +10,8 @@ const formCreate = `<div class="container__form">
     </li>
     <li class="item form__item">
       <p class="form__label-text">Фото</p>
+      <ul class="form__input-download">
+      </ul>
     </li>
     <li class="item form__item">
       <label class="form__label" for="input-textarea">Описание товара</label>
@@ -29,21 +31,11 @@ const formCreate = `<div class="container__form">
       <label class="form__label" for="input-tel">Телефон</label>
       <input class="form__input" type="tel" placeholder="+38 (0--) --- -- --" for="input-tel" name="phone">
     </li>
-    <li class="item form__item-delete">
-      <button class="button-delete" type="click" data-action="delete">
-        <span class="button-delete__span">
-          <svg class="button-delete__icon" width="13" height="14" aria-label="Удалить объявление">
-            <use href="./images/sprite/sprite.svg#icon-file"></use>
-          </svg>
-        </span>
-        Удалить объявление</button>
-    </li>
     <li class="item form__item-submit">
       <button class="button-submit" type="submit" data-action="submit">Добавить</button>
     </li>
   </ul>
-</form>
-</div>`;
+</form>`;
 
 /*const formCreateRef = document.querySelector(".create-ad-button");
 formCreateRef.addEventListener('click', funModalBackDrop);
@@ -54,6 +46,7 @@ function funModalBackDrop() { modalBackDrop(formCreate) };*/
 
 function openModalAddItem() {
   const tempale = modalBackDrop(formCreate);
+  fnDownloadPhoto();
 }
 
 export { openModalAddItem };
