@@ -36,10 +36,6 @@ import salesmaInfoMarkup from '../item-card/salesman-info-btn.hbs'
 import Slider from '../Slider/Slider.js'
 import {modalBackDrop} from '../../components/modal-window/modal-logic.js'
 
-// const sectionContainer = document.querySelector('.advertisement-card-container');
-// const exitBtn = document.querySelector('.advertisement-card-button-exit');
-
-
 
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
@@ -53,11 +49,6 @@ function renderMarkup(item) {
             changeSmallToBigImg();
             getSalesmanInfo();
             
-            // const screenWidth = Number(window.innerWidth)
-            // if (screenWidth < 768) {
-            //  new Slider({ listUlSelector: '.advertisement-card-slider-list', buttons: false , dots:true});
-            // }
-
             const screenWidth = Number(window.innerWidth)
             if (screenWidth < 768) {
                 new Slider({
@@ -68,14 +59,6 @@ function renderMarkup(item) {
                 });
     
             }
-    // new Slider({
-    //   listUlSelector: ".advertisement-card-slider-list",
-    //   dotsVerticalPosition: -30, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
-    //   dotButtonColor: "#CDCDCD",//колір неактивних кнопок
-    //   dotButtonActiveColor: "#FF6B09",//колір активної
-    // });
-    
-    
 
 };
 export default renderMarkup;
