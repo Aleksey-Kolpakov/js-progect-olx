@@ -17,7 +17,7 @@ export function modalBackDrop(template) {
 
   exitBtnRef.addEventListener('click', onBtnClose);
   backDropRef.addEventListener('click', onBackdrop);
-  document.addEventListener('keydown', onBtnPress);
+  document.addEventListener('click', onBtnPress);
 
   modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
 
@@ -30,7 +30,7 @@ export function modalBackDrop(template) {
 
   function closeModal() {
     backDropRef.classList.remove('is-open');
-    document.removeEventListener('keydown', onBtnPress);
+    document.removeEventListener('click', onBtnPress);
     backDropRef.removeEventListener('click', onBackdrop);
     exitBtnRef.removeEventListener('click', onBtnClose);
     hiddenModal.classList.remove('hiddenModalStyle');
