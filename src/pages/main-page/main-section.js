@@ -2,9 +2,9 @@ import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './templates/category-items-markup.hbs';
 import categoryMarkup from './templates/categories-markup.hbs';
 import throttle from 'lodash.throttle';
-import {getAllCategoriesWithItemsByPages} from '../../utils/backend-services.js'
+import { getAllCategoriesWithItemsByPages } from '../../utils/backend-services.js';
 let pageNumber = 1;
-import {itemOpener} from '../../utils/item-opener.js'
+import { itemOpener } from '../../utils/item-opener.js';
 const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
@@ -79,14 +79,14 @@ function markupSections() {
           return;
         }
       });
-      itemOpener()
+      itemOpener();
       return;
     }
     const values = Object.values(data);
 
     const categoryName = values.map(item => item[0].category);
     createMarkup(categoryName, data);
-    itemOpener()
+    itemOpener();
 
     const sectionTittleRef = document.querySelectorAll('.section-title');
     sectionTittleRef.forEach(item => {
@@ -177,9 +177,9 @@ function createMarkup(categoriesList, otherEl) {
   sectionGalleryRef.insertAdjacentHTML('beforebegin', createMarkup);
   const ArraySectionGallery = document.querySelectorAll('.section-gallery');
   ArraySectionGallery.forEach((section, indx) => {
-    if (indx === 0) {
-      return;
-    }
+    // if (indx === 0) {
+    //   return;
+    // }
     new Slider({
       listUlSelector: section,
       buttons: true,
