@@ -85,9 +85,6 @@ function closeModal() {
       })
     };
 
-
-
-
     authRefs.registerAccountBtn.addEventListener('click', registerUser);
     authRefs.enterAccountBtn.addEventListener('click', loginUser);
     authRefs.showPass.addEventListener('click', function (event) {
