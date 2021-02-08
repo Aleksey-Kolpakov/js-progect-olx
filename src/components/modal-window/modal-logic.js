@@ -16,8 +16,8 @@ export function modalBackDrop(template) {
   const exitBtnRef = document.querySelector('.exit-btn-escape');
 
   exitBtnRef.addEventListener('click', onBtnClose);
-  backDropRef.addEventListener('click', onBackdrop);
-  document.addEventListener('click', onBtnPress);
+  backDropRef.addEventListener('mousedown', onBackdrop);
+  document.addEventListener('keydown', onBtnPress);
 
   modalRef.insertAdjacentHTML('beforeend', createModalMarkup());
 
@@ -30,8 +30,8 @@ export function modalBackDrop(template) {
 
   function closeModal() {
     backDropRef.classList.remove('is-open');
-    document.removeEventListener('click', onBtnPress);
-    backDropRef.removeEventListener('click', onBackdrop);
+    document.removeEventListener('keydown', onBtnPress);
+    backDropRef.removeEventListener('mousedown', onBackdrop);
     exitBtnRef.removeEventListener('click', onBtnClose);
     hiddenModal.classList.remove('hiddenModalStyle');
   }
