@@ -2,8 +2,11 @@ import obj from './objectForTest';
 import { modalBackDrop } from '../modal-window/modal-logic.js';
 import formChangeItem from './form-change-item';
 
-export default function (obj) {
+export function MarkUpFormChange() {
   modalBackDrop(formChangeItem);
+}
+
+export function DynamicMarkUp(obj) {
   const formImgList = document.querySelector('.form__input-download');
   let allListItems = document.querySelectorAll('.download__item');
   let firstItem = document.querySelector('.start-list-item');
