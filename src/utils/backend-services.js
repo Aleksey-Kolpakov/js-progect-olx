@@ -146,7 +146,6 @@ export function deleteItemFetch(id) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return axios.delete(`https://callboard-backend.goit.global/call/${id}`)
         .then(({ data }) => data)
-        .catch(error => console.log(error));
 }
 
 export function getUsersOwnItems() {
