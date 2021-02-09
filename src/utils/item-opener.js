@@ -9,7 +9,7 @@ export const itemOpener = function (
 ) {
   const containers = document.querySelectorAll(`${selector}`);
   const containersArr = Array.from(containers);
-  console.dir(containersArr);
+  // console.dir(containersArr);
   containersArr.map(ul => {
     ul.addEventListener('click', openRightModal);
   });
