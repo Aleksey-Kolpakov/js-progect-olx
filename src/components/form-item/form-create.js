@@ -59,7 +59,6 @@ export function sendItemOnServer() {
         if (listOfCategory.hasOwnProperty(value)) {
           formData.set('category', listOfCategory[value]);
         }
-    
       }
     });
     downloadInput.files.forEach(file => {
@@ -78,34 +77,28 @@ export function sendItemOnServer() {
 
   form.addEventListener('submit', formDataCollect);
 
-//-------------------функция для установки цену в ноль на двух категориях
-    const categorrySelectRef = document.querySelector("#form-category")
-categorrySelectRef.addEventListener('change',chancePriceInput )
-
-
+  //-------------------функция для установки цену в ноль на двух категориях
+  const categorrySelectRef = document.querySelector('#form-category');
+  categorrySelectRef.addEventListener('change', chancePriceInput);
 
   function chancePriceInput() {
-      const inputPriceRef = document.querySelector('#input-number');
-  
-   if (categorrySelectRef.value === 'Работа' || categorrySelectRef.value === 'Отдам бесплатно') {
+    const inputPriceRef = document.querySelector('#input-number');
+    console.log(categorrySelectRef.value);
+    if (
+      categorrySelectRef.value === 'Работа' ||
+      categorrySelectRef.value === 'Отдам бесплатно'
+    ) {
       inputPriceRef.value = 0;
       inputPriceRef.setAttribute('readonly', '');
-        if (categorrySelectRef.value !== 'Работа' || categorrySelectRef.value !== 'Отдам бесплатно') {
-      inputPriceRef.value = "";
+    }
+    if (
+      categorrySelectRef.value !== 'Работа' &&
+      categorrySelectRef.value !== 'Отдам бесплатно'
+    ) {
+      console.log('meh');
+      inputPriceRef.value = '';
       inputPriceRef.removeAttribute('readonly');
     }
-    }
-    
-
-
-
-// console.dir(categorrySelectRef)
-  
-
-   
-
-
+    // console.dir(categorrySelectRef)
   }
-  
-
 }
