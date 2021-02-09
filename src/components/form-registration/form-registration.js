@@ -6,6 +6,11 @@ import '@pnotify/core/dist/PNotify.css';
 import { alert, notice, info, success, error } from '@pnotify/core';
 import { defaults } from '@pnotify/core';
 import localStoradge from '../../utils/local-storadge.js'
+defaults.mode = 'light';
+defaults.closerHover = true;
+defaults.delay = 3000;
+
+
 const createMarkupReg =
   `<div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
