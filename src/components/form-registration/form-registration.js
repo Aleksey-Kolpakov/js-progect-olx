@@ -1,6 +1,7 @@
 import { modalBackDrop } from '../modal-window/modal-logic';
 import { registerUserApi, loginFetch } from '../../utils/backend-services.js'
 import { showMyCabinetBlock } from '../header-section/js/service'
+import {authRegError, regSuccess} from '../../utils/pnotify'
 
 const createMarkupReg =
 
@@ -58,30 +59,34 @@ function closeModal() {
     const loginUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
+
       loginFetch(submittedData).then(data => {
         console.log(data);
         showMyCabinetBlock();
-        alert('Success')
         closeModal()
-      }).catch(error => {
-        if (error.response.status == 403) {
-          alert('bad password')
+      })
+        .catch(error => {
+        console.log(error);
+        const eror = error.request.response
+          authRegError(eror)
           closeModal()
-        }
       })
     };
 
     const registerUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
+
       registerUserApi(submittedData)
-        .then(data => console.log(data))
+        .then(data => {
+          console.dir(data)
         closeModal()
-      .catch(error => {
-        if (error.response.status == 409) {
-          alert('Такой E-mail занят, попробуйте другой')
+        })
+        .catch(error => {
+          const regEror = error.request.response
+        console.dir(error)
+          authRegError(regEror)
           closeModal()
-        }
       })
     };
 
@@ -108,6 +113,3 @@ window.onload = function () {
   userTokenGoogle && showMyCabinetBlock()
   history.pushState(null,null,'/')
 }
-
-
-

@@ -7,10 +7,21 @@ import { defaults } from '@pnotify/core';
 
 defaults.mode = 'light';
 defaults.closerHover = true;
-defaults.delay = 3000;
+defaults.delay = 4000;
 
 export function makeNotice(message) {
   const myNotice = error({
     text: message,
   });
+}
+
+export function authRegError(message) {
+  const eror = error({
+    text:message
+  })
+}
+export function regSuccess(message) {
+  const success = succ({
+    text: message
+  })
 }
