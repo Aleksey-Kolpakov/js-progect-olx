@@ -38,6 +38,7 @@ function onClickBtnMyAccount() {
     if (promiseFavourResult.length > 0) {
       updateMarkupFavouritesWithSlider(promiseFavourResult, favouritesHbs);
       const seeAllFavBtnRef = document.querySelector('.favourites');
+      console.log(seeAllFavBtnRef);
       seeAllFavBtnRef.addEventListener('click', onClickBtnSeeAllFavourites(promiseFavourResult));
       itemOpener();
     }
@@ -97,22 +98,18 @@ function updateMarkupFavouritesAll(elementsArray) {
   mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
-const onClickBtnSeeAll = promise => e => {
-  e.preventDefault();
-  promise.then(data => {
-    mainRef.innerHTML = '';
-    updateMarkupFavouritesAll(data);
+const onClickBtnSeeAll = (promiseResultArray) => (event) => {
+  event.preventDefault();
+    mainRef.textContent = '';
+    updateMarkupFavouritesAll(promiseResultArray);
     itemOpener('[data-items="own"]', openChangeOwnItemModal);
-  });
 };
 
-const onClickBtnSeeAllFavourites = promise => e => {
-  e.preventDefault();
-  promise.then(data => {
-    mainRef.innerHTML = '';
-    updateMarkupFavouritesAll(data);
+const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
+    event.preventDefault();
+    mainRef.textContent = '';
+    updateMarkupFavouritesAll(promiseResultArray);
     const ulContainerRef = document.querySelector('[data-items="own"]');
     ulContainerRef.dataset.items = '';
     itemOpener();
-  });
 };
