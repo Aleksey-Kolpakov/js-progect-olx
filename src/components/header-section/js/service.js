@@ -21,6 +21,8 @@ function openMobileMenu() {
   refs.authorizationBlock.classList.add('is-open');
   refs.myCabinetBlock.classList.add('is-open');
   refs.filterClearBlock.classList.add('is-open');
+  refs.filtersContainer.classList.add('is-open');
+  refs.body.style = 'overflow: hidden';
 }
 
 function closeMobileMenu() {
@@ -31,6 +33,7 @@ function closeMobileMenu() {
   refs.myCabinetBlock.classList.remove('is-open');
   refs.filterClearBlock.classList.remove('is-open');
   refs.filtersContainer.classList.remove('is-open');
+  refs.body.removeAttribute('style');
 }
 
 function makeFilterButtonActive(englishCategory) {

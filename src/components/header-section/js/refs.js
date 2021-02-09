@@ -1,4 +1,6 @@
 const refs = {
+  body: document.querySelector('body'),
+  
   burgerMenuButton: document.querySelector('.burger-menu-button'),
   mobileMenu: document.querySelector('.mobile-menu'),
   mobileBackdrop: document.querySelector('.mobile-header-backdrop'),
