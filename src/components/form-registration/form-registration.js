@@ -59,16 +59,30 @@ function closeModal() {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
       loginFetch(submittedData).then(data => {
-        showMyCabinetBlock()
+        console.log(data);
+        showMyCabinetBlock();
+        alert('Success')
+        closeModal()
+      }).catch(error => {
+        if (error.response.status == 403) {
+          alert('bad password')
+          closeModal()
+        }
       })
-      closeModal()
-      alert('Hello PES you authorization')
     };
 
     const registerUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
-      registerUserApi(submittedData);
+      registerUserApi(submittedData)
+        .then(data => console.log(data))
+        closeModal()
+      .catch(error => {
+        if (error.response.status == 409) {
+          alert('Такой E-mail занят, попробуйте другой')
+          closeModal()
+        }
+      })
     };
 
     authRefs.registerAccountBtn.addEventListener('click', registerUser);
@@ -88,9 +102,12 @@ function closeModal() {
   modalBackDrop(createMarkupReg);
   listenerReg()
 }
+export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
 
-export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken')
-console.log(userTokenGoogle);
+window.onload = function () {
+  userTokenGoogle && showMyCabinetBlock()
+  history.pushState(null,null,'/')
+}
 
 
 

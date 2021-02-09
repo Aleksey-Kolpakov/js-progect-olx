@@ -1,5 +1,6 @@
-import { loginFetch } from '../../utils/backend-services';
-import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
+// import { loginFetch } from '../../utils/backend-services';
+// import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
+import EdikMarkUpHbs from '../user-items-pages/templates/categories-markup.hbs';
 import favouritesHbs from '../user-items-pages/templates/favourites.hbs';
 import ownItemsHbs from '../user-items-pages/templates/ownItems.hbs';
 import emptyFavHbs from '../user-items-pages/templates/emptyFav.hbs';
@@ -9,6 +10,7 @@ import {
   getUsersOwnItems,
 } from '../../utils/backend-services';
 import Slider from '../../components/Slider';
+import { itemOpener, openChangeOwnItemModal } from '../../utils/item-opener';
 // ===============================================================================//
 // refs
 const mainRef = document.querySelector('main');
@@ -51,40 +53,46 @@ function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
 }
 
 function onClickBtnMyAccount() {
-  // const fetchPromiseOwnItems = getUsersOwnItems();
+  const fetchPromiseOwnItems = getUsersOwnItems();
   const fetchPromiseFavourites = getUsersFavouritesByToken();
   mainRef.innerHTML = '';
 
   const favProm = fetchPromiseFavourites.then(data => {
     if (data.length === 0) {
-      noContentMarkup(emptyFavHbs);
-      return;
+      return false;
     }
     updateMarkupFavouritesWithSlider(data, favouritesHbs);
     const seeAllBtnRef = document.querySelector('.favourites');
     seeAllBtnRef.addEventListener(
       'click',
-      onClickBtnSeeAll(fetchPromiseFavourites),
+      onClickBtnSeeAllFavourites(fetchPromiseFavourites),
     );
+    itemOpener();
   });
 
-  const ownProm = fetchPromiseFavourites.then(data => {
+  const ownProm = fetchPromiseOwnItems.then(data => {
     if (data.length === 0) {
-      noContentMarkup(emptyOwnHbs);
-      return;
+      return false;
     }
     updateMarkupFavouritesWithSlider(data, ownItemsHbs);
     const seeAllBtnRef = document.querySelector('.ownItems');
     seeAllBtnRef.addEventListener(
       'click',
-      onClickBtnSeeAll(fetchPromiseFavourites),
+      onClickBtnSeeAll(fetchPromiseOwnItems),
     );
+    itemOpener('[data-items="own"]', openChangeOwnItemModal);
   });
 
-  Promise.all([favProm, ownProm]).then(() => {
+  Promise.all([favProm, ownProm]).then(([favProm, ownProm]) => {
+    if (favProm === false) {
+      noContentMarkup(emptyFavHbs);
+    }
+    if (ownProm === false) {
+      noContentMarkup(emptyOwnHbs);
+    }
     const listBlockCollection = document.querySelectorAll('.card-list');
     listBlockCollection.forEach(
-      list =>
+      () =>
         new Slider({
           listUlSelector: '.card-list',
           buttons: true,
@@ -102,5 +110,17 @@ const onClickBtnSeeAll = promise => e => {
   promise.then(data => {
     mainRef.innerHTML = '';
     updateMarkupFavouritesAll(data);
+    itemOpener('[data-items="own"]', openChangeOwnItemModal);
+  });
+};
+
+const onClickBtnSeeAllFavourites = promise => e => {
+  e.preventDefault();
+  promise.then(data => {
+    mainRef.innerHTML = '';
+    updateMarkupFavouritesAll(data);
+    const ulContainerRef = document.querySelector('[data-items="own"]');
+    ulContainerRef.dataset.items = '';
+    itemOpener();
   });
 };

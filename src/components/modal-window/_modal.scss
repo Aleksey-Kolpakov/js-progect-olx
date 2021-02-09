@@ -6,19 +6,20 @@
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
 .back-drop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 99;
+  z-index: 101;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
   background-color: rgba(0, 0, 0, 0.7);
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .modal {
