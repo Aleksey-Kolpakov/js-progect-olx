@@ -11,10 +11,6 @@ export function DynamicMarkUp(obj) {
   let allListItems = document.querySelectorAll('.download__item');
   let firstItem = document.querySelector('.start-list-item');
 
-  // const category = document.querySelector('.category-select');
-  // console.dir(category);
-  // category.selectedIndex = 1;
-
   if (typeof obj != 'undefined') {
     const values = [
       obj.title,
@@ -24,10 +20,6 @@ export function DynamicMarkUp(obj) {
       obj.phone,
     ];
     const formInputs = document.querySelectorAll('.form__input');
-
-    // const optionRef = document.querySelector('.meh');
-    // optionRef.select;
-    // console.dir(optionRef);
 
     const formRef = document.querySelector('.form');
 
@@ -55,20 +47,14 @@ export function DynamicMarkUp(obj) {
     'beforeend', ///--->>
     '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
   );
-  // if (allListItems.length >= 5) {
-  //   firstItem.remove();
-  // }
-  // const fileInput = document.querySelector('.download__input');
 
   formImgList.addEventListener('change', insertImages);
 
   function insertImages(e) {
     if (e.target.nodeName === 'INPUT') {
-      // console.log('bla');
       const allImg = Object.values(e.target.files);
       let allListItems = document.querySelectorAll('.download__item');
       firstItem = document.querySelector('.start-list-item');
-      console.log(allImg.length + allListItems.length);
       if (allImg.length < 6 && allImg.length + allListItems.length <= 6) {
         if (allImg.length + allListItems.length >= 6) {
           firstItem.remove();
@@ -120,7 +106,7 @@ export function DynamicMarkUp(obj) {
 
       if (allListItems.length < 5 && !startListItem) {
         formImgList.insertAdjacentHTML(
-          'beforeend',////------>
+          'beforeend', ////------>
           '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
         );
       }

@@ -58,22 +58,20 @@ export function sendItemOnServer() {
       if (key !== 'file') {
         formData.set(key, value);
         if (listOfCategory.hasOwnProperty(value)) {
-          // console.log('success');
           formData.set('category', listOfCategory[value]);
         }
       }
     });
-    // console.log(listOfCategory.Недвижимость);
     downloadInput.files.forEach(file => {
       formData.append('file', file);
     });
 
-    var object = {};
-    formData.forEach(function (value, key) {
-      object[key] = value;
-    });
-    var json = JSON.stringify(object);
-    console.log(json);
+    // var object = {};
+    // formData.forEach(function (value, key) {
+    //   object[key] = value;
+    // });
+    // var json = JSON.stringify(object);
+    // console.log(json);
 
     createItemFetch(formData);
   }
