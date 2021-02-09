@@ -1,4 +1,8 @@
 import refs from './refs';
+import {
+  RussianCategoriesPromise,
+  EnglishCategoriesPromise,
+} from '../../../utils/initial-load';
 
 function showAuthorizationBlock() {
   refs.myCabinetBlock.classList.add('is-hidden');
@@ -17,6 +21,8 @@ function openMobileMenu() {
   refs.authorizationBlock.classList.add('is-open');
   refs.myCabinetBlock.classList.add('is-open');
   refs.filterClearBlock.classList.add('is-open');
+  refs.filtersContainer.classList.add('is-open');
+  refs.body.style = 'overflow: hidden';
 }
 
 function closeMobileMenu() {
@@ -27,6 +33,24 @@ function closeMobileMenu() {
   refs.myCabinetBlock.classList.remove('is-open');
   refs.filterClearBlock.classList.remove('is-open');
   refs.filtersContainer.classList.remove('is-open');
+  refs.body.removeAttribute('style');
+}
+
+function makeFilterButtonActive(englishCategory) {
+  EnglishCategoriesPromise.then(array => {
+    const index = array.indexOf(englishCategory);
+
+    RussianCategoriesPromise.then(array => {
+      const category = array[index];
+
+      refs.filterList.children.forEach(li => {
+        li.children[0].classList.remove('is-active');
+        if (li.children[0].textContent.trim() === category) {
+          li.children[0].classList.add('is-active');
+        }
+      });
+    });
+  });
 }
 
 export {
@@ -34,4 +58,5 @@ export {
   closeMobileMenu,
   showAuthorizationBlock,
   showMyCabinetBlock,
+  makeFilterButtonActive,
 };

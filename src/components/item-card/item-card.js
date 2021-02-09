@@ -3,9 +3,8 @@ import {addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID, getAllCat
 import salesmaInfoMarkup from '../item-card/salesman-info-btn.hbs'
 import Slider from '../Slider/Slider.js'
 import { modalBackDrop } from '../../components/modal-window/modal-logic.js'
-import {openForm} from '../form-registration/form-registration.js'
-
-
+import { openForm } from '../form-registration/form-registration.js'
+import refsHeader from '../header-section/js/refs.js'
 
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
@@ -16,16 +15,18 @@ function renderMarkup(item) {
     addAndRemoveFavorites();
     changeSmallToBigImg();
     getSalesmanInfo(item);
-            
-    const screenWidth = Number(window.innerWidth);
-        if (screenWidth < 768) {
-            new Slider({
-                listUlSelector: ".advertisement-card-slider-list",
-                dotsVerticalPosition: -30, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
-                dotButtonColor: "#CDCDCD",//колір неактивних кнопок
-                dotButtonActiveColor: "#FF6B09",//колір активної
-                });
-    };
+
+    const screenWidth = Number(window.innerWidth)
+    if (screenWidth < 768) {
+        new Slider({
+            listUlSelector: ".advertisement-card-slider-list",
+            dotsVerticalPosition: -30, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
+            dotButtonColor: "#CDCDCD",//колір неактивних кнопок
+            dotButtonActiveColor: "#FF6B09",//колір активної
+        });
+
+    }
+
 };
 export default renderMarkup;
 // =======================
@@ -47,17 +48,23 @@ function changeSmallToBigImg() {
 // =======================================
 
 //   ============ADD & REMOVE FAVORITES==========
+
 function addAndRemoveFavorites() {
     const favoritesIcon = document.querySelector('.favorites-div');
     const favIcon = favoritesIcon.querySelector('.advertisement-card-favorites-svg')
 
     favoritesIcon.addEventListener('click', event => {
-      if (!favIcon.classList.contains('js-mark-favorites-svg')) {
-        favIcon.classList.toggle('js-mark-favorites-svg');
-        return addItemToFavourite(event.currentTarget.dataset.id);
-      }
+        
+    if (!refsHeader.authorizationBlock.classList.contains('is-hidden')) {
+    openForm()
+    } else {
+        if (!favIcon.classList.contains('js-mark-favorites-svg')) {
+            favIcon.classList.toggle('js-mark-favorites-svg');
+            return addItemToFavourite(event.currentTarget.dataset.id);
+        }
         favIcon.classList.toggle('js-mark-favorites-svg');
         return deleteItemFromFavourite(event.currentTarget.dataset.id);
+}
     });
 }
 //   ==============================
