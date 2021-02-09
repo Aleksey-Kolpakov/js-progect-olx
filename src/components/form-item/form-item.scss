@@ -241,7 +241,7 @@ textarea {
 }
 
 .download__item:nth-child(1) {
-    margin-left: 0px;
+  margin-left: 0px;
 }
 
 .download__item:nth-child(4) {
@@ -307,7 +307,6 @@ textarea {
 }
 
 .download__img {
-
   @include for-form(mobile) {
     width: 78px;
     height: 46px;
@@ -445,4 +444,15 @@ textarea {
   top: 0;
   right: 0;
   pointer-events: none;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
 }
