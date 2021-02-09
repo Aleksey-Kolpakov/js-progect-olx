@@ -5,6 +5,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 import { alert, notice, info, success, error } from '@pnotify/core';
 import { defaults } from '@pnotify/core';
+import {closeMobileMenu} from '../../components/header-section/js/service'
 import localStoradge from '../../utils/local-storadge.js'
 defaults.mode = 'light';
 defaults.closerHover = true;
@@ -73,6 +74,7 @@ function closeModal() {
             error({text:'Не верный пароль!'})
           }
           closeModal()
+          closeMobileMenu()
       })
     };
 
@@ -90,6 +92,7 @@ function closeModal() {
             error({ text: 'Такой email занят!' })
           }
           closeModal()
+          closeMobileMenu()
       })
     };
 
