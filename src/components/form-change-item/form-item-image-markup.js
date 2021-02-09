@@ -4,7 +4,7 @@ import templateCategory from '../form-item/category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 import { ChangeItemOnServer } from './js/send-on-server.js';
 
-export function MarkUpFormChange() {
+export function MarkUpFormChange(id) {
   modalBackDrop(formChangeItem);
 
   const categoryRef = document.querySelector('#form-category');
@@ -14,7 +14,7 @@ export function MarkUpFormChange() {
     categoryRef.insertAdjacentHTML('beforeend', template);
     return;
   });
-  ChangeItemOnServer();
+  ChangeItemOnServer(id);
 }
 
 export function DynamicMarkUp(obj) {

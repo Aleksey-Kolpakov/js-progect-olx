@@ -65,12 +65,12 @@ export function sendItemOnServer() {
       formData.append('file', file);
     });
 
-    // var object = {};
-    // formData.forEach(function (value, key) {
-    //   object[key] = value;
-    // });
-    // var json = JSON.stringify(object);
-    // console.log(json);
+    var object = {};
+    foData.forEach(function (value, key) {
+      object[key] = value;
+    });
+    var json = JSON.stringify(object);
+    console.log(json);
 
     createItemFetch(formData);
   }

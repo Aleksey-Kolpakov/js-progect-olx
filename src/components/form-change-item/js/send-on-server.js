@@ -1,7 +1,17 @@
-import { changeItemFetch } from '../../../utils/backend-services.js';
+import {
+  changeItemFetch,
+  deleteItemFetch,
+} from '../../../utils/backend-services.js';
 
-export function ChangeItemOnServer() {
+export function ChangeItemOnServer(id) {
   const form = document.querySelector('.form');
+
+  const buttonDeleteRef = document.querySelector('.button-delete');
+  buttonDeleteRef.addEventListener('click', deleteItem);
+
+  function deleteItem(id) {
+    deleteItemFetch(id);
+  }
 
   const listOfCategory = {
     Недвижимость: 'property',
@@ -16,6 +26,12 @@ export function ChangeItemOnServer() {
 
   function formDataCollect(event) {
     event.preventDefault();
+
+    const formInputs = document.querySelectorAll('.form__input');
+    formInputs.forEach(input => {
+      console.log(input.value);
+    });
+
     const downloadInput = document.querySelector('.download__input');
     const formData = new FormData();
 
@@ -28,18 +44,27 @@ export function ChangeItemOnServer() {
         }
       }
     });
+
+    // foData.forEach((value, key) => {
+    //   if (key !== 'file') {
+    //     formData.set(key, value);
+    //     if (listOfCategory.hasOwnProperty(value)) {
+    //       formData.set('category', listOfCategory[value]);
+    //     }
+    //   }
+    // });
     downloadInput.files.forEach(file => {
       formData.append('file', file);
     });
 
-    // var object = {};
-    // formData.forEach(function (value, key) {
-    //   object[key] = value;
-    // });
-    // var json = JSON.stringify(object);
-    // console.log(json);
+    var object = {};
+    foData.forEach(function (value, key) {
+      object[key] = value;
+    });
+    var json = JSON.stringify(object);
+    console.log(json);
 
-    changeItemFetch(formData);
+    changeItemFetch(id, formData);
   }
 
   form.addEventListener('submit', formDataCollect);
