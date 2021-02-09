@@ -11,6 +11,7 @@ import {
 } from '../../utils/backend-services';
 import Slider from '../../components/Slider';
 import { itemOpener, openChangeOwnItemModal } from '../../utils/item-opener';
+import { colorInOrangeHeartsOfFavourites } from '../../utils/favourites-rest-logic';//Єгор додав
 // ===============================================================================//
 // refs
 const mainRef = document.querySelector('main');
@@ -102,6 +103,7 @@ function onClickBtnMyAccount() {
           dotButtonActiveColor: '#FF6B09', //колір активної
         }),
     );
+    colorInOrangeHeartsOfFavourites(true);//Єгор додав
   });
 }
 

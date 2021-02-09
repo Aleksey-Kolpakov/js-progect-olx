@@ -5,7 +5,7 @@
         <ul class="card-list js-item-container">
             {{#each this}}
             <li class="userItems-list-item">
-                <a href="" class=" section-gallery-goods-link" data-id="{{_id}}">
+                <div class=" section-gallery-goods-link" data-id="{{_id}}">
                     <div class="image-container">
                         <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" />
                     </div>
@@ -19,7 +19,7 @@
                     <svg class="icon-add-favorite" width="17" height="20">
                         <use href="./images/sprite/sprite.svg#icon-heart-add-favorite"></use>
                     </svg>
-                </a>
+                </div>
             </li>
             {{/each}}
         </ul>

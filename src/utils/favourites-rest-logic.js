@@ -1,64 +1,68 @@
 import { getUsersFavouritesByToken, deleteItemFromFavourite, addItemToFavourite } from './backend-services';
 
-// const fetchGetPromiseFavourites = getUsersFavouritesByToken();
-
 const addItemToFavouriteCallback = (itemId) => (event) => {
-    console.log('addCallback');
     event.stopPropagation();
     addItemToFavourite(itemId).then(() => {
-        // if (event.target.tagName === 'use') {
-        //     console.log('use');
-        //     const tagUse = event.target;
-        //     tagUse.parent.style['fill'] = `orange`;
-        //     tagUse.setAttribute("href", "./images/sprite/sprite.svg#icon-favorite-heart");
-        //     tagUse.parent.style['opacity'] = '1';
-        //     tagUse.parent.removeEventListener('click', addItemToFavouriteCallback);
-        //     tagUse.parent.addEventListener('click', deleteItemFromFavouriteCallback(itemId));
-        // }
+        if (event.target.tagName === 'use') {
+            const tagUse = event.target;
+            tagUse.parentNode.style['fill'] = `orange`;
+            tagUse.setAttribute("href", "./images/sprite/sprite.svg#icon-favorite-heart");
+            tagUse.parentNode.style['opacity'] = '1';
+            tagUse.parentNode.addEventListener('click', deleteItemFromFavouriteCallback(itemId), { once: true });
+            return;
+        }
         if (event.target.tagName === 'svg') {
-            console.log('svg');
             const tagSVG = event.target;
             tagSVG.style['fill'] = `orange`;
             const tagUse = tagSVG.querySelector('use');
             tagUse.setAttribute("href", "./images/sprite/sprite.svg#icon-favorite-heart");
             tagSVG.style['opacity'] = '1';
             tagSVG.addEventListener('click', deleteItemFromFavouriteCallback(itemId), { once: true });
+            return;
         }
     })
 };
 
-const deleteItemFromFavouriteCallback = (itemId) => (event) => {
-    console.log('deleteCallback');
+const deleteItemFromFavouriteCallback = (itemId, inMyCabinet) => (event) => {
     event.stopPropagation();
     deleteItemFromFavourite(itemId).then(() => {
+        if (inMyCabinet) {
+            const targetRef = document.querySelector(`[data-id="${itemId}"]`);
+            targetRef.parentNode.remove();
+            return;
+        }
         if (event.target.tagName === 'use') {
             const tagUse = event.target;
             tagUse.parentNode.style['fill'] = `white`;
             tagUse.setAttribute("href", "./images/sprite/sprite.svg#icon-heart-add-favorite");
             tagUse.parentNode.addEventListener('click', addItemToFavouriteCallback(itemId), { once: true });
+            return;
         }
-        // if (event.target.tagName === 'svg') {
-        //     console.log('svg');
-        //     const tagSVG = event.target;
-        //     tagSVG.style['fill'] = `white`;
-        //     const tagUse = tagSVG.querySelector('use');
-        //     tagUse.setAttribute("href", "./images/sprite/sprite.svg#icon-heart-add-favorite");
-        //     tagSVG.style['opacity'] = '0';
-        //     tagSVG.removeEventListener('click', deleteItemFromFavouriteCallback);
-        //     tagSVG.addEventListener('click', addItemToFavouriteCallback(item.dataset.id));
-        // }
+        if (event.target.tagName === 'svg') {
+            // console.log('svg');
+            const tagSVG = event.target;
+            tagSVG.style['fill'] = `white`;
+            const tagUse = tagSVG.querySelector('use');
+            tagUse.setAttribute("href", "./images/sprite/sprite.svg#icon-heart-add-favorite");
+            tagSVG.addEventListener('click', addItemToFavouriteCallback(itemId), { once: true });
+            return;
+        }
     })
 };
 
-function addAllCardsHeartsOnClickFetchAddItemToFaviurites() {
+function addOnClickHeartsFetchAddItemToFavourites(favourArray) {
+    const favourIdArray = favourArray.map(favItem => favItem._id);
     const itemsArray = document.querySelectorAll('.section-gallery-goods-link');
     itemsArray.forEach(item => {
+        if (favourIdArray.includes(item.dataset.id)) {
+            return;
+        }
         const favItemBtnHeart = item.querySelector('.icon-add-favorite');
         favItemBtnHeart.addEventListener('click', addItemToFavouriteCallback(item.dataset.id), { once: true })
     })
 }
 
-export function colorInOrangeHeartsOfFavourites() {
+export function colorInOrangeHeartsOfFavourites(inMyCabinet=false) {
     getUsersFavouritesByToken().then(favArray => {
         if (!favArray) {
             return;
@@ -73,10 +77,10 @@ export function colorInOrangeHeartsOfFavourites() {
             favItemBtnHeart.style['opacity'] = `1`;
             const favItemBtnHeartUseTag = favItemBtnHeart.querySelector('use');
             favItemBtnHeartUseTag.setAttribute("href", "./images/sprite/sprite.svg#icon-favorite-heart");
-            favItemBtnHeart.addEventListener('click', deleteItemFromFavouriteCallback(item._id),{ once: true });
+            favItemBtnHeart?.addEventListener('click', deleteItemFromFavouriteCallback(item._id, inMyCabinet),{ once: true });
         })
+        addOnClickHeartsFetchAddItemToFavourites(favArray)
     })
 }
 
-setTimeout(colorInOrangeHeartsOfFavourites, 1000)
-setTimeout(addAllCardsHeartsOnClickFetchAddItemToFaviurites, 2000)
+setTimeout(colorInOrangeHeartsOfFavourites, 1000);
