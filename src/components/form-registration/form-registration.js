@@ -5,7 +5,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 import { alert, notice, info, success, error } from '@pnotify/core';
 import { defaults } from '@pnotify/core';
-
+import localStoradge from '../../utils/local-storadge.js'
 const createMarkupReg =
   `<div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
@@ -41,6 +41,7 @@ export function openForm() {
     showPass: document.querySelector('.show-password'),
     backDropRef: document.querySelector('.back-drop'),
     modalRef: document.querySelector('.modal'),
+    hiddenModal : document.querySelector('body'),
     };
 
     const submittedData = {
@@ -49,14 +50,9 @@ export function openForm() {
     }
 
 function closeModal() {
-    authRefs.backDropRef.classList.remove('is-open');
-    const addBtn = `<button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>`;
+  authRefs.backDropRef.classList.remove('is-open');
+    hiddenModal.classList.remove('hiddenModalStyle');
     authRefs.modalRef.innerHTML = '';
-    authRefs.modalRef.insertAdjacentHTML('beforeend', addBtn);
   }
     const loginUser = function () {
       submittedData.email = authRefs.inputEmail.value;
@@ -109,9 +105,11 @@ function closeModal() {
   modalBackDrop(createMarkupReg);
   listenerReg()
 }
-export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
-
-window.onload = function () {
-  userTokenGoogle && showMyCabinetBlock()
-  history.pushState(null,null,'/')
+const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
+if (userTokenGoogle) {
+localStoradge.save('accessTokenOlx', userTokenGoogle);
 }
+// window.onload = function () {
+//   userTokenGoogle && showMyCabinetBlock()
+//   history.pushState(null,null,'/')
+// }
