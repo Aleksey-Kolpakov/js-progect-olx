@@ -46,6 +46,6 @@ function formExit() {
     authorizationBlock.classList.remove('is-hidden');
     myCabinetBlock.classList.add('is-hidden');
     closeModal();
-    logoutFetch();
+    logoutFetch().then(() => location.reload());
   }
 }

@@ -68,6 +68,7 @@ function closeModal() {
         showMyCabinetBlock();
         success({text:'Вы авторизованы!'})
         closeModal()
+        closeMobileMenu()
       })
         .catch(eror => {
           if (eror.response.status == 403) {
@@ -85,7 +86,8 @@ function closeModal() {
       registerUserApi(submittedData)
         .then(data => {
            success({text:'Вы зарегистрированы!'})
-        closeModal()
+          closeModal()
+          closeMobileMenu()
         })
         .catch(eror => {
           if (eror.request.status == 409) {
@@ -115,9 +117,9 @@ function closeModal() {
 }
 const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
 if (userTokenGoogle) {
-localStoradge.save('accessTokenOlx', userTokenGoogle);
+  localStoradge.save('accessTokenOlx', userTokenGoogle);
 }
-// window.onload = function () {
-//   userTokenGoogle && showMyCabinetBlock()
-//   history.pushState(null,null,'/')
-// }
+window.onload = function () {
+  userTokenGoogle && showMyCabinetBlock()
+  history.pushState(null,null,'/')
+}
