@@ -48,7 +48,6 @@ export const getUsersInfoByToken = function () {
     return axios.get(`https://callboard-backend.goit.global/user`)
         .then(({ data }) => data)
 };
-getUsersInfoByToken().then(data => console.log(data))
 
 
 export const getUsersInfoByID = function (id) {
@@ -69,7 +68,7 @@ export const getAllCategoriesWithItemsByPages = function (pageNumber) {
         })
         .catch(error => console.log(error));
 };
-
+getAllCategoriesWithItemsByPages(1).then(console.log)
 export const getUsersFavouritesByToken = function () {
     const accessToken = localStoradge.load('accessTokenOlx');
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
