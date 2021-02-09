@@ -5,7 +5,8 @@
         <ul class="card-list js-item-container">
             {{#each this}}
             <li class="userItems-list-item">
-                <div class=" section-gallery-goods-link" data-id="{{_id}}">
+                <div class=" section-gallery-goods-link" data-id="{{_id}}">{{!-- Єгор замінив <a></a> на <div></div>
+                    --}}
                     <div class="image-container">
                         <img class="section-gallery-item-image" src="{{imageUrls}}" alt="{{title}}" />
                     </div>
