@@ -1,9 +1,12 @@
 import { modalBackDrop } from '../modal-window/modal-logic';
 import { registerUserApi, loginFetch } from '../../utils/backend-services.js'
 import { showMyCabinetBlock } from '../header-section/js/service'
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
+import { alert, notice, info, success, error } from '@pnotify/core';
+import { defaults } from '@pnotify/core';
 
 const createMarkupReg =
-
   `<div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
         <a class="registration-google" href="https://callboard-backend.goit.global/auth/google"><svg class="registration-google-svg" width='17' height='17'>
@@ -58,30 +61,34 @@ function closeModal() {
     const loginUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
+
       loginFetch(submittedData).then(data => {
-        console.log(data);
         showMyCabinetBlock();
-        alert('Success')
+        success({text:'Вы авторизованы!'})
         closeModal()
-      }).catch(error => {
-        if (error.response.status == 403) {
-          alert('bad password')
+      })
+        .catch(eror => {
+          if (eror.response.status == 403) {
+            error({text:'Не верный пароль!'})
+          }
           closeModal()
-        }
       })
     };
 
     const registerUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
+
       registerUserApi(submittedData)
-        .then(data => console.log(data))
+        .then(data => {
+           success({text:'Вы зарегистрированы!'})
         closeModal()
-      .catch(error => {
-        if (error.response.status == 409) {
-          alert('Такой E-mail занят, попробуйте другой')
+        })
+        .catch(eror => {
+          if (eror.request.status == 409) {
+            error({ text: 'Такой email занят!' })
+          }
           closeModal()
-        }
       })
     };
 
@@ -108,6 +115,3 @@ window.onload = function () {
   userTokenGoogle && showMyCabinetBlock()
   history.pushState(null,null,'/')
 }
-
-
-
