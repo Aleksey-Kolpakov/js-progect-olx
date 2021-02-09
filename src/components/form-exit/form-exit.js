@@ -18,11 +18,10 @@ exitRef.addEventListener('click', formExit);
 function formExit() {
   modalBackDrop(exit);
 
+  const hiddenModal = document.querySelector('body');
   function closeModal() {
     backDropRef.classList.remove('is-open');
-    document.removeEventListener('keydown', onBtnPress);
-    backDropRef.removeEventListener('click', onBackdrop);
-    exitBtnRef.removeEventListener('click', onBtnClose);
+    hiddenModal.classList.remove('hiddenModalStyle');
   }
 
   const backDropRef = document.querySelector('.back-drop');
