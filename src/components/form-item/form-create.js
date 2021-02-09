@@ -83,7 +83,6 @@ export function sendItemOnServer() {
 
   function chancePriceInput() {
     const inputPriceRef = document.querySelector('#input-number');
-    console.log(categorrySelectRef.value);
     if (
       categorrySelectRef.value === 'Работа' ||
       categorrySelectRef.value === 'Отдам бесплатно'
@@ -95,7 +94,6 @@ export function sendItemOnServer() {
       categorrySelectRef.value !== 'Работа' &&
       categorrySelectRef.value !== 'Отдам бесплатно'
     ) {
-      console.log('meh');
       inputPriceRef.value = '';
       inputPriceRef.removeAttribute('readonly');
     }
