@@ -1,9 +1,18 @@
 import { modalBackDrop } from '../modal-window/modal-logic';
 import { registerUserApi, loginFetch } from '../../utils/backend-services.js'
 import { showMyCabinetBlock } from '../header-section/js/service'
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
+import { alert, notice, info, success, error } from '@pnotify/core';
+import { defaults } from '@pnotify/core';
+import {closeMobileMenu} from '../../components/header-section/js/service'
+import localStoradge from '../../utils/local-storadge.js'
+defaults.mode = 'light';
+defaults.closerHover = true;
+defaults.delay = 3000;
+
 
 const createMarkupReg =
-
   `<div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
         <a class="registration-google" href="https://callboard-backend.goit.global/auth/google"><svg class="registration-google-svg" width='17' height='17'>
@@ -38,6 +47,7 @@ export function openForm() {
     showPass: document.querySelector('.show-password'),
     backDropRef: document.querySelector('.back-drop'),
     modalRef: document.querySelector('.modal'),
+    hiddenModal : document.querySelector('body'),
     };
 
     const submittedData = {
@@ -46,42 +56,43 @@ export function openForm() {
     }
 
 function closeModal() {
-    authRefs.backDropRef.classList.remove('is-open');
-    const addBtn = `<button class="exit-btn-escape">
-            <svg class="exit-svg">
-              <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-          </button>`;
+  authRefs.backDropRef.classList.remove('is-open');
+    hiddenModal.classList.remove('hiddenModalStyle');
     authRefs.modalRef.innerHTML = '';
-    authRefs.modalRef.insertAdjacentHTML('beforeend', addBtn);
   }
     const loginUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
+
       loginFetch(submittedData).then(data => {
-        console.log(data);
         showMyCabinetBlock();
-        alert('Success')
+        success({text:'Вы авторизованы!'})
         closeModal()
-      }).catch(error => {
-        if (error.response.status == 403) {
-          alert('bad password')
+      })
+        .catch(eror => {
+          if (eror.response.status == 403) {
+            error({text:'Не верный пароль!'})
+          }
           closeModal()
-        }
+          closeMobileMenu()
       })
     };
 
     const registerUser = function () {
       submittedData.email = authRefs.inputEmail.value;
       submittedData.password = authRefs.inputPass.value;
+
       registerUserApi(submittedData)
-        .then(data => console.log(data))
+        .then(data => {
+           success({text:'Вы зарегистрированы!'})
         closeModal()
-      .catch(error => {
-        if (error.response.status == 409) {
-          alert('Такой E-mail занят, попробуйте другой')
+        })
+        .catch(eror => {
+          if (eror.request.status == 409) {
+            error({ text: 'Такой email занят!' })
+          }
           closeModal()
-        }
+          closeMobileMenu()
       })
     };
 
@@ -102,12 +113,11 @@ function closeModal() {
   modalBackDrop(createMarkupReg);
   listenerReg()
 }
-export const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
-
-window.onload = function () {
-  userTokenGoogle && showMyCabinetBlock()
-  history.pushState(null,null,'/')
+const userTokenGoogle = new URLSearchParams(window.location.search).get('accessToken');
+if (userTokenGoogle) {
+localStoradge.save('accessTokenOlx', userTokenGoogle);
 }
-
-
-
+// window.onload = function () {
+//   userTokenGoogle && showMyCabinetBlock()
+//   history.pushState(null,null,'/')
+// }

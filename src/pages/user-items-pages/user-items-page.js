@@ -94,7 +94,8 @@ function onClickBtnMyAccount() {
     }
     const listBlockCollection = document.querySelectorAll('.card-list');
     listBlockCollection.forEach(
-      () => new Slider({
+      () =>
+        new Slider({
           listUlSelector: '.card-list',
           buttons: true,
           parentPadding: '5px 2px',
