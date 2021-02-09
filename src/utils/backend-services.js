@@ -68,7 +68,7 @@ export const getAllCategoriesWithItemsByPages = function (pageNumber) {
         })
         .catch(error => console.log(error));
 };
-getAllCategoriesWithItemsByPages(1).then(console.log)
+
 export const getUsersFavouritesByToken = function () {
     const accessToken = localStoradge.load('accessTokenOlx');
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
