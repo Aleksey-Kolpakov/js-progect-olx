@@ -18,15 +18,16 @@ exitRef.addEventListener('click', formExit);
 function formExit() {
   modalBackDrop(exit);
 
+  const hiddenModal = document.querySelector('body');
+  const modalRef = document.querySelector('.modal');
+
   function closeModal() {
     backDropRef.classList.remove('is-open');
-    document.removeEventListener('keydown', onBtnPress);
-    backDropRef.removeEventListener('click', onBackdrop);
-    exitBtnRef.removeEventListener('click', onBtnClose);
+    hiddenModal.classList.remove('hiddenModalStyle');
+    modalRef.innerHTML = '';
   }
 
   const backDropRef = document.querySelector('.back-drop');
-  const modalRef = document.querySelector('.modal');
 
   const cancelBtnRef = document.querySelector('.cancel');
   cancelBtnRef.addEventListener('click', cancelBtn);
