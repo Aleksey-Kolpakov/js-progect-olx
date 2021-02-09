@@ -53,7 +53,6 @@ export const getUsersInfoByToken = function () {
     .get(`https://callboard-backend.goit.global/user`)
     .then(({ data }) => data);
 };
-getUsersInfoByToken().then(data => console.log(data));
 
 export const getUsersInfoByID = function (id) {
   return axios
