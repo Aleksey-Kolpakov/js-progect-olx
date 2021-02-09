@@ -13,7 +13,7 @@ function onFilterButtonClick(event) {
   if (event.target.nodeName === 'BUTTON') {
     refs.filterList.children.forEach(li => {
       li.children[0].classList.remove('is-active');
-    });
+      });
     event.target.classList.add('is-active');
 
     RussianCategoriesPromise.then(array => {
@@ -24,10 +24,18 @@ function onFilterButtonClick(event) {
 
         getItemsInCategory(array[index]).then(array => {
           // console.log(array);
+         
           const mappedArray = array.map(item => ({
+      
             ...item,
             imageUrls: item.imageUrls[0],
+            
           }));
+
+        
+          const currentButton = array[index].category;
+          history.pushState(null, null, currentButton.replace(/ /g,"-"));
+          
 
           const markup = template(mappedArray);
 
