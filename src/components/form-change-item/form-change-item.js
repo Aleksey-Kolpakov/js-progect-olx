@@ -20,13 +20,12 @@ const formChangeItem = `
               id="input-textarea"
             ></textarea>
           </li>
-          <li class="item form__item">
-            <label class="form__label" for="input-select"
-              >Категория товара</label
-            >
-            <select class="form__input category-select" id="input-select">
-            </select>
-          </li>
+        <li class="item form__item">
+      <label class="form__label" for="input-select">Категория товара</label>
+      <select id="form-category" class="form__input select" id="input-select" size="1" name="category">
+        <option class="select__option"></option>
+      </select>
+    </li>
           <li class="item form__item">
             <label class="form__label" for="input-number">Цена</label>
             <input

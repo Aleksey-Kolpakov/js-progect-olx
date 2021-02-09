@@ -50,7 +50,6 @@ export function sendItemOnServer() {
   function formDataCollect(event) {
     event.preventDefault();
     const downloadInput = document.querySelector('.download__input');
-
     const formData = new FormData();
 
     const foData = new FormData(event.target);
@@ -77,4 +76,27 @@ export function sendItemOnServer() {
   }
 
   form.addEventListener('submit', formDataCollect);
+
+  //-------------------функция для установки цену в ноль на двух категориях
+  const categorrySelectRef = document.querySelector('#form-category');
+  categorrySelectRef.addEventListener('change', chancePriceInput);
+
+  function chancePriceInput() {
+    const inputPriceRef = document.querySelector('#input-number');
+    if (
+      categorrySelectRef.value === 'Работа' ||
+      categorrySelectRef.value === 'Отдам бесплатно'
+    ) {
+      inputPriceRef.value = 0;
+      inputPriceRef.setAttribute('readonly', '');
+    }
+    if (
+      categorrySelectRef.value !== 'Работа' &&
+      categorrySelectRef.value !== 'Отдам бесплатно'
+    ) {
+      inputPriceRef.value = '';
+      inputPriceRef.removeAttribute('readonly');
+    }
+    // console.dir(categorrySelectRef)
+  }
 }
