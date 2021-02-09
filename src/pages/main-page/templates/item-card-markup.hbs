@@ -1,14 +1,12 @@
-{{#each this}}
 <section class="advertisement-card-container">
 
-    <div class="container">
 
-        <div class="flex-container">
+    <div class="flex-container">
+        {{!-- <svg class="advertisement-card-button-exit" type="button" width="14" height="14">
+            <use href="./images/sprite/sprite.svg#icon-close"></use>
+        </svg> --}}
 
-            <svg class="advertisement-card-button-exit" type="button" width="14" height="14">
-                <use href="./images/sprite/sprite.svg#icon-close"></use>
-            </svg>
-
+        <div class="test">
             <div class="advertisement-card-name-container">
                 <h2 class="advertisement-card-title">{{title}}</h2>
                 <p class="advertisement-card-code"><span>Код товару | </span> {{_id}}</p>
@@ -16,63 +14,57 @@
 
 
             <div class="advertisement-card-slider">
-
                 <div class="advertisement-card-slider-big-photo">
-                    <img src="{{imageUrl}}" alt="{{title}}">
+                    <img class="big-photo" src="{{imageUrl}}" alt="{{title}}">
                 </div>
 
                 <div class="advertisement-card-small-photo">
-                    <ul class="advertisement-card-slider-list">
+                    <ul class="advertisement-card-slider-list js-item-container">
                         {{#each imageUrls}}
-                        <li class="advertisement-card-slider-list-item">
-                            <img src="{{this}}" alt="{{title}}">
+                        <li class="advertisement-card-slider-list-item" data-id="{{_id}}">
+                            <img class="small-photos" src="{{this}}" alt="{{title}}">
                         </li>
                         {{/each}}
-                        {{!-- <li class="advertisement-card-slider-list-item"></li>
-                        <li class="advertisement-card-slider-list-item"></li>
-                        <li class="advertisement-card-slider-list-item"></li>
-                        <li class="advertisement-card-slider-list-item"></li> --}}
                     </ul>
                 </div>
-
             </div>
-
-
-            <div class="advertisement-card-main-container">
-
-                <div class="advertisement-card-name-container tablet-desktop">
-                    <h2 class="advertisement-card-title">{{title}}</h2>
-                    <p class="advertisement-card-code"><span>Код товару | </span> {{_id}}</p>
-                </div>
-
-                <h3 class="advertisement-card-price">{{price}} €</h3>
-
-                <button class="advertisement-card-button-salesman-info" type="button">Информация о продавце</button>
-
-                <div class="advertisement-card-buttons-div">
-                    <p class="advertisement-card-favorites-and-share">В избранное</p>
-                    <svg class="advertisement-card-favorites-svg" type="button" width="14" height="12">
-                        <use href="./images/sprite/sprite.svg#icon-heart-favorite"></use>
-                    </svg>
-                    <p class="advertisement-card-favorites-and-share">Поделиться</p>
-                    <svg class="advertisement-card-share-svg" type="button" width="15" height="16">
-                        <use href="./images/sprite/sprite.svg#icon-share"></use>
-                    </svg>
-                </div>
-
-
-                <div class="advertisement-card-description-div">
-                    <h3 class="advertisement-card-description-title">Описание:</h3>
-                    <p class="advertisement-card-description">
-                        {{description}}
-                    </p>
-                </div>
-
-            </div>
-
         </div>
 
+
+        <div class="advertisement-card-main-container test">
+
+            <div class="advertisement-card-name-container tablet-desktop">
+                <h2 class="advertisement-card-title">{{title}}</h2>
+                <p class="advertisement-card-code"><span>Код товару | </span> {{_id}}</p>
+            </div>
+
+            <h3 class="advertisement-card-price">{{price}} €</h3>
+            <div class="btn-div">
+                <button class="advertisement-card-button-salesman-info" type="button"><span
+                        class="salesman-span">Информация о
+                        продавце</span></button>
+            </div>
+            <div class="advertisement-card-buttons-div">
+                <div class="favorites-div" data-id="{{_id}}">
+                    <p class="advertisement-card-favorites-and-share">В избранное</p>
+                    <svg class="advertisement-card-favorites-svg" type="button" width="14" height="12">
+                        <use href="./images/sprite/sprite.svg#icon-favorite-heart"></use>
+                    </svg>
+                </div>
+                <p class="advertisement-card-favorites-and-share">Поделиться</p>
+                <svg class="advertisement-card-share-svg" type="button" width="15" height="16">
+                    <use class='ads' href="./images/sprite/sprite.svg#icon-share"></use>
+                </svg>
+            </div>
+
+            <div class="advertisement-card-description-div">
+                <h3 class="advertisement-card-description-title">Описание:</h3>
+                <p class="advertisement-card-description">
+                    {{description}}
+                </p>
+            </div>
+        </div>
     </div>
 
+
 </section>
-{{/each}}

@@ -161,6 +161,7 @@
             </a>
           </li>
         </ul>
+        <div class="mobile-header-backdrop" style="opacity: 0"></div>
         <div class="mobile-menu">
           <button class="mobile-close-button header-button">
             <svg class="close-icon button-icon" width="24" height="24">
@@ -171,12 +172,12 @@
       </div>
     </header>
 
-    <div class="container search-is-hidden js-search-container"></div>
     <main class="main-section js-main">
+      <div class="search-is-hidden"></div>
       <section class="hero">
-        <ul class="hero-list">
+        <ul class="hero-list js-item-container">
           <li id="item1" class="hero-item">
-            <ul class="hero-list-slider"></ul>
+            <ul class="hero-list-slider js-item-container"></ul>
           </li>
         </ul>
       </section>
@@ -208,9 +209,11 @@
         </p>
       </div>
     </footer>
-    <svg class="arrow-up">
-      <use href="./images/sprite/sprite.svg#icon-arrow-up"></use>
-    </svg>
+    <button class="arrow-up-btn" aria-label="scroll-up-page">
+      <svg class="arrow-up">
+        <use href="./images/sprite/sprite.svg#icon-arrow-up"></use>
+      </svg>
+    </button>
 
     <!-- <div class="modal-wrapper">
       <div class="modal"></div>
