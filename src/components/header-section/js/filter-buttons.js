@@ -6,7 +6,7 @@ import {
 import { getItemsInCategory } from '../../../utils/backend-services';
 import { closeMobileMenu } from './service';
 import template from '../../../pages/main-page/templates/categories-markup.hbs';
-import {itemOpener} from '../../../utils/item-opener'
+import { itemOpener } from '../../../utils/item-opener';
 refs.filterList.addEventListener('click', onFilterButtonClick);
 
 function onFilterButtonClick(event) {
@@ -21,9 +21,12 @@ function onFilterButtonClick(event) {
 
       EnglishCategoriesPromise.then(array => {
         // console.log(array[index]);
+        const currentButton = array[index];
+        history.pushState(null, null, currentButton.replace(/ /g, '-'));
 
         getItemsInCategory(array[index]).then(array => {
           // console.log(array);
+
           const mappedArray = array.map(item => ({
             ...item,
             imageUrls: item.imageUrls[0],

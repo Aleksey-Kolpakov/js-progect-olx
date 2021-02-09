@@ -53,6 +53,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "handlebars": "^4.7.6",
-    "lodash.throttle": "^4.1.1"
+    "lodash.throttle": "^4.1.1",
+    "tippy.js": "^6.2.7"
   }
 }
