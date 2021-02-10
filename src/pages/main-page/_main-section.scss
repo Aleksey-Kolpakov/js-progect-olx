@@ -3,7 +3,8 @@
 }
 
 .section-title {
-  display: inline;
+  display: inline-block;
+  margin-bottom: 16px;
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
@@ -22,7 +23,6 @@
   line-height: 1.5;
   letter-spacing: 0.04em;
 
-  margin-top: 16px;
   margin-bottom: 24px;
 
   color: $secondary-gray-color;
