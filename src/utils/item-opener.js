@@ -5,7 +5,7 @@ import {
   MarkUpFormChange,
   DynamicMarkUp,
 } from '../components/form-change-item/form-item-image-markup.js';
-
+import { colorInOrangeHeartsOfFavourites } from '../utils/favourites-rest-logic.js'
 export const itemOpener = function (
   selector = '[data-items="item"]',
   openRightModal = openItemModal,
@@ -16,6 +16,7 @@ export const itemOpener = function (
   containers.forEach(ul => {
     ul.addEventListener('click', openRightModal);
   });
+  colorInOrangeHeartsOfFavourites();
 };
 
 function openItemModal(event) {
