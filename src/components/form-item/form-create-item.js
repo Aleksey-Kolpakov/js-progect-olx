@@ -54,6 +54,8 @@ function openModalAddItem() {
 
   //-----------------------------------------------> Ф-я загрузки шаблона для фотографий в инпут
   DynamicMarkUp();
+  const inputDownloadRef = document.querySelector('.download__input');
+  inputDownloadRef.setAttribute('required', ' ');
 
   //-----------------------------------------------> Ф-я загрузки списка категорий в инпут
   addRusCategory();
