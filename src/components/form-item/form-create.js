@@ -86,6 +86,7 @@ export function sendItemOnServer() {
     createItemFetch(formData).then(resp => {
       if (resp.ok === true) {
         makeNoticeSuccess('Товар успешно создан');
+        console.log(resp);
         closeModal();
       } else {
         makeNoticeError(
@@ -105,14 +106,16 @@ export function sendItemOnServer() {
     const inputPriceRef = document.querySelector('#input-number');
     if (
       categorrySelectRef.value === 'Работа' ||
-      categorrySelectRef.value === 'Отдам бесплатно'
+      categorrySelectRef.value === 'Отдам бесплатно' ||
+      categorrySelectRef.value === 'Обмен'
     ) {
       inputPriceRef.value = 0;
       inputPriceRef.setAttribute('readonly', '');
     }
     if (
       categorrySelectRef.value !== 'Работа' &&
-      categorrySelectRef.value !== 'Отдам бесплатно'
+      categorrySelectRef.value !== 'Отдам бесплатно' &&
+      categorrySelectRef.value !== 'Обмен'
     ) {
       inputPriceRef.value = '';
       inputPriceRef.removeAttribute('readonly');

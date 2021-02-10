@@ -3,6 +3,8 @@ import {
   deleteItemFetch,
 } from '../../../utils/backend-services.js';
 
+import emptyOwnHbs from '../../../pages/user-items-pages/templates/emptyOwn.hbs';
+import { noContentMarkup } from '../../../pages/user-items-pages/user-items-page';
 import { makeNoticeError, makeNoticeSuccess } from '../../../utils/pnotify.js';
 
 export function ChangeItemOnServer(id) {
@@ -21,11 +23,16 @@ export function ChangeItemOnServer(id) {
 
   function deleteItem(event) {
     event.preventDefault();
-
     deleteItemFetch(id).then(resp => {
       // console.log(typeof id);
       const deletedItemRef = document.querySelector(`[data-id="${id}"]`);
+      const UlRef = deletedItemRef.parentElement.parentElement;
       deletedItemRef.parentElement.remove();
+      if (UlRef.children.length === 0) {
+        const sectionOwnRef = document.querySelector('.section-own-items');
+        sectionOwnRef.remove();
+        noContentMarkup(emptyOwnHbs, 'beforeend');
+      }
       closeModal();
       makeNoticeSuccess('Товар успешно удален');
     });
@@ -97,14 +104,16 @@ export function ChangeItemOnServer(id) {
     const inputPriceRef = document.querySelector('#input-number');
     if (
       categorrySelectRef.value === 'Работа' ||
-      categorrySelectRef.value === 'Отдам бесплатно'
+      categorrySelectRef.value === 'Отдам бесплатно' ||
+      categorrySelectRef.value === 'Обмен'
     ) {
       inputPriceRef.value = 0;
       inputPriceRef.setAttribute('readonly', '');
     }
     if (
       categorrySelectRef.value !== 'Работа' &&
-      categorrySelectRef.value !== 'Отдам бесплатно'
+      categorrySelectRef.value !== 'Отдам бесплатно' &&
+      categorrySelectRef.value !== 'Обмен'
     ) {
       inputPriceRef.value = '';
       inputPriceRef.removeAttribute('readonly');
