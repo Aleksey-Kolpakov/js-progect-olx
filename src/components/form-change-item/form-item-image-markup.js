@@ -71,7 +71,7 @@ export function DynamicMarkUp(obj) {
 
   formImgList.insertAdjacentHTML(
     'beforeend', ///--->>
-    '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
+    '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input visually-hidden" type="file" multiple /></label></li > ',
   );
 
   formImgList.addEventListener('change', insertImages);

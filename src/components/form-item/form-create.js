@@ -4,6 +4,8 @@ import {
   createItemFetch,
   registerUserApi,
   loginFetch,
+  getUsersOwnItems,
+  getItembyTitle,
 } from '../../utils/backend-services.js';
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
@@ -65,12 +67,12 @@ export function sendItemOnServer() {
       formData.append('file', file);
     });
 
-    var object = {};
-    foData.forEach(function (value, key) {
-      object[key] = value;
-    });
-    var json = JSON.stringify(object);
-    console.log(json);
+    // var object = {};
+    // formData.forEach(function (value, key) {
+    //   object[key] = value;
+    // });
+    // var json = JSON.stringify(object);
+    // console.log(json);
 
     createItemFetch(formData);
   }
