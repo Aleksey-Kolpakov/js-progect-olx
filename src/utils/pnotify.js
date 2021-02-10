@@ -15,3 +15,9 @@ export function makeNotice(message) {
   });
 }
 
+export function noticeToReg(message) {
+  const noticeToReg = notice({
+    text: message,
+  });
+}
+
