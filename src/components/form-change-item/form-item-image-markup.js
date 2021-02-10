@@ -5,7 +5,7 @@ import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 import { ChangeItemOnServer } from './js/send-on-server.js';
 import { makeNoticeError, makeNoticeSuccess } from '../../utils/pnotify.js';
 
-export function MarkUpFormChange(id) {
+export const MarkUpFormChange = async id => {
   modalBackDrop(formChangeItem);
   // console.log(id);
   const categoryRef = document.querySelector('#form-category');
@@ -16,9 +16,20 @@ export function MarkUpFormChange(id) {
     return;
   });
   ChangeItemOnServer(id);
-}
+};
 
 export function DynamicMarkUp(obj) {
+  const listOfCategory = {
+    property: 'Недвижимость',
+    transport: 'Транспорт',
+    work: 'Работа',
+    electronics: 'Электроника',
+    'business and services': 'Бизнес и услуги',
+    'recreation and sport': 'Отдых и спорт',
+    free: 'Отдам бесплатно',
+    trade: 'Обмен',
+  };
+
   const formImgList = document.querySelector('.form__input-download');
   let allListItems = document.querySelectorAll('.download__item');
   let firstItem = document.querySelector('.start-list-item');
@@ -31,28 +42,23 @@ export function DynamicMarkUp(obj) {
       obj.price,
       obj.phone,
     ];
-
+    let currentCategorry = '';
     const formInputs = document.querySelectorAll('.form__input');
 
     const formRef = document.querySelector('.form');
 
     const categorrySelectRef = document.querySelector('#form-category');
-    // categorrySelectRef.value = obj.category;
-    // categorrySelectRef.;
 
     const select = categorrySelectRef.options;
 
-    // const test = Object.values(select);
-
-    // for (let i = 0; i < select.length; i++) {
-    //   if (select[i].value === obj.category) {
-    //     select[i].selected = true;
-    //   }
-    // }
-
-    formInputs.forEach((form, i) => {
-      form.value = values[i];
-    });
+    if (listOfCategory.hasOwnProperty(obj.category)) {
+      currentCategorry = listOfCategory[obj.category];
+    }
+    for (let i = 0; i < select.length; i++) {
+      if (select[i].value === currentCategorry) {
+        select[i].selected = true;
+      }
+    }
 
     obj.imageUrls.forEach((img, i) => {
       formImgList.insertAdjacentHTML(

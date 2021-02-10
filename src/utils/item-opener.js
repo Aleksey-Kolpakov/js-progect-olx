@@ -27,8 +27,9 @@ export function openChangeOwnItemModal(event) {
   // console.log(event.currentTarget);
   const itemData = findItemData(event);
   // ownItemChange(itemData);
-  MarkUpFormChange(itemData._id);
-  DynamicMarkUp(itemData);
+  MarkUpFormChange(itemData._id).then(data => {
+    DynamicMarkUp(itemData);
+  });
 }
 
 function findItemData(event) {
