@@ -6,7 +6,7 @@ import { ChangeItemOnServer } from './js/send-on-server.js';
 
 export function MarkUpFormChange(id) {
   modalBackDrop(formChangeItem);
-
+  // console.log(id);
   const categoryRef = document.querySelector('#form-category');
 
   RussianCategoriesPromise.then(function (data) {
@@ -30,9 +30,24 @@ export function DynamicMarkUp(obj) {
       obj.price,
       obj.phone,
     ];
+
     const formInputs = document.querySelectorAll('.form__input');
 
     const formRef = document.querySelector('.form');
+
+    const categorrySelectRef = document.querySelector('#form-category');
+    // categorrySelectRef.value = obj.category;
+    // categorrySelectRef.;
+
+    const select = categorrySelectRef.options;
+
+    // const test = Object.values(select);
+
+    for (let i = 0; i < select.length; i++) {
+      if (select[i].value === obj.category) {
+        select[i].selected = true;
+      }
+    }
 
     formInputs.forEach((form, i) => {
       form.value = values[i];

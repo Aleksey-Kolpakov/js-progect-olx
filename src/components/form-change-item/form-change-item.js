@@ -18,7 +18,7 @@ const formChangeItem = `
     <li class="item form__item">
       <label class="form__label" for="input-select">Категория товара</label>
       <select id="form-category" class="form__input select" id="input-select" size="1" name="category">
-        <option class="select__option"></option>
+        <option ></option>
       </select>
     </li>
     <li class="item form__item">

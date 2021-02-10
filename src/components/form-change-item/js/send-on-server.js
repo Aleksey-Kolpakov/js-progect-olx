@@ -9,8 +9,15 @@ export function ChangeItemOnServer(id) {
   const buttonDeleteRef = document.querySelector('.button-delete');
   buttonDeleteRef.addEventListener('click', deleteItem);
 
-  function deleteItem(id) {
-    deleteItemFetch(id);
+  function deleteItem(event) {
+    event.preventDefault();
+    const newID = Number(id);
+
+    deleteItemFetch(id).then(obj => {
+      // console.log(typeof id);
+      const deletedItemRef = document.querySelector(`[data-id="${id}"]`);
+      deletedItemRef.parentElement.remove();
+    });
   }
 
   const listOfCategory = {
@@ -26,11 +33,12 @@ export function ChangeItemOnServer(id) {
 
   function formDataCollect(event) {
     event.preventDefault();
-
-    const formInputs = document.querySelectorAll('.form__input');
-    formInputs.forEach(input => {
-      console.log(input.value);
-    });
+    // console.log(event.target);
+    console.log('test');
+    // const formInputs = document.querySelectorAll('.form__input');
+    // formInputs.forEach(input => {
+    //   console.log(input.value);
+    // });
 
     const downloadInput = document.querySelector('.download__input');
     const formData = new FormData();
@@ -62,7 +70,7 @@ export function ChangeItemOnServer(id) {
       object[key] = value;
     });
     var json = JSON.stringify(object);
-    console.log(json);
+    // console.log(json);
 
     changeItemFetch(id, formData);
   }
