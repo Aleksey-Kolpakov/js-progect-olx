@@ -1,28 +1,24 @@
 import {
-  getEnglishCategories,
-  getRussianCategories,
-  createItemFetch,
-  registerUserApi,
-  loginFetch,
-} from '../../utils/backend-services.js';
-import templateCategory from './category.hbs';
-import { RussianCategoriesPromise } from '../../utils/initial-load.js';
+  changeItemFetch,
+  deleteItemFetch,
+} from '../../../utils/backend-services.js';
 
-//------------------------------------------- ф-я загрузки категорий с бэкэнда в input
-export function addRusCategory() {
-  const categoryRef = document.querySelector('#form-category');
-
-  RussianCategoriesPromise.then(function (data) {
-    const template = templateCategory(data);
-    categoryRef.insertAdjacentHTML('beforeend', template);
-    return;
-  });
-}
-
-export function sendItemOnServer() {
+export function ChangeItemOnServer(id) {
   const form = document.querySelector('.form');
 
-  //------------------------------------------- Список доступных категорий (должно совпадать с бэкэндом)
+  const buttonDeleteRef = document.querySelector('.button-delete');
+  buttonDeleteRef.addEventListener('click', deleteItem);
+
+  function deleteItem(event) {
+    event.preventDefault();
+    const newID = Number(id);
+
+    deleteItemFetch(id).then(obj => {
+      // console.log(typeof id);
+      const deletedItemRef = document.querySelector(`[data-id="${id}"]`);
+      deletedItemRef.parentElement.remove();
+    });
+  }
 
   const listOfCategory = {
     Недвижимость: 'property',
@@ -34,21 +30,16 @@ export function sendItemOnServer() {
     'Отдам бесплатно': 'free',
     Обмен: 'trade',
   };
-  //-------------------------------------Переводчик категорий для отправки на бэкэнд
-
-  function translator(rus, list) {
-    if (listOfCategory[rus] === undefined) {
-      console.warn(
-        'Отсутствует перевод. Отредактируйте список категорий - listOfCategory (form-create)',
-      );
-    }
-    return listOfCategory[rus];
-  }
-
-  //------------------------------------------- ф-я сбора всех полей
 
   function formDataCollect(event) {
     event.preventDefault();
+    // console.log(event.target);
+    console.log('test');
+    // const formInputs = document.querySelectorAll('.form__input');
+    // formInputs.forEach(input => {
+    //   console.log(input.value);
+    // });
+
     const downloadInput = document.querySelector('.download__input');
     const formData = new FormData();
 
@@ -61,6 +52,15 @@ export function sendItemOnServer() {
         }
       }
     });
+
+    // foData.forEach((value, key) => {
+    //   if (key !== 'file') {
+    //     formData.set(key, value);
+    //     if (listOfCategory.hasOwnProperty(value)) {
+    //       formData.set('category', listOfCategory[value]);
+    //     }
+    //   }
+    // });
     downloadInput.files.forEach(file => {
       formData.append('file', file);
     });
@@ -70,9 +70,9 @@ export function sendItemOnServer() {
       object[key] = value;
     });
     var json = JSON.stringify(object);
-    console.log(json);
+    // console.log(json);
 
-    createItemFetch(formData);
+    changeItemFetch(id, formData);
   }
 
   form.addEventListener('submit', formDataCollect);
@@ -97,6 +97,5 @@ export function sendItemOnServer() {
       inputPriceRef.value = '';
       inputPriceRef.removeAttribute('readonly');
     }
-    // console.dir(categorrySelectRef)
   }
 }
