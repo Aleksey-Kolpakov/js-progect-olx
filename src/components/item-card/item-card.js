@@ -1,5 +1,5 @@
 import itemCardMarkup from '../../pages/main-page/templates/item-card-markup.hbs'
-import {addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID, getAllCategoriesWithItemsByPages, registerUserApi, loginFetch } from '../../utils/backend-services.js'
+import {addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID} from '../../utils/backend-services.js'
 import salesmaInfoMarkup from '../item-card/salesman-info-btn.hbs'
 import Slider from '../Slider/Slider.js'
 import { modalBackDrop } from '../../components/modal-window/modal-logic.js'
