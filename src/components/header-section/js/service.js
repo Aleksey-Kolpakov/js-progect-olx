@@ -53,10 +53,17 @@ function makeFilterButtonActive(englishCategory) {
   });
 }
 
+function clearFilterButtons() {
+  refs.filterList.children.forEach(li => {
+    li.children[0].classList.remove('is-active');
+  });
+}
+
 export {
   openMobileMenu,
   closeMobileMenu,
   showAuthorizationBlock,
   showMyCabinetBlock,
   makeFilterButtonActive,
+  clearFilterButtons,
 };
