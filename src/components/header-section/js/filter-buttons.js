@@ -36,6 +36,13 @@ function onFilterButtonClick(event) {
 
           refs.mainSection.innerHTML = '';
           refs.mainSection.insertAdjacentHTML('beforeend', markup);
+          // Batyuschenko
+          const sectionTittleRef = document.querySelector('.section-title');
+          const activeSectionValueRef = document.querySelector(
+            '.header-filter-item.is-active',
+          );
+          sectionTittleRef.textContent = activeSectionValueRef.textContent;
+
           itemOpener();
           if (window.innerWidth >= 768 && window.innerWidth < 1280) {
             refs.filtersContainer.classList.remove('tablet-is-open');

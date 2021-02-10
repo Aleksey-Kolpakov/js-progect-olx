@@ -228,13 +228,19 @@ function onClick(event) {
 
     history.pushState(null, null, currentSection.replace(/ /g, '-'));
     getItemsInCategory(currentSection).then(resp => {
-      const mapImg = resp.map(item => ({
+      const mapImg = resp.map((item, indx) => ({
         ...item,
         imageUrls: item.imageUrls[0],
       }));
       const markup = categoryMarkup(mapImg);
       mainSectionRef.innerHTML = '';
       mainSectionRef.insertAdjacentHTML('beforeend', markup);
+
+      const sectionTittleRef = document.querySelector('.section-title');
+      const activeSectionValueRef = document.querySelector(
+        '.header-filter-item.is-active',
+      );
+      sectionTittleRef.textContent = activeSectionValueRef.textContent;
       itemOpener();
       window.scrollTo({
         top: 0,
