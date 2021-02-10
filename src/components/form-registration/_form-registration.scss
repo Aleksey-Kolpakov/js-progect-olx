@@ -1,20 +1,29 @@
 .registrationForm {
-  width: 260px;
+  width: 290px;
   margin: 0 auto;
-  padding: 0px 19px 0px 19px;
+  padding: 47px 17px 7px 17px;
   @include for-size(tablet) {
-    width: 427px;
+    width: 480px;
+    padding: 50px;
   }
 }
 
 .registration-title {
-  margin-top: 47px;
-font-weight: 500;
-@include for-size(tablet) {
-   margin-top: 50px;
-  font-size: 14px;
+  font-weight: 500;
+  @include for-size(tablet) {
+    margin-top: 50px;
+    font-size: 14px;
+  }
 }
+
+.registration-title-first {
+  margin-top: 20px;
+  @include for-size(tablet) {
+    margin-top: 50px;
+    font-size: 14px;
+  }
 }
+
 .reg-aut-btn {
   display: flex;
   justify-content: space-between;
@@ -29,6 +38,7 @@ font-weight: 500;
   margin-top: 26px;
   border: 1px solid $tertirary-gray-color;
 }
+
 .input-reg {
   text-align: center;
   position: relative;
@@ -36,9 +46,9 @@ font-weight: 500;
 
 .reg-aut-btn .enterAccount {
   margin-top: 30px;
-  width: 107px;
+  width: 120px;
   height: 50px;
-  background-color:$orange-color;
+  background-color: $orange-color;
   border: none;
   color: #FAFAFA;
   font-weight: 700;
@@ -53,8 +63,9 @@ font-weight: 500;
 
 .reg-aut-btn .registerAccount {
   margin-top: 30px;
-  background-color: #ffffff;;
-  width: 107px;
+  background-color: #ffffff;
+  ;
+  width: 120px;
   height: 50px;
   border: none;
   border: 1px solid #BBBBBB;
@@ -73,6 +84,7 @@ font-weight: 500;
   color: $tertirary-gray-color;
   border: $tertirary-gray-color;
 }
+
 .reg-aut-btn button:hover {
   background-color: $orange-color;
   color: #FAFAFA;
@@ -84,7 +96,8 @@ font-weight: 500;
   justify-content: center;
   align-items: center;
   color: black;
-  background-color: #FAFAFA;;
+  background-color: #FAFAFA;
+  ;
   width: 150px;
   height: 50px;
   margin: 0 auto;
@@ -94,18 +107,19 @@ font-weight: 500;
   margin-top: 26px;
   transition: 0.3s;
   text-decoration: none;
-    @include for-size(tablet) {
-       margin-top: 30px;
-       display: inline-flex;
+  @include for-size(tablet) {
+    margin-top: 30px;
+    display: inline-flex;
   }
 }
+
 .registration-google:hover {
   background-color: $orange-color;
   color: #FAFAFA;
-
 }
+
 .registration-google-svg {
-    margin-right: 10px
+  margin-right: 10px
 }
 
 .form__error {
@@ -130,16 +144,19 @@ font-weight: 500;
 }
 
 .show-password {
-display: flex;
-margin-top: 10px;
+  display: flex;
+  margin-top: 10px;
 }
+
 #show_password {
   margin-right: 3px;
   display: none;
 }
 
 .showPassEye {
- position: absolute;
-top: 46px;
-right: 20px;
+  cursor: pointer;
+  fill: $orange-color;
+  position: absolute;
+  top: 43px;
+  right: 28px;
 }
