@@ -94,6 +94,8 @@ export function sendItemOnServer() {
           'Товар не был создан. Пожалуйста проверьте поля заполнения',
         );
       }
+
+      console.log(resp.json());
     });
   }
 

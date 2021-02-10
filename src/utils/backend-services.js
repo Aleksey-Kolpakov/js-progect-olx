@@ -85,7 +85,7 @@ export const getUsersFavouritesByToken = function () {
         ? [...jsDataBase, ...favourites]
         : jsDataBase;
       return favourites;
-    })
+    });
 };
 /// нужно тестить
 export function createItemFetch(item) {
@@ -114,7 +114,7 @@ export function deleteItemFromFavourite(itemId) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   return axios
     .delete(`https://callboard-backend.goit.global/call/favourite/${itemId}`)
-    .then(({ data }) => data)
+    .then(({ data }) => data);
 }
 
 export function changeItemFetch(id, newItem) {
@@ -156,7 +156,7 @@ export function getItembyTitle(searchQuerry) {
   return axios
     .get(
       `https://callboard-backend.goit.global/call/find?search=${searchQuerry}`,
-  )
+    )
     .then(({ data }) => {
       jsDataBase = [...jsDataBase, ...data];
       return data;
