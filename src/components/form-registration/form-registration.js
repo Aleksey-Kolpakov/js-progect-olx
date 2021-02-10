@@ -61,8 +61,8 @@ export function openForm() {
 
 function closeModal() {
   authRefs.backDropRef.classList.remove('is-open');
-    hiddenModal.classList.remove('hiddenModalStyle');
-    authRefs.modalRef.innerHTML = '';
+  authRefs.hiddenModal.classList.remove('hiddenModalStyle');
+  authRefs.modalRef.innerHTML = '';
   }
     const loginUser = function () {
       submittedData.email = authRefs.inputEmail.value;
