@@ -2,7 +2,9 @@ import { getItembyTitle } from '../../../utils/backend-services.js';
 import template from './search.hbs';
 import './search.scss';
 import '../../../main.scss';
-import {itemOpener} from '../../../utils/item-opener.js'
+import { itemOpener } from '../../../utils/item-opener.js';
+import { makeNotice } from '../../../utils/pnotify.js';
+
 const mainRef = document.querySelector('.js-main');
 const wrapRef = document.querySelector('.search-is-hidden');
 const searchRef = document.querySelector('.js-search');
@@ -26,7 +28,7 @@ function onSearchMarkup(data) {
   const markup = template(data);
 
   if (!data.length) {
-    alert('No matches found');
+    makeNotice('No matches found');
     return;
   }
 
