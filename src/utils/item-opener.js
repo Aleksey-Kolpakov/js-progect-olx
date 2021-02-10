@@ -7,7 +7,7 @@ import {
 } from '../components/form-change-item/form-item-image-markup.js';
 
 export const itemOpener = function (
-  selector = '.js-item-container',
+  selector = '[data-items="item"]',
   openRightModal = openItemModal,
 ) {
   const containers = document.querySelectorAll(selector);
