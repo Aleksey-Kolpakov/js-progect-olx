@@ -28,7 +28,7 @@ function onSearchMarkup(data) {
   const markup = template(data);
 
   if (!data.length) {
-    makeNotice('No matches found');
+    makeNotice('Ничего не найдено');
     return;
   }
 
