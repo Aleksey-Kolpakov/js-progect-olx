@@ -86,6 +86,7 @@ export function sendItemOnServer() {
     createItemFetch(formData).then(resp => {
       if (resp.ok === true) {
         makeNoticeSuccess('Товар успешно создан');
+        console.log(resp);
         closeModal();
       } else {
         makeNoticeError(
