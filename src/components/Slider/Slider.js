@@ -233,20 +233,23 @@ export default class Slider {
   };
 
   changeActiveDot() {
-    if (!this.refs) {
+    if (!this.refs || !this.refs.blockDots) {
       return;
     }
     const allDots = this.refs?.blockDots?.children;
-    if (allDots.length === 0) {//доробити до толку. Це коли видаляємо розмітку героя вилазять помилки
+    if (allDots?.length === 0) {//доробити до толку. Це коли видаляємо розмітку героя вилазять помилки
       clearInterval(this.intervalId);
     }
-    allDots.forEach(dotItem => dotItem.children[0].style['background-image'] = `radial-gradient(
+    allDots?.forEach(dotItem => dotItem.children[0].style['background-image'] = `radial-gradient(
           circle at center,
           ${this.dotBtnColor} 0,
           ${this.dotBtnColor} 50%,
           transparent 50%
         )`);
     const activeDot = allDots[this.position];
+    if (!activeDot) {
+      return;
+    }
     activeDot.children[0].style['background-image'] = `radial-gradient(
           circle at center,
           ${this.dotBtnActiveColor} 0,

@@ -4,16 +4,14 @@ import {
   EnglishCategoriesPromise,
 } from '../../../utils/initial-load';
 import { getItemsInCategory } from '../../../utils/backend-services';
-import { closeMobileMenu } from './service';
+import { closeMobileMenu, clearFilterButtons } from './service';
 import template from '../../../pages/main-page/templates/categories-markup.hbs';
 import { itemOpener } from '../../../utils/item-opener';
 refs.filterList.addEventListener('click', onFilterButtonClick);
 
 function onFilterButtonClick(event) {
   if (event.target.nodeName === 'BUTTON') {
-    refs.filterList.children.forEach(li => {
-      li.children[0].classList.remove('is-active');
-    });
+    clearFilterButtons();
     event.target.classList.add('is-active');
 
     RussianCategoriesPromise.then(array => {

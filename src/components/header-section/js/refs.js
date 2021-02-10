@@ -1,6 +1,6 @@
 const refs = {
   body: document.querySelector('body'),
-  
+
   burgerMenuButton: document.querySelector('.burger-menu-button'),
   mobileMenu: document.querySelector('.mobile-menu'),
   mobileBackdrop: document.querySelector('.mobile-header-backdrop'),
@@ -16,6 +16,7 @@ const refs = {
   logoutButton: document.querySelector('.logout-button'),
 
   createAdButton: document.querySelector('.create-ad-button'),
+  createAdMobButton: document.querySelector('.create-ad-button-mobile'),
 
   filtersContainer: document.querySelector('.header-filter-container'),
   filterList: document.querySelector('.header-filter-list'),
