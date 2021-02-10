@@ -20,6 +20,7 @@ function findGoods(event) {
       })),
     )
     .then(onSearchMarkup);
+    history.pushState(null, null,'search');
 }
 
 function onSearchMarkup(data) {
