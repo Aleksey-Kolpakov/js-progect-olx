@@ -2,6 +2,7 @@ import { getUsersFavouritesByToken, deleteItemFromFavourite, addItemToFavourite 
 
 const addItemToFavouriteCallback = (itemId) => (event) => {
     event.stopPropagation();
+    event.preventDefault();
     addItemToFavourite(itemId).then(() => {
         if (event.target.tagName === 'use') {
             const tagUse = event.target;
@@ -25,6 +26,7 @@ const addItemToFavouriteCallback = (itemId) => (event) => {
 
 const deleteItemFromFavouriteCallback = (itemId, inMyCabinet) => (event) => {
     event.stopPropagation();
+    event.preventDefault();
     deleteItemFromFavourite(itemId).then(() => {
         if (inMyCabinet) {
             const targetRef = document.querySelector(`[data-id="${itemId}"]`);
