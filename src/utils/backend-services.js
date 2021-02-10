@@ -86,7 +86,6 @@ export const getUsersFavouritesByToken = function () {
         : jsDataBase;
       return favourites;
     })
-    .catch(error => console.log(error));
 };
 /// нужно тестить
 export function createItemFetch(item) {
@@ -116,7 +115,6 @@ export function deleteItemFromFavourite(itemId) {
   return axios
     .delete(`https://callboard-backend.goit.global/call/favourite/${itemId}`)
     .then(({ data }) => data)
-    .catch(error => console.log(error));
 }
 
 export function changeItemFetch(id, newItem) {
@@ -158,7 +156,7 @@ export function getItembyTitle(searchQuerry) {
   return axios
     .get(
       `https://callboard-backend.goit.global/call/find?search=${searchQuerry}`,
-    )
+  )
     .then(({ data }) => {
       jsDataBase = [...jsDataBase, ...data];
       return data;

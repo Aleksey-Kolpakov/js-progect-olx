@@ -23,13 +23,13 @@ const formChangeItem = `
     </li>
     <li class="item form__item">
       <label class="form__label" for="input-number">Цена</label>
-      <input class="form__input" type="number" placeholder="0.00 €" id="input-number" name="price">
+      <input class="form__input" type="tel" placeholder="0.00 €" id="input-number" name="price" minlength="1" maxlength="10" pattern="[^0][0-9]{0,10}">
     </li>
     <li class="item form__item">
-      <label class="form__label" for="input-tel">Телефон</label>
+      <label class="form__label" for="input-tel" >Телефон</label>
       <span class="form__error">Это поле должно содержать телефон в формате +38073737300</span>
-      <input class="form__input valid" type="tel" placeholder="+38 (0--) --- -- --" for="input-tel"
-      pattern="\+3\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" minlength="13" maxlength="13" name="phone">
+      <input class="form__input valid" type="tel" placeholder="+38 0XX XXX XX XX" for="input-tel"
+     minlength="13" maxlength="13" name="phone" pattern="[+][3][8][0][0-9]{9}">
     </li>
             <span class="form__error"
               >Это поле должно содержать телефон в формате +38073737300</span

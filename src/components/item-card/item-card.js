@@ -7,13 +7,14 @@ import { openForm } from '../form-registration/form-registration.js'
 import refsHeader from '../header-section/js/refs.js'
 import {noticeToReg} from '../../utils/pnotify.js'
 
+import { userFavourites } from '../../utils/initial-load.js'
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
     item.imageUrl = item.imageUrls[0];
     const markup = itemCardMarkup(item);
 
     modalBackDrop(markup);
-    addAndRemoveFavorites();
+    addAndRemoveFavorites(item);
     changeSmallToBigImg();
     getSalesmanInfo(item);
 
@@ -48,36 +49,40 @@ function changeSmallToBigImg() {
 
 //   ============ADD & REMOVE FAVORITES==========
 
-function addAndRemoveFavorites() {
+function addAndRemoveFavorites(item) {
+    console.log(userFavourites);
+    console.log(item);
+    const isItemInFavourites = userFavourites.find(favourite => favourite._id === item._id);
+
     const favoritesIcon = document.querySelector('.favorites-div');
     const favIcon = favoritesIcon.querySelector('.advertisement-card-favorites-svg')
+    if (isItemInFavourites) { favIcon.classList.add('js-mark-favorites-svg') }
 
     favoritesIcon.addEventListener('click', event => {
-        
         if (!refsHeader.authorizationBlock.classList.contains('is-hidden')) {
             noticeToReg('Для начала зарегистрируйтесь!');
             openForm();
-    } else {
+        } else {
         if (!favIcon.classList.contains('js-mark-favorites-svg')) {
+                favIcon.classList.toggle('js-mark-favorites-svg');
+                return addItemToFavourite(event.currentTarget.dataset.id);
+            }
             favIcon.classList.toggle('js-mark-favorites-svg');
-            return addItemToFavourite(event.currentTarget.dataset.id);
+            return deleteItemFromFavourite(event.currentTarget.dataset.id);
         }
-        favIcon.classList.toggle('js-mark-favorites-svg');
-        return deleteItemFromFavourite(event.currentTarget.dataset.id);
-}
     });
 }
 //   ==============================
 
- //==============INFO ABOUT SALESMAN===========
+//==============INFO ABOUT SALESMAN===========
 function getSalesmanInfo(item) {
-   const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
+    const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
 
     salesmanInfoBtn.addEventListener('click', event => {
         event.preventDefault();
         const userId = item.userId;
         const userPhone = item.phone;
-        
+
         getUsersInfoByID(userId)
             .then((userInfo) => {
                 userInfo.phone = userPhone;
