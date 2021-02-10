@@ -169,7 +169,7 @@ function createMarkup(categoriesList, otherEl) {
   const sectionLinksRef = document
     .querySelectorAll('.section-link')
     .forEach(link => {
-      link.addEventListener('click', onClick);
+      link.addEventListener('click', loadAllCategoryProd);
     });
 }
 
@@ -193,7 +193,7 @@ export function markupSales() {
   markupSections();
 }
 
-function onClick(event) {
+function loadAllCategoryProd(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     const currentSection = event.target.dataset.title;
