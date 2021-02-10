@@ -97,7 +97,8 @@ export function createItemFetch(item) {
       Authorization: `Bearer ${accessToken}`,
       // 'Content-Type': 'multipart/form-data; charset=UTF-8',
     },
-  }).catch(error => console.log(error));
+  }).then(response => response.json())
+    .catch(error => console.log(error));
 }
 
 export function addItemToFavourite(itemId) {
@@ -126,7 +127,8 @@ export function changeItemFetch(id, newItem) {
       Authorization: `Bearer ${accessToken}`,
       // 'Content-Type': 'application/json; charset=UTF-8',
     },
-  }).catch(error => console.log(error));
+  }).then(response => response.json())
+    .catch(error => console.log(error));
 }
 
 export function deleteItemFetch(id) {
