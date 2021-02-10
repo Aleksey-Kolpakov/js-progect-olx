@@ -48,7 +48,6 @@ const formCreate = `<form class="form" autocomplete="off">
 </form>`;
 
 function openModalAddItem() {
-
   //-----------------------------------------------> Ф-я динамической загрузки формы в модальное окно
   modalBackDrop(formCreate);
 

@@ -9,8 +9,18 @@ defaults.mode = 'light';
 defaults.closerHover = true;
 defaults.delay = 3000;
 
-export function makeNotice(message) {
+export function makeNoticeError(message) {
   const myNotice = error({
+    text: message,
+  });
+}
+export function makeNoticeSuccess(message) {
+  const myNotice = success({
+    text: message,
+  });
+}
+export function makeNotice(message) {
+  const myNotice = notice({
     text: message,
   });
 }
@@ -20,4 +30,3 @@ export function noticeToReg(message) {
     text: message,
   });
 }
-

@@ -9,6 +9,7 @@ import {
 } from '../../utils/backend-services.js';
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
+import { makeNoticeError, makeNoticeSuccess } from '../../utils/pnotify.js';
 
 //------------------------------------------- ф-я загрузки категорий с бэкэнда в input
 export function addRusCategory() {
@@ -50,6 +51,14 @@ export function sendItemOnServer() {
   //------------------------------------------- ф-я сбора всех полей
 
   function formDataCollect(event) {
+    function closeModal() {
+      const backDropRef = document.querySelector('.back-drop');
+      const hiddenModal = document.querySelector('body');
+      const modalRef = document.querySelector('.modal');
+      backDropRef.classList.remove('is-open');
+      hiddenModal.classList.remove('hiddenModalStyle');
+      modalRef.innerHTML = '';
+    }
     event.preventDefault();
     const downloadInput = document.querySelector('.download__input');
     const formData = new FormData();
@@ -74,7 +83,16 @@ export function sendItemOnServer() {
     // var json = JSON.stringify(object);
     // console.log(json);
 
-    createItemFetch(formData);
+    createItemFetch(formData).then(resp => {
+      if (resp.ok === true) {
+        makeNoticeSuccess('Товар успешно создан');
+        closeModal();
+      } else {
+        makeNoticeError(
+          'Товар не был создан. Пожалуйста проверьте поля заполнения',
+        );
+      }
+    });
   }
 
   form.addEventListener('submit', formDataCollect);
