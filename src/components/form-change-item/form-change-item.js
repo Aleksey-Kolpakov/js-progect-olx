@@ -30,25 +30,23 @@ const formChangeItem = `
             <label class="form__label" for="input-number">Цена</label>
             <input
               class="form__input"
-              type="number"
+              type="tel"
               placeholder="0.00 €"
               id="input-number"
+              pattern="[^0][0-9]{0,10}"
+              minlength="1" maxlength="10"
             />
           </li>
           <li class="item form__item">
             <label class="form__label" for="input-tel">Телефон</label>
             <input
-              pattern="\+3\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
-              minlength="13"
-              maxlength="13"
+            pattern="[+][3][8][0][0-9]{9}"
+            minlength="13" maxlength="13
               class="form__input valid"
               type="tel"
-              placeholder="+38 (0--) --- -- --"
+              placeholder="+38 0XX XXX XX XX"
               for="input-tel"
             />
-            <span class="form__error"
-              >Это поле должно содержать телефон в формате +38073737300</span
-            >
           </li>
           <li class="item form__item-delete">
             <button class="button-delete" type="click" data-action="delete">
