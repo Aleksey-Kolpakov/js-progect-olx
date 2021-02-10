@@ -76,14 +76,15 @@ export function sendItemOnServer() {
       formData.append('file', file);
     });
 
-    // var object = {};
-    // formData.forEach(function (value, key) {
-    //   object[key] = value;
-    // });
-    // var json = JSON.stringify(object);
-    // console.log(json);
+    var object = {};
+    formData.forEach(function (value, key) {
+      object[key] = value;
+    });
+    var json = JSON.stringify(object);
+    console.log(json);
 
     createItemFetch(formData).then(resp => {
+      console.log(resp);
       if (resp.ok === true) {
         makeNoticeSuccess('Товар успешно создан');
         console.log(resp);
