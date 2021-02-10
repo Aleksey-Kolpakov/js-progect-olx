@@ -10,7 +10,6 @@ let pageNumber = 1;
 import { itemOpener } from '../../utils/item-opener.js';
 import { makeFilterButtonActive } from '../../components/header-section/js/service'; // kozubskyi
 
-const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
 const mainSectionRef = document.querySelector('.main-section');
