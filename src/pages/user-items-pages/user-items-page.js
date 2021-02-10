@@ -66,6 +66,7 @@ function onClickBtnMyAccount() {
         }),
     );
     colorInOrangeHeartsOfFavourites(true);//Єгор додав
+    history.pushState(null, null, 'cabinet'); //добавил изменение ссылки Вансовский
   });
 }
 
@@ -102,7 +103,8 @@ const onClickBtnSeeAll = (promiseResultArray) => (event) => {
   event.preventDefault();
     mainRef.textContent = '';
     updateMarkupFavouritesAll(promiseResultArray);
-    itemOpener('[data-items="own"]', openChangeOwnItemModal);
+  itemOpener('[data-items="own"]', openChangeOwnItemModal);
+  history.pushState(null, null, 'cabinet/all-my-own'); //добавил изменение ссылки Вансовский
 };
 
 const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
@@ -112,4 +114,5 @@ const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
     const ulContainerRef = document.querySelector('[data-items="own"]');
     ulContainerRef.dataset.items = '';
     itemOpener();
+    history.pushState(null, null, 'cabinet/all-my-favourites'); //добавил изменение ссылки Вансовский
 };

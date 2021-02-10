@@ -1,4 +1,5 @@
 import { getUsersFavouritesByToken, deleteItemFromFavourite, addItemToFavourite } from './backend-services';
+import { userFavourites } from './initial-load';
 
 const addItemToFavouriteCallback = (itemId) => (event) => {
     event.stopPropagation();
@@ -65,11 +66,7 @@ function addOnClickHeartsFetchAddItemToFavourites(favourArray) {
 }
 
 export function colorInOrangeHeartsOfFavourites(inMyCabinet=false) {
-    getUsersFavouritesByToken().then(favArray => {
-        if (!favArray) {
-            return;
-        }
-        favArray.map(item => {
+        userFavourites.map(item => {
             const favItem = document.querySelector(`[data-id="${item._id}"]`);
             if (!favItem) {
                 return;
@@ -81,8 +78,28 @@ export function colorInOrangeHeartsOfFavourites(inMyCabinet=false) {
             favItemBtnHeartUseTag.setAttribute("href", "./images/sprite/sprite.svg#icon-favorite-heart");
             favItemBtnHeart?.addEventListener('click', deleteItemFromFavouriteCallback(item._id, inMyCabinet),{ once: true });
         })
-        addOnClickHeartsFetchAddItemToFavourites(favArray)
-    })
+        addOnClickHeartsFetchAddItemToFavourites(userFavourites)
 }
 
 setTimeout(colorInOrangeHeartsOfFavourites, 1000);
+
+// export function colorInOrangeHeartsOfFavourites(inMyCabinet=false) {
+//     getUsersFavouritesByToken().then(favArray => {
+//         if (!favArray) {
+//             return;
+//         }
+//         favArray.map(item => {
+//             const favItem = document.querySelector(`[data-id="${item._id}"]`);
+//             if (!favItem) {
+//                 return;
+//             }
+//             const favItemBtnHeart = favItem.querySelector(`.icon-add-favorite`);
+//             favItemBtnHeart.style['fill'] = `orange`;
+//             favItemBtnHeart.style['opacity'] = `1`;
+//             const favItemBtnHeartUseTag = favItemBtnHeart.querySelector('use');
+//             favItemBtnHeartUseTag.setAttribute("href", "./images/sprite/sprite.svg#icon-favorite-heart");
+//             favItemBtnHeart?.addEventListener('click', deleteItemFromFavouriteCallback(item._id, inMyCabinet),{ once: true });
+//         })
+//         addOnClickHeartsFetchAddItemToFavourites(favArray)
+//     })
+// }
