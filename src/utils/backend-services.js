@@ -90,14 +90,18 @@ export const getUsersFavouritesByToken = function () {
 /// нужно тестить
 export function createItemFetch(item) {
   const accessToken = localStoradge.load('accessTokenOlx');
-  return fetch(`https://callboard-backend.goit.global/call`, {
-    method: 'POST',
-    body: item,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      // 'Content-Type': 'multipart/form-data; charset=UTF-8',
-    },
-  }).catch(error => console.log(error));
+  return (
+    fetch(`https://callboard-backend.goit.global/call`, {
+      method: 'POST',
+      body: item,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        // 'Content-Type': 'multipart/form-data; charset=UTF-8',
+      },
+    })
+      // .then(response => response.json())
+      .catch(error => console.log(error))
+  );
 }
 
 export function addItemToFavourite(itemId) {
@@ -119,14 +123,18 @@ export function deleteItemFromFavourite(itemId) {
 
 export function changeItemFetch(id, newItem) {
   const accessToken = localStoradge.load('accessTokenOlx');
-  return fetch(`https://callboard-backend.goit.global/call/${id}`, {
-    method: 'PATCH',
-    body: newItem,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      // 'Content-Type': 'application/json; charset=UTF-8',
-    },
-  }).catch(error => console.log(error));
+  return (
+    fetch(`https://callboard-backend.goit.global/call/${id}`, {
+      method: 'PATCH',
+      body: newItem,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        // 'Content-Type': 'application/json; charset=UTF-8',
+      },
+    })
+      // .then(response => response.json())
+      .catch(error => console.log(error))
+  );
 }
 
 export function deleteItemFetch(id) {

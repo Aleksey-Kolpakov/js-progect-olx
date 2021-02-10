@@ -10,7 +10,7 @@ import {
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 import { makeNoticeError, makeNoticeSuccess } from '../../utils/pnotify.js';
-
+import ownItems from '../../pages/user-items-pages/templates/ownItems.hbs';
 //------------------------------------------- ф-я загрузки категорий с бэкэнда в input
 export function addRusCategory() {
   const categoryRef = document.querySelector('#form-category');
@@ -83,20 +83,26 @@ export function sendItemOnServer() {
     var json = JSON.stringify(object);
     console.log(json);
 
-    createItemFetch(formData).then(resp => {
-      console.log(resp);
-      if (resp.ok === true) {
-        makeNoticeSuccess('Товар успешно создан');
-        console.log(resp);
-        closeModal();
-      } else {
-        makeNoticeError(
-          'Товар не был создан. Пожалуйста проверьте поля заполнения',
-        );
-      }
+    createItemFetch(formData)
+      .then(resp => {
+        if (resp.ok === true) {
+          makeNoticeSuccess('Товар успешно создан');
+          closeModal();
+        } else {
+          makeNoticeError(
+            'Товар не был создан. Пожалуйста проверьте поля заполнения',
+          );
+        }
 
-      console.log(resp.json());
-    });
+        return resp.json();
+      })
+      .then(resp => {
+        // const mainRef = document.querySelector('main');
+        // console.log(mainRef);
+        // console.log(resp);
+        // const itemsMarkUp = ownItems(resp);
+        // console.log(itemsMarkUp);
+      });
   }
 
   form.addEventListener('submit', formDataCollect);
