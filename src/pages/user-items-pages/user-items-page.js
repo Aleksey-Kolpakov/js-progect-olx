@@ -24,7 +24,8 @@ myAccountBtnRef.addEventListener('click', onClickBtnMyAccount);
 //===============================================================================//
 
 // functions
-function onClickBtnMyAccount() {
+function onClickBtnMyAccount(event) {
+  // event.preventDefault();
   const promiseOwnResult = getUsersOwnItems();
   const promiseFavourResult = getUsersFavouritesByToken();
 
@@ -36,7 +37,7 @@ function onClickBtnMyAccount() {
       noContentMarkup(emptyFavHbs);
     }
     if (promiseFavourResult.length > 0) {
-      updateMarkupFavouritesWithSlider(promiseFavourResult, favouritesHbs);
+      updateMarkupWithSlider(promiseFavourResult, favouritesHbs);
       const seeAllFavBtnRef = document.querySelector('.favourites');
       console.log(seeAllFavBtnRef);
       seeAllFavBtnRef.addEventListener('click', onClickBtnSeeAllFavourites(promiseFavourResult));
@@ -47,9 +48,9 @@ function onClickBtnMyAccount() {
       noContentMarkup(emptyOwnHbs);
     }
     if (promiseOwnResult.length > 0) {
-      updateMarkupFavouritesWithSlider(promiseOwnResult, ownItemsHbs);
+      updateMarkupWithSlider(promiseOwnResult, ownItemsHbs);
       const seeAllOwnBtnRef = document.querySelector('.ownItems');
-      seeAllOwnBtnRef.addEventListener('click', onClickBtnSeeAll(promiseOwnResult));
+      seeAllOwnBtnRef.addEventListener('click', onClickBtnSeeAllOwn(promiseOwnResult));
       itemOpener('[data-items="own"]', openChangeOwnItemModal);
     }
 
@@ -70,7 +71,7 @@ function onClickBtnMyAccount() {
   });
 }
 
-function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
+function updateMarkupWithSlider(elementsArray, markUpHbs) {
   const checkedElementsArray = elementsArray.reduce(
     (accArray, element, indx) => {
       if (indx < 15) {
@@ -84,12 +85,12 @@ function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
   mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
-function noContentMarkup(markUpHbs) {
+export function noContentMarkup(markUpHbs, position='beforeend') {
   const markup = markUpHbs();
-  mainRef.insertAdjacentHTML('beforeend', markup);
+  mainRef.insertAdjacentHTML(position, markup);
 }
 
-function updateMarkupFavouritesAll(elementsArray) {
+function updateMarkupAll(elementsArray) {
   const checkedElementsArray = elementsArray.map(element => ({
     ...element,
     imageUrls: element.imageUrls[0],
@@ -99,20 +100,28 @@ function updateMarkupFavouritesAll(elementsArray) {
   mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
-const onClickBtnSeeAll = (promiseResultArray) => (event) => {
+// const goBack = () => {
+
+// }
+
+const onClickBtnSeeAllOwn = (promiseResultArray) => (event) => {
   event.preventDefault();
     mainRef.textContent = '';
-    updateMarkupFavouritesAll(promiseResultArray);
+  updateMarkupAll(promiseResultArray);
   itemOpener('[data-items="own"]', openChangeOwnItemModal);
-  history.pushState(null, null, 'cabinet/all-my-own'); //добавил изменение ссылки Вансовский
+  history.pushState(null, null, '/all-my-own'); //добавил изменение ссылки Вансовский
+  const btnGoBack = document.querySelector('.js-btn-back');
+    btnGoBack.addEventListener('click', onClickBtnMyAccount);
 };
 
 const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
     event.preventDefault();
     mainRef.textContent = '';
-    updateMarkupFavouritesAll(promiseResultArray);
+    updateMarkupAll(promiseResultArray);
     const ulContainerRef = document.querySelector('[data-items="own"]');
     ulContainerRef.dataset.items = '';
     itemOpener();
-    history.pushState(null, null, 'cabinet/all-my-favourites'); //добавил изменение ссылки Вансовский
+    history.pushState(null, null, '/all-my-favourites'); //добавил изменение ссылки Вансовский
+    const btnGoBack = document.querySelector('.js-btn-back');
+    btnGoBack.addEventListener('click', onClickBtnMyAccount);
 };
