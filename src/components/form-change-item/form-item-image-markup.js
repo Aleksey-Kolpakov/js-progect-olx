@@ -10,7 +10,7 @@ export const MarkUpFormChange = async id => {
   // console.log(id);
   const categoryRef = document.querySelector('#form-category');
 
-  RussianCategoriesPromise.then(function (data) {
+  await RussianCategoriesPromise.then(function (data) {
     const template = templateCategory(data);
     categoryRef.insertAdjacentHTML('beforeend', template);
     return;
@@ -46,7 +46,9 @@ export function DynamicMarkUp(obj) {
     const formInputs = document.querySelectorAll('.form__input');
 
     const formRef = document.querySelector('.form');
-
+    formInputs.forEach((input, i) => {
+      input.value = values[i];
+    });
     const categorrySelectRef = document.querySelector('#form-category');
 
     const select = categorrySelectRef.options;
@@ -149,4 +151,3 @@ export function DynamicMarkUp(obj) {
     }
   }
 }
-//--------------------------------------------------------------------------------------------------------------

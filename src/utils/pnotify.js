@@ -19,6 +19,11 @@ export function makeNoticeSuccess(message) {
     text: message,
   });
 }
+export function makeNotice(message) {
+  const myNotice = notice({
+    text: message,
+  });
+}
 
 export function noticeToReg(message) {
   const noticeToReg = notice({
