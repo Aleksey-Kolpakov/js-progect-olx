@@ -105,14 +105,16 @@ export function sendItemOnServer() {
     const inputPriceRef = document.querySelector('#input-number');
     if (
       categorrySelectRef.value === 'Работа' ||
-      categorrySelectRef.value === 'Отдам бесплатно'
+      categorrySelectRef.value === 'Отдам бесплатно' ||
+      categorrySelectRef.value === 'Обмен'
     ) {
       inputPriceRef.value = 0;
       inputPriceRef.setAttribute('readonly', '');
     }
     if (
       categorrySelectRef.value !== 'Работа' &&
-      categorrySelectRef.value !== 'Отдам бесплатно'
+      categorrySelectRef.value !== 'Отдам бесплатно' &&
+      categorrySelectRef.value !== 'Обмен'
     ) {
       inputPriceRef.value = '';
       inputPriceRef.removeAttribute('readonly');
