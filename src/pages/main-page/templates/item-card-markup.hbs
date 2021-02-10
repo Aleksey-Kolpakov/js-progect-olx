@@ -2,6 +2,9 @@
 
 
     <div class="flex-container">
+        {{!-- <svg class="advertisement-card-button-exit" type="button" width="14" height="14">
+            <use href="./images/sprite/sprite.svg#icon-close"></use>
+        </svg> --}}
 
         <div class="test">
             <div class="advertisement-card-name-container">
@@ -16,7 +19,7 @@
                 </div>
 
                 <div class="advertisement-card-small-photo">
-                    <ul class="advertisement-card-slider-list js-item-container">
+                    <ul class="advertisement-card-slider-list" data-items="{{item}}">
                         {{#each imageUrls}}
                         <li class="advertisement-card-slider-list-item" data-id="{{_id}}">
                             <img class="small-photos" src="{{this}}" alt="{{title}}">
