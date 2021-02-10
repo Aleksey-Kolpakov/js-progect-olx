@@ -3,6 +3,7 @@ import formChangeItem from './form-change-item';
 import templateCategory from '../form-item/category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 import { ChangeItemOnServer } from './js/send-on-server.js';
+import { makeNoticeError, makeNoticeSuccess } from '../../utils/pnotify.js';
 
 export function MarkUpFormChange(id) {
   modalBackDrop(formChangeItem);
@@ -43,11 +44,11 @@ export function DynamicMarkUp(obj) {
 
     // const test = Object.values(select);
 
-    for (let i = 0; i < select.length; i++) {
-      if (select[i].value === obj.category) {
-        select[i].selected = true;
-      }
-    }
+    // for (let i = 0; i < select.length; i++) {
+    //   if (select[i].value === obj.category) {
+    //     select[i].selected = true;
+    //   }
+    // }
 
     formInputs.forEach((form, i) => {
       form.value = values[i];
@@ -115,6 +116,8 @@ export function DynamicMarkUp(obj) {
         if (allListItems.length >= 5) {
           firstItem.remove();
         }
+      } else {
+        makeNoticeError('Добавлено слишком много картинок');
       }
     }
   }

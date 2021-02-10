@@ -23,7 +23,7 @@ const formChangeItem = `
     </li>
     <li class="item form__item">
       <label class="form__label" for="input-number">Цена</label>
-      <input class="form__input" type="tel" placeholder="0.00 €" id="input-number" name="price" minlength="1" maxlength="10" pattern="[^0][0-9]{0,10}">
+      <input class="form__input" type="number" placeholder="0.00 €" id="input-number" name="price" minlength="1" maxlength="10" >
     </li>
     <li class="item form__item">
       <label class="form__label" for="input-tel" >Телефон</label>

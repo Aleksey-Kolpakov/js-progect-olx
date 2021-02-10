@@ -3,7 +3,17 @@ import {
   deleteItemFetch,
 } from '../../../utils/backend-services.js';
 
+import { makeNoticeError, makeNoticeSuccess } from '../../../utils/pnotify.js';
+
 export function ChangeItemOnServer(id) {
+  function closeModal() {
+    const backDropRef = document.querySelector('.back-drop');
+    const hiddenModal = document.querySelector('body');
+    const modalRef = document.querySelector('.modal');
+    backDropRef.classList.remove('is-open');
+    hiddenModal.classList.remove('hiddenModalStyle');
+    modalRef.innerHTML = '';
+  }
   const form = document.querySelector('.form');
 
   const buttonDeleteRef = document.querySelector('.button-delete');
@@ -11,12 +21,13 @@ export function ChangeItemOnServer(id) {
 
   function deleteItem(event) {
     event.preventDefault();
-    const newID = Number(id);
 
-    deleteItemFetch(id).then(obj => {
+    deleteItemFetch(id).then(resp => {
       // console.log(typeof id);
       const deletedItemRef = document.querySelector(`[data-id="${id}"]`);
       deletedItemRef.parentElement.remove();
+      closeModal();
+      makeNoticeSuccess('Товар успешно удален');
     });
   }
 
@@ -33,8 +44,9 @@ export function ChangeItemOnServer(id) {
 
   function formDataCollect(event) {
     event.preventDefault();
+    console.log(id);
     // console.log(event.target);
-    console.log('test');
+    // console.log('test');
     // const formInputs = document.querySelectorAll('.form__input');
     // formInputs.forEach(input => {
     //   console.log(input.value);
@@ -53,26 +65,27 @@ export function ChangeItemOnServer(id) {
       }
     });
 
-    // foData.forEach((value, key) => {
-    //   if (key !== 'file') {
-    //     formData.set(key, value);
-    //     if (listOfCategory.hasOwnProperty(value)) {
-    //       formData.set('category', listOfCategory[value]);
-    //     }
-    //   }
-    // });
     downloadInput.files.forEach(file => {
       formData.append('file', file);
     });
 
     var object = {};
-    foData.forEach(function (value, key) {
+    formData.forEach(function (value, key) {
       object[key] = value;
     });
     var json = JSON.stringify(object);
-    // console.log(json);
+    console.log(json);
 
-    changeItemFetch(id, formData);
+    changeItemFetch(id, formData).then(resp => {
+      if (resp.ok === true) {
+        makeNoticeSuccess('Товар успешно отредактирован');
+        closeModal();
+      } else {
+        makeNoticeError(
+          'Товар не был отредактирован. Пожалуйста проверьте поля заполнения',
+        );
+      }
+    });
   }
 
   form.addEventListener('submit', formDataCollect);
