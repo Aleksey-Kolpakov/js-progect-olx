@@ -237,6 +237,9 @@ export default class Slider {
       return;
     }
     const allDots = this.refs?.blockDots?.children;
+    if (allDots.length === 0) {//доробити до толку. Це коли видаляємо розмітку героя вилазять помилки
+      clearInterval(this.intervalId);
+    }
     allDots.forEach(dotItem => dotItem.children[0].style['background-image'] = `radial-gradient(
           circle at center,
           ${this.dotBtnColor} 0,

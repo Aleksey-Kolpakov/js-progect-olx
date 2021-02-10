@@ -5,6 +5,9 @@ import throttle from 'lodash.throttle';
 import { getAllCategoriesWithItemsByPages } from '../../utils/backend-services.js';
 let pageNumber = 1;
 import { itemOpener } from '../../utils/item-opener.js';
+
+import { makeFilterButtonActive } from '../../components/header-section/js/service'; // kozubskyi
+
 const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
@@ -220,15 +223,24 @@ function onClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     const currentSection = event.target.dataset.title;
-    history.pushState(null, null, currentSection.trim());
+
+    makeFilterButtonActive(currentSection); // kozubskyi
+
+    history.pushState(null, null, currentSection.replace(/ /g, '-'));
     getItemsInCategory(currentSection).then(resp => {
-      const mapImg = resp.map(item => ({
+      const mapImg = resp.map((item, indx) => ({
         ...item,
         imageUrls: item.imageUrls[0],
       }));
       const markup = categoryMarkup(mapImg);
       mainSectionRef.innerHTML = '';
       mainSectionRef.insertAdjacentHTML('beforeend', markup);
+
+      const sectionTittleRef = document.querySelector('.section-title');
+      const activeSectionValueRef = document.querySelector(
+        '.header-filter-item.is-active',
+      );
+      sectionTittleRef.textContent = activeSectionValueRef.textContent;
       itemOpener();
       window.scrollTo({
         top: 0,

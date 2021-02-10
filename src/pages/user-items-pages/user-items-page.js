@@ -53,14 +53,15 @@ function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
 }
 
 function onClickBtnMyAccount() {
-  // const fetchPromiseOwnItems = getUsersOwnItems();
+  const fetchPromiseOwnItems = getUsersOwnItems();
   const fetchPromiseFavourites = getUsersFavouritesByToken();
   mainRef.innerHTML = '';
+  const x = 'my-acc';
+  history.pushState(null, null, x);
 
   const favProm = fetchPromiseFavourites.then(data => {
     if (data.length === 0) {
-      noContentMarkup(emptyFavHbs);
-      return;
+      return false;
     }
     updateMarkupFavouritesWithSlider(data, favouritesHbs);
     const seeAllBtnRef = document.querySelector('.favourites');
@@ -71,24 +72,29 @@ function onClickBtnMyAccount() {
     itemOpener();
   });
 
-  const ownProm = fetchPromiseFavourites.then(data => {
+  const ownProm = fetchPromiseOwnItems.then(data => {
     if (data.length === 0) {
-      noContentMarkup(emptyOwnHbs);
-      return;
+      return false;
     }
     updateMarkupFavouritesWithSlider(data, ownItemsHbs);
     const seeAllBtnRef = document.querySelector('.ownItems');
     seeAllBtnRef.addEventListener(
       'click',
-      onClickBtnSeeAll(fetchPromiseFavourites),
+      onClickBtnSeeAll(fetchPromiseOwnItems),
     );
     itemOpener('[data-items="own"]', openChangeOwnItemModal);
   });
 
-  Promise.all([favProm, ownProm]).then(() => {
+  Promise.all([favProm, ownProm]).then(([favProm, ownProm]) => {
+    if (favProm === false) {
+      noContentMarkup(emptyFavHbs);
+    }
+    if (ownProm === false) {
+      noContentMarkup(emptyOwnHbs);
+    }
     const listBlockCollection = document.querySelectorAll('.card-list');
     listBlockCollection.forEach(
-      list =>
+      () =>
         new Slider({
           listUlSelector: '.card-list',
           buttons: true,
@@ -107,6 +113,10 @@ const onClickBtnSeeAll = promise => e => {
     mainRef.innerHTML = '';
     updateMarkupFavouritesAll(data);
     itemOpener('[data-items="own"]', openChangeOwnItemModal);
+
+    // const y = e.target.dataset.items.value;
+    // console.log(y);
+    // history.pushState(null, null,y);
   });
 };
 
@@ -118,5 +128,8 @@ const onClickBtnSeeAllFavourites = promise => e => {
     const ulContainerRef = document.querySelector('[data-items="own"]');
     ulContainerRef.dataset.items = '';
     itemOpener();
+    // console.log(e.target.dataset.);
+    const y = 'fav';
+    history.pushState(null, null,'all-fav');
   });
 };

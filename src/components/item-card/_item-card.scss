@@ -35,13 +35,11 @@
 .advertisement-card-slider-big-photo {
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
   margin-bottom: 15px;
-
-  cursor: pointer;
 }
 
 .big-photo {
-  width: 253px;
   height: 253px;
+  width: 100%;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
 
   object-fit: cover;
@@ -51,15 +49,10 @@
   }
 
   @include for-size(tablet) {
-    width: 284px;
     height: 284px;
   }
 
   @include for-size(desktop) {
-    // width: 280px;
-    // height: 360px;
-
-    width: 350px;
     height: 350px;
   }
 }
@@ -77,6 +70,10 @@
 
 .advertisement-card-slider-list-item {
   cursor: pointer;
+
+  @include for-size(mobile-only) {
+    height: 170px;
+  }
 
   @include for-size(tablet) {
     width: 55px;
@@ -97,6 +94,7 @@
 }
 
 .small-photos {
+  width: 100%;
   height: inherit;
   object-fit: cover;
 }
@@ -128,8 +126,9 @@
 .advertisement-card-button-salesman-info {
   background: $orange-color;
   width: 254px;
-  height: 60px;
-  border: none;
+  min-height: 60px;
+  // height: 60px;
+  border: 2px solid $orange-color;
 
   font-family: Montserrat;
   font-weight: bold;
@@ -141,11 +140,6 @@
 
   color: $white-color;
 
-  // padding-left: 59px;
-  // padding-right: 58px;
-  // padding-top: 17px;
-  // padding-bottom: 15px;
-
   margin-bottom: 20px;
 
   width: 100%;
@@ -153,7 +147,7 @@
   cursor: pointer;
 
   @include for-size(tablet) {
-    width: 274px;
+    width: 300px;
   }
 
   @include for-size(desktop) {
@@ -169,6 +163,10 @@
 
   @include for-size(tablet) {
     justify-content: start;
+  }
+
+  @include for-size(desktop) {
+    // justify-content: space-around;
   }
 }
 
@@ -247,8 +245,47 @@
 .advertisement-card-container {
   padding-top: 55px;
   padding-bottom: 61px;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 19px;
+  padding-left: 19px;
+
+  @include for-size(tablet) {
+    padding-top: 57px;
+    padding-bottom: 64px;
+    padding-right: 55px;
+    padding-left: 55px;
+
+    width: 724px;
+  }
+
+  @include for-size(desktop) {
+    padding-top: 54px;
+    padding-bottom: 66px;
+    padding-right: 110px;
+    padding-left: 110px;
+
+    width: 1024px;
+  }
+}
+
+.test {
+  @include for-size(tablet) {
+    width: calc((100%-34px) / 2);
+  }
+}
+
+.test:not(:last-child) {
+  @include for-size(desktop) {
+    width: calc((100%-34px) * 428 / 768);
+  }
+}
+
+.test:last-child {
+  @include for-size(tablet) {
+    margin-left: 34px;
+  }
+  @include for-size(desktop) {
+    width: calc((100%-34px) * 340 / 768);
+  }
 }
 
 .flex-container {
@@ -264,30 +301,22 @@
 .advertisement-card-slider {
   @include for-size(tablet) {
     order: 1;
-
-    margin-right: 34px;
-  }
-
-  @include for-size(desktop) {
-    margin-right: 38px;
   }
 }
 
 .advertisement-card-main-container {
-  @include for-size(tablet) {
-    order: 3;
-    max-width: 300px;
+  @include for-size(tablet-only) {
+    @include for-size(tablet) {
+      order: 3;
+      max-width: 300px;
+    }
   }
 }
 
 .salesman-info-list {
   color: $main-black;
-  background: #f5f6fb;
-
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  text-transform: lowercase;
+  font-size: 15px;
 }
 
 .advertisement-card-slider .slider-dot {
@@ -296,4 +325,11 @@
   background: $orange-color;
   margin-right: 5px;
   border-radius: 50%;
+}
+
+.salesman-span {
+  display: flex;
+  justify-content: center;
+  width: 137px;
+  margin: 0 auto;
 }
