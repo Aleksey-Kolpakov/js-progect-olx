@@ -14,20 +14,23 @@ defaults.delay = 3000;
 
 const createMarkupReg =
   `<div class="registrationForm">
+
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
         <a class="registration-google" href="https://callboard-backend.goit.global/auth/google"><svg class="registration-google-svg" width='17' height='17'>
           <use href='./images/sprite/sprite.svg#icon-google'></use>
         </svg>Google</a>
-        <p class='registration-title'>Или войдите в приложение используя e-mail и пароль:</p>
+        <p class='registration-title-first'>Или войдите в приложение используя e-mail и пароль:</p>
         <div class="input-reg">
               <input data-email="email" class="registration-input valid" type="email" name="email" placeholder="E-mail" required>
               <span class="form__error">Это поле должно содержать E-Mail в формате example@site.com</span>
         </div>
         <div class="input-reg password">
-              <input data-pass="pass"  id="password"  class="registration-input valid" type="password" name="password" placeholder="Password" minlength="6" maxlength="18" required>
+          <input data-pass="pass"  id="password"  class="registration-input valid" type="password" name="password" placeholder="Password" minlength="6" maxlength="18" required>
               <label class='show-password' for="show_password">
+                 <svg class="showPassEye" width='20' height='20'>
+                   <use href='./images/sprite/sprite.svg#icon-eye'></use>
+                </svg>
                 <input type="checkbox" name="show_password" id="show_password">
-                Show Password
               </label>
         </div>
         <div class="reg-aut-btn">
@@ -47,7 +50,8 @@ export function openForm() {
     showPass: document.querySelector('.show-password'),
     backDropRef: document.querySelector('.back-drop'),
     modalRef: document.querySelector('.modal'),
-    hiddenModal : document.querySelector('body'),
+    hiddenModal: document.querySelector('body'),
+    eyePass : document.querySelector('.showPassEye'),
     };
 
     const submittedData = {
@@ -106,8 +110,10 @@ function closeModal() {
     if (!password) return;
     if (event.target.checked) {
       password.type = 'text';
+      authRefs.eyePass.setAttribute('style', 'fill: #56ff1c')
     } else {
       password.type = 'password';
+      authRefs.eyePass.setAttribute('style', 'fill: #ff6b09')
     }
   }, false);
   }
