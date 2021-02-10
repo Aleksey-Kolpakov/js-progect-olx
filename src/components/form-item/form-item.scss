@@ -36,7 +36,7 @@
 
   position: relative;
   @include for-form(mobile) {
-    // width: 290px;
+    width: 290px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 54px;

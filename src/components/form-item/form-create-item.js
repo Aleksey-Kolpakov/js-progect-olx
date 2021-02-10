@@ -2,7 +2,6 @@ import { modalBackDrop } from '../modal-window/modal-logic.js';
 import { DynamicMarkUp } from '../form-change-item/form-item-image-markup';
 import { addRusCategory } from '../form-item/form-create.js';
 import { sendItemOnServer } from '../form-item/form-create.js';
-import tippy from 'tippy.js';
 
 const formCreate = `<form class="form" autocomplete="off">
   <h3 class="form__title">Создать объявление</h3>
@@ -43,18 +42,10 @@ const formCreate = `<form class="form" autocomplete="off">
       name="phone">
     </li>
     <li class="item form__item-submit">
-      <button class="button-submit" type="submit" data-action="submit"
-      data-tippy-content="Tooltip">Добавить</button>
+      <button class="button-submit" type="submit" data-action="submit">Добавить</button>
     </li>
   </ul>
 </form>`;
-
-/*const formCreateRef = document.querySelector(".create-ad-button");
-formCreateRef.addEventListener('click', funModalBackDrop);
-function funModalBackDrop() { modalBackDrop(formCreate) };*/
-
-// const formCreateRef = document.querySelector('.create-ad-button');
-// formCreateRef.addEventListener('click', openModalAddItem);
 
 function openModalAddItem() {
 
@@ -66,9 +57,6 @@ function openModalAddItem() {
 
   //-----------------------------------------------> Ф-я загрузки списка категорий в инпут
   addRusCategory();
-
-  //-----------------------------------------------> Ф-я уведомления в инпутах
-  tippy('[data-tippy-content]');
 
   //-----------------------------------------------> Ф-я отправки формы на бэкэенд
   sendItemOnServer();
