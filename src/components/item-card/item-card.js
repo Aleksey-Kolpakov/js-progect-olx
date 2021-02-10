@@ -1,10 +1,12 @@
 import itemCardMarkup from '../../pages/main-page/templates/item-card-markup.hbs'
-import { addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID, getAllCategoriesWithItemsByPages, registerUserApi, loginFetch } from '../../utils/backend-services.js'
+import {addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID} from '../../utils/backend-services.js'
 import salesmaInfoMarkup from '../item-card/salesman-info-btn.hbs'
 import Slider from '../Slider/Slider.js'
 import { modalBackDrop } from '../../components/modal-window/modal-logic.js'
 import { openForm } from '../form-registration/form-registration.js'
 import refsHeader from '../header-section/js/refs.js'
+import {noticeToReg} from '../../utils/pnotify.js'
+
 import { userFavourites } from '../../utils/initial-load.js'
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
@@ -24,9 +26,7 @@ function renderMarkup(item) {
             dotButtonColor: "#CDCDCD",//колір неактивних кнопок
             dotButtonActiveColor: "#FF6B09",//колір активної
         });
-
     }
-
 };
 export default renderMarkup;
 // =======================
@@ -57,12 +57,13 @@ function addAndRemoveFavorites(item) {
     const favoritesIcon = document.querySelector('.favorites-div');
     const favIcon = favoritesIcon.querySelector('.advertisement-card-favorites-svg')
     if (isItemInFavourites) { favIcon.classList.add('js-mark-favorites-svg') }
-    favoritesIcon.addEventListener('click', event => {
 
+    favoritesIcon.addEventListener('click', event => {
         if (!refsHeader.authorizationBlock.classList.contains('is-hidden')) {
-            openForm()
+            noticeToReg('Для начала зарегистрируйтесь!');
+            openForm();
         } else {
-            if (!favIcon.classList.contains('js-mark-favorites-svg')) {
+        if (!favIcon.classList.contains('js-mark-favorites-svg')) {
                 favIcon.classList.toggle('js-mark-favorites-svg');
                 return addItemToFavourite(event.currentTarget.dataset.id);
             }
