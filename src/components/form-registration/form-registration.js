@@ -110,7 +110,7 @@ function closeModal() {
     if (!password) return;
     if (event.target.checked) {
       password.type = 'text';
-      authRefs.eyePass.setAttribute('style', 'fill: #56ff1c')
+      authRefs.eyePass.setAttribute('style', 'fill: green')
     } else {
       password.type = 'password';
       authRefs.eyePass.setAttribute('style', 'fill: #ff6b09')
