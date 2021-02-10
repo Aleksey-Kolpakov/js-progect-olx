@@ -8,7 +8,6 @@ import {
 } from '../../utils/backend-services.js';
 let pageNumber = 1;
 import { itemOpener } from '../../utils/item-opener.js';
-
 import { makeFilterButtonActive } from '../../components/header-section/js/service'; // kozubskyi
 
 const galleryRef = document.querySelector('.section-gallery');
