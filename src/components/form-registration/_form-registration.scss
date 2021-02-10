@@ -31,6 +31,7 @@ font-weight: 500;
 }
 .input-reg {
   text-align: center;
+  position: relative;
 }
 
 .reg-aut-btn .enterAccount {
@@ -134,4 +135,11 @@ margin-top: 10px;
 }
 #show_password {
   margin-right: 3px;
+  display: none;
+}
+
+.showPassEye {
+ position: absolute;
+top: 46px;
+right: 20px;
 }

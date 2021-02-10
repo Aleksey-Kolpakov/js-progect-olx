@@ -15,7 +15,8 @@ defaults.delay = 3000;
 const createMarkupReg =
   `<div class="registrationForm">
         <p class="registration-title">Для авторизации можете использовать Google Account:</p>
-        <a class="registration-google" href="https://callboard-backend.goit.global/auth/google"><svg class="registration-google-svg" width='17' height='17'>
+        <a class="registration-google" href="https://callboard-backend.goit.global/auth/google">
+        <svg class="registration-google-svg" width='17' height='17'>
           <use href='./images/sprite/sprite.svg#icon-google'></use>
         </svg>Google</a>
         <p class='registration-title'>Или войдите в приложение используя e-mail и пароль:</p>
@@ -27,7 +28,9 @@ const createMarkupReg =
               <input data-pass="pass"  id="password"  class="registration-input valid" type="password" name="password" placeholder="Password" minlength="6" maxlength="18" required>
               <label class='show-password' for="show_password">
                 <input type="checkbox" name="show_password" id="show_password">
-                Show Password
+                    <svg class="showPassEye" width="17" height="17">
+                <use href='./components/form-registration/sprite.svg/#icon-eye'></use>
+        </svg>
               </label>
         </div>
         <div class="reg-aut-btn">
