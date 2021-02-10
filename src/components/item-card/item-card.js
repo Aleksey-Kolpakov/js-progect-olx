@@ -5,6 +5,7 @@ import Slider from '../Slider/Slider.js'
 import { modalBackDrop } from '../../components/modal-window/modal-logic.js'
 import { openForm } from '../form-registration/form-registration.js'
 import refsHeader from '../header-section/js/refs.js'
+import {noticeToReg} from '../../utils/pnotify.js'
 
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
@@ -24,9 +25,7 @@ function renderMarkup(item) {
             dotButtonColor: "#CDCDCD",//колір неактивних кнопок
             dotButtonActiveColor: "#FF6B09",//колір активної
         });
-
     }
-
 };
 export default renderMarkup;
 // =======================
@@ -55,8 +54,9 @@ function addAndRemoveFavorites() {
 
     favoritesIcon.addEventListener('click', event => {
         
-    if (!refsHeader.authorizationBlock.classList.contains('is-hidden')) {
-    openForm()
+        if (!refsHeader.authorizationBlock.classList.contains('is-hidden')) {
+            noticeToReg('Для начала зарегистрируйтесь!');
+            openForm();
     } else {
         if (!favIcon.classList.contains('js-mark-favorites-svg')) {
             favIcon.classList.toggle('js-mark-favorites-svg');
