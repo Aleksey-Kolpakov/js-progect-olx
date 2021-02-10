@@ -44,7 +44,6 @@ export function ChangeItemOnServer(id) {
 
   function formDataCollect(event) {
     event.preventDefault();
-    console.log(id);
     // console.log(event.target);
     // console.log('test');
     // const formInputs = document.querySelectorAll('.form__input');
@@ -74,7 +73,7 @@ export function ChangeItemOnServer(id) {
       object[key] = value;
     });
     var json = JSON.stringify(object);
-    console.log(json);
+    // console.log(json);
 
     changeItemFetch(id, formData).then(resp => {
       if (resp.ok === true) {
