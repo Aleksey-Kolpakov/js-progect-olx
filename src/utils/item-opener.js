@@ -7,10 +7,10 @@ export const itemOpener = function (
   selector = '.js-item-container',
   openRightModal = openItemModal,
 ) {
-  const containers = document.querySelectorAll(`${selector}`);
-  const containersArr = Array.from(containers);
+  const containers = document.querySelectorAll(selector);
+  // const containersArr = Array.from(containers);
   // console.dir(containersArr);
-  containersArr.map(ul => {
+  containers.forEach(ul => {
     ul.addEventListener('click', openRightModal);
   });
 };
@@ -28,7 +28,7 @@ export function openChangeOwnItemModal(event) {
 }
 
 function findItemData(event) {
-  event.preventDefault(event);
+  event.preventDefault();
   const itemRef = event.target.closest('[data-id]');
   const clickedItemId = itemRef.dataset.id;
   return jsDataBase.find(item => item._id === clickedItemId);
