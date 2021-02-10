@@ -67,6 +67,7 @@ function onClickBtnMyAccount() {
     );
     colorInOrangeHeartsOfFavourites(true);//Єгор додав
   });
+  history.pushState(null,null,'my-account') //добавил изменение ссылки Вансовский
 }
 
 function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
@@ -96,6 +97,7 @@ function updateMarkupFavouritesAll(elementsArray) {
 
   const markup = EdikMarkUpHbs(checkedElementsArray);
   mainRef.insertAdjacentHTML('beforeend', markup);
+  
 }
 
 const onClickBtnSeeAll = (promiseResultArray) => (event) => {
@@ -103,6 +105,9 @@ const onClickBtnSeeAll = (promiseResultArray) => (event) => {
     mainRef.textContent = '';
     updateMarkupFavouritesAll(promiseResultArray);
     itemOpener('[data-items="own"]', openChangeOwnItemModal);
+    history.pushState(null,null,'my-account/all-my-own') //добавил изменение ссылки Вансовский
+    
+    
 };
 
 const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
@@ -112,4 +117,5 @@ const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
     const ulContainerRef = document.querySelector('[data-items="own"]');
     ulContainerRef.dataset.items = '';
     itemOpener();
+    history.pushState(null,null,'my-account/all-my-favourites') //добавил изменение ссылки Вансовский
 };
