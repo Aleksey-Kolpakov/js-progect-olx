@@ -1,47 +1,14 @@
-const registerData = {
-    email: "mark@test.com",
-    password: "123321",
-};
-
-const testUser = async function () {
-    const regData = await registerUserApi(registerData);
-    const loginData = await loginFetch(registerData);
-    //addItemToFavourite(itemId)
-    // getUsersFavouritesByToken
-    // const data = await getAllCategoriesWithItemsByPages();
-    const additem1 = await addItemToFavourite("5fd367626da6ab0017dbf38b");
-    const additem2 = await addItemToFavourite("5fd38f116da6ab0017dbf588");
-    const additem3 = await addItemToFavourite("5fda618af548230017d87c35");
-    // console.log(additem3);
-    // const userFavourites = await getUsersFavouritesByToken();
-    // console.log(userFavourites);
-    const deleteitem3 = await deleteItemFromFavourite('5fda618af548230017d87c35');
-    // console.log(deleteitem3);
-    // const newuserFavourites = await getUsersFavouritesByToken();
-    // console.log(newuserFavourites);
-}
-
-// testUser();
-
-
-// BACK
-
-// phone	string
-// example: +380000000000
-
-
 import itemCardMarkup from '../../pages/main-page/templates/item-card-markup.hbs'
-import { addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID, getAllCategoriesWithItemsByPages, getItembyTitle, registerUserApi, loginFetch } from '../../utils/backend-services.js'
+import {addItemToFavourite, deleteItemFromFavourite, getUsersInfoByID, getAllCategoriesWithItemsByPages, registerUserApi, loginFetch } from '../../utils/backend-services.js'
 import salesmaInfoMarkup from '../item-card/salesman-info-btn.hbs'
 import Slider from '../Slider/Slider.js'
 import { modalBackDrop } from '../../components/modal-window/modal-logic.js'
-
+import { openForm } from '../form-registration/form-registration.js'
+import refsHeader from '../header-section/js/refs.js'
 
 // ================RENDER MARKUP=================
 function renderMarkup(item) {
     item.imageUrl = item.imageUrls[0];
-    // dataMarkup.imageUrls.shift();
-    // sectionContainer.innerHTML = '';
     const markup = itemCardMarkup(item);
 
     modalBackDrop(markup);
@@ -62,9 +29,7 @@ function renderMarkup(item) {
 
 };
 export default renderMarkup;
-// renderMarkup();
 // =======================
-
 
 // =======CHANGE SMALL IMG TO BIG========
 function changeSmallToBigImg() {
@@ -82,34 +47,41 @@ function changeSmallToBigImg() {
 };
 // =======================================
 
-
 //   ============ADD & REMOVE FAVORITES==========
+
 function addAndRemoveFavorites() {
     const favoritesIcon = document.querySelector('.favorites-div');
     const favIcon = favoritesIcon.querySelector('.advertisement-card-favorites-svg')
 
     favoritesIcon.addEventListener('click', event => {
+        
+    if (!refsHeader.authorizationBlock.classList.contains('is-hidden')) {
+    openForm()
+    } else {
         if (!favIcon.classList.contains('js-mark-favorites-svg')) {
             favIcon.classList.toggle('js-mark-favorites-svg');
             return addItemToFavourite(event.currentTarget.dataset.id);
         }
         favIcon.classList.toggle('js-mark-favorites-svg');
         return deleteItemFromFavourite(event.currentTarget.dataset.id);
+}
     });
 }
 //   ==============================
 
-
-//==============INFO ABOUT SALESMAN===========
+ //==============INFO ABOUT SALESMAN===========
 function getSalesmanInfo(item) {
-    const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
-    const salesmanId = item.userId;
+   const salesmanInfoBtn = document.querySelector('.advertisement-card-button-salesman-info');
+
     salesmanInfoBtn.addEventListener('click', event => {
         event.preventDefault();
-        getUsersInfoByID(`${salesmanId}`)
-            .then((data) => {
-                data.phone = item.phone;
-                const salesmanMarkup = salesmaInfoMarkup(data);
+        const userId = item.userId;
+        const userPhone = item.phone;
+        
+        getUsersInfoByID(userId)
+            .then((userInfo) => {
+                userInfo.phone = userPhone;
+                const salesmanMarkup = salesmaInfoMarkup(userInfo);
                 salesmanInfoBtn.textContent = '';
                 salesmanInfoBtn.insertAdjacentHTML('beforeend', salesmanMarkup);
                 salesmanInfoBtn.setAttribute('style', 'background-color: #f5f6fb');
