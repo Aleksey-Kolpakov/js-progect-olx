@@ -6,9 +6,10 @@ import {
   getAllCategoriesWithItemsByPages,
   getItemsInCategory,
 } from '../../utils/backend-services.js';
-let pageNumber = 1;
 import { itemOpener } from '../../utils/item-opener.js';
 import { makeFilterButtonActive } from '../../components/header-section/js/service'; // kozubskyi
+
+let pageNumber = 1;
 
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
@@ -113,7 +114,7 @@ function createMarkup(categoriesList, otherEl) {
       Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и
       многое другое.
     </p>
-    <ul class="section-gallery js-item-container">
+    <ul class="section-gallery" data-items="item">
     ${values[indx]
       .map(item => ({
         ...item,

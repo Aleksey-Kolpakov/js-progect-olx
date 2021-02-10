@@ -69,6 +69,7 @@ function onClickBtnMyAccount(event) {
     colorInOrangeHeartsOfFavourites(true);//Єгор додав
     history.pushState(null, null, 'cabinet'); //добавил изменение ссылки Вансовский
   });
+  history.pushState(null,null,'my-account') //добавил изменение ссылки Вансовский
 }
 
 function updateMarkupWithSlider(elementsArray, markUpHbs) {
@@ -98,6 +99,7 @@ function updateMarkupAll(elementsArray) {
 
   const markup = EdikMarkUpHbs(checkedElementsArray);
   mainRef.insertAdjacentHTML('beforeend', markup);
+  
 }
 
 // const goBack = () => {
@@ -112,6 +114,7 @@ const onClickBtnSeeAllOwn = (promiseResultArray) => (event) => {
   history.pushState(null, null, '/all-my-own'); //добавил изменение ссылки Вансовский
   const btnGoBack = document.querySelector('.js-btn-back');
     btnGoBack.addEventListener('click', onClickBtnMyAccount);
+
 };
 
 const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
