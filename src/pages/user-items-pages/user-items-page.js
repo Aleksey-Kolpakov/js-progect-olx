@@ -11,6 +11,7 @@ import {
 } from '../../utils/backend-services';
 import Slider from '../../components/Slider';
 import { itemOpener, openChangeOwnItemModal } from '../../utils/item-opener';
+import { colorInOrangeHeartsOfFavourites } from '../../utils/favourites-rest-logic';//Єгор додав
 // ===============================================================================//
 // refs
 const mainRef = document.querySelector('main');
@@ -23,19 +24,49 @@ myAccountBtnRef.addEventListener('click', onClickBtnMyAccount);
 //===============================================================================//
 
 // functions
-function noContentMarkup(markUpHbs) {
-  const markup = markUpHbs();
-  mainRef.insertAdjacentHTML('beforeend', markup);
-}
+function onClickBtnMyAccount() {
+  const promiseOwnResult = getUsersOwnItems();
+  const promiseFavourResult = getUsersFavouritesByToken();
 
-function updateMarkupFavouritesAll(elementsArray) {
-  const checkedElementsArray = elementsArray.map(element => ({
-    ...element,
-    imageUrls: element.imageUrls[0],
-  }));
+  Promise.all([promiseFavourResult, promiseOwnResult]).then((promisesResultsArray) => {
+    mainRef.innerHTML = '';
+    const [promiseFavourResult, promiseOwnResult] = promisesResultsArray;
 
-  const markup = EdikMarkUpHbs(checkedElementsArray);
-  mainRef.insertAdjacentHTML('beforeend', markup);
+    if (promiseFavourResult.length === 0) {
+      noContentMarkup(emptyFavHbs);
+    }
+    if (promiseFavourResult.length > 0) {
+      updateMarkupFavouritesWithSlider(promiseFavourResult, favouritesHbs);
+      const seeAllFavBtnRef = document.querySelector('.favourites');
+      console.log(seeAllFavBtnRef);
+      seeAllFavBtnRef.addEventListener('click', onClickBtnSeeAllFavourites(promiseFavourResult));
+      itemOpener();
+    }
+
+    if (promiseOwnResult.length === 0) {
+      noContentMarkup(emptyOwnHbs);
+    }
+    if (promiseOwnResult.length > 0) {
+      updateMarkupFavouritesWithSlider(promiseOwnResult, ownItemsHbs);
+      const seeAllOwnBtnRef = document.querySelector('.ownItems');
+      seeAllOwnBtnRef.addEventListener('click', onClickBtnSeeAll(promiseOwnResult));
+      itemOpener('[data-items="own"]', openChangeOwnItemModal);
+    }
+
+    const listBlockCollection = document.querySelectorAll('.card-list');
+    listBlockCollection.forEach(
+      () =>
+        new Slider({
+          listUlSelector: '.card-list',
+          buttons: true,
+          parentPadding: '5px 2px',
+          dotsVerticalPosition: -20, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
+          dotButtonColor: '#CDCDCD', //колір неактивних кнопок
+          dotButtonActiveColor: '#FF6B09', //колір активної
+        }),
+    );
+    colorInOrangeHeartsOfFavourites(true);//Єгор додав
+  });
 }
 
 function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
@@ -52,75 +83,33 @@ function updateMarkupFavouritesWithSlider(elementsArray, markUpHbs) {
   mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
-function onClickBtnMyAccount() {
-  const fetchPromiseOwnItems = getUsersOwnItems();
-  const fetchPromiseFavourites = getUsersFavouritesByToken();
-  mainRef.innerHTML = '';
-
-  const favProm = fetchPromiseFavourites.then(data => {
-    if (data.length === 0) {
-      return false;
-    }
-    updateMarkupFavouritesWithSlider(data, favouritesHbs);
-    const seeAllBtnRef = document.querySelector('.favourites');
-    seeAllBtnRef.addEventListener(
-      'click',
-      onClickBtnSeeAllFavourites(fetchPromiseFavourites),
-    );
-    itemOpener();
-  });
-
-  const ownProm = fetchPromiseOwnItems.then(data => {
-    if (data.length === 0) {
-      return false;
-    }
-    updateMarkupFavouritesWithSlider(data, ownItemsHbs);
-    const seeAllBtnRef = document.querySelector('.ownItems');
-    seeAllBtnRef.addEventListener(
-      'click',
-      onClickBtnSeeAll(fetchPromiseOwnItems),
-    );
-    itemOpener('[data-items="own"]', openChangeOwnItemModal);
-  });
-
-  Promise.all([favProm, ownProm]).then(([favProm, ownProm]) => {
-    if (favProm === false) {
-      noContentMarkup(emptyFavHbs);
-    }
-    if (ownProm === false) {
-      noContentMarkup(emptyOwnHbs);
-    }
-    const listBlockCollection = document.querySelectorAll('.card-list');
-    listBlockCollection.forEach(
-      () =>
-        new Slider({
-          listUlSelector: '.card-list',
-          buttons: true,
-          parentPadding: '5px 2px',
-          dotsVerticalPosition: -20, //положення кнопок-точок по вертикалі відносно нижнього краю блоку слайдера
-          dotButtonColor: '#CDCDCD', //колір неактивних кнопок
-          dotButtonActiveColor: '#FF6B09', //колір активної
-        }),
-    );
-  });
+function noContentMarkup(markUpHbs) {
+  const markup = markUpHbs();
+  mainRef.insertAdjacentHTML('beforeend', markup);
 }
 
-const onClickBtnSeeAll = promise => e => {
-  e.preventDefault();
-  promise.then(data => {
-    mainRef.innerHTML = '';
-    updateMarkupFavouritesAll(data);
+function updateMarkupFavouritesAll(elementsArray) {
+  const checkedElementsArray = elementsArray.map(element => ({
+    ...element,
+    imageUrls: element.imageUrls[0],
+  }));
+
+  const markup = EdikMarkUpHbs(checkedElementsArray);
+  mainRef.insertAdjacentHTML('beforeend', markup);
+}
+
+const onClickBtnSeeAll = (promiseResultArray) => (event) => {
+  event.preventDefault();
+    mainRef.textContent = '';
+    updateMarkupFavouritesAll(promiseResultArray);
     itemOpener('[data-items="own"]', openChangeOwnItemModal);
-  });
 };
 
-const onClickBtnSeeAllFavourites = promise => e => {
-  e.preventDefault();
-  promise.then(data => {
-    mainRef.innerHTML = '';
-    updateMarkupFavouritesAll(data);
+const onClickBtnSeeAllFavourites = (promiseResultArray) => (event) => {
+    event.preventDefault();
+    mainRef.textContent = '';
+    updateMarkupFavouritesAll(promiseResultArray);
     const ulContainerRef = document.querySelector('[data-items="own"]');
     ulContainerRef.dataset.items = '';
     itemOpener();
-  });
 };

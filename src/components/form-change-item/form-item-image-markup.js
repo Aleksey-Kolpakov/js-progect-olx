@@ -1,9 +1,20 @@
-import obj from './objectForTest';
 import { modalBackDrop } from '../modal-window/modal-logic.js';
 import formChangeItem from './form-change-item';
+import templateCategory from '../form-item/category.hbs';
+import { RussianCategoriesPromise } from '../../utils/initial-load.js';
+import { ChangeItemOnServer } from './js/send-on-server.js';
 
-export function MarkUpFormChange() {
+export function MarkUpFormChange(id) {
   modalBackDrop(formChangeItem);
+  // console.log(id);
+  const categoryRef = document.querySelector('#form-category');
+
+  RussianCategoriesPromise.then(function (data) {
+    const template = templateCategory(data);
+    categoryRef.insertAdjacentHTML('beforeend', template);
+    return;
+  });
+  ChangeItemOnServer(id);
 }
 
 export function DynamicMarkUp(obj) {
@@ -19,9 +30,24 @@ export function DynamicMarkUp(obj) {
       obj.price,
       obj.phone,
     ];
+
     const formInputs = document.querySelectorAll('.form__input');
 
     const formRef = document.querySelector('.form');
+
+    const categorrySelectRef = document.querySelector('#form-category');
+    // categorrySelectRef.value = obj.category;
+    // categorrySelectRef.;
+
+    const select = categorrySelectRef.options;
+
+    // const test = Object.values(select);
+
+    for (let i = 0; i < select.length; i++) {
+      if (select[i].value === obj.category) {
+        select[i].selected = true;
+      }
+    }
 
     formInputs.forEach((form, i) => {
       form.value = values[i];
@@ -45,7 +71,7 @@ export function DynamicMarkUp(obj) {
 
   formImgList.insertAdjacentHTML(
     'beforeend', ///--->>
-    '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input" type="file" style="display: none" multiple /></label></li > ',
+    '<li class="item download__item start-list-item"><label class= "download__label" > <img class="download__img" width="78" height="50" ><input class="download__input visually-hidden" type="file" multiple /></label></li > ',
   );
 
   formImgList.addEventListener('change', insertImages);
@@ -114,3 +140,4 @@ export function DynamicMarkUp(obj) {
     }
   }
 }
+//--------------------------------------------------------------------------------------------------------------
