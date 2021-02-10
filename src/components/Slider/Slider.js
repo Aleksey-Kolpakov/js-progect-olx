@@ -42,7 +42,7 @@ export default class Slider {
     }
     /* додаємо селектору клас та падінги */
     // refs.sliderList.classList.add('slider-wrap');
-    refs.sliderList.className = 'slider-wrap js-item-container';//стирає усі попередні класи і залишає тільки нові. js-item-container' треба дял Льоши Колпакова
+    refs.sliderList.className = 'slider-wrap';//стирає усі попередні класи і залишає тільки нові. js-item-container' треба дял Льоши Колпакова
     refs.sliderList.style['padding'] = this.parentBlockPadding;
 
     /* створюємо обгортку overflow-hidden для селектора */
