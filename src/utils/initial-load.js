@@ -18,7 +18,6 @@ export function isUserAutorized() {
   if (accesToken) {
     return getUsersFavouritesByToken().then(favourites => {
       userFavourites = [...favourites];
-      // console.log(userFavourites);
       return favourites;
     });
   }
