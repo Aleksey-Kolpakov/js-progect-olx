@@ -2,8 +2,7 @@ import {
   changeItemFetch,
   deleteItemFetch,
 } from '../../../utils/backend-services.js';
-import emptyOwnHbs from '../../../pages/user-items-pages/templates/emptyOwn.hbs';
-import { noContentMarkup } from '../../../pages/user-items-pages/user-items-page';
+
 import emptyOwnHbs from '../../../pages/user-items-pages/templates/emptyOwn.hbs';
 import { noContentMarkup } from '../../../pages/user-items-pages/user-items-page';
 import { makeNoticeError, makeNoticeSuccess } from '../../../utils/pnotify.js';
