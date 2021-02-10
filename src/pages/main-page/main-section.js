@@ -2,49 +2,23 @@ import Slider from '../../components/Slider/Slider';
 import itemsMarkup from './templates/category-items-markup.hbs';
 import categoryMarkup from './templates/categories-markup.hbs';
 import throttle from 'lodash.throttle';
-import { getAllCategoriesWithItemsByPages } from '../../utils/backend-services.js';
+import {
+  getAllCategoriesWithItemsByPages,
+  getItemsInCategory,
+} from '../../utils/backend-services.js';
 let pageNumber = 1;
 import { itemOpener } from '../../utils/item-opener.js';
-
 import { makeFilterButtonActive } from '../../components/header-section/js/service'; // kozubskyi
 
-const galleryRef = document.querySelector('.section-gallery');
 const sectionGalleryRef = document.querySelector('.section-gallery-upload');
 const loadmoreBtn = document.querySelector('.loadmore-btn');
-const sectionLinkRef = document.querySelector('.section-link');
 const mainSectionRef = document.querySelector('.main-section');
 const arrowUpRef = document.querySelector('.arrow-up');
+const salesGalleryRef = document.querySelector('.section-gallery-sales');
 
 loadmoreBtn.addEventListener('click', loadmoreMarkup);
 window.addEventListener('scroll', throttle(listArrowBtn, 200));
 arrowUpRef.addEventListener('click', scrollToHeader);
-
-// const getAllCategoriesWithItemsByPages = function (pageNumber) {
-//   return fetch(
-//     `https://callboard-backend.goit.global/call?page=${pageNumber}`,
-//     {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json; charset=UTF-8',
-//       },
-//     },
-//   )
-//     .then(response => response.json())
-//     .catch(error => console.log(error));
-// };
-function getItemsInCategory(category) {
-  return fetch(
-    `https://callboard-backend.goit.global/call/specific/${category}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    },
-  )
-    .then(response => response.json())
-    .catch(error => console.log(error));
-}
 
 function loadmoreMarkup(event) {
   event.preventDefault();
@@ -195,7 +169,7 @@ function createMarkup(categoriesList, otherEl) {
   const sectionLinksRef = document
     .querySelectorAll('.section-link')
     .forEach(link => {
-      link.addEventListener('click', onClick);
+      link.addEventListener('click', loadAllCategoryProd);
     });
 }
 
@@ -207,9 +181,9 @@ export function markupSales() {
       imageUrls: element.imageUrls[0],
     }));
     const markupSales = itemsMarkup(mapSales);
-    galleryRef.insertAdjacentHTML('beforeend', markupSales);
+    salesGalleryRef.insertAdjacentHTML('beforeend', markupSales);
     new Slider({
-      listUlSelector: '.section-gallery',
+      listUlSelector: '.section-gallery-sales',
       buttons: true,
       parentPadding: '5px 2px',
       dotButtonColor: '#CDCDCD',
@@ -219,7 +193,7 @@ export function markupSales() {
   markupSections();
 }
 
-function onClick(event) {
+function loadAllCategoryProd(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     const currentSection = event.target.dataset.title;
@@ -266,24 +240,3 @@ function listArrowBtn() {
 }
 
 markupSales();
-
-// .then(
-//   items => console.log(items),
-//   // items.reduce(
-//   //   (accObj, item, index) => {
-//   //     if (index > 0 && index <= 5) {
-//   //       item.id = index + 1;
-//   //       accObj.notslider.push(item);
-//   //       return accObj;
-//   //     }
-//   //     accObj.slider.push(item);
-//   //     return accObj;
-//   //   },
-//   //   { slider: [], notslider: [] },
-//   // ),
-// )
-// .then(ObjWithArrays => {
-//   const markUpSlider = itemsMarkup(ObjWithArrays.slider);
-//   galleryRef.insertAdjacentHTML('beforeend', markUpSlider);
-//   new Slider({ listUlSelector: '.section-gallery', buttons: false });
-// });

@@ -19,3 +19,9 @@ export function makeNoticeSuccess(message) {
     text: message,
   });
 }
+
+export function noticeToReg(message) {
+  const noticeToReg = notice({
+    text: message,
+  });
+}
