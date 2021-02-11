@@ -39,7 +39,7 @@ function onClickBtnMyAccount(event) {
     if (promiseFavourResult.length > 0) {
       updateMarkupWithSlider(promiseFavourResult, favouritesHbs);
       const seeAllFavBtnRef = document.querySelector('.favourites');
-      console.log(seeAllFavBtnRef);
+      // console.log(seeAllFavBtnRef);
       seeAllFavBtnRef.addEventListener('click', onClickBtnSeeAllFavourites(promiseFavourResult));
       itemOpener();
     }
