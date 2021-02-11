@@ -10,7 +10,7 @@ import {
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 import { makeNoticeError, makeNoticeSuccess } from '../../utils/pnotify.js';
-import ownItems from '../../pages/user-items-pages/templates/ownItems.hbs';
+import ownItems from './own-items-item.hbs';
 //------------------------------------------- ф-я загрузки категорий с бэкэнда в input
 export function addRusCategory() {
   const categoryRef = document.querySelector('#form-category');
@@ -104,7 +104,7 @@ export function sendItemOnServer() {
           const ownItemsListRef = ownItemsSectionRef.querySelector(
             '.slider-wrap',
           );
-          const listItemMarkUp = itemTemplate(obj);
+          const listItemMarkUp = ownItems(obj);
           ownItemsListRef.insertAdjacentHTML('beforeend', listItemMarkUp);
         }
       });
