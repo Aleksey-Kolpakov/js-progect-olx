@@ -100,8 +100,8 @@ export function sendItemOnServer() {
         // const mainRef = document.querySelector('main');
         // console.log(mainRef);
         // console.log(resp);
-        // const itemsMarkUp = ownItems(resp);
-        // console.log(itemsMarkUp);
+        const itemsMarkUp = ownItems(resp);
+        console.log(itemsMarkUp);
       });
   }
 
