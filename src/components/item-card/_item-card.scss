@@ -290,7 +290,8 @@
 
 .flex-container {
   @include for-size(mobile-only) {
-    width: 253px;
+    max-width: 300px;
+    margin: 0 auto;
   }
 
   @include for-size(tablet) {
