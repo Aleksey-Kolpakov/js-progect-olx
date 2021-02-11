@@ -7,6 +7,7 @@ import { alert, notice, info, success, error } from '@pnotify/core';
 import { defaults } from '@pnotify/core';
 import {closeMobileMenu} from '../../components/header-section/js/service'
 import localStoradge from '../../utils/local-storadge.js'
+import { colorInOrangeHeartsOfFavourites } from '../../utils/favourites-rest-logic';
 defaults.mode = 'light';
 defaults.closerHover = true;
 defaults.delay = 3000;
@@ -73,6 +74,7 @@ function closeModal() {
         success({text:'Вы авторизованы!'})
         closeModal()
         closeMobileMenu()
+        colorInOrangeHeartsOfFavourites();
       })
         .catch(eror => {
           if (eror.response.status == 403) {

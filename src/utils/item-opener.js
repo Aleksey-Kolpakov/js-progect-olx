@@ -7,16 +7,19 @@ import {
 } from '../components/form-change-item/form-item-image-markup.js';
 import { colorInOrangeHeartsOfFavourites } from '../utils/favourites-rest-logic.js'
 export const itemOpener = function (
+  inMyCabinet = false,
+  myOwnItems = false,
   selector = '[data-items="item"]',
   openRightModal = openItemModal,
 ) {
   const containers = document.querySelectorAll(selector);
-  // const containersArr = Array.from(containers);
-  // console.dir(containersArr);
   containers.forEach(ul => {
     ul.addEventListener('click', openRightModal);
   });
-  colorInOrangeHeartsOfFavourites();
+  if (myOwnItems) {
+    return;
+  }
+  colorInOrangeHeartsOfFavourites(inMyCabinet);
 };
 
 function openItemModal(event) {
