@@ -110,7 +110,7 @@ function addOnClickHeartsFetchAddItemToFavourites(favourArray) {
 
 export function colorInOrangeHeartsOfFavourites(inMyCabinet = false) {
   getUsersFavouritesByToken().then(favArray => {
-    if (!favArray) {
+    if (!favArray || typeof favArray === 'string') {
       return;
     }
     favArray.map(item => {

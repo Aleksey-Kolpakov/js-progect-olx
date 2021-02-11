@@ -85,7 +85,7 @@ export const getUsersFavouritesByToken = function () {
         ? [...jsDataBase, ...favourites]
         : jsDataBase;
       return favourites;
-    });
+    }).catch(error => error.response.status===401 ? 'Unauthorized':console.dir(error));
 };
 
 export function createItemFetch(item) {

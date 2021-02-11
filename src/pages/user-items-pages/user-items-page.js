@@ -1,5 +1,3 @@
-// import { loginFetch } from '../../utils/backend-services';
-// import EdikMarkUpHbs from '../../pages/main-page/templates/categories-markup.hbs';
 import EdikMarkUpHbs from '../user-items-pages/templates/categories-markup.hbs';
 import favouritesHbs from '../user-items-pages/templates/favourites.hbs';
 import ownItemsHbs from '../user-items-pages/templates/ownItems.hbs';
@@ -11,7 +9,6 @@ import {
 } from '../../utils/backend-services';
 import Slider from '../../components/Slider';
 import { itemOpener, openChangeOwnItemModal } from '../../utils/item-opener';
-import { colorInOrangeHeartsOfFavourites } from '../../utils/favourites-rest-logic';//Єгор додав
 // ===============================================================================//
 // refs
 const mainRef = document.querySelector('main');
@@ -24,8 +21,7 @@ myAccountBtnRef.addEventListener('click', onClickBtnMyAccount);
 //===============================================================================//
 
 // functions
-function onClickBtnMyAccount(event) {
-  // event.preventDefault();
+function onClickBtnMyAccount() {
   const promiseOwnResult = getUsersOwnItems();
   const promiseFavourResult = getUsersFavouritesByToken();
 
@@ -40,8 +36,9 @@ function onClickBtnMyAccount(event) {
       updateMarkupWithSlider(promiseFavourResult, favouritesHbs);
       const seeAllFavBtnRef = document.querySelector('.favourites');
       // console.log(seeAllFavBtnRef);
+
       seeAllFavBtnRef.addEventListener('click', onClickBtnSeeAllFavourites(promiseFavourResult));
-      itemOpener();
+      itemOpener(true);
     }
 
     if (promiseOwnResult.length === 0) {
@@ -51,7 +48,7 @@ function onClickBtnMyAccount(event) {
       updateMarkupWithSlider(promiseOwnResult, ownItemsHbs);
       const seeAllOwnBtnRef = document.querySelector('.ownItems');
       seeAllOwnBtnRef.addEventListener('click', onClickBtnSeeAllOwn(promiseOwnResult));
-      itemOpener('[data-items="own"]', openChangeOwnItemModal);
+      itemOpener(false, true,'[data-items="own"]', openChangeOwnItemModal);
     }
 
     const listBlockCollection = document.querySelectorAll('.card-list');
@@ -66,7 +63,6 @@ function onClickBtnMyAccount(event) {
           dotButtonActiveColor: '#FF6B09', //колір активної
         }),
     );
-    colorInOrangeHeartsOfFavourites(true);//Єгор додав
     history.pushState(null, null, 'cabinet'); //добавил изменение ссылки Вансовский
   });
   history.pushState(null,null,'my-account') //добавил изменение ссылки Вансовский
@@ -99,12 +95,8 @@ function updateMarkupAll(elementsArray) {
 
   const markup = EdikMarkUpHbs(checkedElementsArray);
   mainRef.insertAdjacentHTML('beforeend', markup);
-  
+
 }
-
-// const goBack = () => {
-
-// }
 
 const onClickBtnSeeAllOwn = (promiseResultArray) => (event) => {
   event.preventDefault();
