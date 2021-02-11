@@ -94,6 +94,7 @@ function closeModal() {
            success({text:'Вы зарегистрированы!'})
           closeModal()
           closeMobileMenu()
+          showMyCabinetBlock()
         })
         .catch(eror => {
           if (eror.request.status == 409) {
