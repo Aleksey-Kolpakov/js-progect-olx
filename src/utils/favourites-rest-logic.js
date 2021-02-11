@@ -136,7 +136,7 @@ export function colorInOrangeHeartsOfFavourites(inMyCabinet = false) {
   });
 }
 
-// setTimeout(colorInOrangeHeartsOfFavourites, 1000);
+setTimeout(colorInOrangeHeartsOfFavourites, 1000);
 
 // export function colorInOrangeHeartsOfFavourites(inMyCabinet=false) {
 //         userFavourites.map(item => {

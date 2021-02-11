@@ -16,10 +16,8 @@ export const itemOpener = function (
   containers.forEach(ul => {
     ul.addEventListener('click', openRightModal);
   });
-  if (myOwnItems) {
-    return;
-  }
-  colorInOrangeHeartsOfFavourites(inMyCabinet);
+  // colorInOrangeHeartsOfFavourites();
+
 };
 
 function openItemModal(event) {
