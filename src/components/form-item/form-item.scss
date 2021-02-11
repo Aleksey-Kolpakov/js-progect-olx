@@ -335,8 +335,10 @@ textarea {
 
 .form__item-submit {
   display: flex;
-  justify-content: center;
-  // justify-content: flex-end;
+  @include for-form(mobile-only) {
+    justify-content: center;
+  }
+  justify-content: flex-end;
 }
 
 .button-delete__span {
@@ -397,13 +399,13 @@ textarea {
     line-height: 17px;
     width: 266px;
     height: 60px;
-    // margin-right: 194px;
+    margin-right: 194px;
   }
 
   @include for-form(desktop) {
     width: 286px;
     height: 60px;
-    // margin-right: 324px;
+    margin-right: 324px;
   }
 }
 
