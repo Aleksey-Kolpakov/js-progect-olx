@@ -81,7 +81,7 @@ export function sendItemOnServer() {
       object[key] = value;
     });
     var json = JSON.stringify(object);
-    console.log(json);
+    // console.log(json);
 
     createItemFetch(formData)
       .then(resp => {
