@@ -85,20 +85,23 @@ export const getUsersFavouritesByToken = function () {
         ? [...jsDataBase, ...favourites]
         : jsDataBase;
       return favourites;
-    })
+    });
 };
 /// нужно тестить
 export function createItemFetch(item) {
   const accessToken = localStoradge.load('accessTokenOlx');
-  return fetch(`https://callboard-backend.goit.global/call`, {
-    method: 'POST',
-    body: item,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      // 'Content-Type': 'multipart/form-data; charset=UTF-8',
-    },
-  }).then(response => response.json())
-    .catch(error => console.log(error));
+  return (
+    fetch(`https://callboard-backend.goit.global/call`, {
+      method: 'POST',
+      body: item,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        // 'Content-Type': 'multipart/form-data; charset=UTF-8',
+      },
+    })
+      // .then(response => response.json())
+      .catch(error => console.log(error))
+  );
 }
 
 export function addItemToFavourite(itemId) {
@@ -115,20 +118,23 @@ export function deleteItemFromFavourite(itemId) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   return axios
     .delete(`https://callboard-backend.goit.global/call/favourite/${itemId}`)
-    .then(({ data }) => data)
+    .then(({ data }) => data);
 }
 
 export function changeItemFetch(id, newItem) {
   const accessToken = localStoradge.load('accessTokenOlx');
-  return fetch(`https://callboard-backend.goit.global/call/${id}`, {
-    method: 'PATCH',
-    body: newItem,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      // 'Content-Type': 'application/json; charset=UTF-8',
-    },
-  }).then(response => response.json())
-    .catch(error => console.log(error));
+  return (
+    fetch(`https://callboard-backend.goit.global/call/${id}`, {
+      method: 'PATCH',
+      body: newItem,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        // 'Content-Type': 'application/json; charset=UTF-8',
+      },
+    })
+      // .then(response => response.json())
+      .catch(error => console.log(error))
+  );
 }
 
 export function deleteItemFetch(id) {
@@ -158,7 +164,7 @@ export function getItembyTitle(searchQuerry) {
   return axios
     .get(
       `https://callboard-backend.goit.global/call/find?search=${searchQuerry}`,
-  )
+    )
     .then(({ data }) => {
       jsDataBase = [...jsDataBase, ...data];
       return data;
