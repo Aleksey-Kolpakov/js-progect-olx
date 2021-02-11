@@ -87,7 +87,7 @@ export const getUsersFavouritesByToken = function () {
       return favourites;
     });
 };
-/// нужно тестить
+
 export function createItemFetch(item) {
   const accessToken = localStoradge.load('accessTokenOlx');
   return (
@@ -109,8 +109,7 @@ export function addItemToFavourite(itemId) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   return axios
     .post(`https://callboard-backend.goit.global/call/favourite/${itemId}`)
-    .then(({ data }) => data)
-    .catch(error => console.log(error));
+    .then(({ data }) => data);
 }
 
 export function deleteItemFromFavourite(itemId) {
