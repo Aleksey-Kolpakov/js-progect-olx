@@ -96,12 +96,17 @@ export function sendItemOnServer() {
 
         return resp.json();
       })
-      .then(resp => {
-        // const mainRef = document.querySelector('main');
-        // console.log(mainRef);
-        // console.log(resp);
-        const itemsMarkUp = ownItems(resp);
-        console.log(itemsMarkUp);
+      .then(obj => {
+        if (document.querySelector('.section-own-items')) {
+          const ownItemsSectionRef = document.querySelector(
+            '.section-own-items',
+          );
+          const ownItemsListRef = ownItemsSectionRef.querySelector(
+            '.slider-wrap',
+          );
+          const listItemMarkUp = itemTemplate(obj);
+          ownItemsListRef.insertAdjacentHTML('beforeend', listItemMarkUp);
+        }
       });
   }
 
