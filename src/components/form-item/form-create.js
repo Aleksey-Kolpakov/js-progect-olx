@@ -10,7 +10,7 @@ import {
 import templateCategory from './category.hbs';
 import { RussianCategoriesPromise } from '../../utils/initial-load.js';
 import { makeNoticeError, makeNoticeSuccess } from '../../utils/pnotify.js';
-import ownItems from '../../pages/user-items-pages/templates/ownItems.hbs';
+import ownItems from './own-items-item.hbs';
 //------------------------------------------- ф-я загрузки категорий с бэкэнда в input
 export function addRusCategory() {
   const categoryRef = document.querySelector('#form-category');
@@ -81,7 +81,7 @@ export function sendItemOnServer() {
       object[key] = value;
     });
     var json = JSON.stringify(object);
-    console.log(json);
+    // console.log(json);
 
     createItemFetch(formData)
       .then(resp => {
@@ -96,12 +96,17 @@ export function sendItemOnServer() {
 
         return resp.json();
       })
-      .then(resp => {
-        // const mainRef = document.querySelector('main');
-        // console.log(mainRef);
-        // console.log(resp);
-        // const itemsMarkUp = ownItems(resp);
-        // console.log(itemsMarkUp);
+      .then(obj => {
+        if (document.querySelector('.section-own-items')) {
+          const ownItemsSectionRef = document.querySelector(
+            '.section-own-items',
+          );
+          const ownItemsListRef = ownItemsSectionRef.querySelector(
+            '.slider-wrap',
+          );
+          const listItemMarkUp = ownItems(obj);
+          ownItemsListRef.insertAdjacentHTML('beforeend', listItemMarkUp);
+        }
       });
   }
 
