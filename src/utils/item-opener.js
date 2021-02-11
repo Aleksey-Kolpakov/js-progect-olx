@@ -16,7 +16,7 @@ export const itemOpener = function (
   containers.forEach(ul => {
     ul.addEventListener('click', openRightModal);
   });
-  colorInOrangeHeartsOfFavourites();
+  // colorInOrangeHeartsOfFavourites();
 };
 
 function openItemModal(event) {
