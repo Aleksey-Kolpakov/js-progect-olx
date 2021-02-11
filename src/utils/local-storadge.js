@@ -4,7 +4,7 @@ const load = key => {
   
       return serializedState === null ? undefined : JSON.parse(serializedState);
     } catch (err) {
-      console.error('Get state error: ', err);
+      // console.error('Get state error: ', err);
     }
   };
   
@@ -14,7 +14,7 @@ const load = key => {
       const serializedState = JSON.stringify(value);
       localStorage.setItem(key, serializedState);
     } catch (err) {
-      console.error('Set state error: ', err);
+      // console.error('Set state error: ', err);
     }
   };
   

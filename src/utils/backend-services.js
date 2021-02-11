@@ -85,9 +85,9 @@ export const getUsersFavouritesByToken = function () {
         ? [...jsDataBase, ...favourites]
         : jsDataBase;
       return favourites;
-    });
+    }).catch(error => error.response.status===401 ? 'Unauthorized':console.dir(error));
 };
-/// нужно тестить
+
 export function createItemFetch(item) {
   const accessToken = localStoradge.load('accessTokenOlx');
   return (
@@ -109,8 +109,7 @@ export function addItemToFavourite(itemId) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   return axios
     .post(`https://callboard-backend.goit.global/call/favourite/${itemId}`)
-    .then(({ data }) => data)
-    .catch(error => console.log(error));
+    .then(({ data }) => data);
 }
 
 export function deleteItemFromFavourite(itemId) {

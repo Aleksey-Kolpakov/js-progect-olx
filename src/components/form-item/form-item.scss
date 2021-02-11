@@ -36,7 +36,7 @@
 
   position: relative;
   @include for-form(mobile) {
-    width: 290px;
+    // width: 290px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 54px;
@@ -144,7 +144,7 @@
   padding-left: 23px;
 
   @include for-form(mobile) {
-    width: 250px;
+    width: 100%;
     height: 52px;
     margin-top: 35px;
     margin-bottom: 10px;
@@ -335,7 +335,8 @@ textarea {
 
 .form__item-submit {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  // justify-content: flex-end;
 }
 
 .button-delete__span {
@@ -396,13 +397,13 @@ textarea {
     line-height: 17px;
     width: 266px;
     height: 60px;
-    margin-right: 194px;
+    // margin-right: 194px;
   }
 
   @include for-form(desktop) {
     width: 286px;
     height: 60px;
-    margin-right: 324px;
+    // margin-right: 324px;
   }
 }
 
